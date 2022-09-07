@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgroFamily"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AgroFamily" Height="450" Width="800"
+        Background="Gray">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="es-cl" Text="AgroFamily"/></TextBlock>
 
