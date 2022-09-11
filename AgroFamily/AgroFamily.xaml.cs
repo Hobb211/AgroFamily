@@ -25,9 +25,16 @@ namespace AgroFamily
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void RegisterButton(object sender, RoutedEventArgs e)
         {
+            Window window = new Register();
+            window.Show();
+        }
 
+        private void LoginButton(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = new Login();
+            Application.Current.MainWindow.Show();
         }
     }
 }
