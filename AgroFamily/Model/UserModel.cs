@@ -5,21 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgroFamily
+namespace AgroFamily.Model
 {
-    internal class User
+    public class UserModel
     {
         [PrimaryKey]
         public string Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Type { get; set; }
-        public string Password  { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Name} - {LastName} - {Type} - {Password}";
-        }
-
+        public string Password { get; set; }
     }
 }

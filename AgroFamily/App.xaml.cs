@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using AgroFamily.View;
 
 namespace AgroFamily
 {
@@ -13,8 +14,19 @@ namespace AgroFamily
     /// </summary>
     public partial class App : Application
     {
-        static string databaseName = "AgroFamily.db";
-        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        public static string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+        protected void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            var loginView = new LoginView();
+            loginView.Show();
+            loginView.IsVisibleChanged += (s, ev) =>
+            {
+                if (loginView.IsVisible == false && loginView.IsLoaded)
+                {
+                    var mainView = new MainView();
+                    mainView.Show();
+                    loginView.Close();
+                }
+            };
+        }
     }
 }
