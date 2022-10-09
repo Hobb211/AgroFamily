@@ -15,4 +15,5 @@ namespace AgroFamily.Model
         public int Price { get; set; }
         public int Stock { get; set; }
     }
+    //asd
 }
