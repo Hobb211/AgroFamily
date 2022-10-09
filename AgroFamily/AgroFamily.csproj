@@ -30,4 +30,8 @@
     <Resource Include="Assets\candado.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="prueba\" />
+  </ItemGroup>
+
 </Project>
