@@ -4,6 +4,7 @@
     <!--Background Colors-->
     <Color x:Key="primaryBackColor1">#FDCB9E</Color>
     <Color x:Key="primaryBackColor2">#E94256</Color>
+    <Color x:Key="primaryBackColor3">#263135</Color>
     
     <!--Window Border Colors-->
     <Color x:Key="winBorderColor1">#E94256</Color>

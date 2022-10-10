@@ -4,19 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgroFamily.View"
-        xmlns:viewModel="clr-namespace:AgroFamily.ViewModel"
+        xmlns:viewModel="clr-namespace:AgroFamily.ViewModel" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="550" Width="800"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
-    <Grid>
-        <TextBlock Text="{Binding UserAccount.Name}"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-        
-    </Grid>
+
+    <Border CornerRadius="10" BorderThickness="2">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--Control bar-->
+                <RowDefinition Height="30"/>
+                <!--Navigation menu-->
+                <RowDefinition Height="50"/>
+                <!--Content Section-->
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!--Control bar background-->
+            <Border CornerRadius="10,10,0,0"
+                    Grid.Row="0">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
+                </Border.Background>
+                <StackPanel x:Name="pnlControlBar"
+                            Orientation="Horizontal"
+                            FlowDirection="RightToLeft"
+                            Background="Transparent"
+                            Margin="0,0,5,0"
+                            MouseDown="Window_MouseDown">
+                    <Button x:Name="btnClose" 
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource Color1}"
+                            Click="btnClose_Click">
+                        <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                    </Button>
+                    <Button x:Name="btnMaximize" 
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource Color1}"
+                            Click="btnMaximize_Click">
+                        <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                    </Button>
+                    <Button x:Name="btnMinimize" 
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource Color2}"
+                            Click="btnMinimize_Click">
+                        <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <!--Navigation menu background-->
+            <Border 
+                    Grid.Row="1">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
+                </Border.Background>
+                
+            </Border>
+            <!--Content Section background-->
+            <Border CornerRadius="0,0,10,10"
+                    Grid.Row="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource primaryBackColor1}"/>
+                </Border.Background>
+            </Border>
+            
+            <!--Control bar-->
+            
+            <StackPanel></StackPanel>
+        </Grid>
+    </Border>
+
 </Window>

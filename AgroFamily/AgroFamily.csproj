@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="prueba\**" />
+    <EmbeddedResource Remove="prueba\**" />
+    <None Remove="prueba\**" />
+    <Page Remove="prueba\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\agro.png" />
     <None Remove="Assets\avatar.png" />
     <None Remove="Assets\candado.png" />
@@ -28,10 +35,6 @@
     <Resource Include="Assets\agro.png" />
     <Resource Include="Assets\avatar.png" />
     <Resource Include="Assets\candado.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="prueba\" />
   </ItemGroup>
 
 </Project>
