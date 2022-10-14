@@ -25,5 +25,5 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="30,0,0,0"/>
     </Style>
-
+    
 </ResourceDictionary>

@@ -10,7 +10,11 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        ResizeMode="CanResize"
+        MinHeight="550"
+        MinWidth="800"
+        >
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -82,7 +86,7 @@
                 </Border.Background>
 
                 <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="20"
+                                Margin="30"
                                 />
             </Border>
 
