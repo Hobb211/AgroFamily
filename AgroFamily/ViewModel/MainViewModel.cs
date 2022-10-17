@@ -42,6 +42,7 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand ShowAddItemsViewCommand { get;}
+        public ICommand ShowAddUserViewCommand { get; }
 
         public MainViewModel()
         {
@@ -51,14 +52,20 @@ namespace AgroFamily.ViewModel
 
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
+            ShowAddUserViewCommand = new ViewModelCommand(ExecuteShowAddUserViewCommand);
 
             //Default view
-            ExecuteShowAddItemsViewCommand(null);
+            //ExecuteShowAddItemsViewCommand(null);
+            ExecuteShowAddUserViewCommand(null);
         }
 
         private void ExecuteShowAddItemsViewCommand(object obj)
         {
             CurrentChildView = new AddItemsViewModel();
+        }
+        private void ExecuteShowAddUserViewCommand(object obj)
+        {
+            CurrentChildView = new UserRegisterViewModel();
         }
 
         private void LoadCurrentUserData()

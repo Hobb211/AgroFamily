@@ -21,8 +21,8 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:AddItemsViewModel}">
-            <local:AddItemsView/>
+        <DataTemplate DataType="{x:Type viewModel:UserRegisterViewModel}">
+            <local:UserRegisterView/>
         </DataTemplate>
     </Window.Resources>
     
@@ -86,7 +86,7 @@
                 </Border.Background>
 
                 <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="30"
+                                Margin="0"
                                 />
             </Border>
 

@@ -17,11 +17,13 @@
             <RowDefinition Height="10"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <Border CornerRadius="20"
                 Grid.Row="0">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
+            
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -32,6 +34,7 @@
                     <ColumnDefinition Width="300"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
                 <TextBlock Text="Añadir Inventario"
                            Margin="10"
                            Style="{StaticResource titleStyle2}"/>
