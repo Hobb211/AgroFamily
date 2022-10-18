@@ -70,7 +70,14 @@ namespace AgroFamily.ViewModel
             {
                 if (Type.Name.Equals("Producto"))
                 {
-                    validData=true;
+                    if (Price > 0)
+                    {
+                        validData = true;
+                    }
+                    else
+                    {
+                        validData = false;
+                    }   
                 }
                 else { validData = true; }
             }
@@ -79,25 +86,34 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteAddItemCommand(object obj)
         {
-            switch(Type.Name)
+            try
             {
-                case "Producto":
-                    ProductModel product = new ProductModel();
-                    product.Name = Name;
-                    product.Price = Price;
-                    product.Stock = Count;
-                    IProductRepository productReposiroty = new ProductRepository();
-                    productReposiroty.Add(product);
-                    break;
+                switch (Type.Name)
+                {
+                    case "Producto":
+                        ProductModel product = new ProductModel();
+                        product.Name = Name;
+                        product.Price = Price;
+                        product.Stock = Count;
+                        IProductRepository productReposiroty = new ProductRepository();
+                        productReposiroty.Add(product);
+                        break;
 
-                case "Suministro":
-                    SuppliesModel suplies = new SuppliesModel();
-                    suplies.Name = Name;
-                    suplies.Stock = Count;
-                    ISuppliesRepository suppliesRepository = new SuppliesRepository();
-                    suppliesRepository.Add(suplies);
-                    break;
+                    case "Suministro":
+                        SuppliesModel suplies = new SuppliesModel();
+                        suplies.Name = Name;
+                        suplies.Stock = Count;
+                        ISuppliesRepository suppliesRepository = new SuppliesRepository();
+                        suppliesRepository.Add(suplies);
+                        break;
+                }
+                MessageBox.Show("Se ha añadido el producto con exito");
             }
+            catch
+            {
+                MessageBox.Show("Un error a ocurrido");
+            }
+            
         }
 
         
