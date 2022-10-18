@@ -70,27 +70,37 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteAddUserCommand(object obj)
         {
-            switch (Type.Name)
+            try
             {
-                case "Administrador":
-                    AdminModel admin = new AdminModel();
-                    admin.Id = Id;
-                    admin.Name = Name;
-                    admin.Lastname = Lastname;
-                    admin.Password = Password;
-                    IAdminRepository productRepository = new AdminRepository();
-                    productRepository.Add(admin);
-                    break;
+                switch (Type.Name)
+                {
+                    case "Administrador":
+                        AdminModel admin = new AdminModel();
+                        admin.Id = Id;
+                        admin.Name = Name;
+                        admin.Lastname = Lastname;
+                        admin.Password = Password;
+                        IAdminRepository productRepository = new AdminRepository();
+                        productRepository.Add(admin);
+                        break;
 
-                case "Cajero":
-                    CashierModel cashier = new CashierModel();
-                    cashier.Id = Id;
-                    cashier.Name = Name;
-                    cashier.Lastname = Lastname;
-                    cashier.Password = Password;
-                    ICashierRepository cashierRepository = new CashierRepository();
-                    cashierRepository.Add(cashier);
-                    break;
+                    case "Cajero":
+                        CashierModel cashier = new CashierModel();
+                        cashier.Id = Id;
+                        cashier.Name = Name;
+                        cashier.Lastname = Lastname;
+                        cashier.Password = Password;
+                        ICashierRepository cashierRepository = new CashierRepository();
+                        cashierRepository.Add(cashier);
+                        break;
+                }
+
+
+            }catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido registrar");
+                
+                //throw new Exception("No se ha podido registrar");
             }
         }
 
