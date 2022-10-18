@@ -10,12 +10,22 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        ResizeMode="CanResize"
+        MinHeight="550"
+        MinWidth="800"
+        >
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:AddItemsViewModel}">
+            <local:AddItemsView/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Border CornerRadius="10" BorderThickness="2">
 
         <Grid>
@@ -28,7 +38,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
-            <!--Control bar background-->
+            <!--Control bar-->
             <Border CornerRadius="10,10,0,0"
                     Grid.Row="0">
                 <Border.Background>
@@ -68,17 +78,18 @@
                 </Border.Background>
                 
             </Border>
-            <!--Content Section background-->
+            <!--Content Section-->
             <Border CornerRadius="0,0,10,10"
                     Grid.Row="2">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource primaryBackColor1}"/>
                 </Border.Background>
+
+                <ContentControl Content="{Binding CurrentChildView}"
+                                Margin="30"
+                                />
             </Border>
-            
-            <!--Control bar-->
-            
-            <StackPanel></StackPanel>
+
         </Grid>
     </Border>
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Repositories
 {
-    public class ProductRepository : RepositoryBase, IProductReposiroty
+    public class ProductRepository : RepositoryBase, IProductRepository
     {
         public void Add(ProductModel productModel)
         {

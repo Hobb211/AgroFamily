@@ -20,10 +20,12 @@
     <None Remove="Assets\agro.png" />
     <None Remove="Assets\avatar.png" />
     <None Remove="Assets\candado.png" />
+    <None Remove="Assets\peso.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="agro.ico" />
+    <Resource Include="Assets\peso.png" />
   </ItemGroup>
 
   <ItemGroup>

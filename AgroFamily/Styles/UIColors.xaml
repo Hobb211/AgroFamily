@@ -5,6 +5,9 @@
     <Color x:Key="primaryBackColor1">#FDCB9E</Color>
     <Color x:Key="primaryBackColor2">#E94256</Color>
     <Color x:Key="primaryBackColor3">#263135</Color>
+    <Color x:Key="secondaryBackColor1">#FF7D73</Color>
+    <Color x:Key="secondaryBackColor2">#FFA9A3</Color>
+    
     
     <!--Window Border Colors-->
     <Color x:Key="winBorderColor1">#E94256</Color>
@@ -16,11 +19,13 @@
     <SolidColorBrush x:Key="Color2" Color="#7c7673"/>
     <SolidColorBrush x:Key="Color3" Color="#0088de"/>
     <SolidColorBrush x:Key="Color4" Color="#fd7e74"/>
+    <SolidColorBrush x:Key="Color5" Color="#E9FFCB"/>
 
     <!--Font Colors-->
     <SolidColorBrush x:Key="textColor1" Color="White"/>
+    <SolidColorBrush x:Key="textColor2" Color="Black"/>
     <SolidColorBrush x:Key="textTitleColor1" Color="White"/>
-           
+
     <!--Button Colors-->
     <SolidColorBrush x:Key="buttonColor1" Color="#505B60"/>
     <SolidColorBrush x:Key="buttonColor2" Color="#263135"/>

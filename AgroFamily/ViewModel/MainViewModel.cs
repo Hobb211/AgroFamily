@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
+using FontAwesome.Sharp;
 
 namespace AgroFamily.ViewModel
 {
@@ -15,8 +17,11 @@ namespace AgroFamily.ViewModel
         //Fields
         private UserAccountModel _userAccount;
         private IUserRepository userRepository;
+        private ViewModelBase _currentChildView;
 
-        public UserAccountModel UserAccount { 
+        //Properties
+        public UserAccountModel UserAccount 
+        { 
             get => _userAccount;
             set
             {
@@ -25,10 +30,35 @@ namespace AgroFamily.ViewModel
             }
         }
 
+        public ViewModelBase CurrentChildView 
+        { 
+            get => _currentChildView; 
+            set 
+            { 
+                _currentChildView = value;
+                OnPropertyChanged(nameof(CurrentChildView));
+            } 
+        }
+
+        //Commands
+        public ICommand ShowAddItemsViewCommand { get;}
+
         public MainViewModel()
         {
             userRepository = new UserRepository();
+            UserAccount = new UserAccountModel();
             LoadCurrentUserData();
+
+            //Initialize commands
+            ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
+
+            //Default view
+            ExecuteShowAddItemsViewCommand(null);
+        }
+
+        private void ExecuteShowAddItemsViewCommand(object obj)
+        {
+            CurrentChildView = new AddItemsViewModel();
         }
 
         private void LoadCurrentUserData()
@@ -36,13 +66,10 @@ namespace AgroFamily.ViewModel
             var user = userRepository.GetById(Thread.CurrentPrincipal.Identity.Name);//Pasar un UserName por el principal
             if (user != null)
             {
-                UserAccount = new UserAccountModel()
-                {
-                    UserName = user.Id,
-                    Name = user.Name,
-                    LastName = user.LastName,
-                    Role = user.Type
-                };
+                UserAccount.UserName = user.Id;
+                UserAccount.Name = user.Name;
+                UserAccount.LastName = user.LastName;
+                UserAccount.Role = user.Type;
             }
             else
             {
