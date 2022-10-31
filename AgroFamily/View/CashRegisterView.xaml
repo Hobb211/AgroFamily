@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="AgroFamily.View.CashRegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AgroFamily.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="800">
+    <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Background="MediumPurple" Margin="10">
+                    <ListView Margin="10">
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Producto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Queso de cabra"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Valor">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="$15.000"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Stock">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="25"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Agregar Producto" Margin="20" Width="150" Height="25"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Background="MediumPurple" Margin="10">
+                    <ListView Margin="10">
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListViewItem/>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Producto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Queso de cabra"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Valor">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="$15.000"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Cantidad" Width="55">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" Text="25"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Background="Bisque" Height="86" Width="364">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="2 2 2 2">
+                            <Button VerticalAlignment="Center" Padding="1 1 1 1" Margin="5" Height="20" Width="90" Content="Quita producto" FontSize="10"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Subtotal:" TextAlignment="Center" Width="50" Margin="4 1 1 1"/>
+                                <TextBlock Text="$99.999" TextAlignment="Center" Width="50" Margin="28 1 1 1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Venta del dia:" TextAlignment="Center" Width="80" Margin="1 1 1 1"/>
+                                <TextBlock Text="$99.999" TextAlignment="Center" Width="50" Margin="1 1 1 1"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                   
+                </StackPanel>
+            </Grid>
+        </Border>
+</UserControl>
