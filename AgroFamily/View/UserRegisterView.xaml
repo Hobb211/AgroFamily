@@ -61,7 +61,7 @@
             <Button x:Name="addUser_Copy"
                     Style="{StaticResource button_tr}"
                     Content="Actualizar"
-                    Command="{Binding ShowUsersCommand}" Margin="76,64,46,23"/>
+                    Command="{Binding ShowUsersCommand}" Margin="50,44,51,43"/>
 
         </Border>
 
@@ -113,7 +113,7 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
-                      ItemsSource="{Binding Path=Adminsa}"
+                      ItemsSource="{Binding Path=Users}"
                       Margin= "-18,0,-48,0" >
                 <DataGrid.Columns>
 

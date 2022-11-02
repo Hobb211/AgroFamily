@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Model
 {
-    public class CashierModel
+    public class UserModel2
     {
         [PrimaryKey, AutoIncrement]
         public int Id_auto { get; set; }

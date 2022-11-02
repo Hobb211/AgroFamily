@@ -18,7 +18,6 @@ namespace AgroFamily.Model
         ObservableCollection<AdminModel> GetByAll2();
         ObservableCollection<AdminModel> GetByAll3();
 
-        //DataTable ToDataTable<AdminModel>(this List<AdminModel> items);
 
 
     }

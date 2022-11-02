@@ -25,7 +25,7 @@ namespace AgroFamily.ViewModel
         private string _typestring;
         private TypeUserModel _type;
         private ObservableCollection<TypeUserModel> _typeUser;
-        public ObservableCollection<AdminModel> _admins;
+        public ObservableCollection<UserModel2> _users;
         public ObservableCollection<AdminModel> _adminsa;
 
         //Propierties
@@ -45,6 +45,7 @@ namespace AgroFamily.ViewModel
         }
         public ObservableCollection<TypeUserModel> TypeUser { get => _typeUser; set => _typeUser = value; }
         public ObservableCollection<AdminModel> Adminsa { get => _adminsa; set => _adminsa = value; }
+        public ObservableCollection<UserModel2> Users { get => _users; set => _users = value; }
 
         //Commands
         public ICommand AddUserCommand { get; }
@@ -63,9 +64,18 @@ namespace AgroFamily.ViewModel
 
 
 
+            IUser2Repository usersRepository = new User2Repository();
+            Users = usersRepository.GetByAll3();
 
-            IAdminRepository adminRepository = new AdminRepository();
-            Adminsa = adminRepository.GetByAll3();
+
+
+            //IAdminRepository adminRepository = new AdminRepository();
+            //Adminsa = adminRepository.GetByAll3();
+
+
+
+
+
 
 
             //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
@@ -99,25 +109,29 @@ namespace AgroFamily.ViewModel
                 switch (Type.Name)
                 {
                     case "Administrador":
-                        AdminModel admin = new AdminModel();
+                        //AdminModel admin = new AdminModel();
+                        UserModel2 admin = new UserModel2();
                         admin.Id = Id;
                         admin.Name = Name;
                         admin.Lastname = Lastname;
                         admin.Password = Password;
                         admin.Type = "Administrador";
-                        IAdminRepository adminRepository = new AdminRepository();
-                        adminRepository.Add(admin);
+                        //IAdminRepository adminRepository = new AdminRepository();
+                        IUser2Repository user2Repository = new User2Repository();
+                        user2Repository.Add(admin);
                         break;
 
                     case "Cajero":
-                        CashierModel cashier = new CashierModel();
+                        //CashierModel cashier = new CashierModel();
+                        UserModel2 cashier = new UserModel2();
                         cashier.Id = Id;
                         cashier.Name = Name;
                         cashier.Lastname = Lastname;
                         cashier.Password = Password;
                         cashier.Type = "Cajero";
-                        ICashierRepository cashierRepository = new CashierRepository();
-                        cashierRepository.Add(cashier);
+                        //ICashierRepository cashierRepository = new CashierRepository();
+                        IUser2Repository user2Repository2 = new User2Repository();
+                        user2Repository2.Add(cashier);
                         break;
                 }
 
