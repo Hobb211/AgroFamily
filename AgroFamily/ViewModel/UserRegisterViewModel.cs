@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using AgroFamily.View;
 
 namespace AgroFamily.ViewModel
 {
@@ -19,8 +22,11 @@ namespace AgroFamily.ViewModel
         private string _name;
         private string _lastname;
         private string _password;
+        private string _typestring;
         private TypeUserModel _type;
         private ObservableCollection<TypeUserModel> _typeUser;
+        public ObservableCollection<AdminModel> _admins;
+        public ObservableCollection<AdminModel> _adminsa;
 
         //Propierties
         public string Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
@@ -38,16 +44,34 @@ namespace AgroFamily.ViewModel
             }
         }
         public ObservableCollection<TypeUserModel> TypeUser { get => _typeUser; set => _typeUser = value; }
+        public ObservableCollection<AdminModel> Adminsa { get => _adminsa; set => _adminsa = value; }
 
         //Commands
         public ICommand AddUserCommand { get; }
+        public ICommand ShowUsersCommand { get; }
 
         //Constructor
         public UserRegisterViewModel()
         {
             AddUserCommand = new ViewModelCommand(ExecuteAddUserCommand, CanExecuteAddUserCommand);
+
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
+
+            //ShowUsersCommand = new ViewModelCommand(ObtenerDatosAdmins);
+            //ShowUsersCommand = new ViewModelCommand(Action < AdminModel > ObtenerDatosAdmins);
+
+
+
+
+            IAdminRepository adminRepository = new AdminRepository();
+            Adminsa = adminRepository.GetByAll3();
+
+
+            //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
+            //Adminsa = new ObservableCollection<AdminModel>(Adminsa2);
+
+
         }
 
         private bool CanExecuteAddUserCommand(object obj)
@@ -80,8 +104,9 @@ namespace AgroFamily.ViewModel
                         admin.Name = Name;
                         admin.Lastname = Lastname;
                         admin.Password = Password;
-                        IAdminRepository productRepository = new AdminRepository();
-                        productRepository.Add(admin);
+                        admin.Type = "Administrador";
+                        IAdminRepository adminRepository = new AdminRepository();
+                        adminRepository.Add(admin);
                         break;
 
                     case "Cajero":
@@ -90,6 +115,7 @@ namespace AgroFamily.ViewModel
                         cashier.Name = Name;
                         cashier.Lastname = Lastname;
                         cashier.Password = Password;
+                        cashier.Type = "Cajero";
                         ICashierRepository cashierRepository = new CashierRepository();
                         cashierRepository.Add(cashier);
                         break;
@@ -98,15 +124,25 @@ namespace AgroFamily.ViewModel
 
             }catch (Exception e)
             {
-                MessageBox.Show("No se ha podido registrar");
-                
+                MessageBox.Show("No se ha podido registrar"+e.Message);
                 //throw new Exception("No se ha podido registrar");
             }
         }
 
+        private void ExecuteGetData()
+        {
+            try
+            {
+                IAdminRepository repo = new AdminRepository();
+                var myobscoll = new ObservableCollection<AdminModel>(repo.GetByAll2());
 
-
+            }catch(Exception e)
+            {
+                MessageBox.Show("no se k paso");
+            }
+        }
 
     } 
+
 
 }

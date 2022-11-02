@@ -8,6 +8,33 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Border CornerRadius="20"
+                Margin="25"
+                Grid.Row="0">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical" Margin="0,20,0,-145">
+
+
+                </StackPanel>
+            </Grid>
+
+
+
+        </Border>
     </Grid>
 
 

@@ -84,5 +84,7 @@ namespace AgroFamily.ViewModel
                 Application.Current.Shutdown();
             }
         }
+
+        
     }
 }

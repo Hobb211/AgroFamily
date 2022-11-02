@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,11 @@ namespace AgroFamily.Model
         void Remove(int id);
         AdminModel GetById(int id);
         IEnumerable<AdminModel> GetByAll();
-    }
+        ObservableCollection<AdminModel> GetByAll2();
+        ObservableCollection<AdminModel> GetByAll3();
 
+        //DataTable ToDataTable<AdminModel>(this List<AdminModel> items);
+
+
+    }
 }
