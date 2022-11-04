@@ -20,12 +20,21 @@ namespace AgroFamily
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
             {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
+                try
                 {
-                    var mainView = new MainView();
-                    mainView.Show();
-                    loginView.Close();
+                    if (loginView.IsVisible == false && loginView.IsLoaded)
+                    {
+                        var mainView = new MainView();
+                        mainView.Show();
+                        loginView.Close();
+                    }
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+
             };
         }
     }
