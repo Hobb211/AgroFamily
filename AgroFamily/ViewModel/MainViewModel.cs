@@ -16,6 +16,7 @@ namespace AgroFamily.ViewModel
     {
         //Fields
         private UserAccountModel _userAccount;
+        //private UserModel _userAcc;
         private IUserRepository userRepository;
         private ViewModelBase _currentChildView;
 
@@ -30,6 +31,16 @@ namespace AgroFamily.ViewModel
             }
         }
 
+        //public UserModel UserAcc
+        //{
+        //    get => _userAcc;
+        //    set
+        //    {
+        //        _userAcc = value;
+        //        OnPropertyChanged(nameof(UserAcc));
+        //    }
+        //}
+
         public ViewModelBase CurrentChildView 
         { 
             get => _currentChildView; 
@@ -42,23 +53,31 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand ShowAddItemsViewCommand { get;}
+        public ICommand ShowAddUserViewCommand { get; }
 
         public MainViewModel()
         {
             userRepository = new UserRepository();
             UserAccount = new UserAccountModel();
+            //UserAcc = new UserModel();
             LoadCurrentUserData();
 
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
+            ShowAddUserViewCommand = new ViewModelCommand(ExecuteShowAddUserViewCommand);
 
             //Default view
-            ExecuteShowAddItemsViewCommand(null);
+            //ExecuteShowAddItemsViewCommand(null);
+            ExecuteShowAddUserViewCommand(null);
         }
 
         private void ExecuteShowAddItemsViewCommand(object obj)
         {
             CurrentChildView = new AddItemsViewModel();
+        }
+        private void ExecuteShowAddUserViewCommand(object obj)
+        {
+            CurrentChildView = new UserRegisterViewModel();
         }
 
         private void LoadCurrentUserData()
@@ -77,5 +96,7 @@ namespace AgroFamily.ViewModel
                 Application.Current.Shutdown();
             }
         }
+
+        
     }
 }
