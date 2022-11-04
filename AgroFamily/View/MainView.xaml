@@ -24,6 +24,9 @@
         <DataTemplate DataType="{x:Type viewModel:AddItemsViewModel}">
             <local:AddItemsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddExpensiveViewModel}">
+            <local:AddExpensiveView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border CornerRadius="10" BorderThickness="2">

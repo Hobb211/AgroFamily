@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="AgroFamily.View.AddExpensiveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="780">
+
+    <UserControl.DataContext>
+        <viewmodel:AddExpensiveViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" CornerRadius="20">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Registrar Gastos" Style="{StaticResource titleStyle2}"/>
+                <!--Amount Box-->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0">
+                    <TextBlock Text="Monto" Style="{StaticResource textStyle2}" Margin="20"/>
+                    <Border Width="200" Margin="10,6" CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <TextBox Style="{StaticResource textBox}" 
+                                 Text="{Binding Amount,UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="10,5" 
+                                 Padding="20,0"
+                                 InputScope="Number"
+                                 PreviewTextInput="NumberValidationTextBox">
+                            <TextBox.Background>
+                                <ImageBrush ImageSource="/Assets/peso.png"
+                                            Stretch="Uniform"
+                                            AlignmentX="Left"/>
+                            </TextBox.Background>
+                        </TextBox>
+                    </Border>
+                </StackPanel>
+                <!--Type ComboBox-->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Tipo" Style="{StaticResource textStyle2}" Margin="20"/>
+                    <Border Width="150" Margin="-5,5" CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <ComboBox Margin="10"
+                                  ItemsSource="{Binding Path=TypeExpensives}"
+                                  SelectedItem="{Binding Path=Type}"
+                                  DisplayMemberPath="Name"/>
+                    </Border>
+                    <Border Width="150" Margin="10,5" CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <TextBox Style="{StaticResource textBox}" 
+                                 Text="{Binding NewType,UpdateSourceTrigger=PropertyChanged}"
+                                 Background="Transparent" 
+                                 Margin="10,5" 
+                                 Padding="20,0"/>
+                    </Border>
+                </StackPanel>
+                <!--Descripcion Box-->
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Descripción" Style="{StaticResource textStyle2}" Margin="30,5"/>
+                    <Border Height="110" Margin="25,5" CornerRadius="15">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <TextBox Style="{StaticResource textBox}" 
+                                 Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="10,5" Height="90" 
+                                 Background="Transparent" 
+                                 VerticalAlignment="Top"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"/>
+                    </Border>
+                </StackPanel>
+                <Button Grid.Row="4" 
+                        Style="{StaticResource button}"  
+                        Content="Añadir"
+                        Command="{Binding AddExpensiveCommand}"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2" CornerRadius="20" Padding="20">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <DataGrid></DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

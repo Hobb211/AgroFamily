@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
+using AgroFamily.View;
 using FontAwesome.Sharp;
 
 namespace AgroFamily.ViewModel
@@ -42,6 +43,7 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand ShowAddItemsViewCommand { get;}
+        public ICommand ShowAddExpensiveViewCommand { get;}
 
         public MainViewModel()
         {
@@ -51,14 +53,20 @@ namespace AgroFamily.ViewModel
 
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
+            ShowAddExpensiveViewCommand = new ViewModelCommand(ExecuteShowAddExpensiveViewCommand);
 
             //Default view
-            ExecuteShowAddItemsViewCommand(null);
+            ExecuteShowAddExpensiveViewCommand(null);
         }
 
         private void ExecuteShowAddItemsViewCommand(object obj)
         {
             CurrentChildView = new AddItemsViewModel();
+        }
+
+        private void ExecuteShowAddExpensiveViewCommand(object obj)
+        {
+            CurrentChildView = new AddExpensiveViewModel();
         }
 
         private void LoadCurrentUserData()
