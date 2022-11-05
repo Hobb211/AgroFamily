@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AgroFamily.Model;
 using SQLite;
 
 namespace AgroFamily.Repositories
@@ -21,5 +22,6 @@ namespace AgroFamily.Repositories
             SQLite.SQLiteConnection database = new SQLite.SQLiteConnection(_databasePath);
             return database;
         }
+
     }
 }

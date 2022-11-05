@@ -21,7 +21,7 @@ namespace AgroFamily.ViewModel
 
         public void addProductToSale(ProductModel product)
         {
-            Add(ProductModel product);
+            //Add(ProductModel product);
         }
     }
 }

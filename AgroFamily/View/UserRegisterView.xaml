@@ -72,38 +72,6 @@
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
 
-
-
-            <!--<DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="memebersDataGrid" ItemsSource="{Binding Adminsa}" >
-
-            </DataGrid>-->
-
-            
-            <!--<DataGrid AutoGenerateColumns="False" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="membersDataGrid" ItemsSource="{Binding Path=Adminsa}" SelectionChanged="membersDataGrid_SelectionChanged" >
-                <DataGrid.Columns>
-                    
-                    <DataGridCheckBoxColumn CanUserResize="False" Width="auto">
-                        <DataGridCheckBoxColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox/>
-                            </DataTemplate>
-                        </DataGridCheckBoxColumn.HeaderTemplate>
-                    </DataGridCheckBoxColumn>
-
-
-       
-
-                    <DataGridTextColumn Header="Id" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding Lastname}" />
-                    <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Contraseña" IsReadOnly="True" Width="*" Binding="{Binding Password}"/>
-
-
-                </DataGrid.Columns>    
-                
-            </DataGrid>-->
-
             <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
                       VerticalGridLinesBrush="{StaticResource Color5}"
                       GridLinesVisibility="All"
@@ -113,102 +81,17 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
-                      ItemsSource="{Binding Path=Users}"
-                      Margin= "-18,0,-48,0" >
+                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}"
+                      Margin= "-18,0,-48,0"
+                      >
                 <DataGrid.Columns>
-
-
-                    <!--<DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
-                        <DataGridCheckBoxColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
-                            </DataTemplate>
-                        </DataGridCheckBoxColumn.HeaderTemplate>
-                    </DataGridCheckBoxColumn>-->
-
-                    <!--<DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                        <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                    </Border>
-
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                    
-                    
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding Lastname}" />
+                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding LastName}" />
                     <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Contraseña" IsReadOnly="True" Width="*" Binding="{Binding Password}"/>
-
-
-                    <!--<DataGridTemplateColumn Header="Operaciones" IsReadOnly="True" Width="auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Margin="10 0 0 0" Style="{StaticResource gridEditButton}">
-                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
-                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                    
                 </DataGrid.Columns>
-                
             </DataGrid>
-            
         </Border>
-
-        <!--<DataGrid AutoGenerateColumns="True">
-
-            </DataGrid>-->
-
-
-        <!--<DataGrid Name="BooksDataGrid" ItemsSource="{Binding Books}">
-                
-               <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Width="200" Binding="{Binding title}"/>
-                    <DataGridTextColumn Header="isbn" Width="200" Binding="{Binding isbn}"/>
-                </DataGrid.Columns>
-            </DataGrid>-->
-
-
-        <!--<Grid>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24*"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="159*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="163*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="179*"/>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="122*"/>
-                </Grid.ColumnDefinitions>
-
-
-                <StackPanel Grid.Row="0" Grid.Column="0">
-                    <Border>
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                    </Border>
-                </StackPanel>
-
-            </Grid-->
-
 
         <Border CornerRadius="20"
                 Grid.Row="0" Margin="25,25,301,44" Grid.RowSpan="5">
@@ -347,10 +230,6 @@
                 Style="{StaticResource button_tr}"
                 Content="Confirmar"
                 Command="{Binding AddUserCommand}" Margin="40,5,10,5" Grid.Row="3" Grid.Column="1"/>
-
-
-
-
 
             </Grid>
         </Border>

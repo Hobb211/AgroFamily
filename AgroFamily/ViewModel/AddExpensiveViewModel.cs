@@ -1,19 +1,13 @@
 ﻿using AgroFamily.Model;
 using AgroFamily.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace AgroFamily.ViewModel
 {
-    public class AddExpensiveViewModel:ViewModelBase
+    public class AddExpensiveViewModel : ViewModelBase
     {
         //Fields
         private TypeExpensiveModel _type;
@@ -24,22 +18,26 @@ namespace AgroFamily.ViewModel
         private string _newType;
 
         //Propierties
-        public TypeExpensiveModel Type 
-        { 
+        public TypeExpensiveModel Type
+        {
             get => _type;
-            set 
-            { 
-                _type = value; 
+            set
+            {
+                _type = value;
                 OnPropertyChanged(nameof(Type));
-                if(Type.Name.Equals("Añadir Tipo"))
+                if (Type!=null)
                 {
-                    NewTypeVisibility = Visibility.Visible;
+                    if (Type.Name.Equals("Añadir tipo"))
+                    {
+                        NewTypeVisibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        NewTypeVisibility = Visibility.Collapsed;
+                    }
                 }
-                else
-                {
-                    NewTypeVisibility = Visibility.Collapsed;
-                }
-            } 
+                 
+            }
         }
         public ObservableCollection<TypeExpensiveModel> TypeExpensives { get => _typeExpensives; set { _typeExpensives = value; OnPropertyChanged(nameof(TypeExpensives)); } }
         public float Amount { get => _amount; set { _amount = value; OnPropertyChanged(nameof(Amount)); } }
@@ -48,21 +46,21 @@ namespace AgroFamily.ViewModel
         public string NewType { get => _newType; set { _newType = value; OnPropertyChanged(nameof(NewType)); } }
 
         //Commands
-        public ICommand AddExpensiveCommand { get;}
-        
+        public ICommand AddExpensiveCommand { get; }
+
 
         //Constructor
         public AddExpensiveViewModel()
         {
             Amount = 0;
-            AddExpensiveCommand=new ViewModelCommand(ExecuteAddExpensiveCommand, CanExecuteAddExpensiveCommand);
+            AddExpensiveCommand = new ViewModelCommand(ExecuteAddExpensiveCommand, CanExecuteAddExpensiveCommand);
             TypeExpensives = new TypeExpensiveRepository().GetByAll();
         }
 
         private bool CanExecuteAddExpensiveCommand(object obj)
         {
             bool validData;
-            if (Amount<=0 || Type == null)
+            if (Amount <= 0 || Type == null)
             {
                 validData = false;
             }
@@ -70,7 +68,7 @@ namespace AgroFamily.ViewModel
             {
                 if (Type.Name.Equals("Añadir Tipo"))
                 {
-                    if (string.IsNullOrWhiteSpace(NewType) || NewType.Length < 3)
+                    if (string.IsNullOrWhiteSpace(NewType) || NewType.Length < 3 )
                     {
                         validData = false;
                     }
@@ -87,12 +85,17 @@ namespace AgroFamily.ViewModel
         private void ExecuteAddExpensiveCommand(object obj)
         {
             string typeExpensive;
-            if(Type.Name.Equals("Añadir Tipo"))
+            if (Type.Name.Equals("Añadir tipo"))
             {
-                TypeExpensiveModel typeExpensiveModel = new TypeExpensiveModel() { Name=NewType };
+                TypeExpensiveModel typeExpensiveModel = new TypeExpensiveModel() { Name = NewType };
                 TypeExpensiveRepository typeExpensiveRepository = new TypeExpensiveRepository();
-                typeExpensiveRepository.Add(typeExpensiveModel);
+                try
+                {
+                    typeExpensiveRepository.Add(typeExpensiveModel);
+                }
+                catch { }
                 typeExpensive = typeExpensiveModel.Name;
+                TypeExpensives = typeExpensiveRepository.GetByAll();
             }
             else
             {
@@ -113,9 +116,9 @@ namespace AgroFamily.ViewModel
             {
                 MessageBox.Show("Un error ha ocurrido");
             }
-            
+
         }
-        
-        
+
+
     }
 }

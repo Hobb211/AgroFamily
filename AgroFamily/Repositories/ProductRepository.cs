@@ -14,7 +14,6 @@ namespace AgroFamily.Repositories
         {
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ProductModel>();
                 connection.Insert(productModel);
             }
         }

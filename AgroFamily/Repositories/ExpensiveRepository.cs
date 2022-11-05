@@ -14,7 +14,6 @@ namespace AgroFamily.Repositories
         {
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ExpensiveModel>();
                 connection.Insert(expensive);
             }
         }
@@ -23,7 +22,6 @@ namespace AgroFamily.Repositories
         {
             using(SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ExpensiveModel>();
                 int cant = connection.Query<ExpensiveModel>("select * from ExpensiveModel").Count();
                 ExpensiveModel[] expensives = new ExpensiveModel[cant];
                 for (int i = 1; i <= cant; i++)

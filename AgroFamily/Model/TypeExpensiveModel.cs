@@ -9,8 +9,7 @@ namespace AgroFamily.Model
 {
     public class TypeExpensiveModel
     {
-        [PrimaryKey,AutoIncrement]
-        public int Id { get; set; }
+        [PrimaryKey]
         public string Name { get; set; }
     }
 }
