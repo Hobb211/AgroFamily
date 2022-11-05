@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Model
 {
-    public interface IProductReposiroty
+    public interface IProductRepository
     {
         void Add(ProductModel productModel);
         void Edit(ProductModel product);

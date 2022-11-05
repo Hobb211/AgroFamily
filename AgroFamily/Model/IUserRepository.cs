@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Model
 {
+
+
     public interface IUserRepository
     {
         bool AuthenticateUser(NetworkCredential credential);
@@ -16,7 +19,8 @@ namespace AgroFamily.Model
         void Edit(UserModel userModel);
         void Remove(String id);
         UserModel GetById(String id);
-        IEnumerable<UserModel> GetByAll();
+        ObservableCollection<UserModel> GetByAll();
 
     }
+
 }

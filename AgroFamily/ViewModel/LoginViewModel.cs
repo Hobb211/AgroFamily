@@ -41,6 +41,14 @@ namespace AgroFamily.ViewModel
         {
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            ITypeInventoryRepository inventoryRepository = new TypeInventoryRepository();
+            if(inventoryRepository.GetById("Producto") == null)
+            {
+                TypeInventoryModel product = new TypeInventoryModel() { Name="Producto" };
+                TypeInventoryModel supplies = new TypeInventoryModel() { Name="Suministro" };
+                inventoryRepository.Add(product);
+                inventoryRepository.Add(supplies);
+            }
         }
 
         private bool CanExecuteLoginCommand(object obj)

@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Repositories
 {
-    public class ProductRepository : RepositoryBase, IProductReposiroty
+    public class ProductRepository : RepositoryBase, IProductRepository
     {
         public void Add(ProductModel productModel)
         {
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ProductModel>();
                 connection.Insert(productModel);
             }
         }

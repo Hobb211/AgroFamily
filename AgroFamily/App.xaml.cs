@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using AgroFamily.Repositories;
 using AgroFamily.View;
 
 namespace AgroFamily
@@ -18,16 +19,27 @@ namespace AgroFamily
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
+            StartAppRepository startApp = new StartAppRepository();
+            startApp.CreateTable();
             var loginView = new LoginView();
             loginView.Show();
             loginView.IsVisibleChanged += (s, ev) =>
             {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
+                try
                 {
-                    var mainView = new SaleView();
-                    mainView.Show();
-                    loginView.Close();
+                    if (loginView.IsVisible == false && loginView.IsLoaded)
+                    {
+                        var mainView = new MainView();
+                        mainView.Show();
+                        loginView.Close();
+                    }
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+
             };
         }
     }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace AgroFamily.Repositories
 {
@@ -16,7 +17,10 @@ namespace AgroFamily.Repositories
     {
         public void Add(UserModel userModel)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Insert(userModel);
+            }
         }
 
         public bool AuthenticatePassword(NetworkCredential credential)
@@ -47,14 +51,24 @@ namespace AgroFamily.Repositories
             return validUser;
         }
 
-        public void Edit(UserModel userModel)
+        public void Edit(UserModel user)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Update(user);
+            }
         }
 
-        public IEnumerable<UserModel> GetByAll()
+        public ObservableCollection<UserModel> GetByAll()
         {
-            throw new NotImplementedException();
+            IEnumerable<UserModel> users;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                users = connection.Query<UserModel>("select * from UserModel");
+            }
+
+            ObservableCollection<UserModel> collection = new ObservableCollection<UserModel>(users);
+            return collection;
         }
 
         public UserModel GetById(string id)
@@ -74,7 +88,10 @@ namespace AgroFamily.Repositories
 
         public void Remove(string id)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Delete<UserModel>(id);
+            }
         }
     }
 }
