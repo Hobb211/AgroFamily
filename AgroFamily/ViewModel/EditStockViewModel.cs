@@ -10,7 +10,7 @@ using AgroFamily.Repositories;
 
 namespace AgroFamily.ViewModel
 {
-    public class SaleViewModel: ViewModelBase 
+    public class EditStockViewModel: ViewModelBase 
     {
         //Fields
         private UserAccountModel _userAccount;
@@ -25,7 +25,7 @@ namespace AgroFamily.ViewModel
             }
         }
 
-        public SaleViewModel()
+        public EditStockViewModel()
         {
             userRepository = new UserRepository();
             LoadCurrentUserData();

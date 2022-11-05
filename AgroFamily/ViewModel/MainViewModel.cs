@@ -57,26 +57,35 @@ namespace AgroFamily.ViewModel
         public ICommand ShowAddExpensiveViewCommand { get;}
         public ICommand ShowAddUserViewCommand { get; }
         public ICommand ShowCashRegisterViewCommand { get; }
+        public ICommand ShowEditStockViewCommand { get; }
 
         public MainViewModel()
         {
             userRepository = new UserRepository();
             UserAccount = new UserAccountModel();
             LoadCurrentUserData();
+
             //Initialize navigation commands
             ShowNavigationMenuCommand = new ViewModelCommand(ExecuteShowNavigationMenuCommand);
             ShowInventoryMenuCommand= new ViewModelCommand(ExecuteShowInventoryMenuCommand);
             ShowBusinessMenuCommand= new ViewModelCommand(ExecuteShowBusinessMenuCommand);
+
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
             ShowAddExpensiveViewCommand = new ViewModelCommand(ExecuteShowAddExpensiveViewCommand);
             ShowAddUserViewCommand = new ViewModelCommand(ExecuteShowAddUserViewCommand);
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
+            ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
             InventoryMenuVisibility = Visibility.Collapsed;
             BusinessMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowEditStockViewCommand(object obj)
+        {
+            CurrentChildView=new EditStockViewModel();
         }
 
         private void ExecuteShowNavigationMenuCommand(object obj)
