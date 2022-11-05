@@ -13,6 +13,8 @@ namespace AgroFamily
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    
+    //Para cambiar a la vista que se nececite 
     public partial class App : Application
     {
         protected void ApplicationStart(object sender, StartupEventArgs e)

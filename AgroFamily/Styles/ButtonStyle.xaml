@@ -62,7 +62,6 @@
         </Style.Triggers>
     </Style>
 
-
     <!--Default button-->
     <Style x:Key="button_tr" TargetType="Button">
         <!--Normal Button Style-->
@@ -389,6 +388,5 @@
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
     </Style>
-
 
 </ResourceDictionary>
