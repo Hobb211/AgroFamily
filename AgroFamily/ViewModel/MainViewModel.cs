@@ -19,6 +19,9 @@ namespace AgroFamily.ViewModel
         private UserAccountModel _userAccount;
         private IUserRepository userRepository;
         private ViewModelBase _currentChildView;
+        private Visibility _navigationMenuVisibility;
+        private Visibility _inventoryMenuVisibility;
+        private Visibility _businessMenuVisibility;
 
         //Properties
         public UserAccountModel UserAccount 
@@ -40,14 +43,19 @@ namespace AgroFamily.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             } 
         }
+        public Visibility NavigationMenuVisibility { get => _navigationMenuVisibility; set { _navigationMenuVisibility = value; OnPropertyChanged(nameof(NavigationMenuVisibility)); } }
+        public Visibility InventoryMenuVisibility { get => _inventoryMenuVisibility; set { _inventoryMenuVisibility = value; OnPropertyChanged(nameof(InventoryMenuVisibility)); } }
+        public Visibility BusinessMenuVisibility { get => _businessMenuVisibility; set { _businessMenuVisibility = value; OnPropertyChanged(nameof(BusinessMenuVisibility)); } }
+
+        //Commands navigation
+        public ICommand ShowNavigationMenuCommand { get; }
+        public ICommand ShowInventoryMenuCommand { get; }
+        public ICommand ShowBusinessMenuCommand { get; }
 
         //Commands
         public ICommand ShowAddItemsViewCommand { get;}
-
         public ICommand ShowAddExpensiveViewCommand { get;}
-
         public ICommand ShowAddUserViewCommand { get; }
-
         public ICommand ShowCashRegisterViewCommand { get; }
 
         public MainViewModel()
@@ -55,15 +63,41 @@ namespace AgroFamily.ViewModel
             userRepository = new UserRepository();
             UserAccount = new UserAccountModel();
             LoadCurrentUserData();
-
+            //Initialize navigation commands
+            ShowNavigationMenuCommand = new ViewModelCommand(ExecuteShowNavigationMenuCommand);
+            ShowInventoryMenuCommand= new ViewModelCommand(ExecuteShowInventoryMenuCommand);
+            ShowBusinessMenuCommand= new ViewModelCommand(ExecuteShowBusinessMenuCommand);
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
             ShowAddExpensiveViewCommand = new ViewModelCommand(ExecuteShowAddExpensiveViewCommand);
             ShowAddUserViewCommand = new ViewModelCommand(ExecuteShowAddUserViewCommand);
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
-            
+
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowNavigationMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Collapsed;
+            NavigationMenuVisibility = Visibility.Visible;
+        }
+
+        private void ExecuteShowBusinessMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Visible;
+            NavigationMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowInventoryMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Visible;
+            BusinessMenuVisibility = Visibility.Collapsed;
+            NavigationMenuVisibility = Visibility.Collapsed;
         }
 
         private void ExecuteShowCashRegisterViewCommand(object obj)
