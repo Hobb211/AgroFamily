@@ -22,11 +22,10 @@ namespace AgroFamily.ViewModel
         private string _name;
         private string _lastname;
         private string _password;
-        private string _typestring;
         private TypeUserModel _type;
         private ObservableCollection<TypeUserModel> _typeUser;
-        public ObservableCollection<UserModel2> _users;
-        public ObservableCollection<AdminModel> _adminsa;
+        private ObservableCollection<UserModel> _users;
+        private UserModel _currentUser;
 
         //Propierties
         public string Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
@@ -44,38 +43,19 @@ namespace AgroFamily.ViewModel
             }
         }
         public ObservableCollection<TypeUserModel> TypeUser { get => _typeUser; set => _typeUser = value; }
-        public ObservableCollection<AdminModel> Adminsa { get => _adminsa; set => _adminsa = value; }
-        public ObservableCollection<UserModel2> Users { get => _users; set => _users = value; }
+        public ObservableCollection<UserModel> Users { get => _users; set { _users = value; OnPropertyChanged(nameof(Users)); } }
 
         //Commands
         public ICommand AddUserCommand { get; }
-        public ICommand ShowUsersCommand { get; }
 
         //Constructor
         public UserRegisterViewModel()
         {
             AddUserCommand = new ViewModelCommand(ExecuteAddUserCommand, CanExecuteAddUserCommand);
-
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
-
-            //ShowUsersCommand = new ViewModelCommand(ObtenerDatosAdmins);
-            //ShowUsersCommand = new ViewModelCommand(Action < AdminModel > ObtenerDatosAdmins);
-
-
-
-            IUser2Repository usersRepository = new User2Repository();
-            Users = usersRepository.GetByAll3();
-
-
-
-            //IAdminRepository adminRepository = new AdminRepository();
-            //Adminsa = adminRepository.GetByAll3();
-
-
-            //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
-            //Adminsa = new ObservableCollection<AdminModel>(Adminsa2);
-
+            IUserRepository usersRepository = new UserRepository();
+            Users = usersRepository.GetByAll();
 
         }
 
@@ -101,55 +81,39 @@ namespace AgroFamily.ViewModel
         {
             try
             {
+                IUserRepository userRepository = new UserRepository();
                 switch (Type.Name)
                 {
                     case "Administrador":
-                        //AdminModel admin = new AdminModel();
-                        UserModel2 admin = new UserModel2();
+                        UserModel admin = new UserModel();
                         admin.Id = Id;
                         admin.Name = Name;
-                        admin.Lastname = Lastname;
+                        admin.LastName = Lastname;
                         admin.Password = Password;
                         admin.Type = "Administrador";
-                        //IAdminRepository adminRepository = new AdminRepository();
-                        IUser2Repository user2Repository = new User2Repository();
-                        user2Repository.Add(admin);
+                        userRepository.Add(admin);
                         break;
 
                     case "Cajero":
-                        //CashierModel cashier = new CashierModel();
-                        UserModel2 cashier = new UserModel2();
+                        UserModel cashier = new UserModel();
                         cashier.Id = Id;
                         cashier.Name = Name;
-                        cashier.Lastname = Lastname;
+                        cashier.LastName = Lastname;
                         cashier.Password = Password;
                         cashier.Type = "Cajero";
-                        //ICashierRepository cashierRepository = new CashierRepository();
-                        IUser2Repository user2Repository2 = new User2Repository();
-                        user2Repository2.Add(cashier);
+                        userRepository.Add(cashier);
                         break;
                 }
-
-
-            }catch (Exception e)
+                Users = userRepository.GetByAll();
+                
+            }
+            catch (Exception e)
             {
                 MessageBox.Show("No se ha podido registrar"+e.Message);
                 //throw new Exception("No se ha podido registrar");
             }
         }
 
-        private void ExecuteGetData()
-        {
-            try
-            {
-                IAdminRepository repo = new AdminRepository();
-                var myobscoll = new ObservableCollection<AdminModel>(repo.GetByAll2());
-
-            }catch(Exception e)
-            {
-                MessageBox.Show("no se k paso");
-            }
-        }
 
     } 
 

@@ -65,36 +65,29 @@
 
         </Border>
 
+
         <Border x:Name="BDRounded" Grid.RowSpan="6" Grid.Row="5" Margin="25,0,330,24" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
+
 
             <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
                       VerticalGridLinesBrush="{StaticResource Color5}"
                       Background="{StaticResource Color4}"
                       GridLinesVisibility="All"
-                      
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
                       AutoGenerateColumns="False" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
-                      BorderBrush="{x:Null}"
-                      ItemsSource="{Binding Path=Users}"
-                      Margin= "-18,0,-48,0" >
-
-
-                    <DataGrid.Columns>
-                    
+                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}"
+                      Margin= "-18,0,-48,0">
+                <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding Lastname}" />
+                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding LastName}" />
                     <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Contraseña" IsReadOnly="True" Width="*" Binding="{Binding Password}"/>
-
                 </DataGrid.Columns>
-                
             </DataGrid>
-            
         </Border>
 
         <Border CornerRadius="20"
@@ -234,10 +227,6 @@
                 Style="{StaticResource button_tr}"
                 Content="Confirmar"
                 Command="{Binding AddUserCommand}" Margin="40,5,10,5" Grid.Row="3" Grid.Column="1"/>
-
-
-
-
 
             </Grid>
         </Border>
