@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace AgroFamily.Repositories
             using (SQLiteConnection connection = GetConnection())
             {
                 int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
+                //int cant = connection.Query<ProductModel>("select * from ProductModel where ID").Count();
                 ProductModel[] products = new ProductModel[cant];
                 for (int i = 1; i <= cant; i++)
                 {
@@ -55,6 +57,21 @@ namespace AgroFamily.Repositories
             {
                 connection.Delete<ProductModel>(id);
             }
+        }
+
+
+        public ObservableCollection<ProductModel> GetByAll3()
+        {
+            IEnumerable<ProductModel> products;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
+                products = connection.Query<ProductModel>("select * from ProductModel");
+
+            }
+
+            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+            return collection;
         }
     }
 }

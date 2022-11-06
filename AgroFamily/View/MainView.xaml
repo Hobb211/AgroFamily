@@ -21,8 +21,8 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:UserRegisterViewModel}">
-            <local:UserRegisterView/>
+        <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
+            <local:InventoryView/>
         </DataTemplate>
     </Window.Resources>
     

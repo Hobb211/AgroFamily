@@ -27,6 +27,7 @@ namespace AgroFamily.ViewModel
         private ObservableCollection<TypeUserModel> _typeUser;
         public ObservableCollection<UserModel2> _users;
         public ObservableCollection<AdminModel> _adminsa;
+        public ObservableCollection<ArticleModel> _articles;
 
         //Propierties
         public string Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
@@ -46,6 +47,7 @@ namespace AgroFamily.ViewModel
         public ObservableCollection<TypeUserModel> TypeUser { get => _typeUser; set => _typeUser = value; }
         public ObservableCollection<AdminModel> Adminsa { get => _adminsa; set => _adminsa = value; }
         public ObservableCollection<UserModel2> Users { get => _users; set => _users = value; }
+        public ObservableCollection<ArticleModel> Articles { get => _articles; set => _articles = value; }
 
         //Commands
         public ICommand AddUserCommand { get; }
@@ -59,22 +61,13 @@ namespace AgroFamily.ViewModel
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
 
-            //ShowUsersCommand = new ViewModelCommand(ObtenerDatosAdmins);
-            //ShowUsersCommand = new ViewModelCommand(Action < AdminModel > ObtenerDatosAdmins);
-
-
 
             IUser2Repository usersRepository = new User2Repository();
             Users = usersRepository.GetByAll3();
 
+            IArticleRepository articlesRepository = new ArticleRepository();
+            Articles = articlesRepository.GetByAll3();
 
-
-            //IAdminRepository adminRepository = new AdminRepository();
-            //Adminsa = adminRepository.GetByAll3();
-
-
-            //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
-            //Adminsa = new ObservableCollection<AdminModel>(Adminsa2);
 
 
         }
@@ -128,6 +121,7 @@ namespace AgroFamily.ViewModel
                         IUser2Repository user2Repository2 = new User2Repository();
                         user2Repository2.Add(cashier);
                         break;
+                        MessageBox.Show("Usuario registrado");
                 }
 
 
@@ -138,18 +132,6 @@ namespace AgroFamily.ViewModel
             }
         }
 
-        private void ExecuteGetData()
-        {
-            try
-            {
-                IAdminRepository repo = new AdminRepository();
-                var myobscoll = new ObservableCollection<AdminModel>(repo.GetByAll2());
-
-            }catch(Exception e)
-            {
-                MessageBox.Show("no se k paso");
-            }
-        }
 
     } 
 
