@@ -22,10 +22,10 @@ namespace AgroFamily.ViewModel
         private string _name;
         private string _lastname;
         private string _password;
-        private string _typestring;
         private TypeUserModel _type;
         private ObservableCollection<TypeUserModel> _typeUser;
-        public ObservableCollection<UserModel> _users;
+        private ObservableCollection<UserModel> _users;
+        private UserModel _currentUser;
 
         //Propierties
         public string Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
@@ -47,7 +47,6 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand AddUserCommand { get; }
-        public ICommand ShowUsersCommand { get; }
 
         //Constructor
         public UserRegisterViewModel()
@@ -56,30 +55,8 @@ namespace AgroFamily.ViewModel
 
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
-
-            //ShowUsersCommand = new ViewModelCommand(ObtenerDatosAdmins);
-            //ShowUsersCommand = new ViewModelCommand(Action < AdminModel > ObtenerDatosAdmins);
-
-
-
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
-
-
-
-            //IAdminRepository adminRepository = new AdminRepository();
-            //Adminsa = adminRepository.GetByAll3();
-
-
-
-
-
-
-
-            //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
-            //Adminsa = new ObservableCollection<AdminModel>(Adminsa2);
-
-
         }
 
         private bool CanExecuteAddUserCommand(object obj)
