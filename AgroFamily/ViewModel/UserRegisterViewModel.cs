@@ -52,11 +52,11 @@ namespace AgroFamily.ViewModel
         public UserRegisterViewModel()
         {
             AddUserCommand = new ViewModelCommand(ExecuteAddUserCommand, CanExecuteAddUserCommand);
-
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
+
         }
 
         private bool CanExecuteAddUserCommand(object obj)
