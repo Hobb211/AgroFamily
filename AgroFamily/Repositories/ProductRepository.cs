@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,18 +27,16 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public IEnumerable<ProductModel> GetByAll()
+        public ObservableCollection<ProductModel> GetByAll()
         {
+            IEnumerable<ProductModel> products;
             using (SQLiteConnection connection = GetConnection())
             {
-                int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
-                ProductModel[] products = new ProductModel[cant];
-                for (int i = 1; i <= cant; i++)
-                {
-                    products[i] = connection.Find<ProductModel>(i);
-                }
-                return products;
+                products = connection.Query<ProductModel>("select * from ProductModel");
             }
+
+            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+            return collection;
         }
 
         public ProductModel GetById(int id)
