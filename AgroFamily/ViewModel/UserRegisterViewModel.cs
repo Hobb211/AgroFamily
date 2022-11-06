@@ -73,11 +73,6 @@ namespace AgroFamily.ViewModel
             //Adminsa = adminRepository.GetByAll3();
 
 
-
-
-
-
-
             //IEnumerable<AdminModel> Adminsa2 = adminRepository.GetByAll();
             //Adminsa = new ObservableCollection<AdminModel>(Adminsa2);
 
