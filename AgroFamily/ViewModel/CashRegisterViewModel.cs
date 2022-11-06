@@ -1,4 +1,5 @@
 ﻿using AgroFamily.Model;
+using AgroFamily.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,18 +11,23 @@ namespace AgroFamily.ViewModel
 {
     public class CashRegisterViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<ProductModel> _products;
+        //Fields
+        private ObservableCollection<ProductModel> _products;
+        private ObservableCollection<SaleProductModel> _saleProducts;
+        private SaleModel _saleModel;
 
-        public IEnumerable<ProductModel> Products => _products;
+        //Propierties
+        public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
+        public ObservableCollection<SaleProductModel> SaleProducts { get => _saleProducts; set { _saleProducts = value; OnPropertyChanged(nameof(SaleProducts)); } }
+        public SaleModel SaleModel { get => _saleModel; set { _saleModel = value; OnPropertyChanged(nameof(SaleModel)); } }
 
         public CashRegisterViewModel()
         {
-            _products = new ObservableCollection<ProductModel>();
+            IProductRepository repository = new ProductRepository();
+            Products = repository.GetByAll();
         }
 
-        public void addProductToSale(ProductModel product)
-        {
-            //Add(ProductModel product);
-        }
+        
+
     }
 }

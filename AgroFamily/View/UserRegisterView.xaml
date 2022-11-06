@@ -26,32 +26,21 @@
             <RowDefinition Height="127*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-
         <Border CornerRadius="0"
                 Grid.Row="0"
                 Margin="539,0,0,7" Grid.RowSpan="6">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
-
             </Border.Background>
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="170"/>
                 </Grid.RowDefinitions>
-
                 <StackPanel Orientation="Vertical" Margin="0,20,0,-145">
                     <Image Source="/Assets/user_reg.png" Height="222" Width="196"/>
-
-
                 </StackPanel>
             </Grid>
-
-
-
         </Border>
-
         <Border CornerRadius="0"
                 Grid.Row="7"
                 Margin="539,0,0,0">
@@ -62,16 +51,12 @@
                     Style="{StaticResource button_tr}"
                     Content="Actualizar"
                     Command="{Binding ShowUsersCommand}" Margin="50,44,51,43"/>
-
         </Border>
-
-
         <Border CornerRadius="20"
                 Grid.Row="5" Margin="25,0,330,24" Grid.RowSpan="6">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
-
             <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
                       VerticalGridLinesBrush="{StaticResource Color5}"
                       GridLinesVisibility="All"
@@ -82,8 +67,7 @@
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
                       ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}"
-                      Margin= "-18,0,-48,0"
-                      >
+                      Margin= "-18,0,-48,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
@@ -92,30 +76,24 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-
         <Border CornerRadius="20"
                 Grid.Row="0" Margin="25,25,301,44" Grid.RowSpan="5">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
-
             <Grid Margin="5">
-
                 <Grid.RowDefinitions >
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
-
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="210"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
                 <TextBlock Text="Añada un usuario al sistema"
                            Margin="10"
                            Style="{StaticResource titleStyle3}"/>
@@ -142,7 +120,6 @@
                     </Border>
                 </StackPanel>
                 <!--Type List Box-->
-
                 <StackPanel Grid.Row="1"
                             Margin="20,0,0,0"
                             Orientation="Horizontal" Grid.Column="1" >
@@ -203,7 +180,6 @@
                                  Height="20"/>
                     </Border>
                 </StackPanel>
-
                 <!--password Box-->
                 <StackPanel Margin="0,0,0,0"
                             Grid.Row="3"
@@ -225,12 +201,10 @@
                                  Height="20"/>
                     </Border>
                 </StackPanel>
-
                 <Button x:Name="addUser"
                 Style="{StaticResource button_tr}"
                 Content="Confirmar"
                 Command="{Binding AddUserCommand}" Margin="40,5,10,5" Grid.Row="3" Grid.Column="1"/>
-
             </Grid>
         </Border>
     </Grid>
