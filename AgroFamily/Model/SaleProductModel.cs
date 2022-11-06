@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Model
 {
-    public class SaleModel
+    public class SaleProductModel
     {
         [PrimaryKey,AutoIncrement]
         public int Id { get; set; }
-        public string id_vendedor { get; set; }
-        public string fecha_Venta { get; set; }
-
+        public int ProductId { get; set; }
+        public int SaleId { get; set; }
+        public int Count { get; set; }
     }
 }
-

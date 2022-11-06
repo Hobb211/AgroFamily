@@ -20,6 +20,8 @@ namespace AgroFamily.Repositories
                 db.CreateTable<TypeInventoryModel>();
                 db.CreateTable<TypeUserModel>();
                 db.CreateTable<UserModel>();
+                db.CreateTable<SaleModel>();
+                db.CreateTable<SaleProductModel>();
                 try
                 {
                     db.Insert(new TypeExpensiveModel() { Name = "Añadir tipo" });
