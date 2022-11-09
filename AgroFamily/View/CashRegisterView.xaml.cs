@@ -1,7 +1,10 @@
-﻿using System;
+﻿using AgroFamily.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,13 +19,18 @@ using System.Windows.Shapes;
 namespace AgroFamily.View
 {
     /// <summary>
-    /// Interaction logic for AddedUserView.xaml
+    /// Lógica de interacción para CashRegisterView.xaml
     /// </summary>
-    public partial class AddedUserView : UserControl
+    public partial class CashRegisterView : UserControl
     {
-        public AddedUserView()
+        public CashRegisterView()
         {
             InitializeComponent();
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

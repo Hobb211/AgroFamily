@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
+using AgroFamily.View;
 using FontAwesome.Sharp;
 
 namespace AgroFamily.ViewModel
@@ -16,9 +17,11 @@ namespace AgroFamily.ViewModel
     {
         //Fields
         private UserAccountModel _userAccount;
-        //private UserModel _userAcc;
         private IUserRepository userRepository;
         private ViewModelBase _currentChildView;
+        private Visibility _navigationMenuVisibility;
+        private Visibility _inventoryMenuVisibility;
+        private Visibility _businessMenuVisibility;
 
         //Properties
         public UserAccountModel UserAccount 
@@ -31,16 +34,6 @@ namespace AgroFamily.ViewModel
             }
         }
 
-        //public UserModel UserAcc
-        //{
-        //    get => _userAcc;
-        //    set
-        //    {
-        //        _userAcc = value;
-        //        OnPropertyChanged(nameof(UserAcc));
-        //    }
-        //}
-
         public ViewModelBase CurrentChildView 
         { 
             get => _currentChildView; 
@@ -50,28 +43,78 @@ namespace AgroFamily.ViewModel
                 OnPropertyChanged(nameof(CurrentChildView));
             } 
         }
+        public Visibility NavigationMenuVisibility { get => _navigationMenuVisibility; set { _navigationMenuVisibility = value; OnPropertyChanged(nameof(NavigationMenuVisibility)); } }
+        public Visibility InventoryMenuVisibility { get => _inventoryMenuVisibility; set { _inventoryMenuVisibility = value; OnPropertyChanged(nameof(InventoryMenuVisibility)); } }
+        public Visibility BusinessMenuVisibility { get => _businessMenuVisibility; set { _businessMenuVisibility = value; OnPropertyChanged(nameof(BusinessMenuVisibility)); } }
+
+        //Commands navigation
+        public ICommand ShowNavigationMenuCommand { get; }
+        public ICommand ShowInventoryMenuCommand { get; }
+        public ICommand ShowBusinessMenuCommand { get; }
 
         //Commands
         public ICommand ShowAddItemsViewCommand { get;}
+        public ICommand ShowAddExpensiveViewCommand { get;}
         public ICommand ShowAddUserViewCommand { get; }
         public ICommand ShowInventoryViewCommand { get; }
+        public ICommand ShowCashRegisterViewCommand { get; }
+        public ICommand ShowEditStockViewCommand { get; }
+
 
         public MainViewModel()
         {
             userRepository = new UserRepository();
             UserAccount = new UserAccountModel();
-            //UserAcc = new UserModel();
             LoadCurrentUserData();
+
+            //Initialize navigation commands
+            ShowNavigationMenuCommand = new ViewModelCommand(ExecuteShowNavigationMenuCommand);
+            ShowInventoryMenuCommand= new ViewModelCommand(ExecuteShowInventoryMenuCommand);
+            ShowBusinessMenuCommand= new ViewModelCommand(ExecuteShowBusinessMenuCommand);
 
             //Initialize commands
             ShowAddItemsViewCommand = new ViewModelCommand(ExecuteShowAddItemsViewCommand);
+            ShowAddExpensiveViewCommand = new ViewModelCommand(ExecuteShowAddExpensiveViewCommand);
             ShowAddUserViewCommand = new ViewModelCommand(ExecuteShowAddUserViewCommand);
             ShowInventoryViewCommand = new ViewModelCommand(ExecuteShowInventoryViewCommand);
+            ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
+            ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
 
             //Default view
-            //ExecuteShowAddItemsViewCommand(null);
-            //ExecuteShowAddUserViewCommand(null);
-            ExecuteShowInventoryViewCommand(null);
+            ExecuteShowCashRegisterViewCommand(null);
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowEditStockViewCommand(object obj)
+        {
+            CurrentChildView=new EditStockViewModel();
+        }
+
+        private void ExecuteShowNavigationMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Collapsed;
+            NavigationMenuVisibility = Visibility.Visible;
+        }
+
+        private void ExecuteShowBusinessMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Collapsed;
+            BusinessMenuVisibility = Visibility.Visible;
+            NavigationMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowInventoryMenuCommand(object obj)
+        {
+            InventoryMenuVisibility = Visibility.Visible;
+            BusinessMenuVisibility = Visibility.Collapsed;
+            NavigationMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowCashRegisterViewCommand(object obj)
+        {
+            CurrentChildView = new CashRegisterViewModel();
         }
 
         private void ExecuteShowAddItemsViewCommand(object obj)
@@ -85,6 +128,11 @@ namespace AgroFamily.ViewModel
         private void ExecuteShowInventoryViewCommand(object obj)
         {
             CurrentChildView = new InventoryViewModel();
+        }
+
+        private void ExecuteShowAddExpensiveViewCommand(object obj)
+        {
+            CurrentChildView = new AddExpensiveViewModel();
         }
 
         private void LoadCurrentUserData()

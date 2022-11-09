@@ -13,9 +13,6 @@ namespace AgroFamily.Model
         void Edit(ProductModel product);
         void Remove(int id);
         ProductModel GetById(int id);
-        IEnumerable<ProductModel> GetByAll();
-
-        ObservableCollection<ProductModel> GetByAll3();
-
+        ObservableCollection<ProductModel> GetByAll();
     }
 }

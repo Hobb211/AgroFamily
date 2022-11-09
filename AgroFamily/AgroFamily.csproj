@@ -21,10 +21,12 @@
     <None Remove="Assets\avatar.png" />
     <None Remove="Assets\candado.png" />
     <None Remove="Assets\peso.png" />
+    <None Remove="Assets\user_reg.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="agro.ico" />
+    <Resource Include="Assets\agro.png" />
     <Resource Include="Assets\peso.png" />
   </ItemGroup>
 
@@ -36,9 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\agro.png" />
     <Resource Include="Assets\avatar.png" />
     <Resource Include="Assets\candado.png" />
+    <Resource Include="Assets\user_reg.png" />
   </ItemGroup>
 
 </Project>

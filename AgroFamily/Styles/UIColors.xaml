@@ -22,6 +22,13 @@
     <SolidColorBrush x:Key="Color5" Color="#E9FFCB"/>
     <SolidColorBrush x:Key="Color6" Color="White"/>
     <SolidColorBrush x:Key="Color7" Color="#FDCB9E"/>
+    <SolidColorBrush x:Key="Color8" Color="#FFA9A3"/>
+
+    <!--Navigation Menu Colors-->
+    <SolidColorBrush x:Key="NavigationColor1" Color="#FA9C67"/>
+    <SolidColorBrush x:Key="NavigationColor2" Color="#DE775B"/>
+    <SolidColorBrush x:Key="NavigationColor3" Color="#F57971"/>
+    <SolidColorBrush x:Key="NavigationColor4" Color="#DE5B7E"/>
 
     <!--Font Colors-->
     <SolidColorBrush x:Key="textColor1" Color="White"/>

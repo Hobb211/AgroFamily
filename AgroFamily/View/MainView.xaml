@@ -19,10 +19,25 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-
+    
+    <!--ChildContent-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
             <local:InventoryView/>
+        <DataTemplate DataType="{x:Type viewModel:UserRegisterViewModel}">
+            <local:UserRegisterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddExpensiveViewModel}">
+            <local:AddExpensiveView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:CashRegisterViewModel}">
+            <local:CashRegisterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddItemsViewModel}">
+            <local:AddItemsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EditStockViewModel}">
+            <local:EditStockView/>
         </DataTemplate>
     </Window.Resources>
     
@@ -76,7 +91,130 @@
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
                 </Border.Background>
-                
+                <StackPanel Orientation="Horizontal">
+                    <!--Navigation menu-->
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="{Binding NavigationMenuVisibility,UpdateSourceTrigger=PropertyChanged}">
+                        <!--CashRegister Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor1}"
+                                     Command="{Binding ShowCashRegisterViewCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CartShopping" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Caja" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Inventory Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     Width="70"
+                                     Command="{Binding ShowInventoryMenuCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesStacked" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Inventario" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Business State Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor3}"
+                                     Command="{Binding ShowBusinessMenuCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Estado" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Users Buttons-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor4}"
+                                     Command="{Binding ShowAddUserViewCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="User" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Usuarios" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    <!--Inventory menu-->
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="{Binding InventoryMenuVisibility}">
+                        <!--Navigation menu button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor1}"
+                                     Command="{Binding ShowNavigationMenuCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleArrowLeft" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Atras" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--AddItems button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     Command="{Binding ShowAddItemsViewCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesPacking" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Añadir" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Edit Stock Menu-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     Command="{Binding ShowEditStockViewCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="Box" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Stock" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Inventory button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     
+                                     Width="70">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesStacked" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Inventario" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    <!--Business menu-->
+                    <StackPanel Orientation="Horizontal"
+                                Visibility="{Binding BusinessMenuVisibility}">
+                        <!--Navigation menu button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor1}"
+                                     Command="{Binding ShowNavigationMenuCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleArrowLeft" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Atras" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Expensives button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     Command="{Binding ShowAddExpensiveViewCommand}">
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleDollarToSlot" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Gastos" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Sales History button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     >
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="FileInvoiceDollar" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Ventas" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Business button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
+                                     Tag="{StaticResource NavigationColor2}"
+                                     >
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
+                                <TextBlock Text="Estado" Style="{StaticResource navigationButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </StackPanel>
             </Border>
             <!--Content Section-->
             <Border CornerRadius="0,0,10,10"
@@ -86,8 +224,7 @@
                 </Border.Background>
 
                 <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="0"
-                                />
+                                Margin="10"/>
             </Border>
 
         </Grid>

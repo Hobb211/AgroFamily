@@ -62,7 +62,6 @@
         </Style.Triggers>
     </Style>
 
-
     <!--Default button-->
     <Style x:Key="button_tr" TargetType="Button">
         <!--Normal Button Style-->
@@ -90,25 +89,61 @@
         </Style.Triggers>
     </Style>
 
+    <!--NavigationButtons-->
+    <Style x:Key="NavigationButton" TargetType="RadioButton">
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Margin" Value="-5,0,0,5"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource textColor1}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="4,0,0,0"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
+        <Style.Triggers>
+            <!--Button Style on hover-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Margin" Value="0,0,0,5"/>
+                <Setter Property="Background" Value="{DynamicResource buttonColor2}"/>
+                <Setter Property="Foreground" Value="{DynamicResource textTitleColor1}"/>
+                <Setter Property="BorderBrush" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+            <!--Active Button Style-->
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Margin" Value="0,0,0,5"/>
+                <Setter Property="Background" Value="{DynamicResource buttonColor1}"/>
+                <Setter Property="Foreground" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="BorderBrush" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--Navigation Button Icon-->
+    <Style x:Key="navigationButtonIcon" TargetType="fa:IconImage">
+        <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="Margin" Value="0,5,0,5"/>
+    </Style>
 
+    <!--Navigation Button text-->
+    <Style x:Key="navigationButtonText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="13.5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
 
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
     <!--DataGrid Buttons-->
-
-
-
-
-
     <Style x:Key="topButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#6E7783" />
@@ -353,6 +388,5 @@
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
     </Style>
-
 
 </ResourceDictionary>

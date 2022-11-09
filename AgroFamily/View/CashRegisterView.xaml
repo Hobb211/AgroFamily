@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="AgroFamily.View.CashRegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="780">
+
+    <UserControl.DataContext>
+        <viewmodel:CashRegisterViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.025*"/>
+            <ColumnDefinition Width="0.75*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0"
+                CornerRadius="20"
+                Padding="15">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0"
+                            CornerRadius="20">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.3*"/>
+                                <RowDefinition Height="0.3*"/>
+                                <RowDefinition Height="0.3*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="{Binding CurrentProduct.Name}" Style="{StaticResource titleStyle1}"/>
+                            <StackPanel Grid.Row="1" 
+                                        Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Precio=$" Style="{StaticResource textStyle1}"/>
+                                <TextBlock Text="{Binding CurrentProduct.Price}" Style="{StaticResource textStyle1}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" 
+                                        Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Stock=" Style="{StaticResource textStyle1}"/>
+                                <TextBlock Text="{Binding CurrentProduct.Stock}" Style="{StaticResource textStyle1}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Column="1" Margin="10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Cantidad" 
+                                       Style="{StaticResource textStyle1}"
+                                       VerticalAlignment="Center"
+                                       Grid.Column="0"/>
+                            <TextBox Grid.Column="1" 
+                                     Style="{StaticResource textBox}"
+                                     Background="Transparent"
+                                     InputScope="Number"
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <TextBlock Grid.Row="1"
+                                   Visibility="{Binding OverflowQuantityVisibility,UpdateSourceTrigger=PropertyChanged}"
+                                   Text="No hay suficiente inventario"
+                                   Style="{StaticResource textStyle1}"
+                                   FontSize="10"/>
+                        <Button Grid.Row="2"
+                                Content="Añadir" 
+                                Style="{StaticResource button}"
+                                Width="100"
+                                Height="30"
+                                Command="{Binding AddProductCommand}"/>
+                    </Grid>
+                </Grid>
+                <DataGrid Grid.Row="1"
+                          BorderBrush="Transparent"
+                          HorizontalGridLinesBrush="{StaticResource Color4}"
+                          VerticalGridLinesBrush="{StaticResource Color4}"
+                          Background="{StaticResource Color8}"
+                          GridLinesVisibility="All"
+                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                          AutoGenerateColumns="False" 
+                          CellStyle="{DynamicResource DataGridCellStyle1}" 
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                          RowStyle="{DynamicResource DataGridRowStyle1}"
+                          x:Name="productsDataGrid"  
+                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" />
+                        <DataGridTextColumn Header="Stock" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Border Grid.Row="2"
+                        Margin="5"
+                        CornerRadius="10">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                    </Border.Background>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Ventas del dia= $"
+                                   Style="{StaticResource textStyle1}"/>
+                        <TextBlock Text="{Binding TotalPriceDay,UpdateSourceTrigger=PropertyChanged}" 
+                                   Style="{StaticResource textStyle1}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Column="2"
+                CornerRadius="10">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.005*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0"
+                          Margin="10"
+                          BorderBrush="Transparent"
+                          HorizontalGridLinesBrush="{StaticResource Color4}"
+                          VerticalGridLinesBrush="{StaticResource Color4}"
+                          Background="{StaticResource Color8}"
+                          GridLinesVisibility="All"
+                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                          AutoGenerateColumns="False" 
+                          CellStyle="{DynamicResource DataGridCellStyle1}" 
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                          RowStyle="{DynamicResource DataGridRowStyle1}"
+                          ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SaleProducts,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Count}" />
+                        <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Border Grid.Row="1" Background="{StaticResource Color5}"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" 
+                                Orientation="Horizontal" 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="10">
+                        <TextBlock Text="Total=$" Style="{StaticResource textStyle1}"/>
+                        <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource textStyle1}"/>
+                    </StackPanel>
+                    <Button Style="{StaticResource button}" 
+                            Content="Comprar"
+                            Command="{Binding PayCommand}"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <Viewbox/>
+    </Grid>
+</UserControl>

@@ -15,7 +15,6 @@ namespace AgroFamily.Repositories
         {
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ProductModel>();
                 connection.Insert(productModel);
             }
         }
@@ -28,19 +27,16 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public IEnumerable<ProductModel> GetByAll()
+        public ObservableCollection<ProductModel> GetByAll()
         {
+            IEnumerable<ProductModel> products;
             using (SQLiteConnection connection = GetConnection())
             {
-                int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
-                //int cant = connection.Query<ProductModel>("select * from ProductModel where ID").Count();
-                ProductModel[] products = new ProductModel[cant];
-                for (int i = 1; i <= cant; i++)
-                {
-                    products[i] = connection.Find<ProductModel>(i);
-                }
-                return products;
+                products = connection.Query<ProductModel>("select * from ProductModel");
             }
+
+            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+            return collection;
         }
 
         public ProductModel GetById(int id)
