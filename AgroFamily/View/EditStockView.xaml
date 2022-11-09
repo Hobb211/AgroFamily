@@ -66,6 +66,7 @@
 							CornerRadius="10,10,10,10" 
 							Width="90">
                             <TextBox x:Name="tId" 
+                                     Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
                                         FontSize="16"
                                         VerticalContentAlignment="Center"
                                         FontWeight="Medium"
@@ -89,6 +90,7 @@
 							CornerRadius="10,10,10,10"
 							Width="90">
                             <TextBox x:Name="tCantidad" 
+                                        Text="{Binding Cantidad,UpdateSourceTrigger=PropertyChanged}"
                                         FontSize="16"
                                         VerticalContentAlignment="Center"
                                         FontWeight="Medium"
@@ -104,50 +106,44 @@
                         </Border>
                     </StackPanel>
 
-                    <Border
-						Grid.Row="0"
-						Grid.Column="1"
-						Margin="5,15,5,15"
-						CornerRadius="10,10,10,10"
-						Width="90">
 
-                        <Button x:Name="eliminar_stock"
+                    <Button x:Name="eliminar_stock"
                                 BorderThickness="0"
                                 Content="Eliminar"
                                 Foreground="White"
                                 FontSize="16"
                                 FontFamily="Montserrat"
-                                Cursor="Hand"
-                                >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#283134"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#505b60"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="90" Height="30"
+                                Cursor="Hand" Grid.ColumnSpan="2" Margin="230,5,-110,95" Grid.RowSpan="2"
+                                Command="{Binding reduce_stock}">
+                                
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#283134"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#505b60"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="90" Height="30"
                                             CornerRadius="9"
                                             Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
+                                    <ContentPresenter VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"/>
-
-                                    </Border>
-
-                                </ControlTemplate>
-                            </Button.Template>
-
-                        </Button>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
 
 
 
-                    </Border>
+
+
+
+
                     <Border
 						Grid.Row="1"
 						Grid.Column="1"
@@ -180,107 +176,39 @@
                                             Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"
                                                             HorizontalAlignment="Center"/>
-
                                     </Border>
-
                                 </ControlTemplate>
                             </Button.Template>
-
                         </Button>
-
-
                     </Border>
 
 
                 </Grid>
 
             </Border>
-            <Border Margin="20"
-					CornerRadius="10,10,10,10"
-                    Grid.Row="1">
-                <Border.Background>
-                    <SolidColorBrush Color="#ee8478"/>
-                </Border.Background>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <!--Definimos la barra superior con un ancho de 30-->
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="2"/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="2"/>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="2"/>
-                        <ColumnDefinition/>
-                        <!--Definimos la parte para el login como sera toda no especificamos un ancho-->
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <!--Definimos la barra superior con un ancho de 30-->
-                        <RowDefinition Height="30"/>
-                        <!--Definimos la parte para el login como sera toda no especificamos un ancho-->
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
 
-                    <TextBlock
-					Margin="0,0,0,0"
-					VerticalAlignment="Center"
-					Text="ID"
-					FontSize="16"
-					Style="{StaticResource titleStyle1}"/>
-                    <!--Preventivo-->
-                    <Border 
-					Margin="0,0,0,0"
-					CornerRadius="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="1">
-                        <Border.Background>
-                            <SolidColorBrush Color="#f5cda4"/>
-                        </Border.Background>
-                    </Border>
-                    <TextBlock
-					Margin="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="2"
-					VerticalAlignment="Center"
-					Text="Nombre del producto"
-					FontSize="16"
-					Style="{StaticResource titleStyle1}"/>
-                    <Border
-					Margin="0,0,0,0"
-					CornerRadius="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="3">
-                        <Border.Background>
-                            <SolidColorBrush Color="#f5cda4"/>
-                        </Border.Background>
-                    </Border>
-                    <TextBlock
-					Margin="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="4"
-					VerticalAlignment="Center"
-					Text="Stock"
-					FontSize="16"
-					Style="{StaticResource titleStyle1}"/>
-                    <Border
-					Margin="0,0,0,0"
-					CornerRadius="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="5">
-                        <Border.Background>
-                            <SolidColorBrush Color="#f5cda4"/>
-                        </Border.Background>
-                    </Border>
-                    <TextBlock
-					Margin="0,0,0,0"
-					Grid.Row="0"
-					Grid.Column="6"
-					VerticalAlignment="Center"
-					Text="Precio"
-					FontSize="16"
-					Style="{StaticResource titleStyle1}"/>
-                </Grid>
 
-            </Border>
+            <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
+                      VerticalGridLinesBrush="{StaticResource Color5}"
+                      Background="{StaticResource Color4}"
+                      GridLinesVisibility="All"
+                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      AutoGenerateColumns="False" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      x:Name="membersDataGrid" 
+                      ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Path=Articulo,UpdateSourceTrigger=PropertyChanged}"
+                      Margin= "20,0,20,38"
+                      Grid.Row="1">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" />
+                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
 
         <StackPanel

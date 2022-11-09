@@ -88,6 +88,11 @@ namespace AgroFamily.ViewModel
         {
             try
             {
+                IArticleRepository articleRepository = new ArticleRepository();
+                IProductRepository productRepository = new ProductRepository();
+                ISuppliesRepository suppliesRepository = new SuppliesRepository();
+
+                ArticleModel article = new ArticleModel();
                 switch (Type.Name)
                 {
                     case "Producto":
@@ -95,16 +100,26 @@ namespace AgroFamily.ViewModel
                         product.Name = Name;
                         product.Price = Price;
                         product.Stock = Count;
-                        IProductRepository productReposiroty = new ProductRepository();
-                        productReposiroty.Add(product);
+                        productRepository.Add(product);
+
+                        article.Name = Name;
+                        article.Price = Price;
+                        article.Stock = Count;
+                        article.Type = Type.Name;
+                        articleRepository.Add(article);
                         break;
 
                     case "Suministro":
                         SuppliesModel suplies = new SuppliesModel();
                         suplies.Name = Name;
                         suplies.Stock = Count;
-                        ISuppliesRepository suppliesRepository = new SuppliesRepository();
                         suppliesRepository.Add(suplies);
+
+                        article.Name = Name;
+                        article.Price = 0;
+                        article.Stock = Count;
+                        article.Type = Type.Name;
+                        articleRepository.Add(article);
                         break;
                 }
                 MessageBox.Show("Se ha añadido el producto con exito");
