@@ -32,8 +32,8 @@ namespace AgroFamily.ViewModel
 
         public EditStockViewModel()
         {
-            IArticleRepository articleRepository = new ArticleRepository();
-            Products = articleRepository.GetAllProducts();
+            //IArticleRepository articleRepository = new ArticleRepository();
+            //Products = articleRepository.GetAllProducts();
 
 
             //AddStockCommand = ViewModelCommand(ExecuteAddStockCommand, CanExecuteAddStockCommand);
@@ -59,10 +59,10 @@ namespace AgroFamily.ViewModel
         {
             try
             {
-                IArticleRepository articleRepository = new ArticleRepository();
-                ArticleModel article = articleRepository.GetById(Id);
-                article.Stock = article.Stock + Cantidad;
-                articleRepository.Edit(article);
+                //IArticleRepository articleRepository = new ArticleRepository();
+                //ArticleModel article = articleRepository.GetById(Id);
+                //article.Stock = article.Stock + Cantidad;
+                //articleRepository.Edit(article);
 
                 MessageBox.Show("Se ha editado el stock con exito");
             }

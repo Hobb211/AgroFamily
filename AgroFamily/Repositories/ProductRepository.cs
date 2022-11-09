@@ -55,18 +55,11 @@ namespace AgroFamily.Repositories
             }
         }
 
-
-        public ObservableCollection<ProductModel> GetByAll3()
+        public ObservableCollection<ArticleModel> GetByAllArticles()
         {
-            IEnumerable<ProductModel> products;
-            using (SQLiteConnection connection = GetConnection())
-            {
-                int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
-                products = connection.Query<ProductModel>("select * from ProductModel");
-
-            }
-
-            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+            ObservableCollection<ArticleModel> collection;
+            IEnumerable<ArticleModel> articles=GetByAll().AsEnumerable();
+            collection = new ObservableCollection<ArticleModel>(articles);
             return collection;
         }
     }

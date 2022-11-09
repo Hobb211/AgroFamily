@@ -14,5 +14,6 @@ namespace AgroFamily.Model
         void Remove(int id);
         ProductModel GetById(int id);
         ObservableCollection<ProductModel> GetByAll();
+        ObservableCollection<ArticleModel> GetByAllArticles();
     }
 }

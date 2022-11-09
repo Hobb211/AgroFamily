@@ -27,20 +27,6 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public IEnumerable<SuppliesModel> GetAll()
-        {
-            using (SQLiteConnection connection = GetConnection())
-            {
-                int cant = connection.Query<SuppliesModel>("select * from SuppliesModel").Count();
-                SuppliesModel[] supplies = new SuppliesModel[cant];
-                for (int i = 1; i <= cant; i++)
-                {
-                    supplies[i] = connection.Find<SuppliesModel>(i);
-                }
-                return supplies;
-            }
-        }
-
         public SuppliesModel GetById(int id)
         {
             using (SQLiteConnection connection = GetConnection())
@@ -57,19 +43,23 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public ObservableCollection<SuppliesModel> GetByAll3()
+        public ObservableCollection<SuppliesModel> GetByAll()
         {
             IEnumerable<SuppliesModel> supplies;
             using (SQLiteConnection connection = GetConnection())
             {
-                int cant = connection.Query<SuppliesModel>("select * from SuppliesModel").Count();
                 supplies = connection.Query<SuppliesModel>("select * from SuppliesModel");
-
-
-
             }
 
             ObservableCollection<SuppliesModel> collection = new ObservableCollection<SuppliesModel>(supplies);
+            return collection;
+        }
+
+        public ObservableCollection<ArticleModel> GetByAllArticles()
+        {
+            ObservableCollection<ArticleModel> collection;
+            IEnumerable<ArticleModel> articles = GetByAll().AsEnumerable();
+            collection = new ObservableCollection<ArticleModel>(articles);
             return collection;
         }
     }

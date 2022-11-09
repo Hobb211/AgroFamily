@@ -22,6 +22,7 @@ namespace AgroFamily.Repositories
                 db.CreateTable<UserModel>();
                 db.CreateTable<SaleModel>();
                 db.CreateTable<SaleProductModel>();
+                db.CreateTable<ArticleModel>();
                 try
                 {
                     db.Insert(new UserModel() { Id = "Admin", Password = "Admin", Name = "Alpharius", Type = "Administrador" });

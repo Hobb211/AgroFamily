@@ -120,13 +120,15 @@
                                    Style="{StaticResource titleStyle3}"
                                    Text="Precio"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   Visibility="{Binding PriceVisibility,UpdateSourceTrigger=PropertyChanged}"/>
                         <Border Grid.Row="3" Grid.Column="1"
                                 CornerRadius="10"
                                 MinHeight="42"
                                 MinWidth="160"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
+                                HorizontalAlignment="Center"
+                                Visibility="{Binding PriceVisibility,UpdateSourceTrigger=PropertyChanged}">
                             <Border.Background>
                                 <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                             </Border.Background>
@@ -170,10 +172,10 @@
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="productsDataGrid"  
-                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}">
+                          ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

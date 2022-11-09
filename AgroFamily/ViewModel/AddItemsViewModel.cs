@@ -22,6 +22,7 @@ namespace AgroFamily.ViewModel
         private int _price;
         private Visibility _priceVisibility;
         private ObservableCollection<TypeInventoryModel> _typeInventory;
+        private ObservableCollection<ArticleModel> _articles;
 
         //Propierties
         public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
@@ -46,9 +47,11 @@ namespace AgroFamily.ViewModel
             } 
         }
         public ObservableCollection<TypeInventoryModel> TypeInventory { get => _typeInventory; set => _typeInventory = value; }
+        public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
 
         //Commands
         public ICommand AddItemCommand { get;}
+        
 
         //Constructor
         public AddItemsViewModel()
@@ -57,6 +60,10 @@ namespace AgroFamily.ViewModel
             AddItemCommand = new ViewModelCommand(ExecuteAddItemCommand, CanExecuteAddItemCommand);
             ITypeInventoryRepository typeInventoryRepository = new TypeInventoryRepository();
             TypeInventory = typeInventoryRepository.GetByAll();
+            IProductRepository productRepository = new ProductRepository();
+            ISuppliesRepository suppliesRepository = new SuppliesRepository();
+            Articles = productRepository.GetByAllArticles();
+            Articles.Union(suppliesRepository.GetByAllArticles());
         }
 
         private bool CanExecuteAddItemCommand(object obj)
@@ -88,11 +95,9 @@ namespace AgroFamily.ViewModel
         {
             try
             {
-                IArticleRepository articleRepository = new ArticleRepository();
                 IProductRepository productRepository = new ProductRepository();
                 ISuppliesRepository suppliesRepository = new SuppliesRepository();
 
-                ArticleModel article = new ArticleModel();
                 switch (Type.Name)
                 {
                     case "Producto":
@@ -101,12 +106,6 @@ namespace AgroFamily.ViewModel
                         product.Price = Price;
                         product.Stock = Count;
                         productRepository.Add(product);
-
-                        article.Name = Name;
-                        article.Price = Price;
-                        article.Stock = Count;
-                        article.Type = Type.Name;
-                        articleRepository.Add(article);
                         break;
 
                     case "Suministro":
@@ -114,15 +113,12 @@ namespace AgroFamily.ViewModel
                         suplies.Name = Name;
                         suplies.Stock = Count;
                         suppliesRepository.Add(suplies);
-
-                        article.Name = Name;
-                        article.Price = 0;
-                        article.Stock = Count;
-                        article.Type = Type.Name;
-                        articleRepository.Add(article);
                         break;
                 }
-                MessageBox.Show("Se ha añadido el producto con exito");
+                Name = "";
+                Price= 0;
+                Count = 0;
+                MessageBox.Show("Se ha añadido el "+Type.Name+" con exito");
             }
             catch
             {
