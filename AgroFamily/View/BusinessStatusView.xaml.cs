@@ -16,7 +16,9 @@ using System.Windows.Shapes;
 namespace AgroFamily.View
 {
     /// <summary>
-    /// Interaction logic for BusinessStatusView.xaml
+
+    /// Interaction logic for BusinessStatus.xaml
+
     /// </summary>
     public partial class BusinessStatusView : UserControl
     {

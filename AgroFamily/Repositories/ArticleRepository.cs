@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace AgroFamily.Repositories
 {
-
     public class ArticleRepository : RepositoryBase, IArticleRepository
     {
         public void Add(ArticleModel articleModel)
         {
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.CreateTable<ArticleModel>();
                 connection.Insert(articleModel);
             }
         }
@@ -29,19 +27,16 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public IEnumerable<ArticleModel> GetByAll()
+
+        public ObservableCollection<ArticleModel> GetByAll()
         {
+            IEnumerable<ArticleModel> articles;
             using (SQLiteConnection connection = GetConnection())
             {
-                int cant = connection.Query<ArticleModel>("select * from ArticleModel").Count();
-                //int cant = connection.Query<ProductModel>("select * from ProductModel where ID").Count();
-                ArticleModel[] products = new ArticleModel[cant];
-                for (int i = 1; i <= cant; i++)
-                {
-                    products[i] = connection.Find<ArticleModel>(i);
-                }
-                return products;
+                articles = connection.Query<ArticleModel>("select * from ArticleModel");
             }
+            ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(articles);
+            return collection;
         }
 
         public ArticleModel GetById(int id)
@@ -51,6 +46,7 @@ namespace AgroFamily.Repositories
                 return connection.Find<ArticleModel>(id);
             }
         }
+
         public void Remove(int id)
         {
             using (SQLiteConnection connection = GetConnection())
@@ -60,12 +56,12 @@ namespace AgroFamily.Repositories
         }
 
 
-        public ObservableCollection<ArticleModel> GetByAll3()
+        public ObservableCollection<ArticleModel> GetAllProducts()
         {
             IEnumerable<ArticleModel> products;
             using (SQLiteConnection connection = GetConnection())
             {
-                products = connection.Query<ArticleModel>("select * from ArticleModel");
+                products = connection.Query<ArticleModel>("select * from ArticleModel where Type=\"Producto\"");
             }
             ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(products);
             return collection;

@@ -39,6 +39,12 @@
         <DataTemplate DataType="{x:Type viewModel:EditStockViewModel}">
             <local:EditStockView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:BusinessStatusViewModel}">
+            <local:BusinessStatusView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
+            <local:InventoryView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border CornerRadius="10" BorderThickness="2">
@@ -166,7 +172,7 @@
                         <!--Inventory button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor2}"
-                                     
+                                     Command="{Binding ShowInventoryViewCommand}"
                                      Width="70">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="BoxesStacked" Style="{StaticResource navigationButtonIcon}"/>
@@ -207,7 +213,7 @@
                         <!--Business button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor2}"
-                                     >
+                                     Command="{Binding ShowBusinessStatusViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
                                 <TextBlock Text="Estado" Style="{StaticResource navigationButtonText}"/>
