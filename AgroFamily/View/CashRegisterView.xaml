@@ -143,18 +143,26 @@
                     <RowDefinition Height="0.005*"/>
                     <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
-                <ListView Margin="10"
-                          Background="{StaticResource Color8}"
+                <DataGrid Grid.Row="0"
+                          Margin="10"
                           BorderBrush="Transparent"
-                          ItemsSource="{Binding SaleProducts,UpdateSourceTrigger=PropertyChanged}">
-                    <ListView.View>
-                        <GridView >
-                            <GridViewColumn Header="Producto" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Cantidad" Width="75" DisplayMemberBinding="{Binding Count}"/>
-                            <GridViewColumn Header="Monto" Width="80" DisplayMemberBinding="{Binding Amount}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                          HorizontalGridLinesBrush="{StaticResource Color4}"
+                          VerticalGridLinesBrush="{StaticResource Color4}"
+                          Background="{StaticResource Color8}"
+                          GridLinesVisibility="All"
+                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                          AutoGenerateColumns="False" 
+                          CellStyle="{DynamicResource DataGridCellStyle1}" 
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                          RowStyle="{DynamicResource DataGridRowStyle1}"
+                          ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SaleProducts,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Count}" />
+                        <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Border Grid.Row="1" Background="{StaticResource Color5}"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>

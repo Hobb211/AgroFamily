@@ -170,8 +170,7 @@
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="productsDataGrid"  
-                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
+                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
