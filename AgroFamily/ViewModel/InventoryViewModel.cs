@@ -19,6 +19,4 @@ namespace AgroFamily.ViewModel
             Articles = articleRepository.GetByAll();
         }
     }
-
-
 }

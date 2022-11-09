@@ -19,9 +19,11 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-
+    
+    <!--ChildContent-->
     <Window.Resources>
-        <!--ChildContent-->
+        <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
+            <local:InventoryView/>
         <DataTemplate DataType="{x:Type viewModel:UserRegisterViewModel}">
             <local:UserRegisterView/>
         </DataTemplate>
@@ -228,7 +230,7 @@
                 </Border.Background>
 
                 <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="0"/>
+                                Margin="10"/>
             </Border>
 
         </Grid>

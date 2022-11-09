@@ -27,6 +27,7 @@ namespace AgroFamily.Repositories
             }
         }
 
+
         public ObservableCollection<ArticleModel> GetByAll()
         {
             IEnumerable<ArticleModel> articles;
@@ -34,7 +35,6 @@ namespace AgroFamily.Repositories
             {
                 articles = connection.Query<ArticleModel>("select * from ArticleModel");
             }
-
             ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(articles);
             return collection;
         }
@@ -55,6 +55,7 @@ namespace AgroFamily.Repositories
             }
         }
 
+
         public ObservableCollection<ArticleModel> GetAllProducts()
         {
             IEnumerable<ArticleModel> products;
@@ -62,10 +63,8 @@ namespace AgroFamily.Repositories
             {
                 products = connection.Query<ArticleModel>("select * from ArticleModel where Type=\"Producto\"");
             }
-
             ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(products);
             return collection;
         }
-
     }
 }

@@ -24,5 +24,10 @@ namespace AgroFamily.View
         {
             InitializeComponent();
         }
+
+        private void membersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

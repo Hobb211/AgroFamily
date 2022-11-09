@@ -1,7 +1,10 @@
-﻿using System;
+﻿using AgroFamily.Model;
+using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,13 +19,11 @@ using System.Windows.Shapes;
 namespace AgroFamily.View
 {
     /// <summary>
-
-    /// Interaction logic for BusinessStatus.xaml
-
+    /// Lógica de interacción para ProductProfitabilityView.xaml
     /// </summary>
-    public partial class BusinessStatusView : UserControl
+    public partial class ProductProfitabilityView : Window
     {
-        public BusinessStatusView()
+        public ProductProfitabilityView()
         {
             InitializeComponent();
         }

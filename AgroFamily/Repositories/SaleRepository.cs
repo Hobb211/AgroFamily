@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,41 +19,14 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public void agregar(SaleModel saleetModel)
+        public ObservableCollection<SaleModel> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(SaleModel saleModel)
-        {
+            IEnumerable<SaleModel> list;
             using (SQLiteConnection connection = GetConnection())
             {
-                connection.Update(saleModel);
+                list = connection.Query<SaleModel>("select * from SaleModel");
             }
-        }
-
-        public void eliminar(SaleModel saletModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void establecerCambios(SaleModel saletModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<SaleModel> GetAll()
-        {
-            using (SQLiteConnection connection = GetConnection())
-            {
-                int cant = connection.Query<SaleModel>("select * from SaleModel").Count();
-                SaleModel[] saleModel = new SaleModel[cant];
-                for (int i = 1; i <= cant; i++)
-                {
-                    saleModel[i] = connection.Find<SaleModel>(i);
-                }
-                return saleModel;
-            }
+            return new ObservableCollection<SaleModel>(list);
         }
 
         public SaleModel GetById(int id)
@@ -63,9 +37,18 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public void mostrarInventario(SaleModel saletModel)
+        public ObservableCollection<SaleModel> GetByDay(DateOnly date)
         {
-            throw new NotImplementedException();
+            ObservableCollection<SaleModel> saleModels = GetAll();
+            ObservableCollection<SaleModel> saleModelsDay = new ObservableCollection<SaleModel>();
+            for (int i=0; i < saleModels.Count; i++)
+            {
+                if (DateOnly.FromDateTime(saleModels[i].dateTime).CompareTo(date)==0)
+                {
+                    saleModelsDay.Add(saleModels[i]);
+                }
+            }
+            return saleModelsDay;
         }
     }
 }

@@ -12,6 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+
         <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
                       VerticalGridLinesBrush="{StaticResource Color5}"
                       Background="{StaticResource Color4}"
@@ -32,9 +33,7 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-
-
-
+    
 
 
 </UserControl>
