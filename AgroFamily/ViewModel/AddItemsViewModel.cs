@@ -106,14 +106,16 @@ namespace AgroFamily.ViewModel
                         product.Name = Name;
                         product.Price = Price;
                         product.Stock = Count;
+                        product.Type = Type.Name;
                         productRepository.Add(product);
                         break;
 
                     case "Suministro":
-                        SuppliesModel suplies = new SuppliesModel();
-                        suplies.Name = Name;
-                        suplies.Stock = Count;
-                        suppliesRepository.Add(suplies);
+                        SuppliesModel supplies = new SuppliesModel();
+                        supplies.Name = Name;
+                        supplies.Stock = Count;
+                        supplies.Type= Type.Name;
+                        suppliesRepository.Add(supplies);
                         break;
                 }
                 Name = "";
