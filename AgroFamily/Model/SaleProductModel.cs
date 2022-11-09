@@ -13,6 +13,8 @@ namespace AgroFamily.Model
         public int Id { get; set; }
         public int ProductId { get; set; }
         public int SaleId { get; set; }
+        public string Name { get; set; }
         public int Count { get; set; }
+        public int Amount { get; set; }
     }
 }

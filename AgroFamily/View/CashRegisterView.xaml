@@ -26,7 +26,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.3*"/>
-                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
@@ -40,19 +41,29 @@
                         </Border.Background>
                         <Grid Margin="10">
                             <Grid.RowDefinitions>
-
                                 <RowDefinition Height="0.3*"/>
                                 <RowDefinition Height="0.3*"/>
                                 <RowDefinition Height="0.3*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="Producto" Style="{StaticResource titleStyle1}"/>
-                            <TextBlock Grid.Row="1" Text="Precio" Style="{StaticResource textStyle1}"/>
-                            <TextBlock Grid.Row="2" Text="Stock" Style="{StaticResource textStyle1}"/>
+                            <TextBlock Grid.Row="0" Text="{Binding CurrentProduct.Name}" Style="{StaticResource titleStyle1}"/>
+                            <StackPanel Grid.Row="1" 
+                                        Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Precio=$" Style="{StaticResource textStyle1}"/>
+                                <TextBlock Text="{Binding CurrentProduct.Price}" Style="{StaticResource textStyle1}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" 
+                                        Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Stock=" Style="{StaticResource textStyle1}"/>
+                                <TextBlock Text="{Binding CurrentProduct.Stock}" Style="{StaticResource textStyle1}"/>
+                            </StackPanel>
                         </Grid>
                     </Border>
                     <Grid Grid.Column="1" Margin="10,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="0.1*"/>
                             <RowDefinition Height="0.3*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -68,32 +79,57 @@
                                      Style="{StaticResource textBox}"
                                      Background="Transparent"
                                      InputScope="Number"
-                                     PreviewTextInput="NumberValidationTextBox"/>
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                        <Button Grid.Row="1"
+                        <TextBlock Grid.Row="1"
+                                   Visibility="{Binding OverflowQuantityVisibility,UpdateSourceTrigger=PropertyChanged}"
+                                   Text="No hay suficiente inventario"
+                                   Style="{StaticResource textStyle1}"
+                                   FontSize="10"/>
+                        <Button Grid.Row="2"
                                 Content="Añadir" 
                                 Style="{StaticResource button}"
                                 Width="100"
-                                Height="30"/>
+                                Height="30"
+                                Command="{Binding AddProductCommand}"/>
                     </Grid>
                 </Grid>
                 <DataGrid Grid.Row="1"
-                          HorizontalGridLinesBrush="{StaticResource Color5}"
-                          VerticalGridLinesBrush="{StaticResource Color5}"
+                          BorderBrush="Transparent"
+                          HorizontalGridLinesBrush="{StaticResource Color4}"
+                          VerticalGridLinesBrush="{StaticResource Color4}"
+                          Background="{StaticResource Color8}"
                           GridLinesVisibility="All"
                           RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
                           AutoGenerateColumns="False" 
                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                           RowStyle="{DynamicResource DataGridRowStyle1}"
-                          x:Name="membersDataGrid" 
-                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}">
+                          x:Name="productsDataGrid"  
+                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" />
                         <DataGridTextColumn Header="Stock" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
                     </DataGrid.Columns>
                 </DataGrid>
+                <Border Grid.Row="2"
+                        Margin="5"
+                        CornerRadius="10">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                    </Border.Background>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Ventas del dia= $"
+                                   Style="{StaticResource textStyle1}"/>
+                        <TextBlock Text="{Binding TotalPriceDay,UpdateSourceTrigger=PropertyChanged}" 
+                                   Style="{StaticResource textStyle1}"/>
+                    </StackPanel>
+                </Border>
             </Grid>
         </Border>
         <Border Grid.Column="2"
@@ -107,7 +143,18 @@
                     <RowDefinition Height="0.005*"/>
                     <RowDefinition Height="0.3*"/>
                 </Grid.RowDefinitions>
-                <ListView Margin="10"></ListView>
+                <ListView Margin="10"
+                          Background="{StaticResource Color8}"
+                          BorderBrush="Transparent"
+                          ItemsSource="{Binding SaleProducts,UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn Header="Producto" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Cantidad" Width="75" DisplayMemberBinding="{Binding Count}"/>
+                            <GridViewColumn Header="Monto" Width="80" DisplayMemberBinding="{Binding Amount}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <Border Grid.Row="1" Background="{StaticResource Color5}"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
@@ -117,11 +164,15 @@
                     <StackPanel Grid.Column="1" 
                                 Orientation="Horizontal" 
                                 VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
                                 Margin="10">
-                        <TextBlock Text="Total=$"/>
-                        <TextBlock Text="xxx.xxx" HorizontalAlignment="Right"/>
+                        <TextBlock Text="Total=$" Style="{StaticResource textStyle1}"/>
+                        <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource textStyle1}"/>
                     </StackPanel>
-                    <Button Style="{StaticResource button}" Content="Comprar"/>
+                    <Button Style="{StaticResource button}" 
+                            Content="Comprar"
+                            Command="{Binding PayCommand}"/>
                 </Grid>
             </Grid>
         </Border>

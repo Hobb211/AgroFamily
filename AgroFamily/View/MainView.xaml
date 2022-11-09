@@ -222,7 +222,7 @@
                 </Border.Background>
 
                 <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="0"/>
+                                Margin="10"/>
             </Border>
 
         </Grid>

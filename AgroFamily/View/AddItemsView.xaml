@@ -10,124 +10,102 @@
     <UserControl.DataContext>
         <viewmodel:AddItemsViewModel/>
     </UserControl.DataContext>
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="340"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        
-        <Border CornerRadius="20"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.45*"/>
+            <ColumnDefinition Width="0.02*"/>
+            <ColumnDefinition Width="0.45*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.01*"/>
+                <RowDefinition Height="0.15*"/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="20"
                 Grid.Row="0">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
-            </Border.Background>
-            
-            <Grid Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="120"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <TextBlock Text="Añadir Inventario"
-                           Margin="10"
-                           Style="{StaticResource titleStyle2}"/>
-                <!--Name Box-->
-                <StackPanel Margin="20"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource textStyle2}"
-                               Text="Nombre"
-                               Width="60"/>
-                    <Border CornerRadius="10"
-                            Margin="20"
-                            Width="160">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="itemName"
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="8*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Añadir Inventario"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource titleStyle2}"/>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                            <RowDefinition Height="0.25*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--Name Box-->
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource titleStyle3}"
+                                   Text="Nombre"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        <Border Grid.Row="0" Grid.Column="1" 
+                                CornerRadius="10"
+                                MinHeight="40"
+                                MinWidth="160"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="itemName"
                                  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource textBox}"
                                  Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
-                    </Border>
-                </StackPanel>
-                <!--Price Box-->
-                <StackPanel x:Name="priceBox" 
-                            Margin="20"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Orientation="Horizontal"
-                            Visibility="{Binding PriceVisibility}">
-                    <TextBlock Style="{StaticResource textStyle2}"
-                               Text="Precio"
-                               Width="60"/>
-                    <Border CornerRadius="10"
-                            Margin="20"
-                            Width="160">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="itemPrice"
-                                 Text="{Binding Price,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox}"
-                                 Margin="15,0"
-                                 Padding="20,0,0,0"
-                                 Height="20"
-                                 InputScope="Number"
-                                 PreviewTextInput="NumberValidationTextBox">
-                            <TextBox.Background>
-                                <ImageBrush ImageSource="/Assets/peso.png"
-                                            Stretch="Uniform"
-                                            AlignmentX="Left"/>
-                            </TextBox.Background>
-                        </TextBox>
-                    </Border>
-                </StackPanel>
-                <!--Type List Box-->
-                <StackPanel Margin="20"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource textStyle2}"
-                               Text="Tipo"
-                               Width="60"/>
-                    <Border CornerRadius="10"
-                            Margin="20"
-                            Width="160">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <ComboBox Margin="15,10"
+                                 Margin="15,0"/>
+                        </Border>
+                        <!--Type List Box-->
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Style="{StaticResource titleStyle3}"
+                                   Text="Tipo"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <Border Grid.Row="1" Grid.Column="1" 
+                                CornerRadius="10"
+                                MinWidth="160"
+                                MinHeight="42"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <ComboBox Margin="15,10"
                                   ItemsSource="{Binding Path=TypeInventory}"
                                   SelectedItem="{Binding Path=Type}"
                                   DisplayMemberPath="Name">
-                        </ComboBox>
-                    </Border>
-                </StackPanel>
-                <!--quantity Box-->
-                <StackPanel Margin="20"
-                            Grid.Row="2"
-                            Grid.Column="0"
-                            Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource textStyle2}"
-                               Text="Cantidad"
-                               Width="60"/>
-                    <Border CornerRadius="10"
-                            Margin="20"
-                            Width="160">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="itemQuantity"
+                            </ComboBox>
+                        </Border>
+                        <!--quantity Box-->
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Style="{StaticResource titleStyle3}"
+                                   Text="Cantidad"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <Border Grid.Row="2" Grid.Column="1" 
+                                CornerRadius="10"
+                                MinHeight="42"
+                                MinWidth="160"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="itemQuantity"
                                  Text="{Binding Count,UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource textBox}"
                                  Margin="15,0"
@@ -135,18 +113,71 @@
                                  Background="Transparent"
                                  InputScope="Number"
                                  PreviewTextInput="NumberValidationTextBox">
-                        </TextBox>
-                    </Border>
-                </StackPanel>
-            </Grid>
-        </Border>
-        <Border Grid.Row="1"
+                            </TextBox>
+                        </Border>
+                        <!--Price Box-->
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Style="{StaticResource titleStyle3}"
+                                   Text="Precio"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <Border Grid.Row="3" Grid.Column="1"
+                                CornerRadius="10"
+                                MinHeight="42"
+                                MinWidth="160"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="itemPrice"
+                                 Text="{Binding Price,UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource textBox}"
+                                 Margin="15,0"
+                                 Padding="20,0,0,0"
+                                 Height="20"
+                                 InputScope="Number"
+                                 PreviewTextInput="NumberValidationTextBox">
+                                <TextBox.Background>
+                                    <ImageBrush ImageSource="/Assets/peso.png"
+                                            Stretch="Uniform"
+                                            AlignmentX="Left"/>
+                                </TextBox.Background>
+                            </TextBox>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1"
                 Background="{StaticResource Color5}"
                 Height="1"/>
-        <Button x:Name="addItem"
+            <Button x:Name="addItem"
                 Style="{StaticResource button}"
                 Grid.Row="2"
                 Content="Confirmar"
                 Command="{Binding AddItemCommand}"/>
+        </Grid>
+        <Grid Grid.Column="2">
+            <DataGrid Grid.Row="1"
+                          BorderBrush="Transparent"
+                          HorizontalGridLinesBrush="{StaticResource Color5}"
+                          VerticalGridLinesBrush="{StaticResource Color5}"
+                          Background="{StaticResource Color4}"
+                          GridLinesVisibility="All"
+                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                          AutoGenerateColumns="False" 
+                          CellStyle="{DynamicResource DataGridCellStyle1}" 
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                          RowStyle="{DynamicResource DataGridRowStyle1}"
+                          x:Name="productsDataGrid"  
+                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
+    
 </UserControl>
