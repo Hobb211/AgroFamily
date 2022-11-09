@@ -1,0 +1,220 @@
+﻿<UserControl x:Class="AgroFamily.View.ProductProfitabilityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AgroFamily.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Margin="20,90,20,90"
+				CornerRadius="10,10,10,10"
+                Grid.Column="0">
+            <Border.Background>
+                <SolidColorBrush Color="#ee8478"/>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+						Margin="0,20,0,0"
+						Text="El producto mas rentable del mes"
+						FontSize="19"
+                        VerticalAlignment="Center"
+						Style="{StaticResource titleStyle1}"/>
+                <TextBlock
+                        Grid.Row="1"
+						Margin="0,20,0,0"
+						Text="xxxx con una ganancia de xxxx"
+						FontSize="19"
+                        VerticalAlignment="Center"
+						Style="{StaticResource titleStyle1}"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!--Definimos la barra superior con un ancho de 30-->
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition/>
+                        <!--Definimos la parte para el login como sera toda no especificamos un ancho-->
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+				        Grid.Row="1"
+				        Grid.Column="0"
+				        Margin="0,0,0,0"
+				        CornerRadius="10,10,10,10"
+				        Width="150" 
+				        Height="40">
+                        <Button x:Name="rentable1"
+                                        BorderThickness="0"
+                                        Content="10 mas rentables"
+                                        Foreground="White"
+                                        FontSize="15"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"
+                                        VerticalAlignment="Center"
+                                        >
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#ee8478"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#ed5a63"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="150" Height="40"
+                                                    CornerRadius="9"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Center"/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                    </Border>
+
+                    <Border
+				        Grid.Row="1"
+				        Grid.Column="2"
+				        Margin="0,0,0,0"
+				        CornerRadius="10,10,10,10"
+				        Width="150" 
+				        Height="40">
+                        <Button x:Name="rentable3"
+                                        BorderThickness="0"
+                                        Content="Todos"
+                                        Foreground="White"
+                                        FontSize="15"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"
+                                        >
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#ee8478"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#ed5a63"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="150" Height="40"
+                                                    CornerRadius="9"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Center"/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                    </Border>
+
+                    <Border
+				        Grid.Row="1"
+				        Grid.Column="1"
+				        Margin="0,0,0,0"
+				        CornerRadius="10,10,10,10"
+				        Width="150" 
+				        Height="40">
+                        <Button x:Name="rentable2"
+                                        BorderThickness="0"
+                                        Content="10 menos rentables"
+                                        Foreground="White"
+                                        FontSize="15"
+                                        FontFamily="Montserrat"
+                                        Cursor="Hand"
+                                        >
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#ee8478"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#ed5a63"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="150" Height="40"
+                                                    CornerRadius="9"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Center"/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+
+                    </Border>
+
+
+
+
+
+                </Grid>
+                <!--Lo dejare asi con un text block para cambiarlo por un list view-->
+                <TextBlock
+				Margin="10,0,10,0"
+				Text="Nombre               Ganancias              Cant Ventas"
+				FontSize="16"
+                Grid.Row="1"    
+				Style="{StaticResource titleStyle1}"
+				Background="#ee8478"
+				Height="150" 
+				VerticalAlignment="Center"/>
+
+            </Grid>
+
+
+
+
+        </Border>
+       
+
+
+
+
+    </Grid>
+
+
+
+
+
+</UserControl>
