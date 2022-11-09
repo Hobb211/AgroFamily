@@ -54,5 +54,20 @@ namespace AgroFamily.Repositories
                 connection.Delete<ProductModel>(id);
             }
         }
+
+
+        public ObservableCollection<ProductModel> GetByAll3()
+        {
+            IEnumerable<ProductModel> products;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                int cant = connection.Query<ProductModel>("select * from ProductModel").Count();
+                products = connection.Query<ProductModel>("select * from ProductModel");
+
+            }
+
+            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+            return collection;
+        }
     }
 }

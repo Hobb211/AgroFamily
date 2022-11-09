@@ -56,7 +56,6 @@ namespace AgroFamily.ViewModel
             TypeUser = typeUserRepository.GetByAll();
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
-
         }
 
         private bool CanExecuteAddUserCommand(object obj)
@@ -103,6 +102,7 @@ namespace AgroFamily.ViewModel
                         cashier.Type = "Cajero";
                         userRepository.Add(cashier);
                         break;
+                        MessageBox.Show("Usuario registrado");
                 }
                 Users = userRepository.GetByAll();
                 

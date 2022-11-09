@@ -20,22 +20,44 @@
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
 
             </Border.Background>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Orientation="Vertical" Margin="0,20,0,-145">
-
-
-                </StackPanel>
-            </Grid>
-
-
-
+            
+            
+            
+          
         </Border>
+
+        
+        
+        <DataGrid   HorizontalGridLinesBrush="{StaticResource Color5}"
+                      VerticalGridLinesBrush="{StaticResource Color5}"
+                      GridLinesVisibility="All"
+                        Background="{StaticResource Color4}"
+                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      AutoGenerateColumns="False" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      x:Name="membersDataGrid" 
+                      ItemsSource="{Binding Path=Products}"
+                      Margin= "25" 
+                  SelectionChanged="membersDataGrid_SelectionChanged" >
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+        
+        
+        
+        
+
     </Grid>
+    
 
 
 

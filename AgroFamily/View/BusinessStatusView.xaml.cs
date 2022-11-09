@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace AgroFamily.View
 {
     /// <summary>
-    /// Interaction logic for InventoryView.xaml
+    /// Interaction logic for BusinessStatusView.xaml
     /// </summary>
-    public partial class InventoryView : UserControl
+    public partial class BusinessStatusView : UserControl
     {
-        public InventoryView()
+        public BusinessStatusView()
         {
             InitializeComponent();
-        }
-
-        private void membersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
