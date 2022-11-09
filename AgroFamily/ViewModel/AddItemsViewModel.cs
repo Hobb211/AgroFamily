@@ -62,8 +62,9 @@ namespace AgroFamily.ViewModel
             TypeInventory = typeInventoryRepository.GetByAll();
             IProductRepository productRepository = new ProductRepository();
             ISuppliesRepository suppliesRepository = new SuppliesRepository();
-            Articles = productRepository.GetByAllArticles();
-            Articles.Union(suppliesRepository.GetByAllArticles());
+            Articles = suppliesRepository.GetByAllArticles();
+            ObservableCollection<ArticleModel> articlesObservable = new ObservableCollection<ArticleModel>() { new SuppliesModel() { Name = "ho" } };
+            Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
         }
 
         private bool CanExecuteAddItemCommand(object obj)
@@ -118,6 +119,7 @@ namespace AgroFamily.ViewModel
                 Name = "";
                 Price= 0;
                 Count = 0;
+                Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
                 MessageBox.Show("Se ha añadido el "+Type.Name+" con exito");
             }
             catch
