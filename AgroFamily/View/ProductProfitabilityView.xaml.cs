@@ -21,7 +21,7 @@ namespace AgroFamily.View
     /// <summary>
     /// Lógica de interacción para ProductProfitabilityView.xaml
     /// </summary>
-    public partial class ProductProfitabilityView : Window
+    public partial class ProductProfitabilityView : UserControl
     {
         public ProductProfitabilityView()
         {

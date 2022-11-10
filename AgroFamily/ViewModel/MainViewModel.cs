@@ -60,7 +60,6 @@ namespace AgroFamily.ViewModel
         public ICommand ShowCashRegisterViewCommand { get; }
         public ICommand ShowEditStockViewCommand { get; }
         public ICommand ShowBusinessStatusViewCommand { get; }
-        public ICommand ShowInventoryViewCommand { get; }
 
         public MainViewModel()
         {
@@ -80,9 +79,7 @@ namespace AgroFamily.ViewModel
             ShowInventoryViewCommand = new ViewModelCommand(ExecuteShowInventoryViewCommand);
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
-
             ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
-            ShowInventoryViewCommand = new ViewModelCommand(ExecuteShowInventoryViewCommand);
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
@@ -144,11 +141,6 @@ namespace AgroFamily.ViewModel
         {
             CurrentChildView = new BusinessStatusViewModel();
         }
-        private void ExecuteShowInventoryViewCommand(object obj)
-        {
-            CurrentChildView = new InventoryViewModel();
-        }
-
         private void LoadCurrentUserData()
         {
             var user = userRepository.GetById(Thread.CurrentPrincipal.Identity.Name);//Pasar un UserName por el principal

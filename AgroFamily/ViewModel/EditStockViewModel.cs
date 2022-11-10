@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace AgroFamily.ViewModel
 {
@@ -24,19 +25,29 @@ namespace AgroFamily.ViewModel
         public int Cantidad { get => _cantidad; set { _cantidad = value; OnPropertyChanged(nameof(Cantidad)); } }
         public int Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
 
-        private ObservableCollection<ArticleModel> _products;
-        public ObservableCollection<ArticleModel> Products { get => _products; set => _products = value; }
+        // private ObservableCollection<ArticleModel> _products;
+        private ObservableCollection<ArticleModel> _articles;
+
+        public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
+        //public ObservableCollection<ArticleModel> Products { get => _products; set => _products = value; }
         public ICommand ReduceStockCommand { get; }
         public ICommand AddStockCommand { get; }
         public ArticleModel Articulo { get => _articulo; set => _articulo = value; }
 
         public EditStockViewModel()
         {
-            IArticleRepository articleRepository = new ArticleRepository();
-            Products = articleRepository.GetAllProducts();
+            //IArticleRepository articleRepository = new ArticleRepository();
+            //Products = articleRepository.GetAllProducts();
 
 
             //AddStockCommand = ViewModelCommand(ExecuteAddStockCommand, CanExecuteAddStockCommand);
+
+
+            IProductRepository productRepository = new ProductRepository();
+            ISuppliesRepository suppliesRepository = new SuppliesRepository();
+
+            Articles = suppliesRepository.GetByAllArticles();
+            Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
         }
 
 
@@ -44,7 +55,7 @@ namespace AgroFamily.ViewModel
         {
             bool validdata;
 
-            if (Cantidad.ToString().Length == 0 || Id.ToString().Length==0)
+            if (Cantidad.ToString().Length == 0 || Id.ToString().Length == 0)
             {
                 validdata = false;
             }
@@ -59,10 +70,21 @@ namespace AgroFamily.ViewModel
         {
             try
             {
-                IArticleRepository articleRepository = new ArticleRepository();
-                ArticleModel article = articleRepository.GetById(Id);
-                article.Stock = article.Stock + Cantidad;
-                articleRepository.Edit(article);
+                //ArticleRepository articleRepository = new ArticleRepository();
+                //ArticleModel article = articleRepository.GetById(Id);
+                //article.Stock = article.Stock + Cantidad;
+                //articleRepository.Edit(article);
+
+
+                //switch(Articulo.Type)
+                //{
+                //    case "Producto":
+                //        //articleRepository.Add(Articulo);
+                //    case "Suministro":
+                //}
+                //    switch (Type.Name)
+                //{
+
 
                 MessageBox.Show("Se ha editado el stock con exito");
             }

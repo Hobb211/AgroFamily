@@ -24,6 +24,7 @@
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
             <local:InventoryView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:UserRegisterViewModel}">
             <local:UserRegisterView/>
         </DataTemplate>
@@ -41,9 +42,6 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:BusinessStatusViewModel}">
             <local:BusinessStatusView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
-            <local:InventoryView/>
         </DataTemplate>
     </Window.Resources>
     

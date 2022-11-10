@@ -22,6 +22,7 @@ namespace AgroFamily.ViewModel
         private int _price;
         private Visibility _priceVisibility;
         private ObservableCollection<TypeInventoryModel> _typeInventory;
+        private ObservableCollection<ArticleModel> _articles;
 
         //Propierties
         public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
@@ -46,9 +47,11 @@ namespace AgroFamily.ViewModel
             } 
         }
         public ObservableCollection<TypeInventoryModel> TypeInventory { get => _typeInventory; set => _typeInventory = value; }
+        public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
 
         //Commands
         public ICommand AddItemCommand { get;}
+        
 
         //Constructor
         public AddItemsViewModel()
@@ -57,6 +60,11 @@ namespace AgroFamily.ViewModel
             AddItemCommand = new ViewModelCommand(ExecuteAddItemCommand, CanExecuteAddItemCommand);
             ITypeInventoryRepository typeInventoryRepository = new TypeInventoryRepository();
             TypeInventory = typeInventoryRepository.GetByAll();
+            IProductRepository productRepository = new ProductRepository();
+            ISuppliesRepository suppliesRepository = new SuppliesRepository();
+            Articles = suppliesRepository.GetByAllArticles();
+            ObservableCollection<ArticleModel> articlesObservable = new ObservableCollection<ArticleModel>() { new SuppliesModel() { Name = "ho" } };
+            Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
         }
 
         private bool CanExecuteAddItemCommand(object obj)
@@ -88,11 +96,9 @@ namespace AgroFamily.ViewModel
         {
             try
             {
-                IArticleRepository articleRepository = new ArticleRepository();
                 IProductRepository productRepository = new ProductRepository();
                 ISuppliesRepository suppliesRepository = new SuppliesRepository();
 
-                ArticleModel article = new ArticleModel();
                 switch (Type.Name)
                 {
                     case "Producto":
@@ -100,29 +106,23 @@ namespace AgroFamily.ViewModel
                         product.Name = Name;
                         product.Price = Price;
                         product.Stock = Count;
+                        product.Type = Type.Name;
                         productRepository.Add(product);
-
-                        article.Name = Name;
-                        article.Price = Price;
-                        article.Stock = Count;
-                        article.Type = Type.Name;
-                        articleRepository.Add(article);
                         break;
 
                     case "Suministro":
-                        SuppliesModel suplies = new SuppliesModel();
-                        suplies.Name = Name;
-                        suplies.Stock = Count;
-                        suppliesRepository.Add(suplies);
-
-                        article.Name = Name;
-                        article.Price = 0;
-                        article.Stock = Count;
-                        article.Type = Type.Name;
-                        articleRepository.Add(article);
+                        SuppliesModel supplies = new SuppliesModel();
+                        supplies.Name = Name;
+                        supplies.Stock = Count;
+                        supplies.Type= Type.Name;
+                        suppliesRepository.Add(supplies);
                         break;
                 }
-                MessageBox.Show("Se ha añadido el producto con exito");
+                Name = "";
+                Price= 0;
+                Count = 0;
+                Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+                MessageBox.Show("Se ha añadido el "+Type.Name+" con exito");
             }
             catch
             {
