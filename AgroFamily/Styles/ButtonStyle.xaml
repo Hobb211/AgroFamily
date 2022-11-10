@@ -9,7 +9,7 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="30"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color10}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -24,7 +24,7 @@
         <!--Button Style on hover-->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource Color4}"/>
+                <Setter Property="Background" Value="{DynamicResource Color9}"/>
                 <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
         </Style.Triggers>
@@ -138,7 +138,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Margin" Value="0,0,0,5"/>
                 <Setter Property="Background" Value="{DynamicResource buttonColor2}"/>
-                <Setter Property="Foreground" Value="{DynamicResource textTitleColor1}"/>
+                <Setter Property="Foreground" Value="{DynamicResource textColor1}"/>
                 <Setter Property="BorderBrush" Value="{Binding Path=Tag,RelativeSource={RelativeSource Self}}"/>
             </Trigger>
             <!--Active Button Style-->

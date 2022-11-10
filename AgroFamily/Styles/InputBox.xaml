@@ -31,7 +31,7 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="Foreground" Value="{StaticResource textColor1}"/>
+        <Setter Property="Foreground" Value="{StaticResource textColor2}"/>
         <Setter Property="CaretBrush" Value="LightGray"/>
         <Setter Property="BorderBrush" Value="DarkGray"/>
         <Setter Property="BorderThickness" Value="0,0,0,2"/>

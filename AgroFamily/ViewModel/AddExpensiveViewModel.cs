@@ -11,7 +11,9 @@ namespace AgroFamily.ViewModel
     {
         //Fields
         private TypeExpensiveModel _type;
+        private ExpensiveModel _expensive;
         private ObservableCollection<TypeExpensiveModel> _typeExpensives;
+        private ObservableCollection<ExpensiveModel> _expensiveModels;
         private float _amount;
         private string _description;
         private Visibility _newTypeVisibility;
@@ -44,6 +46,8 @@ namespace AgroFamily.ViewModel
         public string Description { get => _description; set { _description = value; OnPropertyChanged(nameof(Description)); } }
         public Visibility NewTypeVisibility { get => _newTypeVisibility; set { _newTypeVisibility = value; OnPropertyChanged(nameof(NewTypeVisibility)); } }
         public string NewType { get => _newType; set { _newType = value; OnPropertyChanged(nameof(NewType)); } }
+        public ObservableCollection<ExpensiveModel> ExpensiveModels { get => _expensiveModels; set { _expensiveModels = value; OnPropertyChanged(nameof(ExpensiveModels)); } }
+        public ExpensiveModel Expensive { get => _expensive; set { _expensive = value; OnPropertyChanged(nameof(Expensive)); } }
 
         //Commands
         public ICommand AddExpensiveCommand { get; }
@@ -52,6 +56,8 @@ namespace AgroFamily.ViewModel
         //Constructor
         public AddExpensiveViewModel()
         {
+            IExpensiveModel repository = new ExpensiveRepository();
+            ExpensiveModels = repository.GetByAll();
             Amount = 0;
             AddExpensiveCommand = new ViewModelCommand(ExecuteAddExpensiveCommand, CanExecuteAddExpensiveCommand);
             TypeExpensives = new TypeExpensiveRepository().GetByAll();
@@ -110,6 +116,7 @@ namespace AgroFamily.ViewModel
             try
             {
                 expensiveRepository.Add(expensive);
+                ExpensiveModels = expensiveRepository.GetByAll();
                 MessageBox.Show("Se ha registrado el gasto con exito");
             }
             catch

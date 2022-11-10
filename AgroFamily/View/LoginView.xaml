@@ -26,20 +26,10 @@
     <Window.Visibility>
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
     </Window.Visibility>
-    
+
     <Border CornerRadius="30" BorderThickness="3">
-        <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
-                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.4"/>
-                <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
-            </LinearGradientBrush> 
-        </Border.BorderBrush>
         <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
-                <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
-            </LinearGradientBrush>
+            <SolidColorBrush Color="{StaticResource primaryBackColor1}"/>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
@@ -66,7 +56,7 @@
                     <Button x:Name="btnMinimize" 
                                         Grid.Column="1" 
                                         Style="{StaticResource controlButton}"
-                                        Tag="{StaticResource Color2}"
+                                        Tag="{StaticResource Color6}"
                                         Click="btnMinimize_Click">
                         <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
                     </Button>
@@ -79,27 +69,32 @@
                         Orientation="Vertical"
                         Margin="0,35,0,0">
                 <Image Source="/Assets/agro.png"/>
-                <TextBlock Text="Iniciar Sesión" Style="{StaticResource titleStyle1}"/>
+                <TextBlock Text="Iniciar Sesión" Style="{StaticResource titleStyle4}"/>
                 <TextBlock Text="Nombre de usuario"
-                           Style="{StaticResource textStyle1}"
+                           Style="{StaticResource textStyle4}"
                            Margin="0,35,0,0"/>
-                <TextBox x:Name="txtUser" 
+                <Border Background="{StaticResource Color6}">
+                    <TextBox x:Name="txtUser" 
                          Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource textBox}"
+                         Style="{StaticResource textBox2}"
                          Padding="30,0,0,0">
-                    <TextBox.Background>
-                        <ImageBrush ImageSource="/Assets/avatar.png"
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Assets/avatar.png"
                                     Stretch="Uniform"
                                     AlignmentX="Left"/>
-                    </TextBox.Background>
-                </TextBox>
+                        </TextBox.Background>
+                    </TextBox>
+                </Border>
+                
                 <TextBlock Text="Contraseña"
-                           Style="{StaticResource textStyle1}"
+                           Style="{StaticResource textStyle4}"
                            Margin="0,15,0,0"/>
-                <customcontrols:BindablePasswordBox Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <Border Background="{StaticResource Color6}">
+                    <customcontrols:BindablePasswordBox Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                     Height="28"
                                                     Margin="0,5,0,0">
-                </customcontrols:BindablePasswordBox>
+                    </customcontrols:BindablePasswordBox>
+                </Border>
                 <TextBlock Text="{Binding ErrorMessage}"
                            Style="{StaticResource textStyle1}"
                            Margin="0,10,0,0"

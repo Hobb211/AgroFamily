@@ -24,6 +24,7 @@
     <SolidColorBrush x:Key="Color7" Color="#FDCB9E"/>
     <SolidColorBrush x:Key="Color8" Color="#FFA9A3"/>
     <SolidColorBrush x:Key="Color9" Color="#5E5E5E"/> <!--Color para los fondos iguales al border-->
+    <SolidColorBrush x:Key="Color10" Color="Black"/>
 
 
     <!--Data Grid Color-->
