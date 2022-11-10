@@ -144,7 +144,7 @@
                 </Grid>
             </Border>
 
-            <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+        <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                       VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                       Background="{StaticResource DataGridColor}"
                       GridLinesVisibility="All"
@@ -165,8 +165,6 @@
                 <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
             </DataGrid.Columns>
         </DataGrid>
-
-        </Grid>
 
     </Grid>
 
