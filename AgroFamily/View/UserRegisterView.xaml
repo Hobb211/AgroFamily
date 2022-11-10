@@ -35,7 +35,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <Border CornerRadius="0"
                 Grid.Row="0"
                 Margin="0" Grid.RowSpan="5" Grid.Column="3">
@@ -51,8 +50,6 @@
 
                 <StackPanel Orientation="Vertical" Margin="0,20,0,-145">
                     <Image Source="/Assets/user_reg.png" Height="222" Width="196"/>
-
-
                 </StackPanel>
             </Grid>
         </Border>
@@ -66,13 +63,10 @@
 
         </Border>
 
-
         <Border x:Name="BDRounded" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
-
-
-            <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
-                      VerticalGridLinesBrush="{StaticResource Color5}"
-                      Background="{StaticResource Color4}"
+            <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                      Background="{StaticResource DataGridColor}"
                       GridLinesVisibility="All"
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
                       AutoGenerateColumns="False" 
@@ -132,7 +126,7 @@
                         </Border.Background>
                         <TextBox x:Name="Id"
                                  Text="{Binding Id,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox}"
+                                 Style="{StaticResource textBox2}"
                                  Background="Transparent"
                                  Margin="15,0"
                                  Height="20"/>
@@ -173,7 +167,7 @@
                         </Border.Background>
                         <TextBox x:Name="name"
                                  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox}"
+                                 Style="{StaticResource textBox2}"
                                  Background="Transparent"
                                  Margin="15,0"
                                  Height="20"/>
@@ -194,7 +188,7 @@
                         </Border.Background>
                         <TextBox x:Name="Lastname"
                                  Text="{Binding Lastname,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox}"
+                                 Style="{StaticResource textBox2}"
                                  Background="Transparent"
                                  Margin="15,0"
                                  Height="20"/>
@@ -216,7 +210,7 @@
                         </Border.Background>
                         <TextBox x:Name="Password"
                                  Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox}"
+                                 Style="{StaticResource textBox2}"
                                  Background="Transparent"
                                  Margin="15,0"
                                  Height="20"/>

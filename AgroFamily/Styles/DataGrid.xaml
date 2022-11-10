@@ -277,19 +277,19 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FDCB9E"/>
-                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="Background" Value="{StaticResource TriggerDataGrid}"/>
+                <Setter Property="Foreground" Value="{StaticResource TriggerDataGrid}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#FDCB9E"/>
-                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="Background" Value="{StaticResource TriggerDataGrid}"/>
+                <Setter Property="Foreground" Value="{StaticResource TriggerDataGrid}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="true"/>
                     <Condition Property="Selector.IsSelectionActive" Value="false"/>
                 </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="#dfdfdf"/>
+                <Setter Property="Background" Value="{StaticResource TriggerDataGrid}"/>
             </MultiTrigger>
         </Style.Triggers>
     </Style>

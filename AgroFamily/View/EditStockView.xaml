@@ -31,9 +31,9 @@
         </Grid.RowDefinitions>
 
         <Border Margin="20"
-				CornerRadius="10,10,10,10"
+				        CornerRadius="10,10,10,10"
                 Grid.Row="0"
-                    Grid.Column="0"
+                Grid.Column="0"
                 Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
@@ -76,10 +76,10 @@
                                         VerticalContentAlignment="Center"
                                         FontWeight="Medium"
                                         FontFamily="Montserrat"
-                                        Background="#f3ada6"
                                         IsReadOnly="True"
+                                        Background="{StaticResource Color6}"
                                         BorderBrush="Transparent"
-                                        Foreground="White"
+                                        Foreground="{StaticResource textColor2}"
                                         CaretBrush="LightGray"
                                         Height="28"
                                         VerticalAlignment="Center">
@@ -101,9 +101,9 @@
                                         VerticalContentAlignment="Center"
                                         FontWeight="Medium"
                                         FontFamily="Montserrat"
-                                        Background="#f3ada6"
+                                        Background="{StaticResource Color6}"
                                         BorderBrush="Transparent"
-                                        Foreground="White"
+                                        Foreground="{StaticResource textColor2}"
                                         CaretBrush="LightGray"
                                         Height="28"
                                         VerticalAlignment="Center">
@@ -113,50 +113,23 @@
                 </StackPanel>
 
 
-                <Button x:Name="eliminar_stock"
-                                BorderThickness="0"
-                                Content="Eliminar"
-                                Foreground="White"
-                                FontSize="16"
-                                FontFamily="Montserrat"
-                                Cursor="Hand" 
+
+                    <Button x:Name="eliminar_stock"
+                            BorderThickness="0"
+                            Content="Eliminar"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand" 
                             Grid.Column="1"
-                            Grid.Row="1"                                    
-                            Command="{Binding ReduceStockCommand}" 
-                            Click="eliminar_stock_Click">
+                            Grid.Row="1" 
+                            Command="{Binding ReduceStockCommand}"
+                            Style="{StaticResource button2}">
+                    </Button>
 
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#283134"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#505b60"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Width="90" Height="30"
-                                            CornerRadius="9"
-                                            Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-
-
-
-
-
-
-                <Border
-						Grid.Row="1"
-						Grid.Column="1"
-						CornerRadius="10,10,10,10" Margin="0,37,0,0" Grid.RowSpan="2">
+                    <Border Grid.Row="2"
+						                Grid.Column="1"
+						                CornerRadius="10,10,10,10" >
                     <Button x:Name="agregar_stock"
                                 BorderThickness="0"
                                 Content="Agregar"
@@ -164,40 +137,16 @@
                                 FontSize="16"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"
-                                Command="{Binding AddStockCommand}">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#283134"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#505b60"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
+                                Command="{Binding AddStockCommand}"                       
+                                Style="{StaticResource button2}">
+                        </Button>
+                    </Border>
+                </Grid>
+            </Border>
 
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="90" Height="30"
-                                            CornerRadius="9"
-                                            Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Border>
-
-
-            </Grid>
-
-        </Border>
-
-
-        <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
-                      VerticalGridLinesBrush="{StaticResource Color5}"
-                      Background="{StaticResource Color4}"
+            <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                      Background="{StaticResource DataGridColor}"
                       GridLinesVisibility="All"
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
                       AutoGenerateColumns="False" 
@@ -216,6 +165,9 @@
                 <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
             </DataGrid.Columns>
         </DataGrid>
+
+        </Grid>
+
     </Grid>
 
 </UserControl>

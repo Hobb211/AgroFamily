@@ -32,6 +32,9 @@ namespace AgroFamily.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        
+        private void productsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace AgroFamily.ViewModel
         private ObservableCollection<ProductModel> _products;
         private ObservableCollection<SaleProductModel> _saleProducts;
         private ProductModel _currentProduct;
+        private SaleProductModel _currentSaleProduct;
         private int _currentQuantityProduct;
         private Visibility _overflowQuantityVisibility;
         private int _totalPrice;
@@ -26,20 +27,24 @@ namespace AgroFamily.ViewModel
         public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
         public ObservableCollection<SaleProductModel> SaleProducts { get => _saleProducts; set { _saleProducts = value; OnPropertyChanged(nameof(SaleProducts)); } }
         public ProductModel CurrentProduct { get => _currentProduct; set { _currentProduct = value; OnPropertyChanged(nameof(CurrentProduct)); } }
+        public SaleProductModel CurrentSaleProduct { get => _currentSaleProduct; set { _currentSaleProduct = value; OnPropertyChanged(nameof(CurrentSaleProduct)); } }
         public int CurrentQuantityProduct 
         { 
             get => _currentQuantityProduct; 
             set 
             { 
                 _currentQuantityProduct = value; 
-                OnPropertyChanged(nameof(CurrentQuantityProduct)); 
-                if (value > CurrentProduct.Stock)
+                OnPropertyChanged(nameof(CurrentQuantityProduct));
+                if (CurrentProduct != null)
                 {
-                    OverflowQuantityVisibility = Visibility.Visible;
-                }
-                else
-                {
-                    OverflowQuantityVisibility = Visibility.Collapsed;
+                    if (value > CurrentProduct.Stock)
+                    {
+                        OverflowQuantityVisibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        OverflowQuantityVisibility = Visibility.Collapsed;
+                    }
                 }
             } 
         }
@@ -51,7 +56,7 @@ namespace AgroFamily.ViewModel
         public ICommand AddProductCommand { get;}
         public ICommand RemoveProductCommand { get;}
         public ICommand PayCommand { get;}
-        
+
         public CashRegisterViewModel()
         {
             TotalPriceDay = 0;
@@ -66,7 +71,28 @@ namespace AgroFamily.ViewModel
             SaleProducts = new ObservableCollection<SaleProductModel>();
             //Initialize Command
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
+            RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
+        }
+
+        private bool CanExecuteRemoveProductCommand(object obj)
+        {
+            bool validData;
+            if (CurrentSaleProduct != null)
+            {
+                validData = true;
+            }
+            else
+            {
+                validData = false;
+            }
+            return validData;
+        }
+
+        private void ExecuteRemoveProductCommand(object obj)
+        {
+            TotalPrice -= CurrentSaleProduct.Amount;
+            SaleProducts.Remove(CurrentSaleProduct);
         }
 
         private bool CanExecutePayCommand(object obj)

@@ -13,9 +13,9 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="380"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.05*"/>
+            <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" CornerRadius="20">
             <Border.Background>
@@ -23,21 +23,29 @@
             </Border.Background>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition />
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1.5*" />
                 </Grid.RowDefinitions>
                 <TextBlock Text="Registrar Gastos" Style="{StaticResource titleStyle2}"/>
                 <!--Amount Box-->
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0">
-                    <TextBlock Text="Monto" Style="{StaticResource textStyle2}" Margin="20"/>
-                    <Border Width="200" Margin="10,6" CornerRadius="15">
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" 
+                               Text="Monto" 
+                               Style="{StaticResource textStyle2}" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                    <Border Grid.Column="1" Width="200" MaxHeight="60" Margin="10,6" CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
-                        <TextBox Style="{StaticResource textBox}" 
+                        <TextBox Style="{StaticResource textBox2}" 
                                  Text="{Binding Amount,UpdateSourceTrigger=PropertyChanged}"
                                  Margin="10,5" 
                                  Padding="20,0"
@@ -50,11 +58,24 @@
                             </TextBox.Background>
                         </TextBox>
                     </Border>
-                </StackPanel>
+                </Grid>
                 <!--Type ComboBox-->
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
-                    <TextBlock Text="Tipo" Style="{StaticResource textStyle2}" Margin="20"/>
-                    <Border Width="150" Margin="-5,5" CornerRadius="15">
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="Tipo" 
+                               Style="{StaticResource textStyle2}" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                    <Border Grid.Column="1" 
+                            MaxWidth="200" 
+                            MaxHeight="60"
+                            Margin="15,5"
+                            CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
@@ -63,20 +84,22 @@
                                   SelectedItem="{Binding Type,UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"/>
                     </Border>
-                    <Border Visibility="{Binding NewTypeVisibility}" 
-                            Width="150" 
-                            Margin="10,5" 
+                    <Border Grid.Column="3" 
+                            Visibility="{Binding NewTypeVisibility}" 
+                            MaxWidth="200" 
+                            MaxHeight="60"
+                            Margin="15,5" 
                             CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
-                        <TextBox Style="{StaticResource textBox}" 
+                        <TextBox Style="{StaticResource textBox2}" 
                                  Text="{Binding NewType,UpdateSourceTrigger=PropertyChanged}"
                                  Background="Transparent" 
                                  Margin="10,5" 
                                  Padding="20,0"/>
                     </Border>
-                </StackPanel>
+                </Grid>
                 <!--Descripcion Box-->
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="Descripción" Style="{StaticResource textStyle2}" Margin="30,5"/>
@@ -84,7 +107,7 @@
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
-                        <TextBox Style="{StaticResource textBox}" 
+                        <TextBox Style="{StaticResource textBox2}" 
                                  Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}"
                                  Margin="10,5" Height="90" 
                                  Background="Transparent" 
