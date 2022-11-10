@@ -76,35 +76,15 @@ namespace AgroFamily.ViewModel
                 //articleRepository.Edit(article);
 
 
-                ArticleRepository articleRepository = new ArticleRepository();
-                Articulo.Stock = Articulo.Stock + Cantidad;
-                articleReposito
+                //switch(Articulo.Type)
+                //{
+                //    case "Producto":
+                //        //articleRepository.Add(Articulo);
+                //    case "Suministro":
+                //}
+                //    switch (Type.Name)
+                //{
 
-                switch(Articulo)
-                    switch (Type.Name)
-                {
-                    case "Administrador":
-                        UserModel admin = new UserModel();
-                        admin.Id = Id;
-                        admin.Name = Name;
-                        admin.LastName = Lastname;
-                        admin.Password = Password;
-                        admin.Type = "Administrador";
-                        userRepository.Add(admin);
-                        break;
-
-                    case "Cajero":
-                        UserModel cashier = new UserModel();
-                        cashier.Id = Id;
-                        cashier.Name = Name;
-                        cashier.LastName = Lastname;
-                        cashier.Password = Password;
-                        cashier.Type = "Cajero";
-                        userRepository.Add(cashier);
-                        break;
-                        MessageBox.Show("Usuario registrado");
-                }
-                Users = userRepository.GetByAll();
 
                 MessageBox.Show("Se ha editado el stock con exito");
             }
