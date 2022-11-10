@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"             
+             xmlns:local="clr-namespace:AgroFamily.View" 
+             xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" >
@@ -14,22 +15,29 @@
         <viewmodel:UserRegisterViewModel/>
     </UserControl.DataContext>
 
-    <Grid Margin="-10">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="497*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="242*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition/>
-            <RowDefinition Height="32*"/>
-            <RowDefinition Height="46*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="53*"/>
-            <RowDefinition Height="0"/>
-            <RowDefinition Height="127*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="135*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border CornerRadius="0"
                 Grid.Row="0"
-                Margin="539,0,0,7" Grid.RowSpan="6">
+                Margin="0" Grid.RowSpan="5" Grid.Column="3">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
 
@@ -44,25 +52,18 @@
                     <Image Source="/Assets/user_reg.png" Height="222" Width="196"/>
                 </StackPanel>
             </Grid>
-
-
-
         </Border>
 
         <Border CornerRadius="0"
-                Grid.Row="7"
-                Margin="539,0,0,0">
+                Grid.Row="6"
+                Margin="0" Grid.Column="3">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
-            <Button x:Name="addUser_Copy"
-                    Style="{StaticResource button_tr}"
-                    Content="Actualizar"
-                    Command="{Binding ShowUsersCommand}" Margin="50,44,51,43"/>
 
         </Border>
 
-        <Border x:Name="BDRounded" Grid.RowSpan="6" Grid.Row="5" Margin="25,0,330,24" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
+        <Border x:Name="BDRounded" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
             <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                       VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                       Background="{StaticResource DataGridColor}"
@@ -73,8 +74,7 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
-                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}"
-                      Margin= "-18,0,-48,0">
+                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}" Margin="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
@@ -85,7 +85,7 @@
         </Border>
 
         <Border CornerRadius="20"
-                Grid.Row="0" Margin="25,25,301,44" Grid.RowSpan="5">
+                Grid.Row="1" Margin="3,11,0,44" Grid.RowSpan="4" Grid.Column="1">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
@@ -93,17 +93,17 @@
             <Grid Margin="5">
 
                 <Grid.RowDefinitions >
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
 
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
-                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition Width="250*"/>
+                    <ColumnDefinition Width="210*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 

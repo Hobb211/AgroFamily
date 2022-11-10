@@ -25,11 +25,9 @@ namespace AgroFamily.ViewModel
         public int Cantidad { get => _cantidad; set { _cantidad = value; OnPropertyChanged(nameof(Cantidad)); } }
         public int Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
 
-        // private ObservableCollection<ArticleModel> _products;
         private ObservableCollection<ArticleModel> _articles;
 
         public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
-        //public ObservableCollection<ArticleModel> Products { get => _products; set => _products = value; }
         public ICommand ReduceStockCommand { get; }
         public ICommand AddStockCommand { get; }
         public ArticleModel Articulo { get => _articulo; set => _articulo = value; }
@@ -39,9 +37,9 @@ namespace AgroFamily.ViewModel
             //IArticleRepository articleRepository = new ArticleRepository();
             //Products = articleRepository.GetAllProducts();
 
-
-            //AddStockCommand = ViewModelCommand(ExecuteAddStockCommand, CanExecuteAddStockCommand);
-
+            
+            AddStockCommand = new ViewModelCommand(ExecuteAddStockCommand, CanExecuteChangeStockCommand);
+            ReduceStockCommand = new ViewModelCommand(ExecuteReduceStockCommand, CanExecuteChangeStockCommand);
 
             IProductRepository productRepository = new ProductRepository();
             ISuppliesRepository suppliesRepository = new SuppliesRepository();
@@ -51,7 +49,7 @@ namespace AgroFamily.ViewModel
         }
 
 
-        private bool CanExecuteAddStockCommand(object obj)
+        private bool CanExecuteChangeStockCommand(object obj)
         {
             bool validdata;
 
@@ -70,31 +68,75 @@ namespace AgroFamily.ViewModel
         {
             try
             {
-                //ArticleRepository articleRepository = new ArticleRepository();
-                //ArticleModel article = articleRepository.GetById(Id);
-                //article.Stock = article.Stock + Cantidad;
-                //articleRepository.Edit(article);
+                ProductRepository productRepository = new ProductRepository();
+                SuppliesRepository suppliesRepository = new SuppliesRepository();
+                int cantidad_actual = Articulo.Stock;
+                int cant = cantidad_actual + Cantidad;
+                switch (Articulo.Type)
+                {
+                    case "Producto":
 
-
-                //switch(Articulo.Type)
-                //{
-                //    case "Producto":
-                //        //articleRepository.Add(Articulo);
-                //    case "Suministro":
-                //}
-                //    switch (Type.Name)
-                //{
-
-
-                MessageBox.Show("Se ha editado el stock con exito");
+                        ProductModel pr = (ProductModel) Articulo;
+                        pr.Stock = cant;
+                        productRepository.Edit(pr);
+                        break;
+                    case "Suministro":
+                        SuppliesModel sup = (SuppliesModel) Articulo; 
+                        sup.Stock = cant;
+                        suppliesRepository.Edit(sup);
+                        break;
+                }
+                Id = 0;
+                Cantidad = 0;
+                Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+                MessageBox.Show("Se ha editado el stock con exito"+ cantidad_actual+" a "+cant);
             }
             catch
             {
                 MessageBox.Show("Un error ha ocurrido");
             }
-
         }
 
+        private void ExecuteReduceStockCommand(object obj)
+        {
+            try
+            {
+                ProductRepository productRepository = new ProductRepository();
+                SuppliesRepository suppliesRepository = new SuppliesRepository();
+                int cantidad_actual = Articulo.Stock;
+                int cant = cantidad_actual - Cantidad;
+                if (cant >= 0)
+                {
+                    switch (Articulo.Type)
+                    {
+                        case "Producto":
+
+                            ProductModel pr = (ProductModel)Articulo;
+                            pr.Stock = cant;
+                            productRepository.Edit(pr);
+                            break;
+                        case "Suministro":
+                            SuppliesModel sup = (SuppliesModel)Articulo;
+                            sup.Stock = cant;
+                            suppliesRepository.Edit(sup);
+                            break;
+                    }
+                    Id = 0;
+                    Cantidad = 0;
+                    Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+                    MessageBox.Show("Se ha editado el stock con exito" + cantidad_actual + " a " + cant);
+                }
+                else
+                {
+                    MessageBox.Show("No se puede quitar más stock del que hay");
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Un error ha ocurrido");
+            }
+        }
     }
 }
 
