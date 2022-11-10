@@ -13,18 +13,18 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
-                      VerticalGridLinesBrush="{StaticResource Color5}"
-                      Background="{StaticResource Color4}"
-                      GridLinesVisibility="All"
-                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                      AutoGenerateColumns="False" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                      RowStyle="{DynamicResource DataGridRowStyle1}"
-                      x:Name="articlesDataGrid" 
-                      ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
-                      Margin= "25">
+        <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                  VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                  Background="{StaticResource DataGridColor}"
+                  GridLinesVisibility="All"
+                  RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                  AutoGenerateColumns="False" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  x:Name="articlesDataGrid" 
+                  ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
+                  Margin= "25">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>

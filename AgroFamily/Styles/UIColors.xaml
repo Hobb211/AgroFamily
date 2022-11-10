@@ -20,16 +20,16 @@
     <SolidColorBrush x:Key="Color3" Color="#0088de"/>
     <SolidColorBrush x:Key="Color4" Color="#fd7e74"/>
     <SolidColorBrush x:Key="Color5" Color="#E9FFCB"/>
-    <SolidColorBrush x:Key="Color6" Color="White"/>
+    <SolidColorBrush x:Key="Color6" Color="White"/> <!--Color para los fondos sobre border-->
     <SolidColorBrush x:Key="Color7" Color="#FDCB9E"/>
     <SolidColorBrush x:Key="Color8" Color="#FFA9A3"/>
-    <SolidColorBrush x:Key="Color9" Color="#5E5E5E"/>
-    
-    
+    <SolidColorBrush x:Key="Color9" Color="#5E5E5E"/> <!--Color para los fondos iguales al border-->
+
+
     <!--Data Grid Color-->
     <SolidColorBrush x:Key="DataGridColor" Color="#5E5E5E"/>
     <SolidColorBrush x:Key="LineDataGrid" Color="white"/>
-    <SolidColorBrush x:Key="TriggerDataGrid" Color="#7c7673"/>
+    <SolidColorBrush x:Key="TriggerDataGrid" Color="#0088de"/>
 
     <!--Navigation Menu Colors-->
     <SolidColorBrush x:Key="NavigationColor" Color="White"/>
@@ -41,7 +41,6 @@
     <!--Font Colors-->
     <SolidColorBrush x:Key="textColor1" Color="White"/> <!--Color para el texto sobre border-->
     <SolidColorBrush x:Key="textColor2" Color="Black"/> <!--Color para el texto sobre fondo-->
-    <SolidColorBrush x:Key="textTitleColor1" Color="White"/>
 
     <!--Button Colors-->
     <SolidColorBrush x:Key="buttonColor1" Color="#283134"/>
