@@ -87,6 +87,7 @@ namespace AgroFamily.ViewModel
         {
             ISaleProductRepository saleProductRepository = new SaleProductRepository();
             ISaleRepository saleRepository = new SaleRepository();
+            IProductRepository productRepository = new ProductRepository();
             SaleModel sale=new SaleModel() 
             { 
                 dateTime = DateTime.Now,
@@ -97,11 +98,14 @@ namespace AgroFamily.ViewModel
             {
                 SaleProducts[i].SaleId = sale.Id;
                 saleProductRepository.Add(SaleProducts[i]);
+                ProductModel product=productRepository.GetById(SaleProducts[i].ProductId);
+                product.Stock -= SaleProducts[i].Count;
+                productRepository.Edit(product);
             }
             TotalPriceDay += TotalPrice;
             TotalPrice = 0;
             SaleProducts.Clear();
-            
+            Products = productRepository.GetByAll();
         }
 
         private bool CanExecuteAddProductCommand(object obj)

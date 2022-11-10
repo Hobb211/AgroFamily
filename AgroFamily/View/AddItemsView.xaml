@@ -175,7 +175,9 @@
                           ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}"/>
+                    <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
