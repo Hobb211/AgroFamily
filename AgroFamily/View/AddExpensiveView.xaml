@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <viewmodel:AddExpensiveViewModel/>
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -41,13 +41,13 @@
                                Style="{StaticResource textStyle2}" 
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"/>
-                    <Border Grid.Column="1" Width="200" MaxHeight="60" Margin="10,6" CornerRadius="15">
+                    <Border Grid.Column="1" MaxHeight="60" Margin="10,6,68,6" CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
                         <TextBox Style="{StaticResource textBox2}" 
                                  Text="{Binding Amount,UpdateSourceTrigger=PropertyChanged}"
-                                 Margin="10,5" 
+                                 Margin="10,16,10,16" 
                                  Padding="20,0"
                                  InputScope="Number"
                                  PreviewTextInput="NumberValidationTextBox">
@@ -61,21 +61,25 @@
                 </Grid>
                 <!--Type ComboBox-->
                 <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.15*"/>
                         <ColumnDefinition Width="0.4*"/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"
+                    <TextBlock
                                Text="Tipo" 
                                Style="{StaticResource textStyle2}" 
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center" Grid.Row="1"/>
                     <Border Grid.Column="1" 
                             MaxWidth="200" 
                             MaxHeight="60"
-                            Margin="15,5"
-                            CornerRadius="15">
+                            Margin="15,5,15,5"
+                            CornerRadius="15" Grid.RowSpan="2">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
@@ -84,12 +88,12 @@
                                   SelectedItem="{Binding Type,UpdateSourceTrigger=PropertyChanged}"
                                   DisplayMemberPath="Name"/>
                     </Border>
-                    <Border Grid.Column="3" 
+                    <Border Grid.Column="2" 
                             Visibility="{Binding NewTypeVisibility}" 
                             MaxWidth="200" 
                             MaxHeight="60"
-                            Margin="15,5" 
-                            CornerRadius="15">
+                            Margin="15,5,15,5" 
+                            CornerRadius="15" Grid.RowSpan="2">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>

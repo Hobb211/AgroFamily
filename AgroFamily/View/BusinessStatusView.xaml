@@ -13,25 +13,25 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="84"/>
-                <RowDefinition Height="99"/>
-                <RowDefinition Height="95"/>
-                <RowDefinition Height="193"/>
+                <RowDefinition Height="84*"/>
+                <RowDefinition Height="99*"/>
+                <RowDefinition Height="95*"/>
+                <RowDefinition Height="193*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="38"/>
-                <ColumnDefinition Width="322"/>
-                <ColumnDefinition Width="41"/>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="32"/>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="137"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="320*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
 
 
             <Border CornerRadius="20"
-                Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" >
+                    Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
@@ -39,7 +39,7 @@
             </Border>
 
             <Border CornerRadius="20"
-                Grid.Row="1" Grid.Column="3"  >
+                    Grid.Row="1" Grid.Column="3">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
@@ -48,7 +48,7 @@
             </Border>
 
             <Border CornerRadius="20"
-                Grid.Row="1" Grid.Column="5" >
+                    Grid.Row="1" Grid.Column="5">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>

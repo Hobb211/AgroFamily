@@ -86,10 +86,10 @@ namespace AgroFamily.ViewModel
                         suppliesRepository.Edit(sup);
                         break;
                 }
+                Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+                MessageBox.Show("Se ha editado el stock con exito. Se han agregado " + Cantidad + " unidades");
                 Id = 0;
                 Cantidad = 0;
-                Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
-                MessageBox.Show("Se ha editado el stock con exito"+ cantidad_actual+" a "+cant);
             }
             catch
             {
@@ -121,10 +121,10 @@ namespace AgroFamily.ViewModel
                             suppliesRepository.Edit(sup);
                             break;
                     }
+                    Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+                    MessageBox.Show("Se ha editado el stock con exito. Se han eliminado " + Cantidad+ " unidades");
                     Id = 0;
                     Cantidad = 0;
-                    Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
-                    MessageBox.Show("Se ha editado el stock con exito" + cantidad_actual + " a " + cant);
                 }
                 else
                 {

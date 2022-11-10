@@ -19,10 +19,11 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="380*"/>
-            <ColumnDefinition Width="116*"/>
-            <ColumnDefinition Width="303*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="446*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="127*"/>
+            <ColumnDefinition Width="226*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="150*"/>
@@ -30,11 +31,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Margin="20"
+        <Border Margin="20,20,20,20"
 				        CornerRadius="10,10,10,10"
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="3">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
@@ -62,14 +63,14 @@
                         Orientation="Horizontal"
                         Margin="25,15,20,2" Grid.RowSpan="2">
                     <TextBlock
-							Text="ID"
+							Text="Nombre"
 							FontSize="18"
 							Style="{StaticResource titleStyle1}" 
 							VerticalAlignment="Center"/>
                     <Border
 							Margin="5,5,0,5"
 							CornerRadius="10,10,10,10" 
-							Width="90">
+							Width="150">
                         <TextBox x:Name="tId" 
                                      Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
                                         FontSize="16"
@@ -114,7 +115,7 @@
 
 
 
-                    <Button x:Name="eliminar_stock"
+                <Button x:Name="eliminar_stock"
                             BorderThickness="0"
                             Content="Eliminar"
                             Foreground="White"
@@ -125,9 +126,9 @@
                             Grid.Row="1" 
                             Command="{Binding ReduceStockCommand}"
                             Style="{StaticResource button2}">
-                    </Button>
+                </Button>
 
-                    <Border Grid.Row="2"
+                <Border Grid.Row="2"
 						                Grid.Column="1"
 						                CornerRadius="10,10,10,10" >
                     <Button x:Name="agregar_stock"
@@ -139,10 +140,10 @@
                                 Cursor="Hand"
                                 Command="{Binding AddStockCommand}"                       
                                 Style="{StaticResource button2}">
-                        </Button>
-                    </Border>
-                </Grid>
-            </Border>
+                    </Button>
+                </Border>
+            </Grid>
+        </Border>
 
         <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                       VerticalGridLinesBrush="{StaticResource LineDataGrid}"
@@ -156,13 +157,19 @@
                       x:Name="membersDataGrid" 
                       ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Path=Articulo,UpdateSourceTrigger=PropertyChanged}"
-                      Margin= "20"
+                      Margin= "20,20,20,20"
                       Grid.Row="1"
-                  Grid.ColumnSpan="3">
+                  Grid.ColumnSpan="4">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

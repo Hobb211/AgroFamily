@@ -99,8 +99,20 @@
                           SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" />
-                    <DataGridTextColumn Header="Stock" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
+                    <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Stock" IsReadOnly="True" Width="*" Binding="{Binding Stock}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Border Grid.Row="2"
@@ -141,8 +153,22 @@
                           SelectedItem="{Binding CurrentSaleProduct,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Count}" />
-                    <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" />
+                    <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Count}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    
+                    <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="1">

@@ -27,9 +27,27 @@
                   Margin= "25">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" />
-                <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                    </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
