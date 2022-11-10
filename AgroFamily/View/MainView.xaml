@@ -22,6 +22,9 @@
     
     <!--ChildContent-->
     <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:SaleHistoryViewModel}">
+            <local:SalesHistoryView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
             <local:InventoryView/>
         </DataTemplate>
@@ -101,7 +104,7 @@
                                 Visibility="{Binding NavigationMenuVisibility,UpdateSourceTrigger=PropertyChanged}">
                         <!--CashRegister Button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor1}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowCashRegisterViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="CartShopping" Style="{StaticResource navigationButtonIcon}"/>
@@ -110,7 +113,7 @@
                         </RadioButton>
                         <!--Inventory Button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Width="70"
                                      Command="{Binding ShowInventoryMenuCommand}">
                             <StackPanel Orientation="Vertical">
@@ -120,7 +123,7 @@
                         </RadioButton>
                         <!--Business State Button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor3}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowBusinessMenuCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
@@ -129,7 +132,7 @@
                         </RadioButton>
                         <!--Users Buttons-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor4}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowAddUserViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="User" Style="{StaticResource navigationButtonIcon}"/>
@@ -142,7 +145,7 @@
                                 Visibility="{Binding InventoryMenuVisibility}">
                         <!--Navigation menu button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor1}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowNavigationMenuCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="CircleArrowLeft" Style="{StaticResource navigationButtonIcon}"/>
@@ -151,7 +154,7 @@
                         </RadioButton>
                         <!--AddItems button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowAddItemsViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="BoxesPacking" Style="{StaticResource navigationButtonIcon}"/>
@@ -160,7 +163,7 @@
                         </RadioButton>
                         <!--Edit Stock Menu-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowEditStockViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="Box" Style="{StaticResource navigationButtonIcon}"/>
@@ -169,7 +172,7 @@
                         </RadioButton>
                         <!--Inventory button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowInventoryViewCommand}"
                                      Width="70">
                             <StackPanel Orientation="Vertical">
@@ -183,7 +186,7 @@
                                 Visibility="{Binding BusinessMenuVisibility}">
                         <!--Navigation menu button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor1}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowNavigationMenuCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="CircleArrowLeft" Style="{StaticResource navigationButtonIcon}"/>
@@ -192,7 +195,7 @@
                         </RadioButton>
                         <!--Expensives button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowAddExpensiveViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="CircleDollarToSlot" Style="{StaticResource navigationButtonIcon}"/>
@@ -201,7 +204,7 @@
                         </RadioButton>
                         <!--Sales History button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      >
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="FileInvoiceDollar" Style="{StaticResource navigationButtonIcon}"/>
@@ -210,7 +213,7 @@
                         </RadioButton>
                         <!--Business button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor2}"
+                                     Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowBusinessStatusViewCommand}">
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
