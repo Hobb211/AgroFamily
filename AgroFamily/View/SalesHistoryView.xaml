@@ -9,45 +9,76 @@
     <UserControl.DataContext>
         <viewmodel:SaleHistoryViewModel/>
     </UserControl.DataContext>
-    
+
     <!--Main Container-->
     <Border>
+
         <!--Main grid/-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
             <!--Partial Grid/Left-->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
                 <!--Search Section/TopGrid-->
-                <Grid Background="Aqua"
+                <Grid Background="#5E5E5E"
                       Margin="10 10 10 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="320"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+
                     <!--Section Title-->
                     <TextBlock Text="Buscar Ventas" 
-                                   Grid.Column="0"
-                                   TextAlignment="Center"
-                                   Height="20"
-                                   Width="80"
-                                   Margin="60 5 0 150"/>
+                               Grid.Column="0"
+                               TextAlignment="Center"
+                               Height="20"
+                               Width="80"
+                               Margin="60 5 0 150"
+                               />
+
                     <!--Search Button-->
-                    <Button Grid.Column="1"
-                                Height="20"
-                                Width="30"
-                                Margin="10 10 10 10">
+                    <Button Style="{StaticResource button}"
+                            Grid.Column="1"
+                            Height="20"
+                            Width="30"
+                            Margin="10 10 10 10"
+                            Command="{Binding SearchSaleCommand}"
+                            >
                         <!--<Image Source="Assets\triangular_button_icon.png"/>-->
                     </Button>
+
+                    <!--Radio button, to select the sales of the current day or date range-->
+                    <!--<RadioButton Content="1"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="1 1 1 1"
+                                 Margin="0 0 0 100"
+                                 x:Name="OnlyTodayButton"
+                                 Click="OnlyTodayButton_Checked"
+                                 >
+                    </RadioButton>
+                    <RadioButton Content="2" 
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="1 1 1 1"
+                                 Margin="0 100 0 0"
+                                 IsChecked="{Binding DateRange,UpdateSourceTrigger=PropertyChanged}"
+                                 >
+                    </RadioButton>-->
+
                     <!--Searching Panel-->
                     <StackPanel Margin="0 30 0 0"
-                                    Orientation="Vertical">
+                                Orientation="Vertical">
                         <Grid Height="150">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20"/>
@@ -56,12 +87,14 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
-                                           Width="80"
-                                           Height="20"
-                                           Text="Identificadores"
-                                           TextAlignment="Center"/>
+                                       Width="80"
+                                       Height="20"
+                                       Text="Identificadores"
+                                       TextAlignment="Center"/>
+
                             <!--Searching Identifiers Grid-->
                             <Grid Grid.Row="1">
+
                                 <!--Searching Identifiers-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -71,6 +104,7 @@
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
+
                                 <!--Titles-->
                                 <TextBlock Text="ID Vendedor"
                                            Grid.Row="0"
@@ -82,19 +116,24 @@
                                            Grid.Column="1"
                                            TextAlignment="Center"
                                            />
+
                                 <!--Boxes-->
                                 <TextBox Grid.Row="1"
                                          Grid.Column="0"
                                          Width="120"
                                          Height="20"
+                                         Text="{Binding SellerID}"
                                          />
                                 <TextBox Grid.Row="1"
                                          Grid.Column="1"
                                          Width="120"
                                          Height="20"
+                                         Text="{Binding SaleID}"
                                          />
                             </Grid>
+
                             <!--DatePickers for dates range-->
+
                             <!--Titles-->
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
@@ -105,9 +144,10 @@
                                            Text="Fecha Inicial"
                                            TextAlignment="Center"/>
                                 <TextBlock Grid.Column="1"
-                                           Text="Fecha Inicial"
+                                           Text="Fecha Final"
                                            TextAlignment="Center"/>
                             </Grid>
+
                             <!--DatePickers-->
                             <Grid Grid.Row="3">
                                 <Grid.ColumnDefinitions>
@@ -115,29 +155,142 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <DatePicker Grid.Column="0" 
-                                            BorderThickness="0"/>
-                                <DatePicker Grid.Column="1" BorderThickness="0"/>
+                                            BorderThickness="0"
+                                            Margin="20 0 0 0"
+                                            Name="BeforeDate"
+                                            SelectedDate="{Binding StartingDate,UpdateSourceTrigger=PropertyChanged}"
+                                            />
+                                <DatePicker Grid.Column="1"
+                                            BorderThickness="0"
+                                            Margin="20 0 0 0"
+                                            SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged}"
+                                            Name="AfterDate"
+                                            />
                             </Grid>
                         </Grid>
                     </StackPanel>
                 </Grid>
+
                 <!--Searching results view-->
-                <StackPanel Background="BurlyWood"
-                                Grid.Row="1"
-                                Margin="10 10 10 10">
+                <StackPanel Background="#5E5E5E"
+                            Grid.Row="1"
+                            Margin="10 10 10 10"
+                            >
                     <TextBlock Text="Resultados de la busqueda"
                                TextAlignment="Center"
                                Margin="0 5 0 0"
                                />
-                    <DataGrid Height="143" d:ItemsSource="{d:SampleData ItemCount=5}" Width="360"/>
 
+                    <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
+                              VerticalGridLinesBrush="{StaticResource Color5}"
+                              Background="{StaticResource Color4}"
+                              GridLinesVisibility="All"
+                              RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"
+                              AutoGenerateColumns="False"
+                              CellStyle="{DynamicResource DataGridCellStyle1}"
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                              x:Name="HistoricSalesDataGrid"
+                              Margin= "25"
+                              ItemsSource="{Binding Path=HistoricSales,UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding CurrentSale,UpdateSourceTrigger=PropertyChanged}"
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Código"  
+                                                IsReadOnly="True" Width="*" 
+                                                Binding="{Binding ID}"
+                                                />
+                            <DataGridTextColumn Header="Fecha/Hora" 
+                                                IsReadOnly="True" 
+                                                Width="*" 
+                                                Binding="{Binding SaleDate}"
+                                                />
+                            <DataGridTextColumn Header="Total" 
+                                                IsReadOnly="True" 
+                                                Width="*" 
+                                                Binding="{Binding Total}" 
+                                                />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
             </Grid>
+
             <!--Searching results resume-->
-            <StackPanel Margin="10 10 10 10"
-                            Background="Beige"
-                            Grid.Column="1">
-            </StackPanel>
+            <Grid Grid.Column="1"
+                  Background="{StaticResource Color4}"
+                  Margin="10 10 10 10"
+                  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="200"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" 
+                               Style="{StaticResource titleStyle2}" 
+                               Text="Resumen de la venta"
+                               />
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                                   Text="Vendedor: "
+                                   Margin="13,17,19,15"
+                                   TextAlignment="Center"
+                                   />
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="1"
+                                   Text="Fecha/Hora: "
+                                   TextAlignment="Center"
+                                   Margin="0,17,3,15"
+                                   />
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="2"
+                                   Text="Total: "
+                                   TextAlignment="Center"
+                                   Margin="20,17,20,15"
+                                   />
+                    </Grid>
+                    <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
+                              VerticalGridLinesBrush="{StaticResource Color5}"
+                              Background="{StaticResource Color2}"
+                              GridLinesVisibility="All"
+                              RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"
+                              AutoGenerateColumns="False"
+                              CellStyle="{DynamicResource DataGridCellStyle1}"
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                              x:Name="SaleProducts"
+                              Margin= "25"
+                              Grid.Row="2"
+                              ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding CurrentSale,UpdateSourceTrigger=PropertyChanged}"
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Producto"  
+                                                IsReadOnly="True" Width="*" 
+                                                Binding="{Binding Nombre}"
+                                                />
+                            <DataGridTextColumn Header="Cantidad" 
+                                                IsReadOnly="True" 
+                                                Width="*" 
+                                                Binding="{Binding Cantidad}"
+                                                />
+                            <DataGridTextColumn Header="Monto" 
+                                                IsReadOnly="True" 
+                                                Width="*" 
+                                                Binding="{Binding Monto}" 
+                                                />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
