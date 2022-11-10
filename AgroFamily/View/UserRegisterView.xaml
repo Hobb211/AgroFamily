@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"             
+             xmlns:local="clr-namespace:AgroFamily.View" 
+             xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" >
@@ -14,7 +15,7 @@
         <viewmodel:UserRegisterViewModel/>
     </UserControl.DataContext>
 
-    <Grid Margin="0">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="497*"/>
