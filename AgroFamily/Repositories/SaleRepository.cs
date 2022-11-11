@@ -50,5 +50,20 @@ namespace AgroFamily.Repositories
             }
             return saleModelsDay;
         }
+
+        //Este metodo lo cree para poder buscar las ventas en un rango dado, para poder satisfacer el historial de ventas 
+        public ObservableCollection<SaleModel> GetByDateRange(DateOnly startingDate, DateOnly endingDate)
+        {
+            ObservableCollection<SaleModel> saleModels = GetAll();
+            ObservableCollection<SaleModel> saleModelsOnRange = new ObservableCollection<SaleModel>();
+            for (int i = 0; i < saleModels.Count; i++)
+            {
+                if (DateOnly.FromDateTime(saleModels[i].dateTime).CompareTo(startingDate) == 0)
+                {
+                    saleModelsOnRange.Add(saleModels[i]);
+                }
+            }
+            return saleModelsOnRange;
+        }
     }
 }
