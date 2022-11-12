@@ -79,7 +79,7 @@ namespace AgroFamily.ViewModel
             ShowInventoryViewCommand = new ViewModelCommand(ExecuteShowInventoryViewCommand);
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
-            //ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
