@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AgroFamily.View"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -41,32 +42,44 @@
                                 <RowDefinition Height="50*"/>
                                 <RowDefinition Height="50*"/>
                             </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="102*"/>
+                                <ColumnDefinition Width="163*"/>
+                                <ColumnDefinition Width="59*"/>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+
+
+                            </Grid>
+
+
                             <!--Start date text-->
+
                             <TextBlock
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
+                                       HorizontalAlignment="Center"
                                        Text="Fecha inicial:"
                                        Style="{StaticResource titleStyle3}"
-                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,0"/>
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
+                                       Height="14" 
+                                       Width="69"/>
 
                             <!--Start date picker-->
                             <DatePicker x:Name="StartDate"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Left"
-                                        MaxHeight="100"
-                                        Width="184"
-                                        MaxWidth="500"
                                         SelectedDate="{Binding StartingDate,UpdateSourceTrigger=PropertyChanged}"
-                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
-                                        Height="28" Margin="117,0,0,0"/>
+                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Height="24" Margin="102,0,0,0" Width="102"/>
 
                             <!--End date text-->
                             <TextBlock Grid.Row="1"
                                        VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
+                                       HorizontalAlignment="Center"
                                        Text="Fecha final:"
                                        Style="{StaticResource titleStyle3}"
-                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,0" RenderTransformOrigin="0.195,0.426"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.195,0.426" Height="14" Width="61"
                                        />
                             <!--End date picker-->
                             <DatePicker x:Name="EndDate"
@@ -76,9 +89,26 @@
                                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                         Height="24"
                                         MaxHeight="100"
-                                        Width="184"
+                                        Width="102"
                                         MaxWidth="500"
-                                        Grid.Row="1" Margin="117,0,0,0"/>
+                                        Grid.Row="1" Grid.ColumnSpan="2" Margin="102,0,0,0"/>
+
+
+
+                            <!--Search Button-->
+                            <Button Grid.Column="2"
+                                    Margin="10"
+                                Style="{StaticResource controlButton1}"
+                                Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                                Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                                Command="{Binding SearchRangeSaleCommand}">
+
+                                <fa:IconImage Icon="Play"
+                                          Style="{StaticResource controlButtonIcon}"
+                                          Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"/>
+                            </Button>
+
 
                         </Grid>
 
