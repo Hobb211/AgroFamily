@@ -54,12 +54,30 @@
             </Grid>
         </Border>
 
+        
         <Border CornerRadius="0"
-                Grid.Row="6"
-                Margin="0" Grid.Column="3">
+                Grid.Row="5"
+                Grid.RowSpan="2"
+                Margin="0" 
+                Grid.Column="3">
+            
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
+
+            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Name}"   FontSize="18" />
+                    <TextBlock HorizontalAlignment="Center" Text=" "   FontSize="18" />
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.LastName}"  FontSize="18"/>
+
+                </StackPanel>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="ID " FontSize="18"/>-->
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Id}" FontSize="18"/>
+                </StackPanel>
+                <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Type}" FontSize="18" Margin="0 5 0 0"/>
+            </StackPanel>
 
         </Border>
 
@@ -74,6 +92,7 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
+                      SelectedItem="{Binding Path=CurrentUser,UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}" Margin="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>

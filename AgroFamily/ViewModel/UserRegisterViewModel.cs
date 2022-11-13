@@ -32,6 +32,7 @@ namespace AgroFamily.ViewModel
         public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
         public string Lastname { get => _lastname; set { _lastname = value; OnPropertyChanged(nameof(Lastname)); } }
         public string Password { get => _password; set { _password = value; OnPropertyChanged(nameof(Password)); } }
+        public UserModel CurrentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(nameof(CurrentUser)); } }
         public TypeUserModel Type
         {
             get => _type;

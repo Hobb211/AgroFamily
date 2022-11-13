@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace AgroFamily.ViewModel
 {
@@ -28,6 +30,10 @@ namespace AgroFamily.ViewModel
 
             Articles = suppliesRepository.GetByAllArticles();
             Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+
+            
         }
+
+
     }
 }

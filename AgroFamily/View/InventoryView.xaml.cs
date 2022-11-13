@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,5 +30,18 @@ namespace AgroFamily.View
         {
 
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            var row = sender as DataGridRow;
+            var article = row.DataContext as ArticleModel;
+
+            MessageBox.Show($"El articulo clickeado es {article.Name}!");
+            //articlesDataGrid.IsReadOnly = false;
+            //articlesDataGrid.CurrentCell = new DataGridCellInfo((sender as Button).DataContext, articlesDataGrid.Columns[0]);
+            //articlesDataGrid.BeginEdit();
+        }
+
+
     }
 }
