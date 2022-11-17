@@ -199,7 +199,7 @@
                                                 IsReadOnly="True" Width="*" 
                                                 Binding="{Binding ID}"
                                                 />
-                            <DataGridTextColumn Header="Fecha/Hora" 
+                            <DataGridTextColumn Header="Fecha" 
                                                 IsReadOnly="True" 
                                                 Width="*" 
                                                 Binding="{Binding SaleDate}"
@@ -247,7 +247,7 @@
                                    />
                         <TextBlock Grid.Column="0"
                                    Grid.Row="1"
-                                   Text="Fecha/Hora: "
+                                   Text="Fecha: "
                                    TextAlignment="Center"
                                    Margin="0,17,3,15"
                                    />
