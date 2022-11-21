@@ -52,10 +52,18 @@
         <Setter Property="Foreground" Value="{StaticResource textColor1}"/>
         <Setter Property="Margin" Value="0,32"/>
     </Style>
-    
+
     <Style x:Key="textStyle3" TargetType="TextBlock">
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="{StaticResource textColor1}"/>
+        <!--<Setter Property="Margin" Value="0,32"/>-->
+    </Style>
+    <Style x:Key="textStyle3_auto" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="auto"/>
+        <Setter Property="FontStretch" Value="auto"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="Foreground" Value="{StaticResource textColor1}"/>
         <!--<Setter Property="Margin" Value="0,32"/>-->

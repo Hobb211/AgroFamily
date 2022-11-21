@@ -114,6 +114,33 @@
         </Style.Triggers>
     </Style>
 
+    <!--Default button-->
+    <Style x:Key="button_tr_small" TargetType="Button">
+        <!--Normal Button Style-->
+
+        <Setter Property="Height" Value="auto"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Background" Value="{DynamicResource buttonColor1}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--Button Style on hover-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource buttonColor2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--NavigationButtons-->
     <Style x:Key="NavigationButton" TargetType="RadioButton">
         <Setter Property="Width" Value="60"/>
