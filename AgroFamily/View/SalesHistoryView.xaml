@@ -29,7 +29,7 @@
 
                 <!--Search Section/TopGrid-->
                 <Grid Background="#5E5E5E"
-                      Margin="10 10 10 10">
+                      Margin="10 10 5 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="320"/>
                         <ColumnDefinition Width="*"/>
@@ -174,14 +174,14 @@
                 <!--Searching results view-->
                 <StackPanel Background="#5E5E5E"
                             Grid.Row="1"
-                            Margin="10 10 10 10"
+                            Margin="10 5 5 10"
                             >
                     <TextBlock Text="Resultados de la busqueda"
                                TextAlignment="Center"
-                               Margin="0 5 0 0"
+                               Margin="0 8 0 0"
                                />
 
-                    <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
+                    <DataGrid Margin="5 5 5 0" HorizontalGridLinesBrush="{StaticResource Color5}"
                               VerticalGridLinesBrush="{StaticResource Color5}"
                               Background="{StaticResource Color4}"
                               GridLinesVisibility="All"
@@ -190,7 +190,6 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}"
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                               x:Name="HistoricSalesDataGrid"
-                              Margin= "25"
                               ItemsSource="{Binding Path=HistoricSales,UpdateSourceTrigger=PropertyChanged}"
                               SelectedItem="{Binding CurrentSale,UpdateSourceTrigger=PropertyChanged}"
                               >
@@ -199,7 +198,7 @@
                                                 IsReadOnly="True" Width="*" 
                                                 Binding="{Binding ID}"
                                                 />
-                            <DataGridTextColumn Header="Fecha/Hora" 
+                            <DataGridTextColumn Header="Fecha" 
                                                 IsReadOnly="True" 
                                                 Width="*" 
                                                 Binding="{Binding SaleDate}"
@@ -212,12 +211,13 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
+
             </Grid>
 
             <!--Searching results resume-->
             <Grid Grid.Column="1"
                   Background="{StaticResource Color4}"
-                  Margin="10 10 10 10"
+                  Margin="5 10 10 10"
                   >
                 <Grid>
                     <Grid.RowDefinitions>
@@ -239,6 +239,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
+                        <!--Textblocks to declare the data-->
                         <TextBlock Grid.Column="0"
                                    Grid.Row="0"
                                    Text="Vendedor: "
@@ -247,7 +248,7 @@
                                    />
                         <TextBlock Grid.Column="0"
                                    Grid.Row="1"
-                                   Text="Fecha/Hora: "
+                                   Text="Fecha: "
                                    TextAlignment="Center"
                                    Margin="0,17,3,15"
                                    />
@@ -257,8 +258,31 @@
                                    TextAlignment="Center"
                                    Margin="20,17,20,15"
                                    />
+                        <!--Textblocks to show the data-->
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding SellerName}"
+                                   Margin="13,17,19,15"
+                                   TextAlignment="Center"
+                                   Width="200"
+                                   />
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding SaleDate}"
+                                   TextAlignment="Center"
+                                   Margin="0,17,3,15"
+                                   Width="200"
+                                   />
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="2"
+                                   Text="{Binding SaleAmmount}"
+                                   TextAlignment="Center"
+                                   Width="200"
+                                   Margin="20,17,20,15"
+                                   />
                     </Grid>
                     <DataGrid HorizontalGridLinesBrush="{StaticResource Color5}"
+
                               VerticalGridLinesBrush="{StaticResource Color5}"
                               Background="{StaticResource Color2}"
                               GridLinesVisibility="All"
@@ -267,10 +291,9 @@
                               CellStyle="{DynamicResource DataGridCellStyle1}"
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                               x:Name="SaleProducts"
-                              Margin= "25"
+                              Margin= "10 10 10 10"
                               Grid.Row="2"
                               ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
-                              SelectedItem="{Binding CurrentSale,UpdateSourceTrigger=PropertyChanged}"
                               >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Producto"  
