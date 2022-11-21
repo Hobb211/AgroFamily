@@ -32,16 +32,6 @@ namespace AgroFamily.View
         public UserRegisterView()
         {
             InitializeComponent();
-
-            //ObservableCollection<AdminModel> members = new ObservableCollection<AdminModel>();
-            //ObservableCollection<AdminModel> membersa = GetData();
-            //ObservableCollection<AdminModel> members = new ObservableCollection<AdminModel>();
-            //UserRegisterViewModel urv = new UserRegisterViewModel();
-
-
-            //membersDataGrid.ItemsSource = members;
-            //membersDataGrid.DataContext = members;
-            //membersDataGrid.ItemsSource = members;
             
         }
 

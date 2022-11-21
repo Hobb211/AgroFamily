@@ -12,6 +12,7 @@ namespace AgroFamily.Model
         public string Name { get; set; }
         public string Type { get; set; }
         public int Stock { get; set; }
+        public bool IsEditable { get; set; }
 
     }
 }

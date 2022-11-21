@@ -13,17 +13,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--GridLinesVisibility="All"
+                      AutoGenerateColumns="False" 
+                      CanUserAddRows="False"
+                          Background="{StaticResource DataGridColor}"
+-->
 
         <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                   VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                  Background="{StaticResource DataGridColor}"
-                  GridLinesVisibility="All"
                   RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                  AutoGenerateColumns="False" 
+                  Style="{DynamicResource DataGridStyle1}"
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   RowStyle="{DynamicResource DataGridRowStyle1}"
                   x:Name="articlesDataGrid" 
+                  SelectedItem="{Binding Path=CurrentArticle,UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
                   Margin= "25">
             <DataGrid.Resources>
@@ -34,22 +38,38 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}">
+
+
+                <DataGridTextColumn Header="Nombre" Width="*" Binding="{Binding Name}"/>
+
+                <!--<DataGridTextColumn Header ="Nombre" Binding="{Binding Name}" Width="*">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsEditable}" Value="true">
+                                    <Setter Property="IsEnabled" Value="True"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>-->
+
+                <DataGridTextColumn Header="Precio" Width="*" Binding="{Binding Price}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}" >
+                <DataGridTextColumn Header="Cantidad" Width="*" Binding="{Binding Stock}" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                     </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Tipo" IsReadOnly="True" Width="*" Binding="{Binding Type}" >
+                <DataGridTextColumn Header="Tipo" Width="*" Binding="{Binding Type}" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -57,13 +77,30 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-               
+                <DataGridTemplateColumn Header="Acción" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.RemoveItemCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource gridRemoveButton}">
 
-                <DataGridTemplateColumn Header="Operación" IsReadOnly="True" Width="auto">
+                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
+
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <!--<DataGridTemplateColumn Header="Operación" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding Button_Click_1}" Style="{StaticResource gridEditButton}">
+                                <Button Style="{StaticResource gridEditButton}">
                                     <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                                 <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
@@ -72,7 +109,7 @@
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
                 
                 
             </DataGrid.Columns>
