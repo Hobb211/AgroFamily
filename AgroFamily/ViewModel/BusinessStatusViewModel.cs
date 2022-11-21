@@ -32,8 +32,8 @@ namespace AgroFamily.ViewModel
             int AmountExp_int = expensiveRepository.GetAmountInAMonth(month, year);
             int AmountDiff_int = (AmountSales_int - AmountExp_int);
 
-            AmountSales = "$ "+Convert.ToString(AmountSales_int);
-            AmountExp = "$ "+ Convert.ToString(AmountExp_int);
+            AmountSales = "$ " + Convert.ToString(AmountSales_int);
+            AmountExp = "$ " + Convert.ToString(AmountExp_int);
             AmountDiff = "$ " + Convert.ToString(AmountDiff_int);
 
         }

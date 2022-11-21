@@ -13,5 +13,11 @@ namespace AgroFamily.Model
         public void Add(SaleProductModel sale);
         public ObservableCollection<SaleProductModel> GetBySale(string saleId);
         public ObservableCollection<SaleProductModel> GetByAll();
+
+        public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityASC(int limite);
+
+        public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityDESC(int limite);
+
+        public ObservableCollection<SaleProductModel> getroductProfitabilityAll();
     }
 }

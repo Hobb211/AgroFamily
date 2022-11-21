@@ -61,6 +61,8 @@ namespace AgroFamily.ViewModel
         public ICommand ShowEditStockViewCommand { get; }
         public ICommand ShowBusinessStatusViewCommand { get; }
 
+        public ICommand ShowProductProfitabilityViewCommand { get; }
+
         public MainViewModel()
         {
             userRepository = new UserRepository();
@@ -80,6 +82,8 @@ namespace AgroFamily.ViewModel
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
             ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);

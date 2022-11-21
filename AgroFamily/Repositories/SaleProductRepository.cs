@@ -41,5 +41,38 @@ namespace AgroFamily.Repositories
             ObservableCollection<SaleProductModel> collection=new ObservableCollection<SaleProductModel>(sales);
             return collection;
         }
+
+        public ObservableCollection<SaleProductModel> getroductProfitabilityAll()
+        {
+            IEnumerable<SaleProductModel> sales;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                sales = connection.Query<SaleProductModel>("SELECT * from SaleProductModel ORDER by Amount desc");
+            }
+            ObservableCollection<SaleProductModel> collection = new ObservableCollection<SaleProductModel>(sales);
+            return collection;
+        }
+
+        public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityASC(int limite)
+        {
+            IEnumerable<SaleProductModel> sales;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                sales = connection.Query<SaleProductModel>("SELECT * from SaleProductModel ORDER by Amount ASC limit "+ limite);
+            }
+            ObservableCollection<SaleProductModel> collection = new ObservableCollection<SaleProductModel>(sales);
+            return collection;
+        }
+
+        public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityDESC(int limite)
+        {
+            IEnumerable<SaleProductModel> sales;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                sales = connection.Query<SaleProductModel>("SELECT * from SaleProductModel ORDER by Amount desc limit "+ limite);
+            }
+            ObservableCollection<SaleProductModel> collection = new ObservableCollection<SaleProductModel>(sales);
+            return collection;
+        }
     }
 }
