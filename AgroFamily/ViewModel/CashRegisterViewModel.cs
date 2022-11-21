@@ -116,7 +116,7 @@ namespace AgroFamily.ViewModel
             IProductRepository productRepository = new ProductRepository();
             SaleModel sale=new SaleModel() 
             { 
-                dateTime = DateTime.Now,
+                SaleDate = DateTime.Now,
                 total=TotalPrice
             };
             saleRepository.Add(sale);

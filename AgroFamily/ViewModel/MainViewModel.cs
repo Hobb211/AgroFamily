@@ -60,7 +60,7 @@ namespace AgroFamily.ViewModel
         public ICommand ShowCashRegisterViewCommand { get; }
         public ICommand ShowEditStockViewCommand { get; }
         public ICommand ShowBusinessStatusViewCommand { get; }
-
+        public ICommand ShowSaleHistoryCommand { get; }
         public ICommand ShowProductProfitabilityViewCommand { get; }
 
         public MainViewModel()
@@ -83,12 +83,18 @@ namespace AgroFamily.ViewModel
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
             ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
             ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowSaleHistoryCommand = new ViewModelCommand(ExecuteShowSaleHistoryCommand);
 
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
             InventoryMenuVisibility = Visibility.Collapsed;
             BusinessMenuVisibility = Visibility.Collapsed;
+        }
+
+        private void ExecuteShowSaleHistoryCommand(object obj)
+        {
+            CurrentChildView = new SaleHistoryViewModel();
         }
 
         private void ExecuteShowEditStockViewCommand(object obj)

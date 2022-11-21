@@ -62,7 +62,7 @@ namespace AgroFamily.Repositories
             ObservableCollection<SaleModel> saleModelsDay = new ObservableCollection<SaleModel>();
             for (int i=0; i < saleModels.Count; i++)
             {
-                if (DateOnly.FromDateTime(saleModels[i].dateTime).CompareTo(date)==0)
+                if (DateOnly.FromDateTime(saleModels[i].SaleDate).CompareTo(date)==0)
                 {
                     saleModelsDay.Add(saleModels[i]);
                 }
@@ -78,7 +78,7 @@ namespace AgroFamily.Repositories
             ObservableCollection<SaleModel> saleModelsOnRange = new ObservableCollection<SaleModel>();
             for (int i = 0; i < saleModels.Count; i++)
             {
-                if (DateOnly.FromDateTime(saleModels[i].dateTime).CompareTo(startingDate) == 0)
+                if (DateOnly.FromDateTime(saleModels[i].SaleDate).CompareTo(startingDate) == 0)
                 {
                     saleModelsOnRange.Add(saleModels[i]);
                 }

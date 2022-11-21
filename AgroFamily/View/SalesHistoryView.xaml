@@ -268,14 +268,14 @@
                                    />
                         <TextBlock Grid.Column="1"
                                    Grid.Row="1"
-                                   Text="{Binding SaleDate}"
+                                   Text="{Binding CurrentSale.SaleDate}"
                                    TextAlignment="Center"
                                    Margin="0,17,3,15"
                                    Width="200"
                                    />
                         <TextBlock Grid.Column="1"
                                    Grid.Row="2"
-                                   Text="{Binding SaleAmmount}"
+                                   Text="{Binding CurrentSale.total}"
                                    TextAlignment="Center"
                                    Width="200"
                                    Margin="20,17,20,15"

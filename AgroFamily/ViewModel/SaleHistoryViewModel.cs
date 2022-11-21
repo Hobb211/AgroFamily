@@ -20,10 +20,9 @@ namespace AgroFamily.ViewModel
         private DateOnly _startingDate = DateOnly.FromDateTime(DateTime.Today);
         private DateOnly _endingDate = DateOnly.FromDateTime(DateTime.Today);
         private SaleModel _currentSale;
-        private bool _onlyToday;
-        private bool _dateRange;
+        private string _sellerName;
         private readonly ObservableCollection<SaleModel> _historicSales;
-        private readonly ObservableCollection<ProductModel> _productsOfSale;
+        private ObservableCollection<SaleProductModel> _productsOfSale;
 
         //Properties
         public string SellerID { get => _sellerID; set { _sellerID = value; OnPropertyChanged(nameof(SellerID)); } }
@@ -32,7 +31,60 @@ namespace AgroFamily.ViewModel
         public DateOnly EndingDate { get => _endingDate; set { _endingDate = value; OnPropertyChanged(nameof(EndingDate)); } }
         public SaleModel CurrentSale { get => _currentSale; set { _currentSale = value; OnPropertyChanged(nameof(CurrentSale)); } }
         public IEnumerable<SaleModel> HistoricSales => _historicSales;
-        public IEnumerable<ProductModel> ProductsOfSale => _productsOfSale;
+
+        //La propiedad vendedor que será mostrada en la vista
+        //debe ser obtenida de la base de datos de usuarios
+        public string SellerName
+        {
+            get
+            {
+                return _sellerName;
+            }
+            set
+            {
+                IUserRepository userRepository = new UserRepository();
+                UserModel user = null;
+                try
+                {
+                    user = userRepository.GetById(CurrentSale.id_vendedor);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+                try
+                {
+                    _sellerName = userRepository.GetSeller(user);
+                    OnPropertyChanged(nameof(SellerName));
+                }
+                catch(NullReferenceException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+        }
+        public ObservableCollection<SaleProductModel> ProductsOfSale
+        {
+            get
+            {
+                return _productsOfSale;
+            }
+            set
+            {
+                try
+                {
+                    _productsOfSale = new SaleProductRepository().GetBySale(CurrentSale.Id.ToString());
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }                
+                OnPropertyChanged(nameof(ProductsOfSale));
+            }
+        }
 
         //public bool OnlyToday { get => _onlyToday; set { _onlyToday = value; OnPropertyChanged(nameof(OnlyToday)); } }
         //public bool DateRange { get => _dateRange; set { _dateRange = value; OnPropertyChanged(nameof(DateRange)); } }
@@ -43,7 +95,7 @@ namespace AgroFamily.ViewModel
         public SaleHistoryViewModel()
         {
             _historicSales = new ObservableCollection<SaleModel>();
-            _productsOfSale = new ObservableCollection<ProductModel>();
+            _productsOfSale = new ObservableCollection<SaleProductModel>();
             //Initialize Command
             SearchSaleCommand = new ViewModelCommand(ExecuteSearchSaleCommand, CanExecuteSearchSaleCommand);
         }
@@ -55,15 +107,16 @@ namespace AgroFamily.ViewModel
             bool betweenDateRange;
             bool isToday;
 
-            //Para poder buscar una venta los id de venta e id de vendedor deben ser no nulos
+            //Para poder buscar una venta en el historial, se asegura que el vendedor y/o la venta exista en el historial
             validParameters = !string.IsNullOrEmpty(SellerID) && !string.IsNullOrEmpty(SaleID);
 
             //Respecto al rango de fechas se deben verificar las siguientes condiciones:
             //Fecha final no sea anterior a la fecha de inicio
             //Fecha de inicio y final no sea posterior al dia en curso
             //Si ambas fechas son el dia actual
+            DateOnly Today = DateOnly.FromDateTime(DateTime.Today);
             betweenDateRange = EndingDate.CompareTo(StartingDate) >= 0 || (EndingDate.CompareTo(DateTime.Today) < 0 && StartingDate.CompareTo(DateTime.Today) < 0);
-            isToday = EndingDate.CompareTo(DateTime.Today) == 0 && StartingDate.CompareTo(DateTime.Today) == 0;
+            isToday = EndingDate.CompareTo(Today) == 0 && StartingDate.CompareTo(Today) == 0;
             validDates = betweenDateRange || isToday;
 
             return validParameters && validDates;

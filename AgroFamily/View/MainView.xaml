@@ -205,6 +205,7 @@
                         <!--Sales History button-->
                         <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
+                                     Command="{Binding ShowSaleHistoryCommand}"
                                      >
                             <StackPanel Orientation="Vertical">
                                 <fa:IconImage Icon="FileInvoiceDollar" Style="{StaticResource navigationButtonIcon}"/>
