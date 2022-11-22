@@ -22,9 +22,9 @@
     
     <!--ChildContent-->
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:SaleHistoryViewModel}">
+        <!--<DataTemplate DataType="{x:Type viewModel:SaleHistoryViewModel}">
             <local:SalesHistoryView/>
-        </DataTemplate>
+        </DataTemplate>-->
         <DataTemplate DataType="{x:Type viewModel:InventoryViewModel}">
             <local:InventoryView/>
         </DataTemplate>
