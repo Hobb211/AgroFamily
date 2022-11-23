@@ -126,7 +126,7 @@ namespace AgroFamily.ViewModel
             SaleModel sale = new SaleModel()
             {
                 id_vendedor=UserAccount.UserName,
-                dateTime = DateTime.Now,
+                SaleDate = DateTime.Now,
                 total = TotalPrice
             };
             SaleRepository.Add(sale);

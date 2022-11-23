@@ -92,6 +92,7 @@
                                 Style="{StaticResource button}"
                                 Width="100"
                                 Height="30"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding AddProductCommand}"/>
                         </Grid>
                 </Border>
@@ -192,6 +193,7 @@
             <Grid Grid.Row="1">
                 <Button Style="{StaticResource button}"
                         Content="Eliminar"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding RemoveProductCommand}"/>
             </Grid>
             <Grid Grid.Row="2">
@@ -215,6 +217,7 @@
                 </StackPanel>
                 <Button Style="{StaticResource button}" 
                         Content="Comprar"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding PayCommand}"/>
             </Grid>
         </Grid>
