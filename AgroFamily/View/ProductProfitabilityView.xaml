@@ -15,7 +15,7 @@
 				CornerRadius="10,10,10,10"
                 Grid.Column="0">
             <Border.Background>
-                <SolidColorBrush Color="#ee8478"/>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
             <Grid>
                 <Grid.RowDefinitions>
@@ -69,30 +69,8 @@
                                         FontFamily="Montserrat"
                                         Cursor="Hand"
                                         VerticalAlignment="Center"
-                                        >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#ee8478"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#ed5a63"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="150" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                                    HorizontalAlignment="Center"/>
-
-                                    </Border>
-
-                                </ControlTemplate>
-                            </Button.Template>
+                                        Style="{StaticResource button}">
+                            
 
                         </Button>
 
@@ -112,31 +90,7 @@
                                         FontSize="15"
                                         FontFamily="Montserrat"
                                         Cursor="Hand"
-                                        >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#ee8478"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#ed5a63"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="150" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                                    HorizontalAlignment="Center"/>
-
-                                    </Border>
-
-                                </ControlTemplate>
-                            </Button.Template>
-
+                                        Style="{StaticResource button}">
                         </Button>
 
                     </Border>
@@ -155,30 +109,8 @@
                                         FontSize="15"
                                         FontFamily="Montserrat"
                                         Cursor="Hand"
-                                        >
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#ee8478"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#ed5a63"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Width="150" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
-                                        <ContentPresenter VerticalAlignment="Center"
-                                                                    HorizontalAlignment="Center"/>
-
-                                    </Border>
-
-                                </ControlTemplate>
-                            </Button.Template>
+                                        Style="{StaticResource button}">
+                            
 
                         </Button>
 
@@ -196,7 +128,7 @@
 				FontSize="16"
                 Grid.Row="1"    
 				Style="{StaticResource titleStyle1}"
-				Background="#ee8478"
+				Background="{StaticResource Color9}"
 				Height="150" 
 				VerticalAlignment="Center"/>
 

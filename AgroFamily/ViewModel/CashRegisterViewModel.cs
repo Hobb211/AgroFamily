@@ -1,11 +1,7 @@
 ﻿using AgroFamily.Model;
 using AgroFamily.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,6 +9,14 @@ namespace AgroFamily.ViewModel
 {
     public class CashRegisterViewModel : ViewModelBase
     {
+        //Repositories
+        private IProductRepository _productRepository;
+        private ISaleRepository _saleRepository;
+        private ISaleProductRepository _saleProductRepository;
+        public IProductRepository ProductRepository { get => _productRepository; set { _productRepository = value; OnPropertyChanged(nameof(ProductRepository)); } }
+        public ISaleRepository SaleRepository { get => _saleRepository; set { _saleRepository = value; OnPropertyChanged(nameof(SaleRepository)); } }
+        public ISaleProductRepository SaleProductRepository { get => _saleProductRepository; set { _saleProductRepository = value; OnPropertyChanged(nameof(SaleProductRepository)); } }
+
         //Fields
         private ObservableCollection<ProductModel> _products;
         private ObservableCollection<SaleProductModel> _saleProducts;
@@ -28,12 +32,12 @@ namespace AgroFamily.ViewModel
         public ObservableCollection<SaleProductModel> SaleProducts { get => _saleProducts; set { _saleProducts = value; OnPropertyChanged(nameof(SaleProducts)); } }
         public ProductModel CurrentProduct { get => _currentProduct; set { _currentProduct = value; OnPropertyChanged(nameof(CurrentProduct)); } }
         public SaleProductModel CurrentSaleProduct { get => _currentSaleProduct; set { _currentSaleProduct = value; OnPropertyChanged(nameof(CurrentSaleProduct)); } }
-        public int CurrentQuantityProduct 
-        { 
-            get => _currentQuantityProduct; 
-            set 
-            { 
-                _currentQuantityProduct = value; 
+        public int CurrentQuantityProduct
+        {
+            get => _currentQuantityProduct;
+            set
+            {
+                _currentQuantityProduct = value;
                 OnPropertyChanged(nameof(CurrentQuantityProduct));
                 if (CurrentProduct != null)
                 {
@@ -46,33 +50,41 @@ namespace AgroFamily.ViewModel
                         OverflowQuantityVisibility = Visibility.Collapsed;
                     }
                 }
-            } 
+            }
         }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public int TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public int TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
 
         //Commands
-        public ICommand AddProductCommand { get;}
-        public ICommand RemoveProductCommand { get;}
-        public ICommand PayCommand { get;}
+        public ICommand AddProductCommand { get; }
+        public ICommand RemoveProductCommand { get; }
+        public ICommand PayCommand { get; }
+
 
         public CashRegisterViewModel()
         {
+            ProductRepository = new ProductRepository();
+            SaleRepository = new SaleRepository();
+            SaleProductRepository = new SaleProductRepository();
+            UserRepository = new UserRepository();
+            LoadCurrentUserData();
             TotalPriceDay = 0;
-            ObservableCollection<SaleModel> saleModels = new SaleRepository().GetByDay(DateOnly.FromDateTime(DateTime.Now));
-            for(int i = 0; i < saleModels.Count; i++)
+            ObservableCollection<SaleModel> saleModels = SaleRepository.GetByDay(DateOnly.FromDateTime(DateTime.Now));
+            for (int i = 0; i < saleModels.Count; i++)
             {
                 TotalPriceDay += saleModels[i].total;
             }
-            IProductRepository repository = new ProductRepository();
-            Products = repository.GetByAll();
-            OverflowQuantityVisibility=Visibility.Collapsed;
+            Products = ProductRepository.GetByAll();
+            OverflowQuantityVisibility = Visibility.Collapsed;
             SaleProducts = new ObservableCollection<SaleProductModel>();
+
             //Initialize Command
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
+            TextSize = 3;
+            TitleSize = 10;//Se define con 10 menos por que al inicializar el border se le suman 10 automaticamente dejandolo en 20
         }
 
         private bool CanExecuteRemoveProductCommand(object obj)
@@ -98,7 +110,7 @@ namespace AgroFamily.ViewModel
         private bool CanExecutePayCommand(object obj)
         {
             bool validData;
-            if(SaleProducts.Count > 0)
+            if (SaleProducts.Count > 0)
             {
                 validData = true;
             }
@@ -111,27 +123,25 @@ namespace AgroFamily.ViewModel
 
         private void ExecutePayCommand(object obj)
         {
-            ISaleProductRepository saleProductRepository = new SaleProductRepository();
-            ISaleRepository saleRepository = new SaleRepository();
-            IProductRepository productRepository = new ProductRepository();
-            SaleModel sale=new SaleModel() 
-            { 
+            SaleModel sale = new SaleModel()
+            {
+                id_vendedor=UserAccount.UserName,
                 dateTime = DateTime.Now,
-                total=TotalPrice
+                total = TotalPrice
             };
-            saleRepository.Add(sale);
+            SaleRepository.Add(sale);
             for (int i = 0; i < SaleProducts.Count; i++)
             {
                 SaleProducts[i].SaleId = sale.Id;
-                saleProductRepository.Add(SaleProducts[i]);
-                ProductModel product=productRepository.GetById(SaleProducts[i].ProductId);
+                SaleProductRepository.Add(SaleProducts[i]);
+                ProductModel product = ProductRepository.GetById(SaleProducts[i].ProductId);
                 product.Stock -= SaleProducts[i].Count;
-                productRepository.Edit(product);
+                ProductRepository.Edit(product);
             }
             TotalPriceDay += TotalPrice;
             TotalPrice = 0;
             SaleProducts.Clear();
-            Products = productRepository.GetByAll();
+            Products = ProductRepository.GetByAll();
         }
 
         private bool CanExecuteAddProductCommand(object obj)
@@ -150,21 +160,21 @@ namespace AgroFamily.ViewModel
             }
             else
             {
-                validData= false;
+                validData = false;
             }
             return validData;
         }
 
         private void ExecuteAddProductCommand(object obj)
         {
-            SaleProducts.Add(new SaleProductModel() 
-            { 
-                ProductId=CurrentProduct.Id,
-                Count=CurrentQuantityProduct,
-                Name=CurrentProduct.Name,
-                Amount=CurrentProduct.Price*CurrentQuantityProduct
+            SaleProducts.Add(new SaleProductModel()
+            {
+                ProductId = CurrentProduct.Id,
+                Count = CurrentQuantityProduct,
+                Name = CurrentProduct.Name,
+                Amount = CurrentProduct.Price * CurrentQuantityProduct
             });
-            TotalPrice+=CurrentProduct.Price*CurrentQuantityProduct;
+            TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
         }
     }
 }
