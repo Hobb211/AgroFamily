@@ -85,5 +85,17 @@ namespace AgroFamily.Repositories
             }
             return saleModelsOnRange;
         }
+        public ObservableCollection<SaleModel> GetBySeller(string sellerID)
+        {
+            ObservableCollection<SaleModel> saleModels = GetAll();
+            foreach(SaleModel sale in saleModels)
+            {
+                if (sale.id_vendedor != sellerID)
+                {
+                    saleModels.Remove(sale);
+                }
+            }
+            return saleModels;
+        }
     }
 }

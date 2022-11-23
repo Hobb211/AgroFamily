@@ -63,5 +63,10 @@ namespace AgroFamily.View
         {
             SaleIDField.IsEnabled = false;
         }
+
+        private void SellerIDSelector_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

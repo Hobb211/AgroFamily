@@ -15,5 +15,6 @@ namespace AgroFamily.Model
         int GetAmountInAMonth(int month, int year);
         ObservableCollection<SaleModel> GetByDay(DateOnly date);
         ObservableCollection<SaleModel> GetByDateRange(DateOnly startingDate, DateOnly endingDate);
+        ObservableCollection<SaleModel> GetBySeller(string sellerID);
     }
 }

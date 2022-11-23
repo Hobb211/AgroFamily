@@ -71,7 +71,7 @@
                               VerticalAlignment="Top"
                               HorizontalAlignment="Left"
                               Margin="16,17,0,0"
-                              IsEnabled="False"
+                              IsEnabled="{Binding IsSellerID}"
                               Checked="SellerIDSelector_Checked"
                               Unchecked="SellerIDSelector_Unchecked"
                               >
@@ -92,7 +92,7 @@
                               VerticalAlignment="Top"
                               HorizontalAlignment="Left"
                               Margin="16,84,0,0"
-                              IsEnabled="False"
+                              IsEnabled="{Binding IsSaleID}"
                               Checked="SaleIDSelector_Checked"
                               Unchecked="SellerIDSelector_Unchecked"
                               >
@@ -261,7 +261,7 @@
                           x:Name="SaleProducts"
                           Margin= "5 0 10 10"
                           Grid.Row="2"                             
-                          ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding Path=ProductsOfSale,UpdateSourceTrigger=PropertyChanged}"
                           >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Producto"  
