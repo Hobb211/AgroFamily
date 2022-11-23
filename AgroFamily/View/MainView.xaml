@@ -19,7 +19,7 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
+
     <!--ChildContent-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:SaleHistoryViewModel}">
@@ -47,7 +47,7 @@
             <local:BusinessStatusView/>
         </DataTemplate>
     </Window.Resources>
-    
+
     <Border CornerRadius="10" BorderThickness="2">
 
         <Grid>
@@ -59,7 +59,10 @@
                 <!--Content Section-->
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
             <!--Control bar-->
             <Border CornerRadius="10,10,0,0"
                     Grid.Row="0">
@@ -234,6 +237,15 @@
                 <ContentControl Content="{Binding CurrentChildView}"
                                 Margin="10"/>
             </Border>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="87*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="82*"/>
+                </Grid.ColumnDefinitions>
+                <Image Margin="0" Source="/Assets/agro.png" Stretch="Uniform" Grid.Column="1"/>
+            </Grid>
+            <!--<Image Margin="358,0,334,5" Source="/Assets/agro.png" Stretch="Fill" Grid.Row="1" Grid.Column="0"/>-->
 
         </Grid>
     </Border>
