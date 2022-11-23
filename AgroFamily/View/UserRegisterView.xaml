@@ -37,7 +37,7 @@
 
         <Border CornerRadius="0"
                 Grid.Row="0"
-                Margin="0" Grid.RowSpan="5" Grid.Column="3">
+                Margin="0" Grid.RowSpan="4" Grid.Column="3">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
 
@@ -54,33 +54,162 @@
             </Grid>
         </Border>
 
+
         <Border CornerRadius="0"
-                Grid.Row="6"
-                Margin="0" Grid.Column="3">
+                Grid.Row="4"
+                Grid.RowSpan="2"
+                Margin="0" 
+                Grid.Column="3">
+
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
 
+            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Name}"   FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" Text=" "   FontSize="16" />
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.LastName}"  FontSize="16"/>
+
+                </StackPanel>
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="ID " FontSize="18"/>-->
+                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Id}" FontSize="16"/>
+                </StackPanel>
+                <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Type}" FontSize="16" Margin="0 5 0 0"/>
+                <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Password}"  FontSize="16" Background="Aqua"/>-->
+
+            </StackPanel>
+
+        </Border>
+
+        <Border CornerRadius="0"
+                Grid.Row="6"
+                Grid.RowSpan="2"
+                Margin="0" 
+                Grid.Column="3">
+
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="38*"/>
+                    <RowDefinition Height="36*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="39*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="117*"/>
+                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="34*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Style="{StaticResource textStyle3}"
+                               Text="Nueva contraseña:"
+                               Width="108" 
+                           Height="auto" 
+                           HorizontalAlignment="Center"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           />
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16" Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña" />
+
+                <Border CornerRadius="10"
+                            Margin="5,5,5,5"
+                             Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                    </Border.Background>
+                    <TextBox x:Name="NewPassword"
+                                 Text="{Binding NewPassword,UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource textBox2}"
+                                 Background="Transparent"
+                                 Margin="15,0"
+                                 Height="20"/>
+
+                </Border>
+
+                <Button x:Name="updatePassword"
+                Style="{StaticResource button_tr_small}"
+                Content="Confirmar"
+                Command="{Binding UpdatePasswordCommand}" Grid.Row="3" Grid.Column="2" Margin="2,0,0,0"/>
+
+                <Button x:Name="getCSV"
+                        
+                Content="CSV"
+                Command="{Binding ExportCSV}" Grid.Row="3" Grid.Column="0" Margin="2,0,0,0"/>
+
+            </Grid>
+
+            <!--<StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />
+                    -->
+            <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />-->
+            <!--
+                    <TextBlock Style="{StaticResource textStyle3}"
+                               Text="Contraseña nueva:"
+                               Width="auto" Height="auto"/>
+
+            </StackPanel>-->
+
+
+
+
+
         </Border>
 
         <Border x:Name="BDRounded" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
-            <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
-                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                      Background="{StaticResource DataGridColor}"
-                      GridLinesVisibility="All"
+            <DataGrid 
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                      AutoGenerateColumns="False" 
+
+                Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
+                      SelectedItem="{Binding Path=CurrentUser,UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}" Margin="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding LastName}" />
                     <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
+
+                    <DataGridTemplateColumn Header="Acción" Width="auto" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <!--<Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.EditUserCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource gridEditButton}">
+
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>-->
+                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.RemoveUserCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource gridRemoveButton}">
+
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
+
+
+
+
             </DataGrid>
         </Border>
 

@@ -11,6 +11,7 @@ using System.Windows;
 using System.Collections;
 using System.Diagnostics.Metrics;
 using AgroFamily.View;
+using System.IO;
 
 namespace AgroFamily.ViewModel
 {
@@ -22,6 +23,7 @@ namespace AgroFamily.ViewModel
         private string _name;
         private string _lastname;
         private string _password;
+        private string _newPassword;
         private TypeUserModel _type;
         private ObservableCollection<TypeUserModel> _typeUser;
         private ObservableCollection<UserModel> _users;
@@ -32,6 +34,8 @@ namespace AgroFamily.ViewModel
         public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
         public string Lastname { get => _lastname; set { _lastname = value; OnPropertyChanged(nameof(Lastname)); } }
         public string Password { get => _password; set { _password = value; OnPropertyChanged(nameof(Password)); } }
+        public string NewPassword { get => _newPassword; set { _newPassword = value; OnPropertyChanged(nameof(NewPassword)); } }
+        public UserModel CurrentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(nameof(CurrentUser)); } }
         public TypeUserModel Type
         {
             get => _type;
@@ -47,17 +51,104 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand AddUserCommand { get; }
+        public ICommand RemoveUserCommand { get; }
+        public ICommand UpdatePasswordCommand { get; }
+        public ICommand ExportCSV { get; }
 
         //Constructor
         public UserRegisterViewModel()
         {
             AddUserCommand = new ViewModelCommand(ExecuteAddUserCommand, CanExecuteAddUserCommand);
+            RemoveUserCommand = new ViewModelCommand(ExecuteRemoveUserCommand, CanExecuteRemoveUserCommand);
+            UpdatePasswordCommand = new ViewModelCommand(ExecuteUpdateUserPasswordCommand, CanExecuteUpdateUserPasswordCommand);
+            ExportCSV = new ViewModelCommand(ExecuteExportCSV);
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
         }
 
+        private void ExecuteExportCSV(object obj)
+        {
+            MessageBox.Show("Iniciando conversión");
+            using (var textWriter = File.CreateText(@"C:\Users\jimimix\Desktop\mio\apuntes universidad\2022_SEMESTRE_2        x\Ingeniería de software\CSV_test\testing.csv"))
+            {
+                //string columns_line = "ID,Nombre,Apellido,Rol,Clave";
+                //textWriter.WriteLine(columns_line);
+                foreach (var line in ToCsv(Users))
+                {
+                    textWriter.WriteLine(line);
+                }
+            }
+        }
+
+        public static IEnumerable<string> ToCsv<UserModel>(IEnumerable<UserModel> list)
+        {
+            var fields = typeof(UserModel).GetFields();
+            var properties = typeof(UserModel).GetProperties();
+
+            foreach (var @object in list)
+            {
+                yield return string.Join(",",
+                                         fields.Select(x => (x.GetValue(@object) ?? string.Empty).ToString())
+                                               .Concat(properties.Select(p => (p.GetValue(@object, null) ?? string.Empty).ToString()))
+                                               .ToArray());
+            }
+        }
+
+        private void ExecuteRemoveUserCommand(object obj)
+        {
+            try
+            {
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("¿Estás seguro de eliminar el usuario?", "Confirmación de eliminación", System.Windows.MessageBoxButton.YesNo);
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    IUserRepository userRepository = new UserRepository();
+                    userRepository.Remove(CurrentUser.Id);
+                    Users = userRepository.GetByAll();
+                    MessageBox.Show("Usuario eliminado");
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido eliminar, " + e.Message);
+
+            }
+
+
+        }
+        private bool CanExecuteRemoveUserCommand(object obj) => CurrentUser == null ? false : true;
+        private bool CanExecuteUpdateUserPasswordCommand(object obj) {
+            bool validData;
+            if (NewPassword == null || CurrentUser == null)
+            {
+                validData = false;
+            }
+            else
+            {
+                validData = true;
+            }
+            return validData;
+        }
+        private void ExecuteUpdateUserPasswordCommand(object obj){
+            try
+            {
+                IUserRepository userRepository = new UserRepository();
+                CurrentUser.Password = NewPassword;
+                userRepository.Edit(CurrentUser);
+                MessageBox.Show("Clave actualizada!");
+
+                Users = userRepository.GetByAll();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido registrar, " + e.Message);
+                //throw new Exception("No se ha podido registrar");
+            }
+        }
         private bool CanExecuteAddUserCommand(object obj)
         {
             bool validData;
@@ -75,7 +166,6 @@ namespace AgroFamily.ViewModel
             }
             return validData;
         }
-
         private void ExecuteAddUserCommand(object obj)
         {
             try
@@ -109,7 +199,7 @@ namespace AgroFamily.ViewModel
             }
             catch (Exception e)
             {
-                MessageBox.Show("No se ha podido registrar"+e.Message);
+                MessageBox.Show("No se ha podido registrar, "+e.Message);
                 //throw new Exception("No se ha podido registrar");
             }
         }

@@ -20,6 +20,7 @@ namespace AgroFamily.Model
         void Remove(String id);
         UserModel GetById(String id);
         ObservableCollection<UserModel> GetByAll();
+        string GetSeller(UserModel user);
 
     }
 

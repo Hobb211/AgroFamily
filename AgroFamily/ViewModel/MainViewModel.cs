@@ -68,6 +68,8 @@ namespace AgroFamily.ViewModel
         public ICommand ShowCashRegisterViewCommand { get; }
         public ICommand ShowEditStockViewCommand { get; }
         public ICommand ShowBusinessStatusViewCommand { get; }
+        public ICommand ShowSaleHistoryCommand { get; }
+        public ICommand ShowProductProfitabilityViewCommand { get; }
         public ICommand LogOutCommand { get; }
         public ICommand MaxMinFontCommand { get; }
 
@@ -89,9 +91,11 @@ namespace AgroFamily.ViewModel
             ShowInventoryViewCommand = new ViewModelCommand(ExecuteShowInventoryViewCommand);
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
+            ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowSaleHistoryCommand = new ViewModelCommand(ExecuteShowSaleHistoryCommand);
             LogOutCommand = new ViewModelCommand(ExecuteLogOutCommand);
             MaxMinFontCommand = new ViewModelCommand(ExecuteMaxMinFontCommand);
-            //ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
@@ -126,6 +130,11 @@ namespace AgroFamily.ViewModel
         private void ExecuteLogOutCommand(object obj)
         {
             IsViewVisible= false;
+        }
+
+        private void ExecuteShowSaleHistoryCommand(object obj)
+        {
+            CurrentChildView = new SaleHistoryViewModel();
         }
 
         private void ExecuteShowEditStockViewCommand(object obj)

@@ -36,5 +36,10 @@ namespace AgroFamily.View
         {
 
         }
+
+        private void itemName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

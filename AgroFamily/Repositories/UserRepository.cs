@@ -80,12 +80,10 @@ namespace AgroFamily.Repositories
             }
             return user;
         }
-
         public string[] GetRole(NetworkCredential credential)
         {
             throw new NotImplementedException();
         }
-
         public void Remove(string id)
         {
             using (SQLiteConnection connection = GetConnection())
@@ -93,5 +91,19 @@ namespace AgroFamily.Repositories
                 connection.Delete<UserModel>(id);
             }
         }
+        public string GetSeller(UserModel user)
+        {
+            if (user != null)
+            {
+                return user.Name + ' ' + user.LastName;
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
+        }
+
+
+
     }
 }

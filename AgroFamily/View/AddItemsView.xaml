@@ -66,7 +66,7 @@
                                  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource textBox2}"
                                  Background="Transparent"
-                                 Margin="15,0"/>
+                                 Margin="15,0" TextChanged="itemName_TextChanged"/>
                         </Border>
                         <!--Type List Box-->
                         <TextBlock Grid.Row="1" Grid.Column="0"

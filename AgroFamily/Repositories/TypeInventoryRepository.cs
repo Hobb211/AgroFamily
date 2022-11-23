@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AgroFamily.Repositories
 {
@@ -47,7 +48,8 @@ namespace AgroFamily.Repositories
                 }
             }
             catch (Exception ex)
-            { 
+            {
+                MessageBox.Show(ex.Message);
                 return null; 
             } 
         }

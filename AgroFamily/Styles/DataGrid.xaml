@@ -34,7 +34,6 @@
 
 
 
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -48,7 +47,9 @@
                                                     Padding="{TemplateBinding Padding}" 
                                                     SortDirection="{TemplateBinding SortDirection}" 
                                                     SeparatorVisibility="{TemplateBinding SeparatorVisibility}" 
+
                                                     SeparatorBrush="{TemplateBinding SeparatorBrush}">
+                            
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                               RecognizesAccessKey="True" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
@@ -138,11 +139,9 @@
         <Setter Property="CanUserResizeRows" Value="False" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="ColumnWidth" Value="*" />
-        <!--<Setter Property="GridLinesVisibility" Value="Horizontal"/>-->
-        <!--<Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"/>-->
-        <!--<Setter Property="VerticalGridLinesBrush" Value="{x:Null}"/>-->
-        <!--<Setter Property="HeadersVisibility" Value="Column"/>-->
-
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource LineDataGrid}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource LineDataGrid}"/>
+        
 
 
 
@@ -153,7 +152,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="30" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                    <Border Background="{StaticResource DataGridColor}" CornerRadius="10" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="DG_ScrollViewer" 
                                       Focusable="false">
                             <ScrollViewer.Template>
@@ -228,10 +227,35 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-
     </Style>
 
+
+
+    <Style x:Key="DataGridCellStyle2" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="1"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding isEditable}" Value="True">
+                <Setter Property="IsEnabled" Value="True"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
 
     <Style x:Key="DataGridRowStyle1" TargetType="{x:Type DataGridRow}">
