@@ -16,5 +16,6 @@ namespace AgroFamily.Model
         ObservableCollection<SaleModel> GetByDay(DateOnly date);
         ObservableCollection<SaleModel> GetByDateRange(DateOnly startingDate, DateOnly endingDate);
         ObservableCollection<SaleModel> GetBySeller(string sellerID);
+        SaleModel GetBySellerIDSaleID(string sellerID, int saleID);
     }
 }

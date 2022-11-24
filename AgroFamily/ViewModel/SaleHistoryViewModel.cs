@@ -1,4 +1,5 @@
-﻿using AgroFamily.Model;
+﻿using AgroFamily.Exceptions;
+using AgroFamily.Model;
 using AgroFamily.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,8 @@ namespace AgroFamily.ViewModel
         private DateTime _endingDate = DateTime.Today;
         private SaleModel _currentSale;
         private string _sellerName;
-        private bool _idSearching;
-        private bool _dateSearching;
-        private bool _isSellerID = false;
-        private bool _isSaleID = false;
+        private bool _idSearching = false;
+        private bool _dateSearching = false;
         private ObservableCollection<SaleModel> _historicSales;
         private ObservableCollection<SaleProductModel> _productsOfSale;
 
@@ -34,11 +33,9 @@ namespace AgroFamily.ViewModel
         public DateTime StartingDate { get => _startingDate; set { _startingDate = value; OnPropertyChanged(nameof(StartingDate)); } }
         public DateTime EndingDate { get => _endingDate; set { _endingDate = value; OnPropertyChanged(nameof(EndingDate)); } }
         public SaleModel CurrentSale { get => _currentSale; set { _currentSale = value; OnPropertyChanged(nameof(CurrentSale)); } }
-        public IEnumerable<SaleModel> HistoricSales => _historicSales;
+        public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
         public bool SearchByID { get => _idSearching; set { _idSearching = value; OnPropertyChanged(nameof(SearchByID)); } }
         public bool SearchByDates { get => _dateSearching; set { _dateSearching = value; OnPropertyChanged(nameof(SearchByDates)); } }
-        public bool IsSellerID { get => _isSellerID; set { _isSellerID = value; OnPropertyChanged(nameof(IsSellerID)); } }
-        public bool IsSaleID { get => _isSellerID; set { _isSellerID = value; OnPropertyChanged(nameof(IsSaleID)); } }
 
         //La propiedad vendedor que será mostrada en la vista
         //debe ser obtenida de la base de datos de usuarios
@@ -54,7 +51,7 @@ namespace AgroFamily.ViewModel
                 UserModel user = null;
                 try
                 {
-                    user = userRepository.GetById(CurrentSale.id_vendedor);
+                    user = userRepository.GetById(_currentSale.id_vendedor);
                 }
                 catch (Exception e)
                 {
@@ -65,10 +62,11 @@ namespace AgroFamily.ViewModel
                     _sellerName = userRepository.GetSeller(user);
                     OnPropertyChanged(nameof(SellerName));
                 }
-                catch(NullReferenceException ex)
+                catch (NullReferenceException ex)
                 {
                     MessageBox.Show(ex.Message);
-                }catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                 }
@@ -86,43 +84,42 @@ namespace AgroFamily.ViewModel
                 {
                     _productsOfSale = new SaleProductRepository().GetBySale(CurrentSale.Id.ToString());
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
-                }                
+                }
                 OnPropertyChanged(nameof(ProductsOfSale));
             }
         }
 
         //Commands
         public ICommand SearchSaleCommand { get; }
+
         public SaleHistoryViewModel()
         {
-            _historicSales = new ObservableCollection<SaleModel>();
+            HistoricSales = new ObservableCollection<SaleModel>();
             _productsOfSale = new ObservableCollection<SaleProductModel>();
+
             //Initialize Command
             SearchSaleCommand = new ViewModelCommand(ExecuteSearchSaleCommand, CanExecuteSearchSaleCommand);
         }
 
         private bool CanExecuteSearchSaleCommand(object obj)
         {
-            bool betweenDateRange;
-            bool isToday;
-
             //Para poder buscar una venta en el historial, se asegura que el vendedor y/o la venta exista en el historial
-            if (SearchByID)
+            if (_idSearching)
             {
-                return !string.IsNullOrEmpty(SellerID) || !string.IsNullOrEmpty(SaleID);
+                return !string.IsNullOrEmpty(SellerID);
             }
 
             //Respecto al rango de fechas se deben verificar las siguientes condiciones:
             //Fecha final no sea anterior a la fecha de inicio
             //Fecha de inicio y final no sea posterior al dia en curso
             //Si ambas fechas son el dia actual
-            if (SearchByDates)
+            if (_dateSearching)
             {
-                betweenDateRange = EndingDate.CompareTo(StartingDate) >= 0 || (EndingDate.CompareTo(DateTime.Today) < 0 && StartingDate.CompareTo(DateTime.Today) < 0);
-                isToday = EndingDate.CompareTo(DateTime.Today) == 0 && StartingDate.CompareTo(DateTime.Today) == 0;
+                bool betweenDateRange = EndingDate.CompareTo(StartingDate) >= 0 || (EndingDate.CompareTo(DateTime.Today) < 0 && StartingDate.CompareTo(DateTime.Today) < 0);
+                bool isToday = EndingDate.CompareTo(DateTime.Today) == 0 && StartingDate.CompareTo(DateTime.Today) == 0;
                 return betweenDateRange || isToday;
             }
             return false;
@@ -130,69 +127,92 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteSearchSaleCommand(object obj)
         {
-            UserModel user = new UserModel();
-            ISaleRepository saleRepository = new SaleRepository();
-            ObservableCollection<SaleModel> sales_aux = saleRepository.GetAll();
-
-            //Primero se busca en la base de datos el vendedor solicitado mediante su id
-            //y el listado de ventas
-            //Si no lo encuentra debe lanzar excepcion
-            try
-            {
-                user = new UserRepository().GetById(SellerID);
-            }
-            catch (Exception ex)
-            {
-                //Esta messagebox es temporal, solo para prueba de errores
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            UserModel user = null;
+            ObservableCollection<SaleModel> sales_aux = null;
             //Primero se comprueba que tipo de busqueda se desea hacer
+            //Si se desea buscar mediante un rango de fechas
+            if (SearchByDates)
+            {
+                try
+                {
+                    sales_aux = new SaleRepository().GetByDateRange(DateOnly.FromDateTime(StartingDate), DateOnly.FromDateTime(EndingDate));
+                }
+                catch (SaleConflictException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
             //Si desea buscar por identificadores
-            if (SearchByID)
+            else if (SearchByID)
             {
+                //Primero se busca en la base de datos
+                //Que hayan ventas, en general
+                //Si no lanza excepcion
+                try
+                {
+                    sales_aux = new SaleRepository().GetAll();
+                }
+                catch (SaleConflictException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                //Luego que el vendedor solicitado mediante su id exista
+                //Si no lo encuentra debe lanzar excepcion
+                try
+                {
+                    user = new UserRepository().GetById(SellerID);
+                }
+                catch (UserConflictException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+
                 //Primeramente si se desea buscar por id de vendedor solamente
-                if (IsSellerID)
+                if (!string.IsNullOrEmpty(SellerID) && string.IsNullOrEmpty(SaleID.ToString()))
                 {
                     try
                     {
-                        sales_aux = saleRepository.GetBySeller(user.Id);
+                        sales_aux = (new SaleRepository().GetBySeller(user.Id));
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+
                 //Luego si se desea buscar solamente por el id de venta
-                else if (IsSaleID)
+                else if (string.IsNullOrEmpty(SellerID) && !string.IsNullOrEmpty(SaleID.ToString()))
                 {
+                    SaleModel sale = null;
                     try
                     {
-                        sales_aux.Add(saleRepository.GetById(int.Parse(SaleID)));
+                        sale = new SaleRepository().GetById(int.Parse(SaleID));
+                        sales_aux.Add(sale);
                     }
-                    catch(Exception e)
+                    catch (SaleConflictException e)
                     {
                         MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+
                 //Finalmente si se desean usar ambos parametros para realizar la busqueda
-                else if (IsSellerID && IsSaleID)
+                else if (!string.IsNullOrEmpty(SellerID) && !string.IsNullOrEmpty(SaleID.ToString()))
                 {
-                    foreach(SaleModel saleModel in sales_aux)
-                    { 
-                        if(saleModel.id_vendedor != user.Id && saleModel.Id != int.Parse(SaleID))
-                        {
-                            sales_aux.Remove(saleModel);
-                        }
+                    try
+                    {
+                        sales_aux.Add(new SaleRepository().GetBySellerIDSaleID(SellerID, int.Parse(SaleID)));
+                    }
+                    catch (SaleConflictException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
-            //O si se desea buscar mediante un rango de fechas
-            if(SearchByDates)
-            {
-                sales_aux= saleRepository.GetByDateRange(DateOnly.FromDateTime(StartingDate), DateOnly.FromDateTime(EndingDate));
-            }
-            _historicSales = sales_aux;
+            HistoricSales = sales_aux;
+            MessageBox.Show(_historicSales[1].total.ToString(), "id", MessageBoxButton.OK);
         }
     }
 }
+
