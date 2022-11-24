@@ -41,7 +41,15 @@ namespace AgroFamily.ViewModel
                 OnPropertyChanged(nameof(CurrentQuantityProduct));
                 if (CurrentProduct != null)
                 {
-                    if (value > CurrentProduct.Stock)
+                    int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                    for (int i = 0; i < SaleProducts.Count; i++)
+                    {
+                        if (SaleProducts[i].ProductId == CurrentProduct.Id)
+                        {
+                            cant += SaleProducts[i].Count;
+                        }
+                    }
+                    if (value+cant > CurrentProduct.Stock)
                     {
                         OverflowQuantityVisibility = Visibility.Visible;
                     }
@@ -83,8 +91,25 @@ namespace AgroFamily.ViewModel
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
-            TextSize = 3;
-            TitleSize = 10;//Se define con 10 menos por que al inicializar el border se le suman 10 automaticamente dejandolo en 20
+            //Define los tamaños variables descontando o aumentando el valor dependiendo del estado maximizado o minimizado
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 3;
+                TitleSize = 10;
+                ButtonHeight1 = 20;
+                ButtonWidth1 = 140;
+                ButtonHeight2 = 10;
+                ButtonWidth2 = 80;
+            }
+            else
+            {
+                TextSize = 33;
+                TitleSize = 40;
+                ButtonHeight1 = 80;
+                ButtonWidth1 = 200;
+                ButtonHeight2 = 70;
+                ButtonWidth2 = 140;
+            } 
         }
 
         private bool CanExecuteRemoveProductCommand(object obj)
@@ -149,7 +174,15 @@ namespace AgroFamily.ViewModel
             bool validData;
             if (CurrentProduct != null)
             {
-                if (CurrentQuantityProduct > 0 && CurrentProduct.Stock >= CurrentQuantityProduct)
+                int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                for(int i = 0; i < SaleProducts.Count; i++)
+                {
+                    if (SaleProducts[i].ProductId == CurrentProduct.Id)
+                    {
+                        cant += SaleProducts[i].Count;
+                    }
+                }
+                if (CurrentQuantityProduct > 0 && CurrentProduct.Stock>=cant+CurrentQuantityProduct)
                 {
                     validData = true;
                 }
@@ -175,6 +208,7 @@ namespace AgroFamily.ViewModel
                 Amount = CurrentProduct.Price * CurrentQuantityProduct
             });
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
+            CurrentQuantityProduct = 0;
         }
     }
 }

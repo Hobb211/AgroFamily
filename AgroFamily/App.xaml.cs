@@ -21,6 +21,7 @@ namespace AgroFamily
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             StartAppRepository startApp = new StartAppRepository();
+            Application.Current.Properties["IsViewMinimize"] = true;
             startApp.CreateTable();
             var loginView = new LoginView();
             loginView.Show();

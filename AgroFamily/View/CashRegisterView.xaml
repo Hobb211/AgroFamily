@@ -90,8 +90,8 @@
                             <Button Grid.Row="2" Grid.Column="1"
                                 Content="Añadir" 
                                 Style="{StaticResource button}"
-                                Width="100"
-                                Height="30"
+                                Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
+                                Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding AddProductCommand}"/>
                         </Grid>
@@ -193,6 +193,8 @@
             <Grid Grid.Row="1">
                 <Button Style="{StaticResource button}"
                         Content="Eliminar"
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding RemoveProductCommand}"/>
             </Grid>
@@ -210,13 +212,15 @@
                                Style="{StaticResource textStyle1}"
                                Foreground="{StaticResource textColor2}"
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Text="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource textStyle1}"
                                Foreground="{StaticResource textColor2}"
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <Button Style="{StaticResource button}" 
                         Content="Comprar"
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding PayCommand}"/>
             </Grid>

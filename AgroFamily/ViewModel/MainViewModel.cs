@@ -109,7 +109,6 @@ namespace AgroFamily.ViewModel
             {
                 AdminMenuVisibility= Visibility.Visible;
             }
-            Application.Current.Properties["IsViewMinimize"] = true;
             TextSize = 12;
             TitleSize = 20;
         }

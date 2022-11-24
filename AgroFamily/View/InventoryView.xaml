@@ -29,7 +29,9 @@
                   x:Name="articlesDataGrid" 
                   SelectedItem="{Binding Path=CurrentArticle,UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
-                  Margin= "25">
+                  Margin= "25"
+                  SizeChanged="Border_SizeChanged"
+                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick">

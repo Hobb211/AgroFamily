@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,12 @@ namespace AgroFamily.View
         public BusinessStatusView()
         {
             InitializeComponent();
+        }
+
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
     }
 }

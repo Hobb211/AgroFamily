@@ -23,7 +23,8 @@
                 <RowDefinition Height="0.15*"/>
             </Grid.RowDefinitions>
             <Border CornerRadius="20"
-                Grid.Row="0">
+                    Grid.Row="0"
+                    SizeChanged="Border_SizeChanged">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
@@ -35,7 +36,8 @@
                     <TextBlock Text="Añadir Inventario"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               Style="{StaticResource titleStyle2}"/>
+                               Style="{StaticResource titleStyle2}"
+                               FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.25*"/>
@@ -52,7 +54,8 @@
                                    Style="{StaticResource titleStyle3}"
                                    Text="Nombre"
                                    HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                         <Border Grid.Row="0" Grid.Column="1" 
                                 CornerRadius="10"
                                 MinHeight="40"
@@ -63,17 +66,19 @@
                                 <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                             </Border.Background>
                             <TextBox x:Name="itemName"
-                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0" TextChanged="itemName_TextChanged"/>
+                                     Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     Background="Transparent"
+                                     Margin="15,0" 
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
                         <!--Type List Box-->
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                    Style="{StaticResource titleStyle3}"
                                    Text="Tipo"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                         <Border Grid.Row="1" Grid.Column="1" 
                                 CornerRadius="10"
                                 MinWidth="160"
@@ -84,9 +89,10 @@
                                 <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                             </Border.Background>
                             <ComboBox Margin="15,10"
-                                  ItemsSource="{Binding Path=TypeInventory}"
-                                  SelectedItem="{Binding Path=Type}"
-                                  DisplayMemberPath="Name">
+                                      ItemsSource="{Binding Path=TypeInventory}"
+                                      SelectedItem="{Binding Path=Type}"
+                                      DisplayMemberPath="Name"
+                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                             </ComboBox>
                         </Border>
                         <!--quantity Box-->
@@ -94,7 +100,8 @@
                                    Style="{StaticResource titleStyle3}"
                                    Text="Cantidad"
                                    VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                         <Border Grid.Row="2" Grid.Column="1" 
                                 CornerRadius="10"
                                 MinHeight="42"
@@ -105,13 +112,14 @@
                                 <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                             </Border.Background>
                             <TextBox x:Name="itemQuantity"
-                                 Text="{Binding Count,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Margin="15,0"
-                                 Height="20"
-                                 Background="Transparent"
-                                 InputScope="Number"
-                                 PreviewTextInput="NumberValidationTextBox">
+                                     Text="{Binding Count,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     Margin="15,0"
+                                     Height="20"
+                                     Background="Transparent"
+                                     InputScope="Number"
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                             </TextBox>
                         </Border>
                         <!--Price Box-->
@@ -120,7 +128,8 @@
                                    Text="Precio"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
-                                   Visibility="{Binding PriceVisibility,UpdateSourceTrigger=PropertyChanged}"/>
+                                   Visibility="{Binding PriceVisibility,UpdateSourceTrigger=PropertyChanged}"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                         <Border Grid.Row="3" Grid.Column="1"
                                 CornerRadius="10"
                                 MinHeight="42"
@@ -132,13 +141,14 @@
                                 <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                             </Border.Background>
                             <TextBox x:Name="itemPrice"
-                                 Text="{Binding Price,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Margin="15,0"
-                                 Padding="20,0,0,0"
-                                 Height="20"
-                                 InputScope="Number"
-                                 PreviewTextInput="NumberValidationTextBox">
+                                     Text="{Binding Price,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     Margin="15,0"
+                                     Padding="20,0,0,0"
+                                     Height="20"
+                                     InputScope="Number"
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                                 <TextBox.Background>
                                     <ImageBrush ImageSource="/Assets/peso.png"
                                             Stretch="Uniform"
@@ -150,25 +160,27 @@
                 </Grid>
             </Border>
             <Button x:Name="addItem"
-                Style="{StaticResource button}"
-                Grid.Row="1"
-                Content="Confirmar"
-                Command="{Binding AddItemCommand}"/>
+                    Style="{StaticResource button}"
+                    Grid.Row="1"
+                    Content="Confirmar"
+                    Command="{Binding AddItemCommand}"
+                    FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <Grid Grid.Column="2">
             <DataGrid Grid.Row="1"
-                          BorderBrush="Transparent"
-                          HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
-                          VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                          Background="{StaticResource DataGridColor}"
-                          GridLinesVisibility="All"
-                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                          AutoGenerateColumns="False" 
-                          CellStyle="{DynamicResource DataGridCellStyle1}" 
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          x:Name="productsDataGrid"  
-                          ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="productsDataGrid_SelectionChanged">
+                      BorderBrush="Transparent"
+                      HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                      Background="{StaticResource DataGridColor}"
+                      GridLinesVisibility="All"
+                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      AutoGenerateColumns="False" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      x:Name="productsDataGrid"  
+                      ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}" 
+                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}">

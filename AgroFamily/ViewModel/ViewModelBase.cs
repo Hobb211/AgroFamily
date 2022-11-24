@@ -24,10 +24,19 @@ namespace AgroFamily.ViewModel
         public IUserRepository UserRepository { get => _userRepository; set => _userRepository = value; }
         public double TitleSize { get => _titleSize; set { _titleSize = value; OnPropertyChanged(nameof(TitleSize)); } }
         public double TextSize { get => _textSize; set { _textSize = value; OnPropertyChanged(nameof(TextSize)); } }
+        public double ButtonWidth1 { get => _buttonWidth1; set { _buttonWidth1 = value; OnPropertyChanged(nameof(ButtonWidth1)); } }
+        public double ButtonWidth2 { get => _buttonWidth2; set { _buttonWidth2 = value; OnPropertyChanged(nameof(ButtonWidth2)); } }
+        public double ButtonHeight1 { get => _buttonHeight1; set { _buttonHeight1 = value; OnPropertyChanged(nameof(ButtonHeight1)); } }
+        public double ButtonHeight2 { get => _buttonHeight2; set { _buttonHeight2 = value; OnPropertyChanged(nameof(ButtonHeight2)); } }
 
         //FontSize
         private double _titleSize;
         private double _textSize;
+        //ButtonSize
+        private double _buttonWidth1;
+        private double _buttonWidth2;
+        private double _buttonHeight1;
+        private double _buttonHeight2;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -55,11 +64,19 @@ namespace AgroFamily.ViewModel
             {
                 TextSize += 10;
                 TitleSize += 10;
+                ButtonHeight1 += 20;
+                ButtonHeight2 += 20;
+                ButtonWidth1 +=20;
+                ButtonWidth2 +=20;
             }
             else
             {
                 TextSize -= 10;
                 TitleSize -= 10;
+                ButtonHeight1 -= 20;
+                ButtonHeight2 -= 20;
+                ButtonWidth1 -= 20;
+                ButtonWidth2 -= 20;
             }
         }
 

@@ -31,11 +31,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border Margin="20,20,20,20"
-				        CornerRadius="10,10,10,10"
+        <Border Margin="20"
+				CornerRadius="10"
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.ColumnSpan="3">
+                Grid.ColumnSpan="3"
+                SizeChanged="Border_SizeChanged">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
@@ -55,7 +56,7 @@
                 <TextBlock
 						Margin="0,20,0,0"
 						Text="Modificar el stock del inventario"
-						FontSize="22"
+						FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 						Style="{StaticResource titleStyle1}"/>
 
                 <StackPanel
@@ -64,7 +65,7 @@
                         Margin="25,15,20,2" Grid.RowSpan="2">
                     <TextBlock
 							Text="Nombre"
-							FontSize="18"
+							FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 							Style="{StaticResource titleStyle1}" 
 							VerticalAlignment="Center"/>
                     <Border
@@ -73,7 +74,7 @@
 							Width="150">
                         <TextBox x:Name="tId" 
                                      Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
-                                        FontSize="16"
+                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                         VerticalContentAlignment="Center"
                                         FontWeight="Medium"
                                         FontFamily="Montserrat"
@@ -89,7 +90,7 @@
                     <TextBlock
 							Margin="5,0,0,0"
 							Text="Cantidad"
-							FontSize="18"
+							FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 							Style="{StaticResource titleStyle1}"
 							VerticalAlignment="Center"/>
                     <Border
@@ -97,17 +98,19 @@
 							CornerRadius="10,10,10,10"
 							Width="90">
                         <TextBox x:Name="tCantidad" 
-                                        Text="{Binding Cantidad,UpdateSourceTrigger=PropertyChanged}"
-                                        FontSize="16"
-                                        VerticalContentAlignment="Center"
-                                        FontWeight="Medium"
-                                        FontFamily="Montserrat"
-                                        Background="{StaticResource Color6}"
-                                        BorderBrush="Transparent"
-                                        Foreground="{StaticResource textColor2}"
-                                        CaretBrush="LightGray"
-                                        Height="28"
-                                        VerticalAlignment="Center">
+                                 Text="{Binding Cantidad,UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"
+                                 Background="{StaticResource Color6}"
+                                 BorderBrush="Transparent"
+                                 Foreground="{StaticResource textColor2}"
+                                 CaretBrush="LightGray"
+                                 Height="28"
+                                 VerticalAlignment="Center"
+                                 InputScope="Number"
+                                 PreviewTextInput="NumberValidationTextBox">
                         </TextBox>
 
                     </Border>
@@ -116,50 +119,55 @@
 
 
                 <Button x:Name="eliminar_stock"
-                            BorderThickness="0"
-                            Content="Eliminar"
-                            Foreground="White"
-                            FontSize="16"
-                            FontFamily="Montserrat"
-                            Cursor="Hand" 
-                            Grid.Column="1"
-                            Grid.Row="1" 
-                            Command="{Binding ReduceStockCommand}"
-                            Style="{StaticResource button2}">
+                        BorderThickness="0"
+                        Content="Eliminar"
+                        Foreground="White"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                        FontFamily="Montserrat"
+                        Cursor="Hand" 
+                        Grid.Column="1"
+                        Grid.Row="1" 
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Command="{Binding ReduceStockCommand}"
+                        Style="{StaticResource button2}">
                 </Button>
 
                 <Border Grid.Row="2"
-						                Grid.Column="1"
-						                CornerRadius="10,10,10,10" >
+						Grid.Column="1"
+						CornerRadius="10,10,10,10" >
                     <Button x:Name="agregar_stock"
-                                BorderThickness="0"
-                                Content="Agregar"
-                                Foreground="White"
-                                FontSize="16"
-                                FontFamily="Montserrat"
-                                Cursor="Hand"
-                                Command="{Binding AddStockCommand}"                       
-                                Style="{StaticResource button2}">
+                            BorderThickness="0"
+                            Content="Agregar"
+                            Foreground="White"
+                            FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                            Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding AddStockCommand}"                       
+                            Style="{StaticResource button2}">
                     </Button>
                 </Border>
             </Grid>
         </Border>
 
         <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
-                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                      Background="{StaticResource DataGridColor}"
-                      GridLinesVisibility="All"
-                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                      AutoGenerateColumns="False" 
-                      CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                      RowStyle="{DynamicResource DataGridRowStyle1}"
-                      x:Name="membersDataGrid" 
-                      ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding Path=Articulo,UpdateSourceTrigger=PropertyChanged}"
-                      Margin= "20,20,20,20"
-                      Grid.Row="1"
-                  Grid.ColumnSpan="4">
+                  VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                  Background="{StaticResource DataGridColor}"
+                  GridLinesVisibility="All"
+                  RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                  AutoGenerateColumns="False" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  x:Name="membersDataGrid" 
+                  ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=Articulo,UpdateSourceTrigger=PropertyChanged}"
+                  Margin= "20,20,20,20"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="4"
+                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>

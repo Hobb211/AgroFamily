@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AgroFamily.ViewModel
 {
@@ -35,6 +36,21 @@ namespace AgroFamily.ViewModel
             AmountSales = "$ " + Convert.ToString(AmountSales_int);
             AmountExp = "$ " + Convert.ToString(AmountExp_int);
             AmountDiff = "$ " + Convert.ToString(AmountDiff_int);
+            
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 15;
+                TitleSize = 15;
+                ButtonHeight1 = 20;
+                ButtonWidth1 = 5;
+            }
+            else
+            {
+                TextSize = 25;
+                TitleSize = 35;
+                ButtonHeight1 = 60;
+                ButtonWidth1 = 45;
+            }
 
         }
     }
