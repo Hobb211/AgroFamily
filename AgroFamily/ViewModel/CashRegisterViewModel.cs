@@ -91,7 +91,11 @@ namespace AgroFamily.ViewModel
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
+
             //Define los tamaños variables descontando o aumentando el valor dependiendo del estado maximizado o minimizado
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 3;

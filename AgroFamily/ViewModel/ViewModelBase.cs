@@ -28,15 +28,21 @@ namespace AgroFamily.ViewModel
         public double ButtonWidth2 { get => _buttonWidth2; set { _buttonWidth2 = value; OnPropertyChanged(nameof(ButtonWidth2)); } }
         public double ButtonHeight1 { get => _buttonHeight1; set { _buttonHeight1 = value; OnPropertyChanged(nameof(ButtonHeight1)); } }
         public double ButtonHeight2 { get => _buttonHeight2; set { _buttonHeight2 = value; OnPropertyChanged(nameof(ButtonHeight2)); } }
+        public double ButtonChangeSizeH { get => _buttonChangeSizeH; set => _buttonChangeSizeH = value; }
+        public double ButtonChangeSizeW { get => _buttonChangeSizeW; set => _buttonChangeSizeW = value; }
+        public double TextSizeChange { get => _textSizeChange; set => _textSizeChange = value; }
 
         //FontSize
         private double _titleSize;
         private double _textSize;
+        private double _textSizeChange;
         //ButtonSize
         private double _buttonWidth1;
         private double _buttonWidth2;
         private double _buttonHeight1;
         private double _buttonHeight2;
+        private double _buttonChangeSizeH;
+        private double _buttonChangeSizeW;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -62,21 +68,21 @@ namespace AgroFamily.ViewModel
         {
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
-                TextSize += 10;
-                TitleSize += 10;
-                ButtonHeight1 += 20;
-                ButtonHeight2 += 20;
-                ButtonWidth1 +=20;
-                ButtonWidth2 +=20;
+                TextSize += TextSizeChange;
+                TitleSize += TextSizeChange;
+                ButtonHeight1 += ButtonChangeSizeH;
+                ButtonHeight2 += ButtonChangeSizeH;
+                ButtonWidth1 +=ButtonChangeSizeW;
+                ButtonWidth2 +=ButtonChangeSizeW;
             }
             else
             {
-                TextSize -= 10;
-                TitleSize -= 10;
-                ButtonHeight1 -= 20;
-                ButtonHeight2 -= 20;
-                ButtonWidth1 -= 20;
-                ButtonWidth2 -= 20;
+                TextSize -= TextSizeChange;
+                TitleSize -= TextSizeChange;
+                ButtonHeight1 -= ButtonChangeSizeH;
+                ButtonHeight2 -= ButtonChangeSizeH;
+                ButtonWidth1 -= ButtonChangeSizeW;
+                ButtonWidth2 -= ButtonChangeSizeW;
             }
         }
 

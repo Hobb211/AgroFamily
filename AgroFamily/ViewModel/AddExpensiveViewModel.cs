@@ -61,6 +61,10 @@ namespace AgroFamily.ViewModel
             Amount = 0;
             AddExpensiveCommand = new ViewModelCommand(ExecuteAddExpensiveCommand, CanExecuteAddExpensiveCommand);
             TypeExpensives = new TypeExpensiveRepository().GetByAll();
+
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 3;

@@ -47,6 +47,9 @@
         <DataTemplate DataType="{x:Type viewModel:BusinessStatusViewModel}">
             <local:BusinessStatusView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ProductProfitabilityViewModel}">
+            <local:ProductProfitabilityView/>
+        </DataTemplate>
     </Window.Resources>
 
     <Window.Visibility>
@@ -199,8 +202,8 @@
                                 Visibility="{Binding BusinessMenuVisibility}">
                             <!--Navigation menu button-->
                             <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor}"
-                                     Command="{Binding ShowNavigationMenuCommand}">
+                                         Tag="{StaticResource NavigationColor}"
+                                         Command="{Binding ShowNavigationMenuCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <fa:IconImage Icon="CircleArrowLeft" Style="{StaticResource navigationButtonIcon}"/>
                                     <TextBlock Text="Atras" Style="{StaticResource navigationButtonText}"/>
@@ -208,8 +211,8 @@
                             </RadioButton>
                             <!--Expensives button-->
                             <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor}"
-                                     Command="{Binding ShowAddExpensiveViewCommand}">
+                                         Tag="{StaticResource NavigationColor}"
+                                         Command="{Binding ShowAddExpensiveViewCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <fa:IconImage Icon="CircleDollarToSlot" Style="{StaticResource navigationButtonIcon}"/>
                                     <TextBlock Text="Gastos" Style="{StaticResource navigationButtonText}"/>
@@ -217,8 +220,8 @@
                             </RadioButton>
                             <!--Sales History button-->
                             <RadioButton Style="{DynamicResource NavigationButton}"
-                                     Tag="{StaticResource NavigationColor}"
-                                     >
+                                         Tag="{StaticResource NavigationColor}"
+                                         Command="{Binding ShowSaleHistoryCommand}">
                                 <StackPanel Orientation="Vertical">
                                     <fa:IconImage Icon="FileInvoiceDollar" Style="{StaticResource navigationButtonIcon}"/>
                                     <TextBlock Text="Ventas" Style="{StaticResource navigationButtonText}"/>
@@ -231,6 +234,14 @@
                                 <StackPanel Orientation="Vertical">
                                     <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
                                     <TextBlock Text="Estado" Style="{StaticResource navigationButtonText}"/>
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{DynamicResource NavigationButton}"
+                                         Tag="{StaticResource NavigationColor}"
+                                         Command="{Binding ShowProductProfitabilityViewCommand}">
+                                <StackPanel Orientation="Vertical">
+                                    <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
+                                    <TextBlock Text="Rentabilidad" Style="{StaticResource navigationButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
                         </StackPanel>

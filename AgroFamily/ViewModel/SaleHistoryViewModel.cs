@@ -102,6 +102,24 @@ namespace AgroFamily.ViewModel
 
             //Initialize Command
             SearchSaleCommand = new ViewModelCommand(ExecuteSearchSaleCommand, CanExecuteSearchSaleCommand);
+
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 3;
+                TitleSize = 14;
+                ButtonHeight1 = 10;
+                ButtonWidth1 = 60;
+            }
+            else
+            {
+                TextSize = 33;
+                TitleSize = 44;
+                ButtonHeight1 = 70;
+                ButtonWidth1 = 120;
+            }
         }
 
         private bool CanExecuteSearchSaleCommand(object obj)

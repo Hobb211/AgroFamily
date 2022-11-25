@@ -66,6 +66,24 @@ namespace AgroFamily.ViewModel
             TypeUser = typeUserRepository.GetByAll();
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
+
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 6;
+                TitleSize = 14;
+                ButtonHeight1 = 10;
+                ButtonWidth1 = 60;
+            }
+            else
+            {
+                TextSize = 36;
+                TitleSize = 44;
+                ButtonHeight1 = 70;
+                ButtonWidth1 = 120;
+            }
         }
 
         private void ExecuteExportCSV(object obj)

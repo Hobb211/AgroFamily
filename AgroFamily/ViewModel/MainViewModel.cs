@@ -92,7 +92,7 @@ namespace AgroFamily.ViewModel
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
             ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
-            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
+            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowProfitabilityViewCommand);
             ShowSaleHistoryCommand = new ViewModelCommand(ExecuteShowSaleHistoryCommand);
             LogOutCommand = new ViewModelCommand(ExecuteLogOutCommand);
             MaxMinFontCommand = new ViewModelCommand(ExecuteMaxMinFontCommand);
@@ -109,8 +109,14 @@ namespace AgroFamily.ViewModel
             {
                 AdminMenuVisibility= Visibility.Visible;
             }
+            TextSizeChange = 10;
             TextSize = 12;
             TitleSize = 20;
+        }
+
+        private void ExecuteShowProfitabilityViewCommand(object obj)
+        {
+            CurrentChildView = new ProductProfitabilityViewModel();
         }
 
         private void ExecuteMaxMinFontCommand(object obj)

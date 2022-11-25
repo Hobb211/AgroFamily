@@ -41,7 +41,12 @@ namespace AgroFamily.View
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch { }
+            
         }
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)

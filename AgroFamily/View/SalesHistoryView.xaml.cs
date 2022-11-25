@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace AgroFamily.View
         {
             InitializeComponent();
         }
+
         private void IDSButton_Checked(object sender, RoutedEventArgs e)
         {
             //Cuando se selecciona la opcion de buscar mediante identificadores
@@ -34,6 +36,7 @@ namespace AgroFamily.View
             StartDate.IsEnabled = false;
             EndDate.IsEnabled = false;
         }
+
         private void DatesButton_Checked(object sender, RoutedEventArgs e)
         {
             //Y cuando se selecciona la opcion para buscar mediante fechas
@@ -44,6 +47,12 @@ namespace AgroFamily.View
             SellerIDField.IsEnabled = false;
             SaleIDField.IsEnabled = false;
 
+        }
+
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
     }
 }
