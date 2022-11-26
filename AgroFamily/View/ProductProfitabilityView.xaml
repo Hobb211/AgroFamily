@@ -3,9 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:AgroFamily.ViewModel" 
              xmlns:local="clr-namespace:AgroFamily.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:ProductProfitabilityViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
@@ -35,6 +41,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid>
@@ -87,6 +94,7 @@
                             </Button.Template>
 
                         </Button>
+
 
                     </Border>
 
@@ -175,10 +183,21 @@
 
 
                 </Grid>
+                <Grid Grid.Row="1">
+                    <TextBox 
+                        Name="button_search"
+                        Style="{StaticResource textBox2}"
+                        Background="White"
+                        Margin="50,0,50,0" TextChanged="button_search_TextChanged"
+                        Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </Grid>
+                
                 <!--Lo dejare asi con un text block para cambiarlo por un list view-->
                 <Grid Grid.Row="2"
                       Margin="20,20,20,10">
-                    <DataGrid Grid.Row="0"
+                    <DataGrid 
+                          Grid.Row="0"
                           BorderBrush="Transparent"
                           HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                           VerticalGridLinesBrush="{StaticResource LineDataGrid}"
@@ -191,7 +210,7 @@
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="productProfitabilityDataGrid"  
                           ItemsSource="{Binding Path=Profits,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}">
+                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="productProfitabilityDataGrid_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Ganancias" IsReadOnly="True" Width="*" Binding="{Binding Amount}">

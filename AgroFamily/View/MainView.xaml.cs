@@ -55,5 +55,10 @@ namespace AgroFamily.View
                 this.WindowState = WindowState.Maximized;
             }
         }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

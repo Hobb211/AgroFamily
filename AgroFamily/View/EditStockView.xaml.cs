@@ -26,6 +26,11 @@ namespace AgroFamily.View
         {
 
         }
+
+        private void tId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
 

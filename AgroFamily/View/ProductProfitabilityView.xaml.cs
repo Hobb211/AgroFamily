@@ -1,4 +1,5 @@
 ﻿using AgroFamily.Model;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -10,11 +11,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using AgroFamily;
 using System.Windows.Shapes;
+using UserControl = System.Windows.Controls.UserControl;
+using AgroFamily.Repositories;
+using Binding = System.Windows.Data.Binding;
+using AgroFamily.ViewModel;
 
 namespace AgroFamily.View
 {
@@ -26,6 +33,7 @@ namespace AgroFamily.View
         public ProductProfitabilityView()
         {
             InitializeComponent();
+
         }
 
 
@@ -50,5 +58,17 @@ namespace AgroFamily.View
         }
 
 
+
+        private void productProfitabilityDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void button_search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            ProductProfitabilityViewModel searchName = (ProductProfitabilityViewModel)this.DataContext;
+            searchName.ExecuteShowSearchProduc();
+        }
     }
 }

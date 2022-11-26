@@ -83,7 +83,7 @@
                                         Foreground="{StaticResource textColor2}"
                                         CaretBrush="LightGray"
                                         Height="28"
-                                        VerticalAlignment="Center">
+                                        VerticalAlignment="Center" TextChanged="tId_TextChanged">
                         </TextBox>
                     </Border>
                     <TextBlock

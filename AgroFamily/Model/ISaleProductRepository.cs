@@ -19,5 +19,8 @@ namespace AgroFamily.Model
         public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityDESC(int limite);
 
         public ObservableCollection<SaleProductModel> getroductProfitabilityAll();
+
+        public ObservableCollection<SaleProductModel> consultaName(string nameProduct,int consultaActual);
+
     }
 }
