@@ -17,7 +17,9 @@
             <ColumnDefinition Width="0.05*"/>
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" CornerRadius="20">
+        <Border Grid.Column="0" 
+                CornerRadius="20"
+                SizeChanged="Border_SizeChanged">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>
@@ -29,7 +31,9 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="1.5*" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Registrar Gastos" Style="{StaticResource titleStyle2}"/>
+                <TextBlock Text="Registrar Gastos" 
+                           Style="{StaticResource titleStyle2}"
+                           FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                 <!--Amount Box-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -40,7 +44,8 @@
                                Text="Monto" 
                                Style="{StaticResource textStyle2}" 
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <Border Grid.Column="1" MaxHeight="60" Margin="10,6,68,6" CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
@@ -50,7 +55,8 @@
                                  Margin="10,16,10,16" 
                                  Padding="20,0"
                                  InputScope="Number"
-                                 PreviewTextInput="NumberValidationTextBox">
+                                 PreviewTextInput="NumberValidationTextBox"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Background>
                                 <ImageBrush ImageSource="/Assets/peso.png"
                                             Stretch="Uniform"
@@ -70,11 +76,12 @@
                         <ColumnDefinition Width="0.4*"/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock
-                               Text="Tipo" 
+                    <TextBlock Text="Tipo" 
                                Style="{StaticResource textStyle2}" 
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center" Grid.Row="1"/>
+                               HorizontalAlignment="Center" 
+                               Grid.Row="1"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <Border Grid.Column="1" 
                             MaxWidth="200" 
                             MaxHeight="60"
@@ -86,7 +93,8 @@
                         <ComboBox Margin="10"
                                   ItemsSource="{Binding Path=TypeExpensives,UpdateSourceTrigger=PropertyChanged}"
                                   SelectedItem="{Binding Type,UpdateSourceTrigger=PropertyChanged}"
-                                  DisplayMemberPath="Name"/>
+                                  DisplayMemberPath="Name"
+                                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                     <Border Grid.Column="2" 
                             Visibility="{Binding NewTypeVisibility}" 
@@ -101,12 +109,16 @@
                                  Text="{Binding NewType,UpdateSourceTrigger=PropertyChanged}"
                                  Background="Transparent" 
                                  Margin="10,5" 
-                                 Padding="20,0"/>
+                                 Padding="20,0"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </Grid>
                 <!--Descripcion Box-->
                 <StackPanel Grid.Row="3">
-                    <TextBlock Text="Descripción" Style="{StaticResource textStyle2}" Margin="30,5"/>
+                    <TextBlock Text="Descripción" 
+                               Style="{StaticResource textStyle2}" 
+                               Margin="30,5"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <Border Height="110" Margin="25,5" CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
@@ -117,13 +129,17 @@
                                  Background="Transparent" 
                                  VerticalAlignment="Top"
                                  TextWrapping="Wrap"
-                                 AcceptsReturn="True"/>
+                                 AcceptsReturn="True"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
                 <Button Grid.Row="4" 
                         Style="{StaticResource button}"  
                         Content="Añadir"
-                        Command="{Binding AddExpensiveCommand}"/>
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                        Command="{Binding AddExpensiveCommand}"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Border>
         <Border Grid.Column="2" CornerRadius="20" Padding="20">
@@ -140,15 +156,15 @@
                           HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                           VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                           Background="{StaticResource DataGridColor}"
-                          GridLinesVisibility="All"
+                          Style="{DynamicResource DataGridStyle1}"
                           RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                          AutoGenerateColumns="False" 
                           CellStyle="{DynamicResource DataGridCellStyle1}" 
                           ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="productsDataGrid"  
                           ItemsSource="{Binding Path=ExpensiveModels,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}">
+                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}"
+                          FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Fecha" IsReadOnly="True" Width="*" Binding="{Binding DateTime}"/>
                         <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}">
@@ -169,10 +185,12 @@
                 </DataGrid>
                 <TextBlock Grid.Row="1" 
                            Text="{Binding Expensive.Description}"
-                           Style="{StaticResource textStyle4}"
+                           Style="{StaticResource textStyle1}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
-                           MaxWidth="550"/>
+                           MaxWidth="550"
+                           TextWrapping="Wrap"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Border>
     </Grid>

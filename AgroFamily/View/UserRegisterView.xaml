@@ -17,136 +17,140 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="497*"/>
             <ColumnDefinition Width="46*"/>
             <ColumnDefinition Width="242*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="135*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="47*"/>
-            <RowDefinition Height="49*"/>
-            <RowDefinition Height="93*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Border CornerRadius="0"
-                Grid.Row="0"
-                Margin="0" Grid.RowSpan="4" Grid.Column="3">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="0"
+                    Grid.Row="0"
+                    SizeChanged="Border_SizeChanged">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
+                <Image Margin="10" 
+                       Source="/Assets/user_reg.png" />
+            </Border>
 
-            </Border.Background>
+            <Border CornerRadius="0"
+                    Grid.Row="1"
+                    Padding="10">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="170"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Orientation="Vertical" Margin="0,20,0,-145">
-                    <Image Source="/Assets/user_reg.png" Height="222" Width="196"/>
+                <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Style="{StaticResource textStyle3}" 
+                               HorizontalAlignment="Center" 
+                               Text="{Binding CurrentUser.Name}"   
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock HorizontalAlignment="Center" 
+                               Text=" "   
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Style="{StaticResource textStyle3}" 
+                               HorizontalAlignment="Center" 
+                               Text="{Binding CurrentUser.LastName}"  
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <!--<TextBlock Style="{StaticResource textStyle3}" 
+                                   HorizontalAlignment="Center" 
+                                   Text="ID " 
+                                   FontSize="18"/>-->
+                        <TextBlock Style="{StaticResource textStyle3}" 
+                               HorizontalAlignment="Center" 
+                               Text="{Binding CurrentUser.Id}" 
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource textStyle3}" 
+                           HorizontalAlignment="Center" 
+                           Text="{Binding CurrentUser.Type}" 
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
+                           Margin="0 5 0 0"/>
+                    <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Password}"  FontSize="16" Background="Aqua"/>-->
                 </StackPanel>
-            </Grid>
-        </Border>
+            </Border>
 
+            <Border CornerRadius="0"
+                    Grid.Row="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24*"/>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="36*"/>
+                    </Grid.RowDefinitions>
 
-        <Border CornerRadius="0"
-                Grid.Row="4"
-                Grid.RowSpan="2"
-                Margin="0" 
-                Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="39*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="117*"/>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="34*"/>
+                    </Grid.ColumnDefinitions>
 
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
-            </Border.Background>
-
-            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Name}"   FontSize="16" />
-                    <TextBlock HorizontalAlignment="Center" Text=" "   FontSize="16" />
-                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.LastName}"  FontSize="16"/>
-
-                </StackPanel>
-                <StackPanel Margin="0 5 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="ID " FontSize="18"/>-->
-                    <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Id}" FontSize="16"/>
-                </StackPanel>
-                <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Type}" FontSize="16" Margin="0 5 0 0"/>
-                <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Password}"  FontSize="16" Background="Aqua"/>-->
-
-            </StackPanel>
-
-        </Border>
-
-        <Border CornerRadius="0"
-                Grid.Row="6"
-                Grid.RowSpan="2"
-                Margin="0" 
-                Grid.Column="3">
-
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
-            </Border.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24*"/>
-                    <RowDefinition Height="15*"/>
-                    <RowDefinition Height="38*"/>
-                    <RowDefinition Height="36*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="39*"/>
-                    <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="117*"/>
-                    <ColumnDefinition Width="27*"/>
-                    <ColumnDefinition Width="34*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Nueva contraseña:"
-                               Width="108" 
-                           Height="auto" 
+                    <TextBlock Style="{StaticResource textStyle3}"
+                           Text="Nueva contraseña:"
                            HorizontalAlignment="Center"
                            Grid.Row="1"
                            Grid.Column="2"
-                           />
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16" Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña" />
+                    <TextBlock Grid.Row="0" 
+                           Grid.Column="1" 
+                           Grid.ColumnSpan="3" 
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource textStyle3}" 
+                           HorizontalAlignment="Center" 
+                           Text="Cambio de contraseña" />
 
-                <Border CornerRadius="10"
-                            Margin="5,5,5,5"
-                             Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
-                    <Border.Background>
-                        <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                    </Border.Background>
-                    <TextBox x:Name="NewPassword"
-                                 Text="{Binding NewPassword,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
+                    <Border CornerRadius="10"
+                        Margin="5,5,5,5"
+                        Grid.Row="2" 
+                        Grid.Column="1" Grid.ColumnSpan="3">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                        </Border.Background>
+                        <TextBox x:Name="NewPassword"
+                             Text="{Binding NewPassword,UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource textBox2}"
+                             Background="Transparent"
+                             Margin="15,0"
+                             Height="20"
+                             FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
 
-                </Border>
+                    <Button x:Name="updatePassword"
+                        Style="{StaticResource button_tr_small}"
+                        Content="Confirmar"
+                        Command="{Binding UpdatePasswordCommand}" 
+                        Grid.Row="3" Grid.Column="2" Margin="2,0,0,0"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Button x:Name="updatePassword"
-                Style="{StaticResource button_tr_small}"
-                Content="Confirmar"
-                Command="{Binding UpdatePasswordCommand}" Grid.Row="3" Grid.Column="2" Margin="2,0,0,0"/>
+                    <Button x:Name="getCSV"
+                        Content="CSV"
+                        Command="{Binding ExportCSV}" 
+                        Grid.Row="3" Grid.Column="0" 
+                        Margin="2,0,0,0"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
+                </Grid>
 
-            </Grid>
-
-            <!--<StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                <!--<StackPanel Orientation="Vertical" Margin="0 5 0 0">
                 <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />
                     -->
-            <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />-->
-            <!--
+                <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />-->
+                <!--
                     <TextBlock Style="{StaticResource textStyle3}"
                                Text="Contraseña nueva:"
                                Width="auto" Height="auto"/>
@@ -157,197 +161,241 @@
 
 
 
-        </Border>
+            </Border>
+        </Grid>
 
-        <Border x:Name="BDRounded" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
-            <DataGrid 
-                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-
-                Style="{DynamicResource DataGridStyle1}"
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Border x:Name="BDRounded" Grid.Row="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
+                <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
                       x:Name="membersDataGrid" 
                       SelectedItem="{Binding Path=CurrentUser,UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}" Margin="0">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding LastName}" />
-                    <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
+                      ItemsSource="{Binding Path=Users,UpdateSourceTrigger=PropertyChanged}" 
+                      Margin="0"
+                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Apellido" IsReadOnly="True" Width="*" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Rol" IsReadOnly="True" Width="*" Binding="{Binding Type}" />
 
-                    <DataGridTemplateColumn Header="Acción" Width="auto" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <!--<Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                        <DataGridTemplateColumn Header="Acción" Width="auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <!--<Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
                                               Path=DataContext.EditUserCommand}"
                                         CommandParameter="{Binding}"
                                         Style="{StaticResource gridEditButton}">
 
                                         <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>-->
-                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
                                               Path=DataContext.RemoveUserCommand}"
                                         CommandParameter="{Binding}"
                                         Style="{StaticResource gridRemoveButton}">
 
-                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                        </Button>
 
-                                </StackPanel>
+                                    </StackPanel>
 
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                </DataGrid.Columns>
-
-
+                    </DataGrid.Columns>
 
 
-            </DataGrid>
-        </Border>
 
-        <Border CornerRadius="20"
-                Grid.Row="1" Margin="3,11,0,44" Grid.RowSpan="4" Grid.Column="1">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
-            </Border.Background>
 
-            <Grid Margin="5">
+                </DataGrid>
+            </Border>
 
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="40*"/>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
+            <Border CornerRadius="20"
+                    Grid.Row="0" Margin="3,11,0,4">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
 
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+                <Grid Margin="5">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40*"/>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
+                    </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250*"/>
-                    <ColumnDefinition Width="210*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250*"/>
+                        <ColumnDefinition Width="210*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Añada un usuario al sistema"
-                           Margin="10"
-                           Style="{StaticResource titleStyle3}"/>
-                <!--Name Box-->
-                <StackPanel Margin="20,0,0,0"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Orientation="Horizontal" >
-                    <TextBlock Style="{StaticResource textStyle3}"
+                    <TextBlock Text="Añada un usuario al sistema"
+                               Margin="10"
+                               Style="{StaticResource titleStyle3}"
+                               FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    <!--Name Box-->
+                    <Grid Margin="10,0,0,0"
+                          Grid.Row="1"
+                          Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource textStyle3}"
                                Text="ID (Rut)"
-                               Width="50" Height="20"/>
-                    <Border CornerRadius="10"
-                            Margin="5"
-                            Width="150" Height="40">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="Id"
-                                 Text="{Binding Id,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
-                    </Border>
-                </StackPanel>
-                <!--Type List Box-->
+                               VerticalAlignment="Center"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border Grid.Column="1"
+                                CornerRadius="10"
+                                Margin="10,5"
+                                MaxHeight="50">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="Id"
+                                     Text="{Binding Id,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                     Background="Transparent"
+                                     Margin="15,0"
+                                     Height="20"/>
+                        </Border>
+                    </Grid>
+                    <!--Type List Box-->
+                    <Grid Grid.Row="1"
+                          Margin="10,0,0,0"
+                          Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   Text="Rol" 
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border CornerRadius="10"
+                                Margin="10,5"
+                                Grid.Column="1"
+                                MaxHeight="50">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <ComboBox Margin="10,6"
+                                      ItemsSource="{Binding Path=TypeUser}"
+                                      SelectedItem="{Binding Path=Type}"
+                                      DisplayMemberPath="Name"
+                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
+                            </ComboBox>
+                        </Border>
+                    </Grid>
+                    <!--name Box-->
+                    <Grid Margin="10,0,0,0"
+                          Grid.Row="2"
+                          Grid.Column="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   Text="Nombre"
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border CornerRadius="10"
+                                Margin="10,5"
+                                Grid.Column="1"
+                                MaxHeight="50">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="name"
+                                     Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                     Background="Transparent"
+                                     Margin="15,0"
+                                     Height="20"/>
+                        </Border>
+                    </Grid>
+                    <!--lastname Box-->
+                    <Grid Margin="10,0,0,0"
+                          Grid.Row="2"
+                          Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   Text="Apellido"
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border CornerRadius="10"
+                                Margin="10,5"
+                                Grid.Column="1"
+                                MaxHeight="50">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="Lastname"
+                                     Text="{Binding Lastname,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                     Background="Transparent"
+                                     Margin="15,0"
+                                     Height="20"/>
+                        </Border>
+                    </Grid>
 
-                <StackPanel Grid.Row="1"
-                            Margin="20,0,0,0"
-                            Orientation="Horizontal" Grid.Column="1" >
-                    <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Rol" Height="20" />
-                    <Border CornerRadius="10"
-                            Margin="5"
-                            Width="150" Height="40">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <ComboBox Margin="10,6"
-                                  ItemsSource="{Binding Path=TypeUser}"
-                                  SelectedItem="{Binding Path=Type}"
-                                  DisplayMemberPath="Name">
-                        </ComboBox>
-                    </Border>
-                </StackPanel>
-                <!--name Box-->
-                <StackPanel Margin="20,0,0,0"
-                    Grid.Row="2"
-                            Orientation="Horizontal" Grid.Column="0" >
-                    <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Nombre"
-                               Width="50" Height="20"/>
-                    <Border CornerRadius="10"
-                            Margin="5"
-                            Width="150" Height="40">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="name"
-                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
-                    </Border>
-                </StackPanel>
-                <!--lastname Box-->
-                <StackPanel Margin="-10,0,0,0"
-                            Grid.Row="2"
-                            Orientation="Horizontal" Grid.Column="1" >
-                    <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Apellido"
-                               Width="50" Height="20"/>
-                    <Border CornerRadius="10"
-                            Margin="5"
-                            Width="150" Height="40">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="Lastname"
-                                 Text="{Binding Lastname,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
-                    </Border>
-                </StackPanel>
+                    <!--password Box-->
+                    <Grid Margin="10,0,0,0"
+                          Grid.Row="3"
+                          Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   Text="Contraseña"
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <Border CornerRadius="10"
+                                Margin="10,5"
+                                Grid.Column="1"
+                                MaxHeight="50">
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                            </Border.Background>
+                            <TextBox x:Name="Password"
+                                     Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource textBox2}"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                     Background="Transparent"
+                                     Margin="15,0"
+                                     Height="20"/>
+                        </Border>
+                    </Grid>
 
-                <!--password Box-->
-                <StackPanel Margin="0,0,0,0"
-                            Grid.Row="3"
-                            Orientation="Horizontal" Grid.Column="0" >
-                    <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Contraseña"
-                               Width="70" Height="20"/>
-                    <Border CornerRadius="10"
-                            Margin="5"
-                            Width="150" Height="40">
-                        <Border.Background>
-                            <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                        </Border.Background>
-                        <TextBox x:Name="Password"
-                                 Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource textBox2}"
-                                 Background="Transparent"
-                                 Margin="15,0"
-                                 Height="20"/>
-                    </Border>
-                </StackPanel>
-
-                <Button x:Name="addUser"
-                Style="{StaticResource button_tr}"
-                Content="Confirmar"
-                Command="{Binding AddUserCommand}" Margin="40,5,10,5" Grid.Row="3" Grid.Column="1"/>
-
-            </Grid>
-        </Border>
+                    <Button x:Name="addUser"
+                            Style="{StaticResource button_tr}"
+                            FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                            Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                            Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
+                            Content="Confirmar"
+                            Command="{Binding AddUserCommand}" 
+                            Grid.Row="3" Grid.Column="1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

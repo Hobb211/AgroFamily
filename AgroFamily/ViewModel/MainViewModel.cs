@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
@@ -22,6 +23,12 @@ namespace AgroFamily.ViewModel
         private Visibility _navigationMenuVisibility;
         private Visibility _inventoryMenuVisibility;
         private Visibility _businessMenuVisibility;
+        private Visibility _adminMenuVisibility;
+        private bool _isViewVisible = true;
+        
+
+        public bool IsViewVisible { get => _isViewVisible; set { _isViewVisible = value; OnPropertyChanged(nameof(IsViewVisible)); } }
+
 
         //Properties
         public UserAccountModel UserAccount 
@@ -46,6 +53,7 @@ namespace AgroFamily.ViewModel
         public Visibility NavigationMenuVisibility { get => _navigationMenuVisibility; set { _navigationMenuVisibility = value; OnPropertyChanged(nameof(NavigationMenuVisibility)); } }
         public Visibility InventoryMenuVisibility { get => _inventoryMenuVisibility; set { _inventoryMenuVisibility = value; OnPropertyChanged(nameof(InventoryMenuVisibility)); } }
         public Visibility BusinessMenuVisibility { get => _businessMenuVisibility; set { _businessMenuVisibility = value; OnPropertyChanged(nameof(BusinessMenuVisibility)); } }
+        public Visibility AdminMenuVisibility { get => _adminMenuVisibility; set { _adminMenuVisibility = value; OnPropertyChanged(nameof(AdminMenuVisibility)); } }
 
         //Commands navigation
         public ICommand ShowNavigationMenuCommand { get; }
@@ -60,7 +68,10 @@ namespace AgroFamily.ViewModel
         public ICommand ShowCashRegisterViewCommand { get; }
         public ICommand ShowEditStockViewCommand { get; }
         public ICommand ShowBusinessStatusViewCommand { get; }
+        public ICommand ShowSaleHistoryCommand { get; }
         public ICommand ShowProductProfitabilityViewCommand { get; }
+        public ICommand LogOutCommand { get; }
+        public ICommand MaxMinFontCommand { get; }
 
         public MainViewModel()
         {
@@ -81,13 +92,54 @@ namespace AgroFamily.ViewModel
             ShowCashRegisterViewCommand = new ViewModelCommand(ExecuteShowCashRegisterViewCommand);
             ShowEditStockViewCommand = new ViewModelCommand(ExecuteShowEditStockViewCommand);
             ShowBusinessStatusViewCommand = new ViewModelCommand(ExecuteShowBusinessStatusViewCommand);
-            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowProductProfitabilityViewCommand);
-
+            ShowProductProfitabilityViewCommand = new ViewModelCommand(ExecuteShowProfitabilityViewCommand);
+            ShowSaleHistoryCommand = new ViewModelCommand(ExecuteShowSaleHistoryCommand);
+            LogOutCommand = new ViewModelCommand(ExecuteLogOutCommand);
+            MaxMinFontCommand = new ViewModelCommand(ExecuteMaxMinFontCommand);
 
             //Default view
             ExecuteShowCashRegisterViewCommand(null);
             InventoryMenuVisibility = Visibility.Collapsed;
             BusinessMenuVisibility = Visibility.Collapsed;
+            if (UserAccount.Role != "Administrador")
+            {
+                AdminMenuVisibility = Visibility.Collapsed;
+            }
+            else
+            {
+                AdminMenuVisibility= Visibility.Visible;
+            }
+            TextSizeChange = 10;
+            TextSize = 12;
+            TitleSize = 20;
+        }
+
+        private void ExecuteShowProfitabilityViewCommand(object obj)
+        {
+            CurrentChildView = new ProductProfitabilityViewModel();
+        }
+
+        private void ExecuteMaxMinFontCommand(object obj)
+        {
+            ChangeSizeFont();
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                Application.Current.Properties["IsViewMinimize"] = false;
+            }
+            else
+            {
+                Application.Current.Properties["IsViewMinimize"] = true;
+            }
+        }
+
+        private void ExecuteLogOutCommand(object obj)
+        {
+            IsViewVisible= false;
+        }
+
+        private void ExecuteShowSaleHistoryCommand(object obj)
+        {
+            CurrentChildView = new SaleHistoryViewModel();
         }
 
         private void ExecuteShowEditStockViewCommand(object obj)
@@ -144,10 +196,6 @@ namespace AgroFamily.ViewModel
         {
             CurrentChildView = new BusinessStatusViewModel();
         }
-        private void ExecuteShowProductProfitabilityViewCommand(object obj)
-        {
-            CurrentChildView = new ProductProfitabilityViewModel();
-        }
         private void LoadCurrentUserData()
         {
             var user = userRepository.GetById(Thread.CurrentPrincipal.Identity.Name);//Pasar un UserName por el principal
@@ -165,6 +213,6 @@ namespace AgroFamily.ViewModel
             }
         }
 
-        
+
     }
 }

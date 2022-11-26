@@ -1,5 +1,5 @@
 ﻿using AgroFamily.Model;
-using SQLite;
+using AgroFamily.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -16,12 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using AgroFamily;
 using System.Windows.Shapes;
-using UserControl = System.Windows.Controls.UserControl;
-using AgroFamily.Repositories;
-using Binding = System.Windows.Data.Binding;
-using AgroFamily.ViewModel;
 
 namespace AgroFamily.View
 {
@@ -33,36 +28,16 @@ namespace AgroFamily.View
         public ProductProfitabilityView()
         {
             InitializeComponent();
-
         }
 
-
-        private void productsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
-        }
-
-        private void rentable2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rentable1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rentable3_Click(object sender, RoutedEventArgs e)
-        {
-
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
 
 
 
-        private void productProfitabilityDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void button_search_TextChanged(object sender, TextChangedEventArgs e)
         {

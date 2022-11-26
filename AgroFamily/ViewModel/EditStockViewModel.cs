@@ -46,6 +46,24 @@ namespace AgroFamily.ViewModel
 
             Articles = suppliesRepository.GetByAllArticles();
             Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
+
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 5;
+                TitleSize = 10;
+                ButtonHeight1 = 10;
+                ButtonWidth1 = 70;
+            }
+            else
+            {
+                TextSize = 35;
+                TitleSize = 40;
+                ButtonHeight1 = 70;
+                ButtonWidth1 = 130;
+            }
         }
 
 

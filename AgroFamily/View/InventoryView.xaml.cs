@@ -1,4 +1,5 @@
 ﻿using AgroFamily.Model;
+using AgroFamily.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,10 @@ namespace AgroFamily.View
             InitializeComponent();
         }
 
-        private void membersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, RoutedEventArgs e)

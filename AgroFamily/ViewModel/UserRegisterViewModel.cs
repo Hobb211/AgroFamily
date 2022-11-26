@@ -11,6 +11,7 @@ using System.Windows;
 using System.Collections;
 using System.Diagnostics.Metrics;
 using AgroFamily.View;
+using System.IO;
 
 namespace AgroFamily.ViewModel
 {
@@ -52,6 +53,7 @@ namespace AgroFamily.ViewModel
         public ICommand AddUserCommand { get; }
         public ICommand RemoveUserCommand { get; }
         public ICommand UpdatePasswordCommand { get; }
+        public ICommand ExportCSV { get; }
 
         //Constructor
         public UserRegisterViewModel()
@@ -59,11 +61,63 @@ namespace AgroFamily.ViewModel
             AddUserCommand = new ViewModelCommand(ExecuteAddUserCommand, CanExecuteAddUserCommand);
             RemoveUserCommand = new ViewModelCommand(ExecuteRemoveUserCommand, CanExecuteRemoveUserCommand);
             UpdatePasswordCommand = new ViewModelCommand(ExecuteUpdateUserPasswordCommand, CanExecuteUpdateUserPasswordCommand);
+            ExportCSV = new ViewModelCommand(ExecuteExportCSV);
             ITypeUserRepository typeUserRepository = new TypeUserRepository();
             TypeUser = typeUserRepository.GetByAll();
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
+
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 6;
+                TitleSize = 8;
+                ButtonHeight1 = 10;
+                ButtonWidth1 = 60;
+                ButtonHeight2 = 20;
+                ButtonWidth2 = 140;
+            }
+            else
+            {
+                TextSize = 36;
+                TitleSize = 38;
+                ButtonHeight1 = 70;
+                ButtonWidth1 = 120;
+                ButtonHeight2 = 80;
+                ButtonWidth2 = 200;
+            }
         }
+
+        private void ExecuteExportCSV(object obj)
+        {
+            MessageBox.Show("Iniciando conversión");
+            using (var textWriter = File.CreateText(@"C:\Users\jimimix\Desktop\mio\apuntes universidad\2022_SEMESTRE_2        x\Ingeniería de software\CSV_test\testing.csv"))
+            {
+                //string columns_line = "ID,Nombre,Apellido,Rol,Clave";
+                //textWriter.WriteLine(columns_line);
+                foreach (var line in ToCsv(Users))
+                {
+                    textWriter.WriteLine(line);
+                }
+            }
+        }
+
+        public static IEnumerable<string> ToCsv<UserModel>(IEnumerable<UserModel> list)
+        {
+            var fields = typeof(UserModel).GetFields();
+            var properties = typeof(UserModel).GetProperties();
+
+            foreach (var @object in list)
+            {
+                yield return string.Join(",",
+                                         fields.Select(x => (x.GetValue(@object) ?? string.Empty).ToString())
+                                               .Concat(properties.Select(p => (p.GetValue(@object, null) ?? string.Empty).ToString()))
+                                               .ToArray());
+            }
+        }
+
         private void ExecuteRemoveUserCommand(object obj)
         {
             try
@@ -159,8 +213,8 @@ namespace AgroFamily.ViewModel
                         cashier.Password = Password;
                         cashier.Type = "Cajero";
                         userRepository.Add(cashier);
-                        break;
                         MessageBox.Show("Usuario registrado");
+                        break;
                 }
                 Users = userRepository.GetByAll();
                 

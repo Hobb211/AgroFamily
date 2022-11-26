@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,12 @@ namespace AgroFamily.View
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
     }
 }

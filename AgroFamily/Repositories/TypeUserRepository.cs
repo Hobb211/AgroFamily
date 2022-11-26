@@ -1,7 +1,6 @@
 ﻿using AgroFamily.Model;
 using SQLite;
 using System;
-using AgroFamily.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

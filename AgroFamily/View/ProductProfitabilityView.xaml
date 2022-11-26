@@ -3,56 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModel="clr-namespace:AgroFamily.ViewModel" 
-             xmlns:local="clr-namespace:AgroFamily.View"
+             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <viewModel:ProductProfitabilityViewModel/>
+        <viewmodel:ProductProfitabilityViewModel/>
     </UserControl.DataContext>
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Margin="20,90,20,90"
 				CornerRadius="10,10,10,10"
-                Grid.Column="0">
+                Grid.Column="0"
+                SizeChanged="Border_SizeChanged">
             <Border.Background>
                 <SolidColorBrush Color="#5e5e5e"/>
             </Border.Background>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
                 <TextBlock
 						TextWrapping="Wrap"
                         Text="{Binding TextInformation,UpdateSourceTrigger=PropertyChanged}"
-						FontSize="19"
+						FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
                         HorizontalAlignment="Center"
-						Style="{StaticResource titleStyle1}" Width="266" Margin="0,78,0,10"/>
+						Style="{StaticResource titleStyle1}" Margin="0,40,0,10"/>
             </Grid>
         </Border>
         <Border Grid.Column="1">
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Definimos la barra superior con un ancho de 30-->
-                        <ColumnDefinition Width="145"/>
-                        <ColumnDefinition Width="6"/>
-                        <ColumnDefinition Width="148"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="114"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition Width="1*"/>
                         <!--Definimos la parte para el login como sera toda no especificamos un ancho-->
                     </Grid.ColumnDefinitions>
 
@@ -61,14 +55,15 @@
 				        Margin="0,30,0,30"
 				        CornerRadius="10,10,10,10" Grid.ColumnSpan="2">
                         <Button x:Name="rentable1"
-                                        BorderThickness="0"
-                                        Content="10 mas rentables"
-                                        Foreground="White"
-                                        FontSize="15"
-                                        FontFamily="Montserrat"
-                                        Cursor="Hand"
-                                        VerticalAlignment="Center"
-                                        Command="{Binding ShowTop10DESCCommand}" Click="rentable1_Click" Margin="0,0,10,0">
+                                BorderThickness="0"
+                                Content="10 mas rentables"
+                                Foreground="White"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                FontFamily="Montserrat"
+                                Cursor="Hand"
+                                VerticalAlignment="Center"
+                                Command="{Binding ShowTop10DESCCommand}" 
+                                Margin="0,0,10,0">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#283134"/>
@@ -82,9 +77,10 @@
 
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Width="140" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
+                                    <Border Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                                            Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                                            CornerRadius="9"
+                                            Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"
                                                                     HorizontalAlignment="Center"/>
 
@@ -103,13 +99,14 @@
 				        Margin="0,30,0,30"
 				        CornerRadius="10,10,10,10">
                         <Button x:Name="rentable3"
-                                        BorderThickness="0"
-                                        Content="Todos"
-                                        Foreground="White"
-                                        FontSize="15"
-                                        FontFamily="Montserrat"
-                                        Cursor="Hand"
-                                        Command="{Binding ShowAllCommand}" Click="rentable3_Click" Margin="10,0,0,0">
+                                BorderThickness="0"
+                                Content="Todos"
+                                Foreground="White"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                FontFamily="Montserrat"
+                                Cursor="Hand"
+                                Command="{Binding ShowAllCommand}" 
+                                Margin="10,0,0,0">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="#283134"/>
@@ -123,9 +120,10 @@
 
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Width="100" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
+                                    <Border Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                                            Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                                            CornerRadius="9"
+                                            Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"
                                                                     HorizontalAlignment="Center"/>
 
@@ -146,9 +144,9 @@
                                         BorderThickness="0"
                                         Content="10 menos rentables"
                                         Foreground="White"
-                                        FontSize="15"
+                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                         FontFamily="Montserrat"
-                                        Cursor="Hand" Click="rentable2_Click"
+                                        Cursor="Hand"
                                         Command="{Binding ShowTop10ASCCommand}" Margin="0,0,10,0">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -163,9 +161,10 @@
 
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Width="140" Height="40"
-                                                    CornerRadius="9"
-                                                    Background="{TemplateBinding Background}">
+                                    <Border Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                                            Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                                            CornerRadius="9"
+                                            Background="{TemplateBinding Background}">
                                         <ContentPresenter VerticalAlignment="Center"
                                                                     HorizontalAlignment="Center"/>
 
@@ -196,21 +195,20 @@
                 <!--Lo dejare asi con un text block para cambiarlo por un list view-->
                 <Grid Grid.Row="2"
                       Margin="20,20,20,10">
-                    <DataGrid 
-                          Grid.Row="0"
-                          BorderBrush="Transparent"
-                          HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
-                          VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                          Background="{StaticResource DataGridColor}"
-                          GridLinesVisibility="All"
-                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                          AutoGenerateColumns="False" 
-                          CellStyle="{DynamicResource DataGridCellStyle1}" 
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          x:Name="productProfitabilityDataGrid"  
-                          ItemsSource="{Binding Path=Profits,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="productProfitabilityDataGrid_SelectionChanged">
+                    <DataGrid Grid.Row="0"
+                              BorderBrush="Transparent"
+                              Style="{DynamicResource DataGridStyle1}"
+                              HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                              VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                              Background="{StaticResource DataGridColor}"
+                              RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                              CellStyle="{DynamicResource DataGridCellStyle1}" 
+                              ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                              RowStyle="{DynamicResource DataGridRowStyle1}"
+                              x:Name="productProfitabilityDataGrid"  
+                              ItemsSource="{Binding Path=Profits,UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}"
+                              FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Ganancias" IsReadOnly="True" Width="*" Binding="{Binding Amount}">
