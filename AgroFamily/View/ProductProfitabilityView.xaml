@@ -186,12 +186,11 @@
                       Margin="20,20,20,10">
                     <DataGrid Grid.Row="0"
                               BorderBrush="Transparent"
+                              Style="{DynamicResource DataGridStyle1}"
                               HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                               VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                               Background="{StaticResource DataGridColor}"
-                              GridLinesVisibility="All"
                               RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                              AutoGenerateColumns="False" 
                               CellStyle="{DynamicResource DataGridCellStyle1}" 
                               ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                               RowStyle="{DynamicResource DataGridRowStyle1}"
