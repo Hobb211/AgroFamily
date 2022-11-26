@@ -229,7 +229,6 @@ namespace AgroFamily.ViewModel
                 }
             }
             HistoricSales = sales_aux;
-            MessageBox.Show(_historicSales[1].total.ToString(), "id", MessageBoxButton.OK);
         }
     }
 }

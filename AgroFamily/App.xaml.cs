@@ -46,7 +46,6 @@ namespace AgroFamily
                             }
                             catch (Exception e)
                             {
-                                MessageBox.Show(e.Message);
                             }
                         };
                     }

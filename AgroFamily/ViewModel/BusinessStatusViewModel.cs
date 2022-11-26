@@ -51,8 +51,8 @@ namespace AgroFamily.ViewModel
             {
                 TextSize = 35;
                 TitleSize = 35;
-                ButtonHeight1 = 60;
-                ButtonWidth1 = 45;
+                ButtonHeight1 = 80;
+                ButtonWidth1 = 65;
             }
 
         }

@@ -236,11 +236,12 @@
                                     <TextBlock Text="Estado" Style="{StaticResource navigationButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
+                            <!--Profitability button-->
                             <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowProductProfitabilityViewCommand}">
                                 <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="ChartLine" Style="{StaticResource navigationButtonIcon}"/>
+                                    <fa:IconImage Icon="MoneyBillTrendUp" Style="{StaticResource navigationButtonIcon}"/>
                                     <TextBlock Text="Rentabilidad" Style="{StaticResource navigationButtonText}"/>
                                 </StackPanel>
                             </RadioButton>
@@ -251,7 +252,8 @@
                             <ColumnDefinition Width="1.5*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
+                        <StackPanel Grid.Column="0"
+                                    VerticalAlignment="Center">
                             <TextBlock Text="{Binding UserAccount.Name}"
                                        Style="{StaticResource textStyle1}"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>

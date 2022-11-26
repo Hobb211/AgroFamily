@@ -95,13 +95,11 @@
                                        VerticalAlignment="Center"/>
 
                             <!--Sale ID section-->
-                            <TextBlock
-                               Text="ID Venta"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-
+                            <TextBlock Text="ID Venta"
+                                       Grid.Row="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                             <!--Boxes-->
                             <TextBox x:Name="SellerIDField" 
                                      Grid.Row="1"
