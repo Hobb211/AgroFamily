@@ -158,7 +158,6 @@
                       ItemsSource="{Binding Path=Articles,UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Path=Articulo,UpdateSourceTrigger=PropertyChanged}"
                       Margin= "20,20,20,20"
-                      Style="{DynamicResource DataGridStyle1}"
                       Grid.Row="1"
                   Grid.ColumnSpan="4">
 
