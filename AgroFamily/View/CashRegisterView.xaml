@@ -25,7 +25,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="0,0,0,10">
                 <Border Grid.Column="0"
-                            CornerRadius="20">
+                        CornerRadius="20"
+                        SizeChanged="Border_SizeChanged">
                     <Border.Background>
                         <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                     </Border.Background>
@@ -39,18 +40,29 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentProduct.Name}" Style="{StaticResource titleStyle1}"/>
+                        <TextBlock Grid.Row="0" 
+                                   Text="{Binding CurrentProduct.Name}" 
+                                   Style="{StaticResource titleStyle1}"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
                         <StackPanel Grid.Row="1" 
                                         Orientation="Horizontal" 
                                         VerticalAlignment="Center">
-                            <TextBlock Text="Precio=$" Style="{StaticResource textStyle1}"/>
-                            <TextBlock Text="{Binding CurrentProduct.Price}" Style="{StaticResource textStyle1}"/>
+                            <TextBlock Text="Precio=$" 
+                                       Style="{StaticResource textStyle1}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding CurrentProduct.Price}" 
+                                       Style="{StaticResource textStyle1}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="2" 
                                         Orientation="Horizontal" 
                                         VerticalAlignment="Center">
-                            <TextBlock Text="Stock=" Style="{StaticResource textStyle1}"/>
-                            <TextBlock Text="{Binding CurrentProduct.Stock}" Style="{StaticResource textStyle1}"/>
+                            <TextBlock Text="Stock=" 
+                                       Style="{StaticResource textStyle1}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding CurrentProduct.Stock}" 
+                                       Style="{StaticResource textStyle1}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -60,43 +72,47 @@
                             <TextBlock Text="Cantidad" 
                                        Style="{StaticResource textStyle1}"
                                        VerticalAlignment="Center"
-                                       Grid.Column="0"/>
+                                       Grid.Column="0"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Column="1" 
                                      Style="{StaticResource textBox}"
                                      Background="Transparent"
                                      InputScope="Number"
                                      PreviewTextInput="NumberValidationTextBox"
-                                     Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                             <TextBlock Grid.Row="1" Grid.Column="1"
                                        Visibility="{Binding OverflowQuantityVisibility,UpdateSourceTrigger=PropertyChanged}"
                                        Text="No hay suficiente inventario"
                                        Style="{StaticResource textStyle1}"
-                                       FontSize="10"/>
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Grid.Row="2" Grid.Column="1"
                                 Content="Añadir" 
                                 Style="{StaticResource button}"
-                                Width="100"
-                                Height="30"
+                                Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
+                                Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding AddProductCommand}"/>
                         </Grid>
                 </Border>
                 
             </Grid>
             <DataGrid Grid.Row="1"
-                          BorderBrush="Transparent"
-                          HorizontalGridLinesBrush="{StaticResource Color6}"
-                          VerticalGridLinesBrush="{StaticResource Color6}"
-                          Background="{StaticResource Color9}"
-                          GridLinesVisibility="All"
-                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                          AutoGenerateColumns="False" 
-                          CellStyle="{DynamicResource DataGridCellStyle1}" 
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          x:Name="productsDataGrid"  
-                          ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}">
+                      BorderBrush="Transparent"
+                      HorizontalGridLinesBrush="{StaticResource Color6}"
+                      VerticalGridLinesBrush="{StaticResource Color6}"
+                      Background="{StaticResource Color9}"
+                      GridLinesVisibility="All"
+                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      AutoGenerateColumns="False" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      x:Name="productsDataGrid"  
+                      ItemsSource="{Binding Path=Products,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding CurrentProduct,UpdateSourceTrigger=PropertyChanged}"
+                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Precio" IsReadOnly="True" Width="*" Binding="{Binding Price}" >
@@ -125,9 +141,11 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
                     <TextBlock Text="Ventas del dia= $"
-                                   Style="{StaticResource textStyle1}"/>
+                               Style="{StaticResource textStyle1}"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding TotalPriceDay,UpdateSourceTrigger=PropertyChanged}" 
-                                   Style="{StaticResource textStyle1}"/>
+                               Style="{StaticResource textStyle1}"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>
         </Grid>
@@ -138,19 +156,20 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <DataGrid Grid.Row="0"
-                          Margin="10"
-                          BorderBrush="Transparent"
-                          HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
-                          VerticalGridLinesBrush="{StaticResource LineDataGrid}"
-                          Background="{StaticResource DataGridColor}"
-                          GridLinesVisibility="All"
-                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
-                          AutoGenerateColumns="False" 
-                          CellStyle="{DynamicResource DataGridCellStyle1}" 
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding CurrentSaleProduct,UpdateSourceTrigger=PropertyChanged}">
+                      Margin="10"
+                      BorderBrush="Transparent"
+                      HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+                      VerticalGridLinesBrush="{StaticResource LineDataGrid}"
+                      Background="{StaticResource DataGridColor}"
+                      GridLinesVisibility="All"
+                      RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
+                      AutoGenerateColumns="False" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}"
+                      ItemsSource="{Binding Path=SaleProducts,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding CurrentSaleProduct,UpdateSourceTrigger=PropertyChanged}"
+                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Count}" >
@@ -174,6 +193,9 @@
             <Grid Grid.Row="1">
                 <Button Style="{StaticResource button}"
                         Content="Eliminar"
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding RemoveProductCommand}"/>
             </Grid>
             <Grid Grid.Row="2">
@@ -188,13 +210,18 @@
                                 Margin="10">
                     <TextBlock Text="Total=$" 
                                Style="{StaticResource textStyle1}"
-                               Foreground="{StaticResource textColor2}"/>
+                               Foreground="{StaticResource textColor2}"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource textStyle1}"
-                               Foreground="{StaticResource textColor2}"/>
+                               Foreground="{StaticResource textColor2}"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <Button Style="{StaticResource button}" 
                         Content="Comprar"
+                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding PayCommand}"/>
             </Grid>
         </Grid>

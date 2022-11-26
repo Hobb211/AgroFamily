@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,14 +33,10 @@ namespace AgroFamily.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void productsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
-        }
-
-        private void itemName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
     }
 }

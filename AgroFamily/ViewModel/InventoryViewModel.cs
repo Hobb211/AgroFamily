@@ -41,6 +41,21 @@ namespace AgroFamily.ViewModel
             Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
             RemoveItemCommand = new ViewModelCommand(ExecuteRemoveArticleCommand, CanExecuteRemoveArticleCommand);
 
+            TextSizeChange = 10;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 20;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 3;
+                ButtonHeight1 = 20;
+                ButtonWidth1 = 140;
+            }
+            else
+            {
+                TextSize = 33;
+                ButtonHeight1 = 80;
+                ButtonWidth1 = 200;
+            }
         }
 
 

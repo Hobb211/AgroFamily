@@ -1,4 +1,5 @@
 ﻿using AgroFamily.Model;
+using AgroFamily.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -28,25 +29,10 @@ namespace AgroFamily.View
             InitializeComponent();
         }
 
-
-        private void productsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
-        }
-
-        private void rentable2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rentable1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rentable3_Click(object sender, RoutedEventArgs e)
-        {
-
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgroFamily.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,16 +25,18 @@ namespace AgroFamily.View
         {
             InitializeComponent();
         }
+
         private void IDSButton_Checked(object sender, RoutedEventArgs e)
         {
             //Cuando se selecciona la opcion de buscar mediante identificadores
             //Se debe habilitar los campos correspondientes
-            SellerIDSelector.IsEnabled = true;
-            SaleIDSelector.IsEnabled = true;
+            SellerIDField.IsEnabled = true;
+            SaleIDField.IsEnabled = true;
             //Se debe deshabilitar los campos correspondientes a las fechas
             StartDate.IsEnabled = false;
             EndDate.IsEnabled = false;
         }
+
         private void DatesButton_Checked(object sender, RoutedEventArgs e)
         {
             //Y cuando se selecciona la opcion para buscar mediante fechas
@@ -41,27 +44,15 @@ namespace AgroFamily.View
             StartDate.IsEnabled = true;
             EndDate.IsEnabled = true;
             //Deshabilitar y vaciar los campos anteriores
-            SellerIDSelector.IsEnabled = false;
-            SaleIDSelector.IsEnabled = false;
             SellerIDField.IsEnabled = false;
             SaleIDField.IsEnabled = false;
 
         }
-        private void SellerIDSelector_Checked(object sender, RoutedEventArgs e)
+
+        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            SellerIDField.IsEnabled = true;
-        }
-        private void SaleIDSelector_Checked(object sender, RoutedEventArgs e)
-        {
-            SaleIDField.IsEnabled = true;
-        }
-        private void SellerIDSelector_Unchecked(object sender, RoutedEventArgs e)
-        {
-            SellerIDField.IsEnabled = false;
-        }
-        private void SaleIDSelector_Unchecked(object sender, RoutedEventArgs e)
-        {
-            SaleIDField.IsEnabled = false;
+            ViewModelBase viewModel = (ViewModelBase)this.DataContext;
+            viewModel.ChangeSizeFont();
         }
     }
 }

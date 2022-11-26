@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows;
 using System.Collections.ObjectModel;
+using AgroFamily.Exceptions;
 
 namespace AgroFamily.Repositories
 {
@@ -29,7 +30,8 @@ namespace AgroFamily.Repositories
             using (SQLiteConnection connection = GetConnection())
             {
                 UserModel user = connection.Find<UserModel>(credential.UserName);
-                if (user.Password.Equals(credential.Password)){
+                if (user.Password.Equals(credential.Password))
+                {
                     validPassword = true;
                 }
                 else
@@ -73,12 +75,17 @@ namespace AgroFamily.Repositories
 
         public UserModel GetById(string id)
         {
-            UserModel user=null;
+            UserModel user = null;
             using (SQLiteConnection connection = GetConnection())
             {
                 user = connection.Find<UserModel>(id);
             }
+            if (user == null)
+            {
+                throw new UserConflictException($"ID no valido {id}");
+            }
             return user;
+
         }
         public string[] GetRole(NetworkCredential credential)
         {
@@ -99,11 +106,8 @@ namespace AgroFamily.Repositories
             }
             else
             {
-                throw new NullReferenceException();
+                throw new UserConflictException("No se ha dado un usuario valido");
             }
         }
-
-
-
     }
 }

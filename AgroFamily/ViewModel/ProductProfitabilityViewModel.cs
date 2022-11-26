@@ -19,8 +19,6 @@ namespace AgroFamily.ViewModel
         private ObservableCollection<SaleProductModel> _profits;
         private string _textInformation;
 
-
-
         public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
         public ObservableCollection<SaleProductModel> Profits { get => _profits; set { _profits = value; OnPropertyChanged(nameof(Profits)); } }
         public string TextInformation { get => _textInformation; set { _textInformation = value; OnPropertyChanged(nameof(TextInformation)); } }
@@ -40,14 +38,28 @@ namespace AgroFamily.ViewModel
             ISaleProductRepository saleProductRepository = new SaleProductRepository();
 
             Profits = new ObservableCollection<SaleProductModel>(saleProductRepository.getroductProfitabilityAll());
-
             ShowTop10ASCCommand = new ViewModelCommand(ExecuteShowTop10ASCCommand, CanExecuteShowTop10ASCCommand);
-
             ShowTop10DESCCommand = new ViewModelCommand(ExecuteShowTop10DESCCommand, CanExecuteShowTop10DESCCommand);
-
             ShowAllCommand = new ViewModelCommand(ExecuteShowAllCommand, CanExecuteShowAllCommand);
-
             TextInformation = "Mostrando lista de los productos mas rentables";
+
+            TextSizeChange = 4;
+            ButtonChangeSizeH = 20;
+            ButtonChangeSizeW = 40;
+            if ((bool)Application.Current.Properties["IsViewMinimize"])
+            {
+                TextSize = 9;
+                TitleSize = 20;
+                ButtonHeight1 = 20;
+                ButtonWidth1 = 80;
+            }
+            else
+            {
+                TextSize = 21;
+                TitleSize = 28;
+                ButtonHeight1 = 80;
+                ButtonWidth1 = 200;
+            }
         }
 
         private bool CanExecuteShowTop10ASCCommand(object obj)
