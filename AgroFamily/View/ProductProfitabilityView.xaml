@@ -191,7 +191,9 @@
                           RowStyle="{DynamicResource DataGridRowStyle1}"
                           x:Name="productProfitabilityDataGrid"  
                           ItemsSource="{Binding Path=Profits,UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}">
+                          SelectedItem="{Binding Expensive,UpdateSourceTrigger=PropertyChanged}"
+                              Style="{DynamicResource DataGridStyle1}">
+                        
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Ganancias" IsReadOnly="True" Width="*" Binding="{Binding Amount}">

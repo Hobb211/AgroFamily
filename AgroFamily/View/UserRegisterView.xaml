@@ -167,7 +167,7 @@
             <DataGrid 
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
 
-                Style="{DynamicResource DataGridStyle1}"
+                      Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}"
