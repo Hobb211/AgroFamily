@@ -19,10 +19,8 @@
         <Border Margin="20,90,20,90"
 				CornerRadius="10,10,10,10"
                 Grid.Column="0"
-                SizeChanged="Border_SizeChanged">
-            <Border.Background>
-                <SolidColorBrush Color="#5e5e5e"/>
-            </Border.Background>
+                SizeChanged="Border_SizeChanged"
+                Background="{StaticResource Color9}">
             <Grid>
                 <TextBlock
 						TextWrapping="Wrap"
@@ -66,7 +64,7 @@
                                 Margin="0,0,10,0">
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#283134"/>
+                                    <Setter Property="Background" Value="{StaticResource buttonColor1}"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#505b60"/>
@@ -108,7 +106,7 @@
                                 Margin="10,0,0,0">
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#283134"/>
+                                    <Setter Property="Background" Value="{StaticResource buttonColor1}"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#505b60"/>
@@ -149,7 +147,7 @@
                                         Command="{Binding ShowTop10ASCCommand}" Margin="0,0,10,0">
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background" Value="#283134"/>
+                                    <Setter Property="Background" Value="{StaticResource buttonColor1}"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#505b60"/>

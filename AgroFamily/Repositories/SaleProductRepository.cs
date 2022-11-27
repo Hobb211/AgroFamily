@@ -31,7 +31,7 @@ namespace AgroFamily.Repositories
             return collection;
         }
 
-        public ObservableCollection<SaleProductModel> GetBySale(string saleId)
+        public ObservableCollection<SaleProductModel> GetBySale(int saleId)
         {
             IEnumerable<SaleProductModel> sales;
             using (SQLiteConnection connection = GetConnection())
