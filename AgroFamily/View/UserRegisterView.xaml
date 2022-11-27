@@ -103,7 +103,8 @@
                            Text="Nueva contraseña:"
                            HorizontalAlignment="Center"
                            Grid.Row="1"
-                           Grid.Column="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Grid.Row="0" 

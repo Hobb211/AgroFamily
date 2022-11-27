@@ -32,7 +32,19 @@ namespace AgroFamily.ViewModel
         public string SaleID { get => _saleID; set { _saleID = value; OnPropertyChanged(nameof(SaleID)); } }
         public DateTime StartingDate { get => _startingDate; set { _startingDate = value; OnPropertyChanged(nameof(StartingDate)); } }
         public DateTime EndingDate { get => _endingDate; set { _endingDate = value; OnPropertyChanged(nameof(EndingDate)); } }
-        public SaleModel CurrentSale { get => _currentSale; set { _currentSale = value; OnPropertyChanged(nameof(CurrentSale)); } }
+        public SaleModel CurrentSale 
+        { 
+            get => _currentSale; 
+            set 
+            { 
+                _currentSale = value; 
+                OnPropertyChanged(nameof(CurrentSale));
+                ISaleProductRepository saleProductRepository = new SaleProductRepository();
+                ProductsOfSale = saleProductRepository.GetBySale(CurrentSale.Id);
+                IUserRepository userRepository = new UserRepository();
+                SellerName = userRepository.GetById(CurrentSale.id_vendedor).Name+" "+ userRepository.GetById(CurrentSale.id_vendedor).LastName;
+            } 
+        }
         public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
         public bool SearchByID { get => _idSearching; set { _idSearching = value; OnPropertyChanged(nameof(SearchByID)); } }
         public bool SearchByDates { get => _dateSearching; set { _dateSearching = value; OnPropertyChanged(nameof(SearchByDates)); } }
@@ -47,29 +59,8 @@ namespace AgroFamily.ViewModel
             }
             set
             {
-                IUserRepository userRepository = new UserRepository();
-                UserModel user = null;
-                try
-                {
-                    user = userRepository.GetById(_currentSale.id_vendedor);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-                try
-                {
-                    _sellerName = userRepository.GetSeller(user);
-                    OnPropertyChanged(nameof(SellerName));
-                }
-                catch (NullReferenceException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
+                _sellerName = value;
+                OnPropertyChanged(nameof(SellerName));
             }
         }
         public ObservableCollection<SaleProductModel> ProductsOfSale
@@ -80,14 +71,7 @@ namespace AgroFamily.ViewModel
             }
             set
             {
-                try
-                {
-                    _productsOfSale = new SaleProductRepository().GetBySale(CurrentSale.Id.ToString());
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
+                _productsOfSale = value;
                 OnPropertyChanged(nameof(ProductsOfSale));
             }
         }
@@ -98,7 +82,7 @@ namespace AgroFamily.ViewModel
         public SaleHistoryViewModel()
         {
             HistoricSales = new ObservableCollection<SaleModel>();
-            _productsOfSale = new ObservableCollection<SaleProductModel>();
+            ProductsOfSale = new ObservableCollection<SaleProductModel>();
 
             //Initialize Command
             SearchSaleCommand = new ViewModelCommand(ExecuteSearchSaleCommand, CanExecuteSearchSaleCommand);

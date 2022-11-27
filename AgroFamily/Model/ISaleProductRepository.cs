@@ -11,7 +11,7 @@ namespace AgroFamily.Model
     public interface ISaleProductRepository
     {
         public void Add(SaleProductModel sale);
-        public ObservableCollection<SaleProductModel> GetBySale(string saleId);
+        public ObservableCollection<SaleProductModel> GetBySale(int saleId);
         public ObservableCollection<SaleProductModel> GetByAll();
 
         public ObservableCollection<SaleProductModel> getTop10ProductProfitabilityASC(int limite);
