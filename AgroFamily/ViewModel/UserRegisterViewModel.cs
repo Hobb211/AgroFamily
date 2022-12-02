@@ -67,12 +67,12 @@ namespace AgroFamily.ViewModel
             IUserRepository usersRepository = new UserRepository();
             Users = usersRepository.GetByAll();
 
-            TextSizeChange = 10;
+            TextSizeChange = 6;
             ButtonChangeSizeH = 20;
             ButtonChangeSizeW = 20;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
-                TextSize = 6;
+                TextSize = 10;
                 TitleSize = 8;
                 ButtonHeight1 = 10;
                 ButtonWidth1 = 60;
@@ -81,7 +81,7 @@ namespace AgroFamily.ViewModel
             }
             else
             {
-                TextSize = 36;
+                TextSize = 28;
                 TitleSize = 38;
                 ButtonHeight1 = 70;
                 ButtonWidth1 = 120;
