@@ -114,25 +114,34 @@
                     </Border>
                 </Grid>
                 <!--Descripcion Box-->
-                <StackPanel Grid.Row="3">
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.8*"/>
+                    </Grid.RowDefinitions>
                     <TextBlock Text="Descripción" 
                                Style="{StaticResource textStyle2}" 
                                Margin="30,5"
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <Border Height="110" Margin="25,5" CornerRadius="15">
+                    <Border Grid.Row="1" Margin="25,7" CornerRadius="15">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
                         <TextBox Style="{StaticResource textBox2}" 
                                  Text="{Binding Description,UpdateSourceTrigger=PropertyChanged}"
-                                 Margin="10,5" Height="90" 
-                                 Background="Transparent" 
+                                 Margin="10,5" 
+                                 MinHeight="90"
+                                 Height="{Binding TextBoxHeight}"
+                                 MaxHeight="160"
+                                 Background="Transparent"
                                  VerticalAlignment="Top"
                                  TextWrapping="Wrap"
                                  AcceptsReturn="True"
+                                 TextAlignment="Justify"
+                                 VerticalContentAlignment="Top"
                                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
-                </StackPanel>
+                </Grid>
                 <Button Grid.Row="4" 
                         Style="{StaticResource button}"  
                         Content="Añadir"

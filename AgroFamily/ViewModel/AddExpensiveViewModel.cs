@@ -65,12 +65,15 @@ namespace AgroFamily.ViewModel
             TextSizeChange = 10;
             ButtonChangeSizeH = 20;
             ButtonChangeSizeW = 20;
+            TextBoxChangeSize = 70;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 3;
                 TitleSize = 10;
                 ButtonHeight1 = 20;
                 ButtonWidth1 = 140;
+                ButtonHeight2 = 90;
+                TextBoxHeight = 20;
             }
             else
             {
@@ -78,6 +81,8 @@ namespace AgroFamily.ViewModel
                 TitleSize = 40;
                 ButtonHeight1 = 80;
                 ButtonWidth1 = 200;
+                ButtonHeight2 = 150;
+                TextBoxHeight = 230;
             }
         }
 

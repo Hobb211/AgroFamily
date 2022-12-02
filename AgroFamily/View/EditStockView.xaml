@@ -73,18 +73,18 @@
 							CornerRadius="10,10,10,10" 
 							Width="150">
                         <TextBox x:Name="tId" 
-                                     Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
-                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                        VerticalContentAlignment="Center"
-                                        FontWeight="Medium"
-                                        FontFamily="Montserrat"
-                                        IsReadOnly="True"
-                                        Background="{StaticResource Color6}"
-                                        BorderBrush="Transparent"
-                                        Foreground="{StaticResource textColor2}"
-                                        CaretBrush="LightGray"
-                                        Height="28"
-                                        VerticalAlignment="Center" TextChanged="tId_TextChanged">
+                                 Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center"
+                                 FontWeight="Medium"
+                                 FontFamily="Montserrat"
+                                 IsReadOnly="True"
+                                 Background="{StaticResource Color6}"
+                                 BorderBrush="Transparent"
+                                 Foreground="{StaticResource textColor2}"
+                                 CaretBrush="LightGray"
+                                 Height="28"
+                                 VerticalAlignment="Center" TextChanged="tId_TextChanged">
                         </TextBox>
                     </Border>
                     <TextBlock

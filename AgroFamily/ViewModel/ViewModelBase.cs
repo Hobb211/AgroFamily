@@ -31,6 +31,8 @@ namespace AgroFamily.ViewModel
         public double ButtonChangeSizeH { get => _buttonChangeSizeH; set => _buttonChangeSizeH = value; }
         public double ButtonChangeSizeW { get => _buttonChangeSizeW; set => _buttonChangeSizeW = value; }
         public double TextSizeChange { get => _textSizeChange; set => _textSizeChange = value; }
+        public double TextBoxHeight { get => _textBoxHeight; set { _textBoxHeight = value; OnPropertyChanged(nameof(TextBoxHeight)); } }
+        public double TextBoxChangeSize { get => _textBoxChangeSize; set => _textBoxChangeSize = value; }
 
         //FontSize
         private double _titleSize;
@@ -43,6 +45,9 @@ namespace AgroFamily.ViewModel
         private double _buttonHeight2;
         private double _buttonChangeSizeH;
         private double _buttonChangeSizeW;
+        //TextBoxSize
+        private double _textBoxHeight;
+        private double _textBoxChangeSize;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -74,6 +79,7 @@ namespace AgroFamily.ViewModel
                 ButtonHeight2 += ButtonChangeSizeH;
                 ButtonWidth1 +=ButtonChangeSizeW;
                 ButtonWidth2 +=ButtonChangeSizeW;
+                TextBoxHeight += TextBoxChangeSize;
             }
             else
             {
@@ -83,6 +89,7 @@ namespace AgroFamily.ViewModel
                 ButtonHeight2 -= ButtonChangeSizeH;
                 ButtonWidth1 -= ButtonChangeSizeW;
                 ButtonWidth2 -= ButtonChangeSizeW;
+                TextBoxHeight-= TextBoxChangeSize;
             }
         }
 

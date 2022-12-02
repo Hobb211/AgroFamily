@@ -51,9 +51,9 @@ namespace AgroFamily.ViewModel
             ShowAllCommand = new ViewModelCommand(ExecuteShowAllCommand, CanExecuteShowAllCommand);
             TextInformation = "Mostrando lista de los productos mas rentables";
 
-            TextSizeChange = 4;
+            TextSizeChange = 6;
             ButtonChangeSizeH = 20;
-            ButtonChangeSizeW = 40;
+            ButtonChangeSizeW = 60;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 9;
@@ -63,10 +63,10 @@ namespace AgroFamily.ViewModel
             }
             else
             {
-                TextSize = 21;
-                TitleSize = 28;
+                TextSize = 27;
+                TitleSize = 38;
                 ButtonHeight1 = 80;
-                ButtonWidth1 = 200;
+                ButtonWidth1 = 260;
             }
         }
 
@@ -83,6 +83,7 @@ namespace AgroFamily.ViewModel
 
             TextInformation = "El producto menos rentable es " + saleProductRepository.getTop10ProductProfitabilityASC(1)[0].Name + " con una ganancia de $" + saleProductRepository.getTop10ProductProfitabilityASC(1)[0].Amount;
             consultaActual = 1;
+            ExecuteShowSearchProduc();
         }
 
         private bool CanExecuteShowTop10DESCCommand(object obj)
@@ -98,6 +99,7 @@ namespace AgroFamily.ViewModel
 
             TextInformation = "El producto mas rentable es " + saleProductRepository.getTop10ProductProfitabilityDESC(1)[0].Name + " con una ganancia de $" + saleProductRepository.getTop10ProductProfitabilityDESC(1)[0].Amount;
             consultaActual = 2;
+            ExecuteShowSearchProduc();
         }
         private bool CanExecuteShowAllCommand(object obj)
         {
@@ -112,6 +114,7 @@ namespace AgroFamily.ViewModel
 
             TextInformation = "Mostrando lista de los productos mas rentables";
             consultaActual = 0;
+            ExecuteShowSearchProduc();
         }
 
         public void ExecuteShowSearchProduc()

@@ -21,7 +21,7 @@
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="Foreground" Value="{StaticResource textColor2}"/>
         <Setter Property="CaretBrush" Value="LightGray"/>
-        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,5,0,0"/>

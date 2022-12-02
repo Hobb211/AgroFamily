@@ -148,7 +148,7 @@
                                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                         <!--Search Button-->
-                        <Button Style="{StaticResource controlButton}"
+                        <Button Style="{StaticResource controlButton1}"
                                 Grid.Column="2"
                                 Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                                 Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"

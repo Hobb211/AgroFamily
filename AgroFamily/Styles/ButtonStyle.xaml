@@ -29,6 +29,25 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style x:Key="controlButton1" TargetType="Button">
+        <!--Normal Button Style-->
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color10}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
 
     <Style x:Key="controlButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
