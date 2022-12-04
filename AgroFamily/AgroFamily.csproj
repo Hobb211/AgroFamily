@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="Material.Icons.WPF" Version="1.2.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>

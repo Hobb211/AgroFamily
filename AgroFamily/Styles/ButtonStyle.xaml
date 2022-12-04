@@ -267,12 +267,7 @@
     </Style>
 
 
-    <Style x:Key="menuButtonIcon" TargetType="Icon:PackIconMaterial">
-        <Setter Property="Margin" Value="20 2 20 0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="15" />
-        <Setter Property="Height" Value="15" />
-    </Style>
+
 
 
     <Style x:Key="searchTextbox" TargetType="TextBox">
@@ -414,11 +409,6 @@
     </Style>
 
 
-    <Style x:Key="pagingButtonIcon" TargetType="Icon:PackIconMaterial">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="10" />
-        <Setter Property="Height" Value="10" />
-    </Style>
 
 
     <Style x:Key="gridEditButton" TargetType="Button">
@@ -455,11 +445,7 @@
     </Style>
 
 
-    <Style x:Key="gridButtonIcon" TargetType="Icon:PackIconMaterial">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="12" />
-        <Setter Property="Height" Value="12" />
-    </Style>
+ 
 
 
 </ResourceDictionary>

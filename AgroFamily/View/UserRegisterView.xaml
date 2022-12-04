@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:AgroFamily.View" 
              xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"             
              mc:Ignorable="d" 
@@ -204,7 +204,7 @@
                                         CommandParameter="{Binding}"
                                         Style="{StaticResource gridRemoveButton}">
 
-                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource controlButtonIcon}"/>
                                         </Button>
 
                                     </StackPanel>

@@ -155,6 +155,7 @@ namespace AgroFamily.ViewModel
             SaleModel sale = new SaleModel()
             {
                 id_vendedor=UserAccount.UserName,
+                salerName=UserAccount.Name+" "+UserAccount.LastName,
                 SaleDate = DateTime.Now,
                 total = TotalPrice
             };

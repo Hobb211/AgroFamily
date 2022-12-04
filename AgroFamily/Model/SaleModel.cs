@@ -12,6 +12,7 @@ namespace AgroFamily.Model
         [PrimaryKey,AutoIncrement]
         public int Id { get; set; }
         public string id_vendedor { get; set; }
+        public string salerName { get; set; }
         public DateTime SaleDate { get; set; }
         public int total { get; set; }
     }

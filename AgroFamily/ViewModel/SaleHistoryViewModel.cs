@@ -40,9 +40,18 @@ namespace AgroFamily.ViewModel
                 _currentSale = value; 
                 OnPropertyChanged(nameof(CurrentSale));
                 ISaleProductRepository saleProductRepository = new SaleProductRepository();
-                ProductsOfSale = saleProductRepository.GetBySale(CurrentSale.Id);
+                if(CurrentSale!=null)
+                {
+                    ProductsOfSale = saleProductRepository.GetBySale(CurrentSale.Id);
+                    SellerName = CurrentSale.salerName;
+                }
+                else
+                {
+                    ProductsOfSale = null;
+                    SellerName = "";
+                }  
                 IUserRepository userRepository = new UserRepository();
-                SellerName = userRepository.GetById(CurrentSale.id_vendedor).Name+" "+ userRepository.GetById(CurrentSale.id_vendedor).LastName;
+                
             } 
         }
         public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
@@ -129,6 +138,7 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteSearchSaleCommand(object obj)
         {
+            CurrentSale = null;
             UserModel user = null;
             ObservableCollection<SaleModel> sales_aux = null;
             //Primero se comprueba que tipo de busqueda se desea hacer
