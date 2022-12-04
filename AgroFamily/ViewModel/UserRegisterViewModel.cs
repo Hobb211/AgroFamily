@@ -174,9 +174,16 @@ namespace AgroFamily.ViewModel
         private bool CanExecuteAddUserCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Name) || Name.Length < 3 || Type == null)
+            if (string.IsNullOrWhiteSpace(Name) || Id.Length < 3 || Name.Length < 3 || Lastname.Length < 3 || Password.Length < 3)
             {
+               // MessageBox.Show("Cada campo debe contener al menos 3 caracteres");
                 validData = false;
+            }
+            else if (Type == null){
+                //MessageBox.Show("No se ha seleccionado el tipo de usuario");
+                validData = false;
+
+
             }
             else
             {
