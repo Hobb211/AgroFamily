@@ -25,28 +25,6 @@ namespace AgroFamily.View
         {
             InitializeComponent();
         }
-
-        private void IDSButton_Checked(object sender, RoutedEventArgs e)
-        {
-            //Cuando se selecciona la opcion de buscar mediante identificadores
-            //Se debe habilitar los campos correspondientes
-            SellerIDField.IsEnabled = true;
-            //Se debe deshabilitar los campos correspondientes a las fechas
-            StartDate.IsEnabled = false;
-            EndDate.IsEnabled = false;
-        }
-
-        private void DatesButton_Checked(object sender, RoutedEventArgs e)
-        {
-            //Y cuando se selecciona la opcion para buscar mediante fechas
-            //Se debe inhabilitar la opcino para buscar por identificadores
-            StartDate.IsEnabled = true;
-            EndDate.IsEnabled = true;
-            //Deshabilitar y vaciar los campos anteriores
-            SellerIDField.IsEnabled = false;
-
-        }
-
         private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ViewModelBase viewModel = (ViewModelBase)this.DataContext;

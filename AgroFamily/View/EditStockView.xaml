@@ -130,7 +130,7 @@
                         Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                         Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                         Command="{Binding ReduceStockCommand}"
-                        Style="{StaticResource button2}">
+                        Style="{StaticResource button2}" Click="eliminar_stock_Click">
                 </Button>
 
                 <Border Grid.Row="2"
@@ -169,11 +169,19 @@
                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombre" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Cantidad" IsReadOnly="True" Width="*" Binding="{Binding Stock}">
+                <DataGridTextColumn Header="Nombre" 
+                                    IsReadOnly="True" 
+                                    Width="*" 
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Cantidad" 
+                                    IsReadOnly="True" 
+                                    Width="*" 
+                                    Binding="{Binding Stock}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            <Setter Property="HorizontalAlignment" 
+                                    Value="Center">
+                            </Setter>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>

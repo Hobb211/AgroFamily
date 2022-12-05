@@ -10,126 +10,154 @@
     <UserControl.DataContext>
         <viewmodel:SaleHistoryViewModel/>
     </UserControl.DataContext>
+
     <!--Main Window Grid-->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".8*"/>
+            <RowDefinition Height="1.1*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.1*"/>
+            <ColumnDefinition Width=".9*"/>
         </Grid.ColumnDefinitions>
 
-        <!--Searching Section Grid-->
-        <Grid Grid.Column="0"
-              SizeChanged="Border_SizeChanged">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--Section Title-->
-            <TextBlock Text="Buscar Ventas"
-                       Grid.Row="0"
-                       TextAlignment="Center"
-                       FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
-                       Margin="118,0,118,1"/>
-
-            <!--Searching Parameters Section-->
-            <Grid Grid.Row="1">
+        <!--Titles-->
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Buscar ventas"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   Style="{StaticResource titleStyle4}" 
+                   FontSize="{Binding TitleSize, UpdateSourceTrigger=PropertyChanged}"
+                   />
+        <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Resultados de la busqueda"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource titleStyle4}"
+                   FontSize="{Binding TitleSize, UpdateSourceTrigger=PropertyChanged}"
+                   />
+        <!--Searching parameters-->
+        <Grid Grid.Row="1">
+            
+            <!--Main section-->
+            <Border CornerRadius="10"
+                    Margin="10 10 10 10">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+                </Border.Background>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Busqueda por:"
-                                   TextAlignment="Left"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center" 
-                                   Margin="10,0,0,0"
-                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".6*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width=".5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0"
+                          Margin="5 5 5 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".4*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Filters title-->
+                        <TextBlock Grid.Row="0"
+                                   Text="Filtros de busqueda"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
+                                   />
 
                         <!--Search by id-->
-                        <RadioButton x:Name="IDSButton" 
-                                     Grid.Column="1"
-                                     Margin="5,0,0,0"
-                                     HorizontalAlignment="Left"
+                        <RadioButton x:Name="IDSButton"
+                                     Grid.Row="1"
+                                     HorizontalAlignment="Center"
                                      VerticalAlignment="Center" 
                                      Content="Identificadores"
-                                     Checked="IDSButton_Checked"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                     IsChecked="{Binding SearchByID}"/>
+                                     IsChecked="{Binding SearchByID, UpdateSourceTrigger=PropertyChanged}"/>
+
                         <!--Search by dates-->
                         <RadioButton x:Name="DatesButton"
-                                     Grid.Column="2"
-                                     Margin="5,0,0,0"
-                                     HorizontalAlignment="Left"
+                                     Grid.Row="2"
+                                     HorizontalAlignment="Center"
                                      VerticalAlignment="Center" 
-                                     Content="Fechas" 
-                                     Checked="DatesButton_Checked"
+                                     Content="Fechas"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                     IsChecked="{Binding SearchByDates}"/>
+                                     IsChecked="{Binding SearchByDates, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.3*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <!--Seller ID section-->
+                    
+                    <!--ID search-->
+                    <Border x:Name="IdBorder" 
+                            Grid.Column="1"
+                            Visibility="{Binding IsID, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid>
                             <TextBlock Text="ID Vendedor"
                                        VerticalAlignment="Top"
                                        HorizontalAlignment="Center"
+                                       Style="{StaticResource textStyle3}"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox x:Name="SellerIDField" 
                                      Text="{Binding SellerID, UpdateSourceTrigger=PropertyChanged}"
-                                     IsEnabled="False"
-                                     Margin="15"
                                      Height="20"
+                                     Width="100"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.2*"/>
-                                <RowDefinition Height="0.25*"/>
-                                <RowDefinition Height="0.2*"/>
-                                <RowDefinition Height="0.25*"/>
-                            </Grid.RowDefinitions>
+                    </Border>
+
+                    <!--Date range search-->
+                    <Border x:Name="DatesBorder" 
+                            Grid.Column="1"
+                            Visibility="{Binding IsDates, UpdateSourceTrigger=PropertyChanged}">
+                        <Grid>
+                            <!--Start date text-->
                             <TextBlock Grid.Row="0"
-                                       VerticalAlignment="Center"
+                                       VerticalAlignment="Top"
                                        HorizontalAlignment="Center"
                                        Text="Fecha inicial:"
-                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                            <DatePicker x:Name="StartDate"
-                                        Grid.Row="1" 
-                                        BorderThickness="0"
-                                        Margin="15,0,15,0"
-                                        VerticalAlignment="Center"
+                                       Style="{StaticResource titleStyle4}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Margin="0,20,0,0"/>
+                            
+                            <!--Start date picker-->
+                            <DatePicker x:Name="StartDate" 
+                                        Margin="0,46,0,0"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Center"
+                                        MaxHeight="100"
+                                        Width="150"
+                                        MaxWidth="500"
                                         SelectedDate="{Binding StartingDate,UpdateSourceTrigger=PropertyChanged}"
-                                        IsEnabled="False"
-                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Height="27"/>
-                            <TextBlock Grid.Row="2"
+                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
+                                        Height="28"/>
+                            <!--End date text-->
+                            <TextBlock Margin="0 40 0 0"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Text="Fecha final: "
-                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                                       Text="Fecha final:"
+                                       Style="{StaticResource titleStyle4}"
+                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                       />
+                            <!--End date picker-->
                             <DatePicker x:Name="EndDate"
-                                        Grid.Row="3"
-                                        Margin="15,0,15,0"
-                                        BorderThickness="0"
-                                        VerticalAlignment="Center"
-                                        IsEnabled="False"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Center"
                                         SelectedDate="{Binding EndingDate,UpdateSourceTrigger=PropertyChanged}"
-                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" Height="27"/>
+                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                        Height="24"
+                                        MaxHeight="100"
+                                        Width="150"
+                                        MaxWidth="500"
+                                        Margin="0,118,0,0"/>
                         </Grid>
+                    </Border>
+                    <Border Grid.Column="2"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
                         <!--Search Button-->
                         <Button Style="{StaticResource controlButton1}"
-                                Grid.Column="2"
                                 Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                                 Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding SearchSaleCommand}"
@@ -139,188 +167,204 @@
                                           Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                                           Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"/>
                         </Button>
-                    </Grid>
+                    </Border>
+
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width=".6*"/>
-                </Grid.ColumnDefinitions>
-                <!--Searching results-->
-                <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2"
+              Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".9*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Searching results-->
+            <DataGrid x:Name="SalesDataGrid"
+                      Grid.Column="0"
+                      HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                       VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                       RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"
                       Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}"
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
                       RowStyle="{DynamicResource DataGridRowStyle1}"
-                      x:Name="SalesDataGrid" 
                       ItemsSource="{Binding Path=HistoricSales,UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding CurrentSale,UpdateSourceTrigger=PropertyChanged}"
                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                      Margin="10 0 0 10"
+                      Margin="10 10 10 10"
                       >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Fecha"
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Fecha"
                                         IsReadOnly="True" 
                                         Width="*" 
-                                        Binding="{Binding SaleDate}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" 
-                                    Value="Center"></Setter>
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Total" 
+                                        Binding="{Binding SaleDate.Date}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" 
+                                    Value="Center">
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Total" 
                                         IsReadOnly="True" 
                                         Width="*" 
                                         Binding="{Binding total}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" 
-                                    Value="Center"></Setter>
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <TextBlock Grid.Column="1"
-                           Margin="0 20 0 0"
-                           Text="Ventas del periodo"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" 
+                                    Value="Center">
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <!--Period details-->
+            <TextBlock Grid.Column="1"
+                       Margin="0 25 0 0"
+                       Text="Ventas del periodo"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"
+                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                       />
 
-                <TextBlock Grid.Column="1"
-                           Margin="0 70 0 0"
-                           Text="{Binding SalesOfPeriod, UpdateSourceTrigger=PropertyChanged}"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Grid.Column="1"
-                           Margin="0 140 0 0"
-                           Text="Ingresos del periodo"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                           />
-                <TextBlock Grid.Column="1"
-                           Margin="0 190 0 0"
-                           Text="{Binding EarningOfPeriod, UpdateSourceTrigger=PropertyChanged}"
-                           VerticalAlignment="Top"
-                           HorizontalAlignment="Center"
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Column="1"
+                       Margin="0 0 0 95"
+                       Text="{Binding SalesOfPeriod, UpdateSourceTrigger=PropertyChanged}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                       />
 
-                <Button Grid.Column="1"
-                        Margin="0 220 0 0"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="40"
-                        Width="150"
-                        Content="Exportar CSV"
-                        Command="{Binding ExportCsvCommand}"/>
-            </Grid>
+            <TextBlock Grid.Column="1"
+                       Margin="0 0 0 0"
+                       Text="Ingresos del periodo"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                       />
+
+            <TextBlock Grid.Column="1"
+                       Margin="0 0 0 80"
+                       Text="{Binding EarningOfPeriod, UpdateSourceTrigger=PropertyChanged}"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"
+                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                       />
+
+            <Button Grid.Column="1"
+                    Margin="0 0 0 30"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Content="Exportar CSV"
+                    FontSize="{Binding TextSize}"
+                    Command="{Binding ExportCsvCommand}"
+                    Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
+                    Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource button2}" 
+                    />
         </Grid>
-
-        <!--Sale details section-->
-        <Grid Grid.Column="1">
-            <Grid>
+        
+        <!--Sale products detail-->
+        <DataGrid Grid.Row="2"
+                  Grid.Column="1"
+                  Style="{StaticResource DataGridStyle1}"
+                  RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"
+                  CellStyle="{DynamicResource DataGridCellStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  RowStyle="{DynamicResource DataGridRowStyle1}"
+                  x:Name="SaleProducts"
+                  Margin= "10 10 10 10"
+                  ItemsSource="{Binding Path=ProductsOfSale,UpdateSourceTrigger=PropertyChanged}"
+                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Producto"
+                                    IsReadOnly="True" 
+                                    Width="*" 
+                                    Binding="{Binding Name}"
+                                    />
+                <DataGridTextColumn Header="Cantidad" 
+                                    IsReadOnly="True" 
+                                    Width="*" 
+                                    Binding="{Binding Count}"
+                                    />
+                <DataGridTextColumn Header="Monto" 
+                                    IsReadOnly="True" 
+                                    Width="*" 
+                                    Binding="{Binding Amount}" 
+                                    />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                CornerRadius="20"
+                Margin="10 10 10 10">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
+            </Border.Background>
+            <Grid Margin="10 10 10 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
-                           Style="{StaticResource titleStyle4}" 
-                           Text="Resumen de la venta"
-                           FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <!--Textblocks to declare the data-->
-                    <TextBlock Grid.Column="0"
-                               Grid.Row="0"
-                               Text="Vendedor: "
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               TextAlignment="Center"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Column="0"
-                               Grid.Row="1"
-                               Text="Fecha: "
-                               TextAlignment="Center"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Column="0"
-                               Grid.Row="2"
-                               Text="Total: "
-                               TextAlignment="Center"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <!--Textblocks to show the data-->
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="0"
-                               Text="{Binding CurrentSaleSellerName}"
-                               Margin="10"
-                               VerticalAlignment="Center"
-                               TextAlignment="Justify"
-                               TextWrapping="Wrap"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="1"
-                               Text="{Binding CurrentSaleDate}"
-                               VerticalAlignment="Center"
-                               TextAlignment="Justify"
-                               Margin="10"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Grid.Column="1"
-                               Grid.Row="2"
-                               Text="{Binding CurrentSaleTotal}"
-                               TextAlignment="Justify"
-                               VerticalAlignment="Center"
-                               Margin="10"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-                <DataGrid Style="{StaticResource DataGridStyle1}"
-                          RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"
-                          CellStyle="{DynamicResource DataGridCellStyle1}"
-                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
-                          RowStyle="{DynamicResource DataGridRowStyle1}"
-                          x:Name="SaleProducts"
-                          Margin= "5 0 10 10"
-                          Grid.Row="2"                             
-                          ItemsSource="{Binding Path=ProductsOfSale,UpdateSourceTrigger=PropertyChanged}"
-                          FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Producto"  
-                                            IsReadOnly="True" 
-                                            Width="*" 
-                                            Binding="{Binding Name}"
-                                            />
-                        <DataGridTextColumn Header="Cantidad" 
-                                            IsReadOnly="True" 
-                                            Width="*" 
-                                            Binding="{Binding Count}"
-                                            />
-                        <DataGridTextColumn Header="Monto" 
-                                            IsReadOnly="True" 
-                                            Width="*" 
-                                            Binding="{Binding Amount}" 
-                                            />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <!--Textblocks to declare the data-->
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Text="Vendedor: "
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Text="Fecha: "
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Text="Total: "
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                <!--Textblocks to show the data-->
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           Text="{Binding CurrentSaleSellerName}"
+                           Margin="10"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Justify"
+                           TextWrapping="Wrap"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding CurrentSaleDate}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Justify"
+                           Margin="10"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding CurrentSaleTotal}"
+                           TextAlignment="Justify"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="10"
+                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </UserControl>

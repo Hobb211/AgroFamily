@@ -39,6 +39,11 @@ namespace AgroFamily.View
         {
 
         }
+
+        private void eliminar_stock_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

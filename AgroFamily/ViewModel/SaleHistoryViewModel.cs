@@ -32,6 +32,8 @@ namespace AgroFamily.ViewModel
         private string _earningOfPeriod;
         private string _currentSaleTotal;
         private string _currentSaleDate;
+        private Visibility _isID;
+        private Visibility _isDates;
 
 
         //Properties
@@ -100,6 +102,47 @@ namespace AgroFamily.ViewModel
             }
         }
 
+        public Visibility IsID
+        {
+            get
+            {
+                return _isID;
+            }
+            set
+            {
+                _isID = value;
+                OnPropertyChanged(nameof(IsID));
+                if (SearchByID)
+                {
+                    IsID = Visibility.Visible;
+                }
+                else
+                {
+                    IsID = Visibility.Collapsed;
+                }
+            }
+        }
+
+        public Visibility IsDates
+        {
+            get
+            {
+                return _isDates;
+            }
+            set
+            {
+                _isDates = value;
+                OnPropertyChanged(nameof(IsDates));
+                if (SearchByDates)
+                {
+                    IsDates = Visibility.Visible;
+                }
+                else
+                {
+                    IsDates = Visibility.Collapsed;
+                }
+            }
+        }
         //Commands
         public ICommand SearchSaleCommand { get; }
         public ICommand ExportCsvCommand { get; }
@@ -116,6 +159,7 @@ namespace AgroFamily.ViewModel
             TextSizeChange = 10;
             ButtonChangeSizeH = 20;
             ButtonChangeSizeW = 20;
+
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 3;
