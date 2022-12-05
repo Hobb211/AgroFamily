@@ -1,16 +1,12 @@
 ﻿using AgroFamily.Exceptions;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
-using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.IO;
@@ -47,6 +43,8 @@ namespace AgroFamily.ViewModel
         public string EarningOfPeriod { get => _earningOfPeriod; set { _earningOfPeriod = value; OnPropertyChanged(nameof(EarningOfPeriod)); } }
         public string CurrentSaleTotal { get => _currentSaleTotal; set { _currentSaleTotal = value; OnPropertyChanged(nameof(CurrentSaleTotal)); } }
         public string CurrentSaleDate { get => _currentSaleDate; set { _currentSaleDate = value; OnPropertyChanged(nameof(CurrentSaleDate)); } }
+        public string CurrentSaleSellerName { get =>_currentSaleSellerName; set { _currentSaleSellerName = value; OnPropertyChanged(nameof(CurrentSaleSellerName)); } }
+        public ObservableCollection<SaleProductModel> ProductsOfSale {get => _productsOfSale; set { _productsOfSale = value; OnPropertyChanged(nameof(ProductsOfSale)); } }
         public Visibility IsID { get => _isID; set { _isID = value; OnPropertyChanged(nameof(IsID)); } }
         public Visibility IsDates { get => _isDates; set { _isDates = value; OnPropertyChanged(nameof(IsDates)); } }
         public bool SearchByID 
@@ -116,33 +114,6 @@ namespace AgroFamily.ViewModel
             } 
         }
 
-        //La propiedad vendedor que será mostrada en la vista
-        //debe ser obtenida de la base de datos de usuarios
-        public string CurrentSaleSellerName
-        {
-            get
-            {
-                return _currentSaleSellerName;
-            }
-            set
-            {
-                _currentSaleSellerName = value;
-                OnPropertyChanged(nameof(CurrentSaleSellerName));
-            }
-        }
-        public ObservableCollection<SaleProductModel> ProductsOfSale
-        {
-            get
-            {
-                return _productsOfSale;
-            }
-            set
-            {
-                _productsOfSale = value;
-                OnPropertyChanged(nameof(ProductsOfSale));
-            }
-        }
-
         //Commands
         public ICommand SearchSaleCommand { get; }
         public ICommand ExportCsvCommand { get; }
@@ -175,7 +146,6 @@ namespace AgroFamily.ViewModel
                 ButtonWidth1 = 120;
             }
         }
-
         private void ExecuteExportCsvCommand(object obj)
         {
             MessageBox.Show("Iniciando conversión");
@@ -183,10 +153,10 @@ namespace AgroFamily.ViewModel
             {
                 //string columns_line = "ID,Nombre,Apellido,Rol,Clave";
                 //textWriter.WriteLine(columns_line);
-                //foreach (var line in ToCsv(SalesOfPeriod))
-                //{
-                //    textWriter.WriteLine(line);
-                //}
+                foreach (var line in ToCsv(HistoricSales))
+                {
+                    textWriter.WriteLine(line);
+                }
             }
         }
         public static IEnumerable<string> ToCsv<SaleModel>(ObservableCollection<SaleModel> list)
