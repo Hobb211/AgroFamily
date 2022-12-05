@@ -31,7 +31,6 @@ namespace AgroFamily.View
             //Cuando se selecciona la opcion de buscar mediante identificadores
             //Se debe habilitar los campos correspondientes
             SellerIDField.IsEnabled = true;
-            SaleIDField.IsEnabled = true;
             //Se debe deshabilitar los campos correspondientes a las fechas
             StartDate.IsEnabled = false;
             EndDate.IsEnabled = false;
@@ -45,7 +44,6 @@ namespace AgroFamily.View
             EndDate.IsEnabled = true;
             //Deshabilitar y vaciar los campos anteriores
             SellerIDField.IsEnabled = false;
-            SaleIDField.IsEnabled = false;
 
         }
 

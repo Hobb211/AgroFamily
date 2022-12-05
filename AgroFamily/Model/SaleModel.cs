@@ -15,6 +15,7 @@ namespace AgroFamily.Model
         public string salerName { get; set; }
         public DateTime SaleDate { get; set; }
         public int total { get; set; }
+        public string SaleDateShortFormat = this.SaleDate.ToShortDateString();
     }
 }
 

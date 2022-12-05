@@ -4,7 +4,10 @@ using AgroFamily.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,59 +20,71 @@ namespace AgroFamily.ViewModel
 
         //Fields
         private string _sellerID;
-        private string _saleID;
         private DateTime _startingDate = DateTime.Today;
         private DateTime _endingDate = DateTime.Today;
         private SaleModel _currentSale;
-        private string _sellerName;
+        private string _currentSaleSellerName;
         private bool _idSearching = false;
         private bool _dateSearching = false;
         private ObservableCollection<SaleModel> _historicSales;
         private ObservableCollection<SaleProductModel> _productsOfSale;
+        private long _salesOfPeriod;
+        private string _earningOfPeriod;
+        private string _currentSaleTotal;
+        private string _currentSaleDate;
+
 
         //Properties
         public string SellerID { get => _sellerID; set { _sellerID = value; OnPropertyChanged(nameof(SellerID)); } }
-        public string SaleID { get => _saleID; set { _saleID = value; OnPropertyChanged(nameof(SaleID)); } }
         public DateTime StartingDate { get => _startingDate; set { _startingDate = value; OnPropertyChanged(nameof(StartingDate)); } }
         public DateTime EndingDate { get => _endingDate; set { _endingDate = value; OnPropertyChanged(nameof(EndingDate)); } }
+        public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
+        public bool SearchByID { get => _idSearching; set { _idSearching = value; OnPropertyChanged(nameof(SearchByID)); } }
+        public bool SearchByDates { get => _dateSearching; set { _dateSearching = value; OnPropertyChanged(nameof(SearchByDates)); } }
+        public long SalesOfPeriod { get => _salesOfPeriod; set { _salesOfPeriod = value; OnPropertyChanged(nameof(SalesOfPeriod)); } }
+        public string EarningOfPeriod { get => _earningOfPeriod; set { _earningOfPeriod = value; OnPropertyChanged(nameof(EarningOfPeriod)); } }
+        public string CurrentSaleTotal { get => _currentSaleTotal; set { _currentSaleTotal = value; OnPropertyChanged(nameof(CurrentSaleTotal)); } }
+        public string CurrentSaleDate { get => _currentSaleDate; set { _currentSaleDate = value; OnPropertyChanged(nameof(CurrentSaleDate)); } }
         public SaleModel CurrentSale 
         { 
             get => _currentSale; 
             set 
-            { 
-                _currentSale = value; 
+            {
+                _currentSale = value;
                 OnPropertyChanged(nameof(CurrentSale));
                 ISaleProductRepository saleProductRepository = new SaleProductRepository();
                 if(CurrentSale!=null)
                 {
                     ProductsOfSale = saleProductRepository.GetBySale(CurrentSale.Id);
-                    SellerName = CurrentSale.salerName;
+                    CurrentSaleSellerName = CurrentSale.salerName;
+                    var nfi = new NumberFormatInfo()
+                    {
+                        NumberDecimalDigits = 0,
+                        NumberGroupSeparator = "."
+                    };
+                    CurrentSaleTotal = CurrentSale.total.ToString("N", nfi);
+                    CurrentSaleDate = CurrentSale.SaleDate.ToShortDateString();
                 }
                 else
                 {
                     ProductsOfSale = null;
-                    SellerName = "";
-                }  
-                IUserRepository userRepository = new UserRepository();
-                
+                    CurrentSaleSellerName = "";
+                }
             } 
         }
-        public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
-        public bool SearchByID { get => _idSearching; set { _idSearching = value; OnPropertyChanged(nameof(SearchByID)); } }
-        public bool SearchByDates { get => _dateSearching; set { _dateSearching = value; OnPropertyChanged(nameof(SearchByDates)); } }
 
         //La propiedad vendedor que será mostrada en la vista
         //debe ser obtenida de la base de datos de usuarios
-        public string SellerName
+        public string CurrentSaleSellerName
         {
             get
             {
-                return _sellerName;
+                return _currentSaleSellerName;
             }
             set
             {
-                _sellerName = value;
-                OnPropertyChanged(nameof(SellerName));
+                _currentSaleSellerName = value;
+                OnPropertyChanged(nameof(CurrentSaleSellerName));
             }
         }
         public ObservableCollection<SaleProductModel> ProductsOfSale
@@ -87,6 +102,7 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand SearchSaleCommand { get; }
+        public ICommand ExportCsvCommand { get; }
 
         public SaleHistoryViewModel()
         {
@@ -95,6 +111,7 @@ namespace AgroFamily.ViewModel
 
             //Initialize Command
             SearchSaleCommand = new ViewModelCommand(ExecuteSearchSaleCommand, CanExecuteSearchSaleCommand);
+            ExportCsvCommand = new ViewModelCommand(ExecuteExportCsvCommand, CanExecuteExportCsvCommand);
 
             TextSizeChange = 10;
             ButtonChangeSizeH = 20;
@@ -113,6 +130,16 @@ namespace AgroFamily.ViewModel
                 ButtonHeight1 = 70;
                 ButtonWidth1 = 120;
             }
+        }
+
+        private void ExecuteExportCsvCommand(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanExecuteExportCsvCommand(object obj)
+        {
+            return HistoricSales.Any();
         }
 
         private bool CanExecuteSearchSaleCommand(object obj)
@@ -151,9 +178,11 @@ namespace AgroFamily.ViewModel
                 }
                 catch (SaleConflictException ex)
                 {
+                    sales_aux = new ObservableCollection<SaleModel>();
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
             //Si desea buscar por identificadores
             else if (SearchByID)
             {
@@ -174,54 +203,30 @@ namespace AgroFamily.ViewModel
                 try
                 {
                     user = new UserRepository().GetById(SellerID);
+                    sales_aux = (new SaleRepository().GetBySeller(user.Id));
+
                 }
                 catch (UserConflictException ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-
-                //Primeramente si se desea buscar por id de vendedor solamente
-                if (!string.IsNullOrEmpty(SellerID) && string.IsNullOrEmpty(SaleID.ToString()))
+                catch (Exception e)
                 {
-                    try
-                    {
-                        sales_aux = (new SaleRepository().GetBySeller(user.Id));
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-
-                //Luego si se desea buscar solamente por el id de venta
-                else if (string.IsNullOrEmpty(SellerID) && !string.IsNullOrEmpty(SaleID.ToString()))
-                {
-                    SaleModel sale = null;
-                    try
-                    {
-                        sale = new SaleRepository().GetById(int.Parse(SaleID));
-                        sales_aux.Add(sale);
-                    }
-                    catch (SaleConflictException e)
-                    {
-                        MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-
-                //Finalmente si se desean usar ambos parametros para realizar la busqueda
-                else if (!string.IsNullOrEmpty(SellerID) && !string.IsNullOrEmpty(SaleID.ToString()))
-                {
-                    try
-                    {
-                        sales_aux.Add(new SaleRepository().GetBySellerIDSaleID(SellerID, int.Parse(SaleID)));
-                    }
-                    catch (SaleConflictException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            long earning = 0;
+            foreach (SaleModel sale in sales_aux)
+            {
+                earning += sale.total;
+            }
+            var nfi = new NumberFormatInfo()
+            {
+                NumberDecimalDigits = 0,
+                NumberGroupSeparator = "."
+            };
+            EarningOfPeriod = earning.ToString("N", nfi);
+            SalesOfPeriod = sales_aux.Count;
             HistoricSales = sales_aux;
         }
     }
