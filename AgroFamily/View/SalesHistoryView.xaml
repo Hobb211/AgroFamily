@@ -45,7 +45,8 @@
             
             <!--Main section-->
             <Border CornerRadius="10"
-                    Margin="10 10 10 10">
+                    Margin="10 10 10 10"
+                    SizeChanged="Border_SizeChanged">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
@@ -93,6 +94,7 @@
                     <!--ID search-->
                     <Border x:Name="IdBorder" 
                             Grid.Column="1"
+                            SizeChanged="Border_SizeChanged"
                             Visibility="{Binding IsID, UpdateSourceTrigger=PropertyChanged}">
                         <Grid>
                             <TextBlock Text="ID Vendedor"
@@ -111,6 +113,7 @@
                     <!--Date range search-->
                     <Border x:Name="DatesBorder" 
                             Grid.Column="1"
+                            SizeChanged="Border_SizeChanged"
                             Visibility="{Binding IsDates, UpdateSourceTrigger=PropertyChanged}">
                         <Grid>
                             <!--Start date text-->
@@ -155,7 +158,8 @@
                     </Border>
                     <Border Grid.Column="2"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
+                            HorizontalAlignment="Center"
+                            SizeChanged="Border_SizeChanged">
                         <!--Search Button-->
                         <Button Style="{StaticResource controlButton1}"
                                 Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
@@ -301,7 +305,8 @@
         <Border Grid.Column="1"
                 Grid.Row="1"
                 CornerRadius="20"
-                Margin="10 10 10 10">
+                Margin="10 10 10 10"
+                SizeChanged="Border_SizeChanged">
             <Border.Background>
                 <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
             </Border.Background>

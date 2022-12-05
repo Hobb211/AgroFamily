@@ -1,6 +1,7 @@
 ﻿using AgroFamily.Exceptions;
 using AgroFamily.Model;
 using AgroFamily.Repositories;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace AgroFamily.ViewModel
 {
@@ -24,7 +26,7 @@ namespace AgroFamily.ViewModel
         private DateTime _endingDate = DateTime.Today;
         private SaleModel _currentSale;
         private string _currentSaleSellerName;
-        private bool _idSearching = false;
+        private bool _idSearching = true;
         private bool _dateSearching = false;
         private ObservableCollection<SaleModel> _historicSales;
         private ObservableCollection<SaleProductModel> _productsOfSale;
@@ -33,7 +35,7 @@ namespace AgroFamily.ViewModel
         private string _currentSaleTotal;
         private string _currentSaleDate;
         private Visibility _isID;
-        private Visibility _isDates;
+        private Visibility _isDates = Visibility.Collapsed;
 
 
         //Properties
@@ -41,12 +43,51 @@ namespace AgroFamily.ViewModel
         public DateTime StartingDate { get => _startingDate; set { _startingDate = value; OnPropertyChanged(nameof(StartingDate)); } }
         public DateTime EndingDate { get => _endingDate; set { _endingDate = value; OnPropertyChanged(nameof(EndingDate)); } }
         public ObservableCollection<SaleModel> HistoricSales { get => _historicSales; set { _historicSales = value; OnPropertyChanged(nameof(HistoricSales)); } }
-        public bool SearchByID { get => _idSearching; set { _idSearching = value; OnPropertyChanged(nameof(SearchByID)); } }
-        public bool SearchByDates { get => _dateSearching; set { _dateSearching = value; OnPropertyChanged(nameof(SearchByDates)); } }
         public long SalesOfPeriod { get => _salesOfPeriod; set { _salesOfPeriod = value; OnPropertyChanged(nameof(SalesOfPeriod)); } }
         public string EarningOfPeriod { get => _earningOfPeriod; set { _earningOfPeriod = value; OnPropertyChanged(nameof(EarningOfPeriod)); } }
         public string CurrentSaleTotal { get => _currentSaleTotal; set { _currentSaleTotal = value; OnPropertyChanged(nameof(CurrentSaleTotal)); } }
         public string CurrentSaleDate { get => _currentSaleDate; set { _currentSaleDate = value; OnPropertyChanged(nameof(CurrentSaleDate)); } }
+        public Visibility IsID { get => _isID; set { _isID = value; OnPropertyChanged(nameof(IsID)); } }
+        public Visibility IsDates { get => _isDates; set { _isDates = value; OnPropertyChanged(nameof(IsDates)); } }
+        public bool SearchByID 
+        { get
+            {
+                return _idSearching;
+            }
+            set
+            {
+                _idSearching = value;
+                OnPropertyChanged(nameof(SearchByID));
+                if (SearchByID)
+                {
+                    IsID = Visibility.Visible;
+                }
+                else
+                {
+                    IsID = Visibility.Collapsed;
+                }
+            }
+        }
+        public bool SearchByDates
+        {
+            get
+            {
+                return _dateSearching;
+            }
+            set
+            {
+                _dateSearching = value; 
+                OnPropertyChanged(nameof(SearchByDates));
+                if (SearchByDates)
+                {
+                    IsDates = Visibility.Visible;
+                }
+                else
+                {
+                    IsDates = Visibility.Collapsed;
+                }
+            }
+        }
         public SaleModel CurrentSale 
         { 
             get => _currentSale; 
@@ -102,47 +143,6 @@ namespace AgroFamily.ViewModel
             }
         }
 
-        public Visibility IsID
-        {
-            get
-            {
-                return _isID;
-            }
-            set
-            {
-                _isID = value;
-                OnPropertyChanged(nameof(IsID));
-                if (SearchByID)
-                {
-                    IsID = Visibility.Visible;
-                }
-                else
-                {
-                    IsID = Visibility.Collapsed;
-                }
-            }
-        }
-
-        public Visibility IsDates
-        {
-            get
-            {
-                return _isDates;
-            }
-            set
-            {
-                _isDates = value;
-                OnPropertyChanged(nameof(IsDates));
-                if (SearchByDates)
-                {
-                    IsDates = Visibility.Visible;
-                }
-                else
-                {
-                    IsDates = Visibility.Collapsed;
-                }
-            }
-        }
         //Commands
         public ICommand SearchSaleCommand { get; }
         public ICommand ExportCsvCommand { get; }
@@ -178,9 +178,27 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteExportCsvCommand(object obj)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Iniciando conversión");
+            using (var textWriter = File.CreateText(@"C:\Users\Christian\Desktop\testing.csv"))
+            {
+                //string columns_line = "ID,Nombre,Apellido,Rol,Clave";
+                //textWriter.WriteLine(columns_line);
+                //foreach (var line in ToCsv(SalesOfPeriod))
+                //{
+                //    textWriter.WriteLine(line);
+                //}
+            }
         }
+        public static IEnumerable<string> ToCsv<SaleModel>(ObservableCollection<SaleModel> list)
+        {
+            var fields = typeof(SaleModel).GetFields();
+            var properties = typeof(SaleModel).GetProperties();
 
+            foreach (var @object in list)
+            {
+                yield return string.Join(",", fields.Select(x => (x.GetValue(@object) ?? string.Empty).ToString()).Concat(properties.Select(p => (p.GetValue(@object, null) ?? string.Empty).ToString())).ToArray());
+            }
+        }
         private bool CanExecuteExportCsvCommand(object obj)
         {
             return HistoricSales.Any();
