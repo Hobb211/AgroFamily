@@ -280,8 +280,7 @@
                         Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                         Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource button2}"
-                        >
+                        Style="{StaticResource button2}">
                     <TextBlock Text="Exportar CSV"
                                Margin="5"
                                Style="{StaticResource textStyle1}"
