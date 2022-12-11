@@ -12,13 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!--GridLinesVisibility="All"
-                      AutoGenerateColumns="False" 
-                      CanUserAddRows="False"
-                          Background="{StaticResource DataGridColor}"
--->
-
+        
         <DataGrid HorizontalGridLinesBrush="{StaticResource LineDataGrid}"
                   VerticalGridLinesBrush="{StaticResource LineDataGrid}"
                   RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
