@@ -61,9 +61,23 @@ namespace AgroFamily.Repositories
             IEnumerable<ArticleModel> articles = GetByAll().AsEnumerable();
             collection = new ObservableCollection<ArticleModel>(articles);
             return collection;
+
+
+
+        }
+        public ObservableCollection<ArticleModel> GetSuppliesCoincidences(string coincidencia)
+        {
+            IEnumerable<SuppliesModel> supplies;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                supplies = connection.Query<SuppliesModel>("SELECT * FROM SuppliesModel where Name like '%" + coincidencia + "%'");
+            }
+            IEnumerable<ArticleModel> articles = supplies.AsEnumerable();
+
+            ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(articles);
+            return collection;
         }
     }
 
 
-
-}
+ }
