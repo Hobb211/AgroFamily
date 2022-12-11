@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace AgroFamily.View
 {
@@ -37,7 +38,8 @@ namespace AgroFamily.View
 
         private void tId_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            EditStockViewModel searchName = (EditStockViewModel)this.DataContext;
+            searchName.ExecuteGetCoincidences();
         }
 
         private void eliminar_stock_Click(object sender, RoutedEventArgs e)

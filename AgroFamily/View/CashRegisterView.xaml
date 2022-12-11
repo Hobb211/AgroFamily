@@ -19,11 +19,43 @@
         </Grid.ColumnDefinitions>
         <Grid Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="137*"/>
+                <RowDefinition Height="46*"/>
+                <RowDefinition Height="199*"/>
+                <RowDefinition Height="48*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,0,0,10">
+
+
+            <Border Grid.Row="1"
+                        Background="{StaticResource Color9}"
+                        CornerRadius="10"
+                        Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="123*"/>
+                        <ColumnDefinition Width="286*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Buscar por nombre"
+                                   Style="{StaticResource titleStyle3}"
+                                   VerticalAlignment="Center"
+                                   FontSize="{Binding TextSize}" Height="14"/>
+                    <TextBox Grid.Column="1"
+                                 Name="button_search"
+                                 Style="{StaticResource textBox2}"
+                                 Background="White"
+                                 Margin="50,7,50,7" TextChanged="button_search_TextChanged_Cash"
+                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </Grid>
+            </Border>
+
+
+
+
+
+
+
+            <Grid Grid.Row="0" Margin="0,0,0,00">
                 <Border Grid.Column="0"
                         CornerRadius="20"
                         SizeChanged="Border_SizeChanged">
@@ -81,24 +113,24 @@
                                      PreviewTextInput="NumberValidationTextBox"
                                      Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-                            <TextBlock Grid.Row="1" Grid.Column="1"
+                        </Grid>
+                        <TextBlock Grid.Row="1" Grid.Column="1"
                                        Visibility="{Binding OverflowQuantityVisibility,UpdateSourceTrigger=PropertyChanged}"
                                        Text="No hay suficiente inventario"
                                        Style="{StaticResource textStyle1}"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                            <Button Grid.Row="2" Grid.Column="1"
+                        <Button Grid.Row="2" Grid.Column="1"
                                 Content="Añadir" 
                                 Style="{StaticResource button}"
                                 Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
                                 Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding AddProductCommand}"/>
-                        </Grid>
+                    </Grid>
                 </Border>
-                
+
             </Grid>
-            <DataGrid Grid.Row="1"
+            <DataGrid Grid.Row="2"
                       BorderBrush="Transparent"
                       HorizontalGridLinesBrush="{StaticResource Color6}"
                       VerticalGridLinesBrush="{StaticResource Color6}"
@@ -130,8 +162,8 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Border Grid.Row="2"
-                        Margin="5"
+            <Border Grid.Row="3"
+                        Margin="5,5,5,5"
                         CornerRadius="10">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
@@ -177,7 +209,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    
+
                     <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -185,7 +217,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="1">

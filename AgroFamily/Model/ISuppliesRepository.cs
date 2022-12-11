@@ -15,5 +15,7 @@ namespace AgroFamily.Model
         SuppliesModel GetById(int id);
         ObservableCollection<SuppliesModel> GetByAll();
         ObservableCollection<ArticleModel> GetByAllArticles();
+        ObservableCollection<ArticleModel> GetSuppliesCoincidences(string coincidencia);
+
     }
 }
