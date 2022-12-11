@@ -170,8 +170,6 @@
                     Grid.Row="1"
                     Content="Confirmar"
                     Command="{Binding AddItemCommand}"
-                    Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
-                    Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                     FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <Grid Grid.Column="2">
