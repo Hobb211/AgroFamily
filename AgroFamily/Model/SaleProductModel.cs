@@ -14,7 +14,7 @@ namespace AgroFamily.Model
         public int ProductId { get; set; }
         public int SaleId { get; set; }
         public string Name { get; set; }
-        public int Count { get; set; }
-        public int Amount { get; set; }
+        public long Count { get; set; }
+        public long Amount { get; set; }
     }
 }

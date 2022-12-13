@@ -14,7 +14,7 @@ namespace AgroFamily.ViewModel
         private ExpensiveModel _expensive;
         private ObservableCollection<TypeExpensiveModel> _typeExpensives;
         private ObservableCollection<ExpensiveModel> _expensiveModels;
-        private float _amount;
+        private long _amount;
         private string _description;
         private Visibility _newTypeVisibility;
         private string _newType;
@@ -42,7 +42,7 @@ namespace AgroFamily.ViewModel
             }
         }
         public ObservableCollection<TypeExpensiveModel> TypeExpensives { get => _typeExpensives; set { _typeExpensives = value; OnPropertyChanged(nameof(TypeExpensives)); } }
-        public float Amount { get => _amount; set { _amount = value; OnPropertyChanged(nameof(Amount)); } }
+        public long Amount { get => _amount; set { _amount = value; OnPropertyChanged(nameof(Amount)); } }
         public string Description { get => _description; set { _description = value; OnPropertyChanged(nameof(Description)); } }
         public Visibility NewTypeVisibility { get => _newTypeVisibility; set { _newTypeVisibility = value; OnPropertyChanged(nameof(NewTypeVisibility)); } }
         public string NewType { get => _newType; set { _newType = value; OnPropertyChanged(nameof(NewType)); } }

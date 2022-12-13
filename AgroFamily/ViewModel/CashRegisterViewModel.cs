@@ -22,17 +22,17 @@ namespace AgroFamily.ViewModel
         private ObservableCollection<SaleProductModel> _saleProducts;
         private ProductModel _currentProduct;
         private SaleProductModel _currentSaleProduct;
-        private int _currentQuantityProduct;
+        private long _currentQuantityProduct;
         private Visibility _overflowQuantityVisibility;
-        private int _totalPrice;
-        private int _totalPriceDay;
+        private long _totalPrice;
+        private long _totalPriceDay;
 
         //Propierties
         public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
         public ObservableCollection<SaleProductModel> SaleProducts { get => _saleProducts; set { _saleProducts = value; OnPropertyChanged(nameof(SaleProducts)); } }
         public ProductModel CurrentProduct { get => _currentProduct; set { _currentProduct = value; OnPropertyChanged(nameof(CurrentProduct)); } }
         public SaleProductModel CurrentSaleProduct { get => _currentSaleProduct; set { _currentSaleProduct = value; OnPropertyChanged(nameof(CurrentSaleProduct)); } }
-        public int CurrentQuantityProduct
+        public long CurrentQuantityProduct
         {
             get => _currentQuantityProduct;
             set
@@ -41,7 +41,7 @@ namespace AgroFamily.ViewModel
                 OnPropertyChanged(nameof(CurrentQuantityProduct));
                 if (CurrentProduct != null)
                 {
-                    int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                    long cant = 0;//Cantidad del producto seleccionado ya agregada al sale
                     for (int i = 0; i < SaleProducts.Count; i++)
                     {
                         if (SaleProducts[i].ProductId == CurrentProduct.Id)
@@ -61,8 +61,8 @@ namespace AgroFamily.ViewModel
             }
         }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
-        public int TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
-        public int TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
+        public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
+        public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
 
         //Commands
         public ICommand AddProductCommand { get; }
@@ -179,7 +179,7 @@ namespace AgroFamily.ViewModel
             bool validData;
             if (CurrentProduct != null)
             {
-                int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                long cant = 0;//Cantidad del producto seleccionado ya agregada al sale
                 for(int i = 0; i < SaleProducts.Count; i++)
                 {
                     if (SaleProducts[i].ProductId == CurrentProduct.Id)

@@ -12,7 +12,7 @@ namespace AgroFamily.Model
         void Add(SaleModel saletModel);
         SaleModel GetById(int id);
         ObservableCollection<SaleModel> GetAll();
-        int GetAmountInAMonth(int month, int year);
+        long GetAmountInAMonth(int month, int year);
         ObservableCollection<SaleModel> GetByDay(DateOnly date);
         ObservableCollection<SaleModel> GetByDateRange(DateOnly startingDate, DateOnly endingDate);
         ObservableCollection<SaleModel> GetBySeller(string sellerID);

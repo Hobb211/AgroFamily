@@ -39,9 +39,9 @@ namespace AgroFamily.Repositories
             }
         }
 
-        public int GetAmountInAMonth(int month, int year) //A
+        public long GetAmountInAMonth(int month, int year) //A
         {
-            int Amount = 0;
+            long Amount = 0;
             IEnumerable<SaleModel> list;
             using (SQLiteConnection connection = GetConnection())
             {

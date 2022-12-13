@@ -11,7 +11,7 @@ namespace AgroFamily.Model
     {
         [PrimaryKey,AutoIncrement]
         public int Id { get; set; }
-        public float Amount { get; set; }
+        public long Amount { get; set; }
         public DateTime DateTime { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }

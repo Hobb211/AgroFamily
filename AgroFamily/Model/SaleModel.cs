@@ -14,7 +14,7 @@ namespace AgroFamily.Model
         public string id_vendedor { get; set; }
         public string salerName { get; set; }
         public DateTime SaleDate { get; set; }
-        public int total { get; set; }
+        public long total { get; set; }
     }
 }
 

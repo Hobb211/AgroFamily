@@ -88,8 +88,8 @@ namespace AgroFamily.ViewModel
             {
                 ProductRepository productRepository = new ProductRepository();
                 SuppliesRepository suppliesRepository = new SuppliesRepository();
-                int cantidad_actual = Articulo.Stock;
-                int cant = cantidad_actual + Cantidad;
+                long cantidad_actual = Articulo.Stock;
+                long cant = cantidad_actual + Cantidad;
                 switch (Articulo.Type)
                 {
                     case "Producto":
@@ -121,8 +121,8 @@ namespace AgroFamily.ViewModel
             {
                 ProductRepository productRepository = new ProductRepository();
                 SuppliesRepository suppliesRepository = new SuppliesRepository();
-                int cantidad_actual = Articulo.Stock;
-                int cant = cantidad_actual - Cantidad;
+                long cantidad_actual = Articulo.Stock;
+                long cant = cantidad_actual - Cantidad;
                 if (cant >= 0)
                 {
                     switch (Articulo.Type)
