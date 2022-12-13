@@ -21,7 +21,6 @@
             <ColumnDefinition Width="46*"/>
             <ColumnDefinition Width="242*"/>
         </Grid.ColumnDefinitions>
-
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.4*"/>
@@ -37,7 +36,6 @@
                 <Image Margin="10" 
                        Source="/Assets/user_reg.png" />
             </Border>
-
             <Border CornerRadius="0"
                     Grid.Row="1"
                     Padding="10">
@@ -45,36 +43,35 @@
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
 
-                <StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Style="{StaticResource textStyle3}" 
-                               HorizontalAlignment="Center" 
-                               Text="{Binding CurrentUser.Name}"   
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel Orientation="Vertical" 
+                            Margin="0 5 0 0">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding CurrentUser.Name}"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" />
                         <TextBlock HorizontalAlignment="Center" 
                                Text=" "   
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Style="{StaticResource textStyle3}" 
-                               HorizontalAlignment="Center" 
-                               Text="{Binding CurrentUser.LastName}"  
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding CurrentUser.LastName}"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
-                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <!--<TextBlock Style="{StaticResource textStyle3}" 
-                                   HorizontalAlignment="Center" 
-                                   Text="ID " 
-                                   FontSize="18"/>-->
-                        <TextBlock Style="{StaticResource textStyle3}" 
-                               HorizontalAlignment="Center" 
-                               Text="{Binding CurrentUser.Id}" 
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Margin="0 5 0 0" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center">
+                        <TextBlock Style="{StaticResource textStyle3}"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding CurrentUser.Id}"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
-                    <TextBlock Style="{StaticResource textStyle3}" 
-                           HorizontalAlignment="Center" 
-                           Text="{Binding CurrentUser.Type}" 
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
-                           Margin="0 5 0 0"/>
-                    <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="{Binding CurrentUser.Password}"  FontSize="16" Background="Aqua"/>-->
+                    <TextBlock Style="{StaticResource textStyle3}"
+                               HorizontalAlignment="Center"
+                               Text="{Binding CurrentUser.Type}"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                               Margin="0 5 0 0"/>
                 </StackPanel>
             </Border>
 
@@ -90,88 +87,77 @@
                         <RowDefinition Height="38*"/>
                         <RowDefinition Height="36*"/>
                     </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="39*"/>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="117*"/>
-                        <ColumnDefinition Width="27*"/>
-                        <ColumnDefinition Width="34*"/>
-                    </Grid.ColumnDefinitions>
-
                     <TextBlock Style="{StaticResource textStyle3}"
-                           Text="Nueva contraseña:"
-                           HorizontalAlignment="Center"
-                           Grid.Row="1"
-                           Grid.Column="1"
-                           Grid.ColumnSpan="3"
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                               Text="Nueva contraseña:"
+                               HorizontalAlignment="Center"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <TextBlock Grid.Row="0" 
-                           Grid.Column="1" 
-                           Grid.ColumnSpan="3" 
-                           FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource textStyle3}" 
-                           HorizontalAlignment="Center" 
-                           Text="Cambio de contraseña" />
-
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="1"
+                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource textStyle3}"
+                               HorizontalAlignment="Center"
+                               Text="Cambio de contraseña" />
                     <Border CornerRadius="10"
-                        Margin="5,5,5,5"
-                        Grid.Row="2" 
-                        Grid.Column="1" Grid.ColumnSpan="3">
+                            Margin="5,5,5,5"
+                            Grid.Row="2"
+                            Grid.Column="1">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
                         </Border.Background>
                         <TextBox x:Name="NewPassword"
-                             Text="{Binding NewPassword,UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource textBox2}"
-                             Background="Transparent"
-                             Margin="15,0"
-                             Height="20"
-                             FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding NewPassword,UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource textBox2}"
+                                 Background="Transparent"
+                                 Margin="15,0"
+                                 Height="20"
+                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="updatePassword"
+                                Style="{StaticResource button_tr}"
+                                Content="Confirmar"
+                                Command="{Binding UpdatePasswordCommand}"
+                                Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                                Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Column="2" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="2,0,0,0"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button x:Name="updatePassword"
-                        Style="{StaticResource button_tr_small}"
-                        Content="Confirmar"
-                        Command="{Binding UpdatePasswordCommand}" 
-                        Grid.Row="3" Grid.Column="2" Margin="2,0,0,0"
-                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <Button x:Name="getCSV"
-                        Content="CSV"
-                        Command="{Binding ExportCSV}" 
-                        Grid.Row="3" Grid.Column="0" 
-                        Margin="2,0,0,0"
-                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-
+                        <Button x:Name="getCSV"
+                                Style="{StaticResource button_tr}"
+                                Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                                Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
+                                Content="CSV"
+                                Command="{Binding ExportCSV}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="2,0,0,0"
+                                />
+                    </Grid>
                 </Grid>
-
-                <!--<StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                <TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />
-                    -->
-                <!--<TextBlock Style="{StaticResource textStyle3}" HorizontalAlignment="Center" Text="Cambio de contraseña"   FontSize="18" />-->
-                <!--
-                    <TextBlock Style="{StaticResource textStyle3}"
-                               Text="Contraseña nueva:"
-                               Width="auto" Height="auto"/>
-
-            </StackPanel>-->
-
-
-
-
-
             </Border>
         </Grid>
-
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Border x:Name="BDRounded" Grid.Row="2" BorderThickness="0" CornerRadius="20" Background="{StaticResource Color5}">
+            <Border x:Name="BDRounded"
+                    Grid.Row="2"
+                    BorderThickness="0"
+                    CornerRadius="20"
+                    Background="{StaticResource Color5}">
                 <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}" 
                       Style="{DynamicResource DataGridStyle1}"
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -206,186 +192,184 @@
 
                                             <fa:IconImage Icon="Trash" Style="{StaticResource controlButtonIcon}"/>
                                         </Button>
-
                                     </StackPanel>
-
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
-
-
-
-
                 </DataGrid>
             </Border>
-
             <Border CornerRadius="20"
-                    Grid.Row="0" Margin="3,11,0,4">
+                    Grid.Row="0" 
+                    Margin="3,11,0,4">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
-
                 <Grid Margin="5">
                     <Grid.RowDefinitions >
-                        <RowDefinition Height="40*"/>
-                        <RowDefinition Height="50*"/>
-                        <RowDefinition Height="50*"/>
-                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height=".2*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250*"/>
-                        <ColumnDefinition Width="210*"/>
-                    </Grid.ColumnDefinitions>
-
                     <TextBlock Text="Añada un usuario al sistema"
-                               Margin="10"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
                                Style="{StaticResource titleStyle3}"
                                FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <!--Name Box-->
-                    <Grid Margin="10,0,0,0"
-                          Grid.Row="1"
-                          Grid.Column="0">
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="250*"/>
+                            <ColumnDefinition Width="210*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource textStyle3}"
-                               Text="ID (Rut)"
-                               VerticalAlignment="Center"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border Grid.Column="1"
+                        <!--Name Box-->
+                        <Grid Margin="10,0,0,0"
+                          Grid.Row="0"
+                          Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource textStyle3}"
+                                   Text="ID (Rut)"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                            <Border Grid.Column="1"
                                 CornerRadius="10"
                                 Margin="10,5"
                                 MaxHeight="50">
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                            </Border.Background>
-                            <TextBox x:Name="Id"
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                                </Border.Background>
+                                <TextBox x:Name="Id"
                                      Text="{Binding Id,UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource textBox2}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      Margin="15,0"
                                      Height="20"/>
-                        </Border>
-                    </Grid>
-                    <!--Type List Box-->
-                    <Grid Grid.Row="1"
+                            </Border>
+                        </Grid>
+                        <!--Type List Box-->
+                        <Grid Grid.Row="0"
                           Margin="10,0,0,0"
                           Grid.Column="1" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.6*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource textStyle3}"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource textStyle3}"
                                    Text="Rol" 
                                    VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="10"
+                            <Border CornerRadius="10"
                                 Margin="10,5"
                                 Grid.Column="1"
                                 MaxHeight="50">
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                            </Border.Background>
-                            <ComboBox Margin="10,6"
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                                </Border.Background>
+                                <ComboBox Margin="10,6"
                                       ItemsSource="{Binding Path=TypeUser}"
                                       SelectedItem="{Binding Path=Type}"
                                       DisplayMemberPath="Name"
                                       FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}">
-                            </ComboBox>
-                        </Border>
-                    </Grid>
-                    <!--name Box-->
-                    <Grid Margin="10,0,0,0"
-                          Grid.Row="2"
+                                </ComboBox>
+                            </Border>
+                        </Grid>
+                        <!--name Box-->
+                        <Grid Margin="10,0,0,0"
+                          Grid.Row="1"
                           Grid.Column="0" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.6*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource textStyle3}"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource textStyle3}"
                                    Text="Nombre"
                                    VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="10"
+                            <Border CornerRadius="10"
                                 Margin="10,5"
                                 Grid.Column="1"
                                 MaxHeight="50">
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                            </Border.Background>
-                            <TextBox x:Name="name"
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                                </Border.Background>
+                                <TextBox x:Name="name"
                                      Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource textBox2}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      Margin="15,0"
                                      Height="20"/>
-                        </Border>
-                    </Grid>
-                    <!--lastname Box-->
-                    <Grid Margin="10,0,0,0"
-                          Grid.Row="2"
+                            </Border>
+                        </Grid>
+                        <!--lastname Box-->
+                        <Grid Margin="10,0,0,0"
+                          Grid.Row="1"
                           Grid.Column="1" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.6*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource textStyle3}"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource textStyle3}"
                                    Text="Apellido"
                                    VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="10"
+                            <Border CornerRadius="10"
                                 Margin="10,5"
                                 Grid.Column="1"
                                 MaxHeight="50">
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                            </Border.Background>
-                            <TextBox x:Name="Lastname"
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                                </Border.Background>
+                                <TextBox x:Name="Lastname"
                                      Text="{Binding Lastname,UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource textBox2}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      Margin="15,0"
                                      Height="20"/>
-                        </Border>
-                    </Grid>
-
-                    <!--password Box-->
-                    <Grid Margin="10,0,0,0"
+                            </Border>
+                        </Grid>
+                        <!--password Box-->
+                        <Grid Margin="10,0,0,0"
                           Grid.Row="3"
                           Grid.Column="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.6*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Style="{StaticResource textStyle3}"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource textStyle3}"
                                    Text="Contraseña"
                                    VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        <Border CornerRadius="10"
+                            <Border CornerRadius="10"
                                 Margin="10,5"
                                 Grid.Column="1"
                                 MaxHeight="50">
-                            <Border.Background>
-                                <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
-                            </Border.Background>
-                            <TextBox x:Name="Password"
+                                <Border.Background>
+                                    <SolidColorBrush Color="{StaticResource secondaryBackColor2}"/>
+                                </Border.Background>
+                                <TextBox x:Name="Password"
                                      Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource textBox2}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                      Background="Transparent"
                                      Margin="15,0"
                                      Height="20"/>
-                        </Border>
-                    </Grid>
-
-                    <Button x:Name="addUser"
+                            </Border>
+                        </Grid>
+                        <Button x:Name="addUser"
                             Style="{StaticResource button_tr}"
                             FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                             Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
@@ -395,6 +379,7 @@
                             Grid.Row="3" Grid.Column="1"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"/>
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
