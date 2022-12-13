@@ -213,11 +213,10 @@ namespace AgroFamily.ViewModel
                         cashier.Password = Password;
                         cashier.Type = "Cajero";
                         userRepository.Add(cashier);
-                        MessageBox.Show("Usuario registrado");
                         break;
                 }
                 Users = userRepository.GetByAll();
-                
+                MessageBox.Show("Usuario registrado");
             }
             catch (Exception e)
             {

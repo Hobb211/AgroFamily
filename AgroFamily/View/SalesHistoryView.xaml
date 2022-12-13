@@ -43,7 +43,7 @@
             <!--Main section-->
             <Border CornerRadius="10"
                     Margin="10"
-                    SizeChanged="Border_SizeChanged">
+                    SizeChanged="Border_SizeChanged1">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource secondaryBackColor1}"/>
                 </Border.Background>
@@ -210,7 +210,7 @@
                     <DataGridTextColumn Header="Fecha"
                                         IsReadOnly="True" 
                                         Width="*" 
-                                        Binding="{Binding SaleDate.Date}">
+                                        Binding="{Binding SaleDate}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" 

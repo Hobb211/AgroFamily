@@ -191,8 +191,7 @@
                                    Style="{StaticResource titleStyle3}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
-                                   FontSize="{Binding TextSize}"
-                                   Height="15"/>
+                                   FontSize="{Binding TextSize}"/>
                         <TextBox Grid.Column="1"
                                  Name="button_search"
                                  Style="{StaticResource textBox2}"

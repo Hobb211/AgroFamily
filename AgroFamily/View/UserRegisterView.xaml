@@ -117,8 +117,9 @@
                     </Border>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="updatePassword"
                                 Style="{StaticResource button_tr}"
@@ -126,23 +127,11 @@
                                 Command="{Binding UpdatePasswordCommand}"
                                 Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                 Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
-                                Grid.Column="2" 
+                                Grid.Column="1" 
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="2,0,0,0"
                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-
-                        <Button x:Name="getCSV"
-                                Style="{StaticResource button_tr}"
-                                Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
-                                Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}"
-                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                Content="CSV"
-                                Command="{Binding ExportCSV}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="2,0,0,0"
-                                />
                     </Grid>
                 </Grid>
             </Border>
@@ -222,15 +211,15 @@
                             <RowDefinition Height="50*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250*"/>
-                            <ColumnDefinition Width="210*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <!--Name Box-->
                         <Grid Margin="10,0,0,0"
                           Grid.Row="0"
                           Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.25*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -259,7 +248,7 @@
                           Margin="10,0,0,0"
                           Grid.Column="1" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -287,7 +276,7 @@
                           Grid.Row="1"
                           Grid.Column="0" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.25*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -316,7 +305,7 @@
                           Grid.Row="1"
                           Grid.Column="1" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -345,7 +334,7 @@
                           Grid.Row="3"
                           Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.25*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"

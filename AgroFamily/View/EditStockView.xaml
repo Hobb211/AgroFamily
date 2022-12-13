@@ -64,7 +64,7 @@
                         Orientation="Horizontal"
                         Margin="25,15,20,2" Grid.RowSpan="2">
                     <TextBlock
-							Text="Nombre"
+							Text="Filtrar"
 							FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 							Style="{StaticResource titleStyle1}" 
 							VerticalAlignment="Center"/>
@@ -73,7 +73,6 @@
 							CornerRadius="10,10,10,10" 
 							Width="150">
                         <TextBox x:Name="tId" 
-                                 
                                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                  VerticalContentAlignment="Center"

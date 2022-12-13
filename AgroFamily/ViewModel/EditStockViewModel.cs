@@ -32,7 +32,7 @@ namespace AgroFamily.ViewModel
         public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
         public ICommand ReduceStockCommand { get; }
         public ICommand AddStockCommand { get; }
-        public ArticleModel Articulo { get => _articulo; set => _articulo = value; }
+        public ArticleModel Articulo { get => _articulo; set { _articulo = value; OnPropertyChanged(nameof(Articulo)); } }
 
         public EditStockViewModel()
         {
