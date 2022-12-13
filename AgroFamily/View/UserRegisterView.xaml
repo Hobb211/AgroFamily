@@ -18,7 +18,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="497*"/>
-            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="242*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="2">
@@ -219,7 +219,7 @@
                           Grid.Row="0"
                           Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.25*"/>
+                                <ColumnDefinition Width="0.3*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -276,7 +276,7 @@
                           Grid.Row="1"
                           Grid.Column="0" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.25*"/>
+                                <ColumnDefinition Width="0.3*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
@@ -334,7 +334,7 @@
                           Grid.Row="3"
                           Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.25*"/>
+                                <ColumnDefinition Width="0.3*"/>
                                 <ColumnDefinition Width="0.6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource textStyle3}"
