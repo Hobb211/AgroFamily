@@ -174,7 +174,11 @@ namespace AgroFamily.ViewModel
         private bool CanExecuteAddUserCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Name) || Name.Length < 3 || Type == null)
+            if (Id == null || string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(Lastname) || Type == null)
+            {
+                validData = false;  
+            }
+            else if (Name.Length<3 || Password.Length<3 ||  Lastname.Length <3 || Id.Length <3)
             {
                 validData = false;
             }
