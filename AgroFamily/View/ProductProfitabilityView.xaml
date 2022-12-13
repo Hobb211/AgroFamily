@@ -10,14 +10,14 @@
     <UserControl.DataContext>
         <viewmodel:ProductProfitabilityViewModel/>
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border Margin="20,90,20,90"
-				CornerRadius="10,10,10,10"
+        <Border Margin="20,103,20,10"
+				CornerRadius="10"
                 Grid.Column="0"
                 SizeChanged="Border_SizeChanged"
                 Background="{StaticResource Color9}">
@@ -181,26 +181,30 @@
                 <Border Grid.Row="1"
                         Background="{StaticResource Color9}"
                         CornerRadius="10"
-                        Margin="10,0">
+                        Margin="20,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*"/>
-                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="47*"/>
+                            <ColumnDefinition Width="73*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nombre"
                                    Style="{StaticResource titleStyle3}"
                                    VerticalAlignment="Center"
-                                   FontSize="{Binding TextSize}"/>
+                                   HorizontalAlignment="Center"
+                                   FontSize="{Binding TextSize}"
+                                   Height="15"/>
                         <TextBox Grid.Column="1"
                                  Name="button_search"
                                  Style="{StaticResource textBox2}"
                                  Background="White"
-                                 Margin="50,0,50,0" TextChanged="button_search_TextChanged"
-                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}">
-                        </TextBox>
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Left"
+                                 Width="150"
+                                 TextChanged="button_search_TextChanged"
+                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Border>
-                
+
                 <!--Lo dejare asi con un text block para cambiarlo por un list view-->
                 <Grid Grid.Row="2"
                       Margin="20,20,20,10">
@@ -236,23 +240,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-
             </Grid>
-
-
-
-
         </Border>
-
-
-
-
-
     </Grid>
-
-
-
-
-
-
 </UserControl>

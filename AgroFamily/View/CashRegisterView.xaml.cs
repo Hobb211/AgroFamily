@@ -39,5 +39,11 @@ namespace AgroFamily.View
             ViewModelBase viewModel = (ViewModelBase)this.DataContext;
             viewModel.ChangeSizeFont();
         }
+
+        private void button_search_TextChanged_Cash(object sender, TextChangedEventArgs e)
+        {
+            CashRegisterViewModel viewModel = (CashRegisterViewModel)this.DataContext;
+            viewModel.ExecuteGetCoincidencesCash();
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="AgroFamily.View.EditStockView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AgroFamily.View"
         xmlns:viewModel="clr-namespace:AgroFamily.ViewModel" 
 		xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -73,18 +73,20 @@
 							CornerRadius="10,10,10,10" 
 							Width="150">
                         <TextBox x:Name="tId" 
-                                 Text="{Binding SelectedItem.Name, ElementName=membersDataGrid}"
+                                 
+                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                  FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
                                  VerticalContentAlignment="Center"
                                  FontWeight="Medium"
                                  FontFamily="Montserrat"
-                                 IsReadOnly="True"
+                                 IsReadOnly="False"
                                  Background="{StaticResource Color6}"
                                  BorderBrush="Transparent"
                                  Foreground="{StaticResource textColor2}"
                                  CaretBrush="LightGray"
                                  Height="28"
-                                 VerticalAlignment="Center" TextChanged="tId_TextChanged">
+                                 VerticalAlignment="Center" 
+                                 TextChanged="tId_TextChanged">
                         </TextBox>
                     </Border>
                     <TextBlock

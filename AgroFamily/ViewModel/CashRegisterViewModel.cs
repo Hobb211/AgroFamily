@@ -2,20 +2,26 @@
 using AgroFamily.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization.Metadata;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace AgroFamily.ViewModel
 {
     public class CashRegisterViewModel : ViewModelBase
     {
         //Repositories
+        private string _name;
         private IProductRepository _productRepository;
         private ISaleRepository _saleRepository;
         private ISaleProductRepository _saleProductRepository;
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
+
         public IProductRepository ProductRepository { get => _productRepository; set { _productRepository = value; OnPropertyChanged(nameof(ProductRepository)); } }
         public ISaleRepository SaleRepository { get => _saleRepository; set { _saleRepository = value; OnPropertyChanged(nameof(SaleRepository)); } }
         public ISaleProductRepository SaleProductRepository { get => _saleProductRepository; set { _saleProductRepository = value; OnPropertyChanged(nameof(SaleProductRepository)); } }
+
 
         //Fields
         private ObservableCollection<ProductModel> _products;
@@ -215,5 +221,14 @@ namespace AgroFamily.ViewModel
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
             CurrentQuantityProduct = 0;
         }
+        public void ExecuteGetCoincidencesCash()
+
+        {
+            IProductRepository productRepository = new ProductRepository();
+            Products = productRepository.GetProductCoincidences2(Name);
+
+        }
     }
+
+
 }
