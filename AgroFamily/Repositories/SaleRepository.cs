@@ -29,14 +29,8 @@ namespace AgroFamily.Repositories
             {
                 list = connection.Query<SaleModel>("select * from SaleModel");
             }
-            if (list != null && list.Any())
-            {
-                return new ObservableCollection<SaleModel>(list);
-            }
-            else
-            {
-                throw new SaleConflictException("No se ha obtenido ninguna venta");
-            }
+            return new ObservableCollection<SaleModel>(list);
+
         }
 
         public long GetAmountInAMonth(int month, int year) //A
