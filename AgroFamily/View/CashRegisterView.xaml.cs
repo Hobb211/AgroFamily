@@ -57,7 +57,10 @@ namespace AgroFamily.View
             if (e.Key == Key.Enter)
             {
                 CashRegisterViewModel viewModel = (CashRegisterViewModel)this.DataContext;
-                viewModel.AddProductCommand.Execute(viewModel);
+                if (viewModel.CanAddProduct)
+                {
+                    viewModel.AddProductCommand.Execute(viewModel);
+                }
             }
         }
     }

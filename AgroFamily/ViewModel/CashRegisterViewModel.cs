@@ -13,6 +13,7 @@ namespace AgroFamily.ViewModel
         private IProductRepository _productRepository;
         private ISaleRepository _saleRepository;
         private ISaleProductRepository _saleProductRepository;
+        private bool _canAddProduct;
         public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
 
         public IProductRepository ProductRepository { get => _productRepository; set { _productRepository = value; OnPropertyChanged(nameof(ProductRepository)); } }
@@ -30,7 +31,7 @@ namespace AgroFamily.ViewModel
         private Visibility _overflowQuantityVisibility;
         private long _totalPrice;
         private long _totalPriceDay;
-        private string _manualAmmount;
+        private string _manualAmmount="";
 
         //Propierties
         public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
@@ -57,19 +58,35 @@ namespace AgroFamily.ViewModel
                     if (value+cant > CurrentProduct.Stock)
                     {
                         OverflowQuantityVisibility = Visibility.Visible;
+                        CanAddProduct = false;
                     }
                     else
                     {
                         OverflowQuantityVisibility = Visibility.Collapsed;
+                        CanAddProduct = true;
                     }
                 }
             }
         }
-        public string CurrentQuantityProduct1 { get => _currentQuantityProduct1; set { _currentQuantityProduct1 = value; OnPropertyChanged(nameof(CurrentQuantityProduct1)); try { CurrentQuantityProduct = long.Parse(value); } catch { }  } }
+        public string CurrentQuantityProduct1 { get => _currentQuantityProduct1; set { _currentQuantityProduct1 = value; try { CurrentQuantityProduct = long.Parse(value); } catch { } OnPropertyChanged(nameof(CurrentQuantityProduct1)); } }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
-        public string ManualAmmount { get => _manualAmmount; set { _manualAmmount = value; OnPropertyChanged(nameof(ManualAmmount)); } }
+        public string ManualAmmount 
+        { get => _manualAmmount; 
+            set { 
+                _manualAmmount = value;
+                if (value != "")
+                {
+                    CanAddProduct = true;
+                }
+                else
+                {
+                    CanAddProduct = false;
+                }
+                    OnPropertyChanged(nameof(ManualAmmount));
+                } 
+            }
 
 
         //Commands
@@ -77,7 +94,7 @@ namespace AgroFamily.ViewModel
         public ICommand RemoveProductCommand { get; }
         public ICommand RemoveProductCommand_DG { get; }
         public ICommand PayCommand { get; }
-
+        public bool CanAddProduct { get => _canAddProduct; set => _canAddProduct = value; }
 
         public CashRegisterViewModel()
         {
@@ -226,19 +243,28 @@ namespace AgroFamily.ViewModel
                     ammount = long.Parse(ManualAmmount);
                 }
                 catch { }
+                SaleProducts.Add(new SaleProductModel()
+                {
+                    ProductId = CurrentProduct.Id,
+                    Count = 0,
+                    Name = CurrentProduct.Name,
+                    Amount = ammount
+                }) ;
             }
-
-            SaleProducts.Add(new SaleProductModel()
+            else
             {
-                ProductId = CurrentProduct.Id,
-                Count = CurrentQuantityProduct,
-                Name = CurrentProduct.Name,
-                Amount = ammount
-            }) ;
-            TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
+                SaleProducts.Add(new SaleProductModel()
+                {
+                    ProductId = CurrentProduct.Id,
+                    Count = CurrentQuantityProduct,
+                    Name = CurrentProduct.Name,
+                    Amount = ammount
+                });
+            }
+            TotalPrice += ammount;
             CurrentQuantityProduct = 0;
             CurrentQuantityProduct1 = "";
-
+            ManualAmmount = "";
         }
         public void ExecuteGetCoincidencesCash()
 
