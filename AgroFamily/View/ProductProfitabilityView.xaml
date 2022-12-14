@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <viewmodel:ProductProfitabilityViewModel/>
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
@@ -200,7 +200,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                
+
                 <!--Lo dejare asi con un text block para cambiarlo por un list view-->
                 <Grid Grid.Row="2"
                       Margin="20,20,20,10">
@@ -236,23 +236,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-
             </Grid>
-
-
-
-
         </Border>
-
-
-
-
-
     </Grid>
-
-
-
-
-
-
 </UserControl>
+
+
+    

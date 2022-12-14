@@ -54,9 +54,11 @@ namespace AgroFamily.Repositories
                 SaleModel saleModel = SaleModels[i];
                 Amount = Amount + saleModel.total;
             }
-
             return Amount;
         }
+
+
+
 
         public SaleModel GetById(int id)
         {
