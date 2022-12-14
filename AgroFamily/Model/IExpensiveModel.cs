@@ -12,7 +12,7 @@ namespace AgroFamily.Model
         public void Add(ExpensiveModel expensive);
         public ExpensiveModel GetById(int id);
         public ObservableCollection<ExpensiveModel> GetByAll();
-        double GetAmountInAMonth(int month, int year);
+        long GetAmountInAMonth(int month, int year);
 
     }
 }

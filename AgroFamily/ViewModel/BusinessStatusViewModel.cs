@@ -36,7 +36,7 @@ namespace AgroFamily.ViewModel
 
             ISaleRepository saleRepository = new SaleRepository();
             IExpensiveModel expensiveRepository = new ExpensiveRepository();
-            int AmountSales_int = saleRepository.GetAmountInAMonth(month, year);
+            long AmountSales_int = saleRepository.GetAmountInAMonth(month, year);
             double AmountExp_int = expensiveRepository.GetAmountInAMonth(month, year);
             double AmountDiff_int = (AmountSales_int - AmountExp_int);
             double AmountDiffPorcent_int = (((AmountDiff_int)/AmountSales_int)*100);

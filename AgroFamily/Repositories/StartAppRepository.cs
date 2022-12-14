@@ -25,7 +25,10 @@ namespace AgroFamily.Repositories
                 db.CreateTable<ArticleModel>();
                 try
                 {
-                    db.Insert(new UserModel() { Id = "admin", Password = "admin", Name = "Admin", Type = "Administrador" });
+                    if (db.Query<UserModel>("select * from UserModel").Count() == 0) 
+                    {
+                        db.Insert(new UserModel() { Id = "admin",Password="admin",Type="Administrador"});
+                    }
                     db.Insert(new TypeExpensiveModel() { Name = "Añadir tipo" });
                     db.Insert(new TypeUserModel() { Name="Administrador"});
                     db.Insert(new TypeUserModel() { Name = "Cajero" });

@@ -20,17 +20,19 @@ namespace AgroFamily.ViewModel
     {
         private int _cantidad;
         private int _id;
+        private string _name;
         private ArticleModel _articulo;
 
         public int Cantidad { get => _cantidad; set { _cantidad = value; OnPropertyChanged(nameof(Cantidad)); } }
         public int Id { get => _id; set { _id = value; OnPropertyChanged(nameof(Id)); } }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
 
         private ObservableCollection<ArticleModel> _articles;
 
         public ObservableCollection<ArticleModel> Articles { get => _articles; set { _articles = value; OnPropertyChanged(nameof(Articles)); } }
         public ICommand ReduceStockCommand { get; }
         public ICommand AddStockCommand { get; }
-        public ArticleModel Articulo { get => _articulo; set => _articulo = value; }
+        public ArticleModel Articulo { get => _articulo; set { _articulo = value; OnPropertyChanged(nameof(Articulo)); } }
 
         public EditStockViewModel()
         {
@@ -88,8 +90,8 @@ namespace AgroFamily.ViewModel
             {
                 ProductRepository productRepository = new ProductRepository();
                 SuppliesRepository suppliesRepository = new SuppliesRepository();
-                int cantidad_actual = Articulo.Stock;
-                int cant = cantidad_actual + Cantidad;
+                long cantidad_actual = Articulo.Stock;
+                long cant = cantidad_actual + Cantidad;
                 switch (Articulo.Type)
                 {
                     case "Producto":
@@ -109,9 +111,9 @@ namespace AgroFamily.ViewModel
                 Id = 0;
                 Cantidad = 0;
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Un error ha ocurrido");
+                MessageBox.Show("Un error ha ocurrido"+ e.Message);
             }
         }
 
@@ -121,8 +123,8 @@ namespace AgroFamily.ViewModel
             {
                 ProductRepository productRepository = new ProductRepository();
                 SuppliesRepository suppliesRepository = new SuppliesRepository();
-                int cantidad_actual = Articulo.Stock;
-                int cant = cantidad_actual - Cantidad;
+                long cantidad_actual = Articulo.Stock;
+                long cant = cantidad_actual - Cantidad;
                 if (cant >= 0)
                 {
                     switch (Articulo.Type)
@@ -154,6 +156,17 @@ namespace AgroFamily.ViewModel
             {
                 MessageBox.Show("Un error ha ocurrido");
             }
+        }
+
+        public void ExecuteGetCoincidences()
+
+        {
+            IProductRepository productRepository = new ProductRepository();
+            ISuppliesRepository suppliesRepository = new SuppliesRepository();
+
+            Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetSuppliesCoincidences(Name).Concat(productRepository.GetProductCoincidences(Name)));
+
+
         }
     }
 }

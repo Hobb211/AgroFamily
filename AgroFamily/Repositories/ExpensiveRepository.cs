@@ -35,9 +35,9 @@ namespace AgroFamily.Repositories
                 return con.Find<ExpensiveModel>(id);
             }
         }
-        public double GetAmountInAMonth(int month, int year) //A
+        public long GetAmountInAMonth(int month, int year) //A
         {
-            double Amount = 0;
+            long Amount = 0;
             IEnumerable<ExpensiveModel> list;
             using (SQLiteConnection connection = GetConnection())
             {
@@ -47,7 +47,7 @@ namespace AgroFamily.Repositories
             for (int i = 0; i < expensiveModels.Count; i++)
             {
                 ExpensiveModel expensive = expensiveModels[i];
-                Amount = Amount + (double)Math.Round(expensive.Amount);
+                Amount = Amount + expensive.Amount;
             }
 
             return Amount;

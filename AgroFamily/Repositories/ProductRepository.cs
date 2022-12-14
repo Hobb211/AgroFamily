@@ -6,6 +6,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace AgroFamily.Repositories
 {
@@ -60,6 +63,40 @@ namespace AgroFamily.Repositories
             ObservableCollection<ArticleModel> collection;
             IEnumerable<ArticleModel> articles=GetByAll().AsEnumerable();
             collection = new ObservableCollection<ArticleModel>(articles);
+            return collection;
+        }
+
+
+        //public ObservableCollection<ArticleModel> GetProductCoincidences()
+        //{
+        //    ObservableCollection<ArticleModel> collection;
+        //    IEnumerable<ArticleModel> articles = GetByAll().AsEnumerable();
+        //    collection = new ObservableCollection<ArticleModel>(articles);
+        //    return collection;
+        //}
+
+        public ObservableCollection<ArticleModel> GetProductCoincidences(string coincidencia)
+        {
+            IEnumerable<ProductModel> products;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                products = connection.Query<ProductModel>("SELECT * FROM ProductModel where Name like '%" + coincidencia + "%'");
+            }
+            IEnumerable<ArticleModel> articles = products.AsEnumerable();
+
+            ObservableCollection<ArticleModel> collection = new ObservableCollection<ArticleModel>(articles);
+            return collection;
+        }
+
+        public ObservableCollection<ProductModel> GetProductCoincidences2(string coincidencia)
+        {
+            IEnumerable<ProductModel> products;
+            using (SQLiteConnection connection = GetConnection())
+            {
+                products = connection.Query<ProductModel>("SELECT * FROM ProductModel where Name like '%" + coincidencia + "%'");
+            }
+            ObservableCollection<ProductModel> collection = new ObservableCollection<ProductModel>(products);
+
             return collection;
         }
     }

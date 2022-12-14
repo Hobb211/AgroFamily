@@ -2,37 +2,43 @@
 using AgroFamily.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization.Metadata;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace AgroFamily.ViewModel
 {
     public class CashRegisterViewModel : ViewModelBase
     {
         //Repositories
+        private string _name;
         private IProductRepository _productRepository;
         private ISaleRepository _saleRepository;
         private ISaleProductRepository _saleProductRepository;
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(nameof(Name)); } }
+
         public IProductRepository ProductRepository { get => _productRepository; set { _productRepository = value; OnPropertyChanged(nameof(ProductRepository)); } }
         public ISaleRepository SaleRepository { get => _saleRepository; set { _saleRepository = value; OnPropertyChanged(nameof(SaleRepository)); } }
         public ISaleProductRepository SaleProductRepository { get => _saleProductRepository; set { _saleProductRepository = value; OnPropertyChanged(nameof(SaleProductRepository)); } }
+
 
         //Fields
         private ObservableCollection<ProductModel> _products;
         private ObservableCollection<SaleProductModel> _saleProducts;
         private ProductModel _currentProduct;
         private SaleProductModel _currentSaleProduct;
-        private int _currentQuantityProduct;
+        private long _currentQuantityProduct;
         private Visibility _overflowQuantityVisibility;
-        private int _totalPrice;
-        private int _totalPriceDay;
+        private long _totalPrice;
+        private long _totalPriceDay;
 
         //Propierties
         public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
         public ObservableCollection<SaleProductModel> SaleProducts { get => _saleProducts; set { _saleProducts = value; OnPropertyChanged(nameof(SaleProducts)); } }
         public ProductModel CurrentProduct { get => _currentProduct; set { _currentProduct = value; OnPropertyChanged(nameof(CurrentProduct)); } }
         public SaleProductModel CurrentSaleProduct { get => _currentSaleProduct; set { _currentSaleProduct = value; OnPropertyChanged(nameof(CurrentSaleProduct)); } }
-        public int CurrentQuantityProduct
+        public long CurrentQuantityProduct
         {
             get => _currentQuantityProduct;
             set
@@ -41,7 +47,7 @@ namespace AgroFamily.ViewModel
                 OnPropertyChanged(nameof(CurrentQuantityProduct));
                 if (CurrentProduct != null)
                 {
-                    int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                    long cant = 0;//Cantidad del producto seleccionado ya agregada al sale
                     for (int i = 0; i < SaleProducts.Count; i++)
                     {
                         if (SaleProducts[i].ProductId == CurrentProduct.Id)
@@ -61,8 +67,8 @@ namespace AgroFamily.ViewModel
             }
         }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
-        public int TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
-        public int TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
+        public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
+        public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
 
         //Commands
         public ICommand AddProductCommand { get; }
@@ -179,7 +185,7 @@ namespace AgroFamily.ViewModel
             bool validData;
             if (CurrentProduct != null)
             {
-                int cant = 0;//Cantidad del producto seleccionado ya agregada al sale
+                long cant = 0;//Cantidad del producto seleccionado ya agregada al sale
                 for(int i = 0; i < SaleProducts.Count; i++)
                 {
                     if (SaleProducts[i].ProductId == CurrentProduct.Id)
@@ -215,5 +221,14 @@ namespace AgroFamily.ViewModel
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
             CurrentQuantityProduct = 0;
         }
+        public void ExecuteGetCoincidencesCash()
+
+        {
+            IProductRepository productRepository = new ProductRepository();
+            Products = productRepository.GetProductCoincidences2(Name);
+
+        }
     }
+
+
 }
