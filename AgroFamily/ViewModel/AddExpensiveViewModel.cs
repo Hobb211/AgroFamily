@@ -51,6 +51,7 @@ namespace AgroFamily.ViewModel
 
         //Commands
         public ICommand AddExpensiveCommand { get; }
+        public ICommand RemoveExpensiveCommand { get; }
 
 
         //Constructor
@@ -60,6 +61,8 @@ namespace AgroFamily.ViewModel
             ExpensiveModels = repository.GetByAll();
             Amount = 0;
             AddExpensiveCommand = new ViewModelCommand(ExecuteAddExpensiveCommand, CanExecuteAddExpensiveCommand);
+            RemoveExpensiveCommand = new ViewModelCommand(ExecuteRemoveExpensiveCommand, CanExecuteRemoveExpensiveCommand);
+
             TypeExpensives = new TypeExpensiveRepository().GetByAll();
 
             TextSizeChange = 10;
@@ -147,6 +150,27 @@ namespace AgroFamily.ViewModel
                 MessageBox.Show("Un error ha ocurrido");
             }
 
+        }
+
+        private void ExecuteRemoveExpensiveCommand(object obj)
+        {
+            try
+            {
+                IExpensiveModel expensiveRepository = new ExpensiveRepository();
+                expensiveRepository.Remove(Expensive.Id);
+                ExpensiveModels = expensiveRepository.GetByAll();
+                MessageBox.Show("Se ha eliminado el gasto");
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido eliminar, " + e.Message);
+            }
+        }
+
+        private bool CanExecuteRemoveExpensiveCommand(object obj)
+        {
+            return true;
         }
 
 
