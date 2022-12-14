@@ -10,6 +10,8 @@ namespace AgroFamily.Model
     public interface IExpensiveModel
     {
         public void Add(ExpensiveModel expensive);
+        void Remove(int id);
+
         public ExpensiveModel GetById(int id);
         public ObservableCollection<ExpensiveModel> GetByAll();
         long GetAmountInAMonth(int month, int year);

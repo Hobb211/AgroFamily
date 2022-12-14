@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
+             xmlns:local="clr-namespace:AgroFamily.View" 
+             xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="780">
 
@@ -82,7 +84,8 @@
                                      Background="Transparent"
                                      InputScope="Number"
                                      PreviewTextInput="NumberValidationTextBox"
-                                     Text="{Binding CurrentQuantityProduct,UpdateSourceTrigger=PropertyChanged}"
+                                     KeyDown="ItemAmmount_KeyDown"
+                                     Text="{Binding CurrentQuantityProduct1,UpdateSourceTrigger=PropertyChanged}"
                                      FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
                         <TextBlock Grid.Row="1" Grid.Column="1"
@@ -189,11 +192,53 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
+                    <DataGridTemplateColumn Header="Acción" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.RemoveProductCommand_DG}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource gridRemoveButton}">
+
+                                        <fa:IconImage Icon="Trash" Style="{StaticResource controlButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Row="1">
-                <Button Style="{StaticResource button}"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="Precio manual"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="{Binding TextSize, UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource textStyle4}"
+                               />
+                    <TextBox Grid.Row="1"
+                             VerticalAlignment="top"
+                             HorizontalAlignment="Center"
+                             Text="{Binding ManualValue, UpdateSourceTrigger=PropertyChanged}"
+                             Width="100"
+                             />
+                </Grid>
+                <Button Grid.Column="1" 
+                        Style="{StaticResource button}"
                         Content="Eliminar"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
                         Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                         Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                         FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"

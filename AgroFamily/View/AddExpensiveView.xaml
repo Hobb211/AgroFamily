@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AgroFamily.View" xmlns:viewmodel="clr-namespace:AgroFamily.ViewModel"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="780">
 
@@ -190,6 +191,25 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
+
+
+                        <DataGridTemplateColumn Header="Acción" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
+                                              Path=DataContext.RemoveExpensiveCommand}"
+                                        CommandParameter="{Binding}"
+                                        Style="{StaticResource gridRemoveButton}">
+
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource controlButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Grid.Row="1" 

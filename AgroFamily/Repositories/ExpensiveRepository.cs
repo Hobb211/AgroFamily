@@ -28,6 +28,14 @@ namespace AgroFamily.Repositories
             }
         }
 
+        public void Remove(int id)
+        {
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Delete<ExpensiveModel>(id);
+            }
+        }
+
         public ExpensiveModel GetById(int id)
         {
             using(SQLiteConnection con = GetConnection())

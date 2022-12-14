@@ -2,6 +2,7 @@
 using AgroFamily.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.Json.Serialization.Metadata;
 using System.Windows;
 using System.Windows.Input;
@@ -29,6 +30,7 @@ namespace AgroFamily.ViewModel
         private ProductModel _currentProduct;
         private SaleProductModel _currentSaleProduct;
         private long _currentQuantityProduct;
+        private string _currentQuantityProduct1;
         private Visibility _overflowQuantityVisibility;
         private long _totalPrice;
         private long _totalPriceDay;
@@ -66,6 +68,7 @@ namespace AgroFamily.ViewModel
                 }
             }
         }
+        public string CurrentQuantityProduct1 { get => _currentQuantityProduct1; set { _currentQuantityProduct1 = value; OnPropertyChanged(nameof(CurrentQuantityProduct1)); try { CurrentQuantityProduct = long.Parse(value); } catch { }  } }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
@@ -73,6 +76,7 @@ namespace AgroFamily.ViewModel
         //Commands
         public ICommand AddProductCommand { get; }
         public ICommand RemoveProductCommand { get; }
+        public ICommand RemoveProductCommand_DG { get; }
         public ICommand PayCommand { get; }
 
 
@@ -96,6 +100,7 @@ namespace AgroFamily.ViewModel
             //Initialize Command
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
+            RemoveProductCommand_DG = new ViewModelCommand(ExecuteRemoveArticle2Command, CanExecuteRemoveArticle2Command);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
 
             //Define los tamaños variables descontando o aumentando el valor dependiendo del estado maximizado o minimizado
@@ -223,6 +228,8 @@ namespace AgroFamily.ViewModel
             });
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
             CurrentQuantityProduct = 0;
+            CurrentQuantityProduct1 = "";
+
         }
         public void ExecuteGetCoincidencesCash()
 
@@ -230,6 +237,24 @@ namespace AgroFamily.ViewModel
             IProductRepository productRepository = new ProductRepository();
             Products = productRepository.GetProductCoincidences2(Name);
 
+        }
+
+
+        private void ExecuteRemoveArticle2Command(object obj)
+        {
+            try
+            {
+                SaleProducts.Remove(CurrentSaleProduct);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido eliminar, " + e.Message);
+            }
+        }
+
+        private bool CanExecuteRemoveArticle2Command(object obj)
+        {
+            return true;
         }
     }
 
