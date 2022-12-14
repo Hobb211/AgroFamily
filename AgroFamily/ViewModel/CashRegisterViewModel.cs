@@ -2,12 +2,8 @@
 using AgroFamily.Repositories;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text.Json.Serialization.Metadata;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
-
 namespace AgroFamily.ViewModel
 {
     public class CashRegisterViewModel : ViewModelBase
@@ -34,6 +30,7 @@ namespace AgroFamily.ViewModel
         private Visibility _overflowQuantityVisibility;
         private long _totalPrice;
         private long _totalPriceDay;
+        private string _manualAmmount;
 
         //Propierties
         public ObservableCollection<ProductModel> Products { get => _products; set { _products = value; OnPropertyChanged(nameof(Products)); } }
@@ -72,6 +69,8 @@ namespace AgroFamily.ViewModel
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
+        public string ManualAmmount { get => _manualAmmount; set { _manualAmmount = value; OnPropertyChanged(nameof(ManualAmmount)); } }
+
 
         //Commands
         public ICommand AddProductCommand { get; }
@@ -219,13 +218,23 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteAddProductCommand(object obj)
         {
+            long ammount = CurrentProduct.Price * CurrentQuantityProduct; ;
+            if (ManualAmmount != "")
+            {
+                try
+                {
+                    ammount = long.Parse(ManualAmmount);
+                }
+                catch { }
+            }
+
             SaleProducts.Add(new SaleProductModel()
             {
                 ProductId = CurrentProduct.Id,
                 Count = CurrentQuantityProduct,
                 Name = CurrentProduct.Name,
-                Amount = CurrentProduct.Price * CurrentQuantityProduct
-            });
+                Amount = ammount
+            }) ;
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
             CurrentQuantityProduct = 0;
             CurrentQuantityProduct1 = "";
@@ -238,8 +247,6 @@ namespace AgroFamily.ViewModel
             Products = productRepository.GetProductCoincidences2(Name);
 
         }
-
-
         private void ExecuteRemoveArticle2Command(object obj)
         {
             try
