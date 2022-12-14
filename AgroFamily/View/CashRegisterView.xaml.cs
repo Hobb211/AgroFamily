@@ -51,5 +51,14 @@ namespace AgroFamily.View
             ItemAmmount.Clear();
             ItemAmmount.Focus();
         }
+
+        private void ItemAmmount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CashRegisterViewModel viewModel = (CashRegisterViewModel)this.DataContext;
+                viewModel.AddProductCommand.Execute(viewModel);
+            }
+        }
     }
 }

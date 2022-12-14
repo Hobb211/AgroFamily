@@ -29,6 +29,7 @@ namespace AgroFamily.ViewModel
         private ProductModel _currentProduct;
         private SaleProductModel _currentSaleProduct;
         private long _currentQuantityProduct;
+        private string _currentQuantityProduct1;
         private Visibility _overflowQuantityVisibility;
         private long _totalPrice;
         private long _totalPriceDay;
@@ -66,6 +67,7 @@ namespace AgroFamily.ViewModel
                 }
             }
         }
+        public string CurrentQuantityProduct1 { get => _currentQuantityProduct1; set { _currentQuantityProduct1 = value; OnPropertyChanged(nameof(CurrentQuantityProduct1)); try { CurrentQuantityProduct = long.Parse(value); } catch { }  } }
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
@@ -220,6 +222,8 @@ namespace AgroFamily.ViewModel
             });
             TotalPrice += CurrentProduct.Price * CurrentQuantityProduct;
             CurrentQuantityProduct = 0;
+            CurrentQuantityProduct1 = "";
+
         }
         public void ExecuteGetCoincidencesCash()
 
