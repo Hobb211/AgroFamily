@@ -20,39 +20,10 @@
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="137*"/>
-                <RowDefinition Height="46*"/>
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="199*"/>
                 <RowDefinition Height="48*"/>
             </Grid.RowDefinitions>
-
-
-            <Border Grid.Row="1"
-                        Background="{StaticResource Color9}"
-                        CornerRadius="10"
-                        Margin="5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="123*"/>
-                        <ColumnDefinition Width="286*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Buscar por nombre"
-                                   Style="{StaticResource titleStyle3}"
-                                   VerticalAlignment="Center"
-                                   FontSize="{Binding TextSize}" Height="14"/>
-                    <TextBox Grid.Column="1"
-                                 Name="button_search"
-                                 Style="{StaticResource textBox2}"
-                                 Background="White"
-                                 Margin="50,7,50,7" TextChanged="button_search_TextChanged_Cash"
-                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}">
-                    </TextBox>
-                </Grid>
-            </Border>
-
-
-
-
-
 
 
             <Grid Grid.Row="0" Margin="0,0,0,00">
@@ -210,7 +181,7 @@
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}" >
+                    <DataGridTextColumn Header="Monto" IsReadOnly="True" Width="*" Binding="{Binding Amount}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -241,11 +212,11 @@
                     <TextBlock Text="Total=$" 
                                Style="{StaticResource textStyle1}"
                                Foreground="{StaticResource textColor2}"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                               FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource textStyle1}"
                                Foreground="{StaticResource textColor2}"
-                               FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
+                               FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <Button Style="{StaticResource button}" 
                         Content="Comprar"

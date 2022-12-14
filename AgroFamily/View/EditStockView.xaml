@@ -59,42 +59,26 @@
 						FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 						Style="{StaticResource titleStyle1}"/>
 
-                <StackPanel
-                        Grid.Row="1"
-                        Orientation="Horizontal"
-                        Margin="25,15,20,2" Grid.RowSpan="2">
-                    <TextBlock
-							Text="Filtrar"
+                <Grid Grid.Row="1"
+                      Margin="25,15,20,2" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+							Text="{Binding Articulo.Name}"
 							FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 							Style="{StaticResource titleStyle1}" 
 							VerticalAlignment="Center"/>
-                    <Border
-							Margin="5,5,0,5"
-							CornerRadius="10,10,10,10" 
-							Width="150">
-                        <TextBox x:Name="tId" 
-                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                 FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                 VerticalContentAlignment="Center"
-                                 FontWeight="Medium"
-                                 FontFamily="Montserrat"
-                                 IsReadOnly="False"
-                                 Background="{StaticResource Color6}"
-                                 BorderBrush="Transparent"
-                                 Foreground="{StaticResource textColor2}"
-                                 CaretBrush="LightGray"
-                                 Height="28"
-                                 VerticalAlignment="Center" 
-                                 TextChanged="tId_TextChanged">
-                        </TextBox>
-                    </Border>
-                    <TextBlock
+                    
+                    <TextBlock Grid.Column="1"
 							Margin="5,0,0,0"
 							Text="Cantidad"
 							FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
 							Style="{StaticResource titleStyle1}"
 							VerticalAlignment="Center"/>
-                    <Border
+                    <Border Grid.Column="2"
 							Margin="5,5,0,5"
 							CornerRadius="10,10,10,10"
 							Width="90">
@@ -115,7 +99,7 @@
                         </TextBox>
 
                     </Border>
-                </StackPanel>
+                </Grid>
 
 
 

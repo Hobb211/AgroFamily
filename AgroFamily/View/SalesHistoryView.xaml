@@ -169,7 +169,7 @@
                             >
 
                         <!--Search Button-->
-                        <Button Style="{StaticResource controlButton1}"
+                        <Button Style="{StaticResource controlButton2}"
                                 Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
                                 Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
                                 Command="{Binding SearchSaleCommand}"

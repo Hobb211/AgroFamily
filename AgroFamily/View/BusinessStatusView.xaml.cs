@@ -28,7 +28,7 @@ namespace AgroFamily.View
             InitializeComponent();
         }
 
-        private void Border_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Border_SizeChanged1(object sender, SizeChangedEventArgs e)
         {
             ViewModelBase viewModel = (ViewModelBase)this.DataContext;
             viewModel.ChangeSizeFont();

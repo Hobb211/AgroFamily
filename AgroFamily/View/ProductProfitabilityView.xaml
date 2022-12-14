@@ -35,7 +35,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.3*"/>
-                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.03*"/>
                     <RowDefinition Height="0.8*"/>
                 </Grid.RowDefinitions>
                 <Grid>
@@ -177,32 +177,6 @@
 
 
                 </Grid>
-                <!--buscador-->
-                <Border Grid.Row="1"
-                        Background="{StaticResource Color9}"
-                        CornerRadius="10"
-                        Margin="20,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="47*"/>
-                            <ColumnDefinition Width="73*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Nombre"
-                                   Style="{StaticResource titleStyle3}"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   FontSize="{Binding TextSize}"/>
-                        <TextBox Grid.Column="1"
-                                 Name="button_search"
-                                 Style="{StaticResource textBox2}"
-                                 Background="White"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Left"
-                                 Width="150"
-                                 TextChanged="button_search_TextChanged"
-                                 Text="{Binding Name,UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                </Border>
 
                 <!--Lo dejare asi con un text block para cambiarlo por un list view-->
                 <Grid Grid.Row="2"

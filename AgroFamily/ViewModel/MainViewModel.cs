@@ -112,11 +112,13 @@ namespace AgroFamily.ViewModel
             TextSizeChange = 10;
             TextSize = 12;
             TitleSize = 20;
-        }
-
-        private void ExecuteShowProfitabilityViewCommand(object obj)
-        {
-            CurrentChildView = new ProductProfitabilityViewModel();
+            ButtonWidth1= 60;
+            ButtonWidth2 = 90;
+            ButtonHeight2 = 22;
+            ButtonChangeSizeH= 20;
+            ButtonChangeSizeW= 20;
+            TextBoxHeight = 12;
+            TextBoxChangeSize = 6;
         }
 
         private void ExecuteMaxMinFontCommand(object obj)
@@ -135,16 +137,6 @@ namespace AgroFamily.ViewModel
         private void ExecuteLogOutCommand(object obj)
         {
             IsViewVisible= false;
-        }
-
-        private void ExecuteShowSaleHistoryCommand(object obj)
-        {
-            CurrentChildView = new SaleHistoryViewModel();
-        }
-
-        private void ExecuteShowEditStockViewCommand(object obj)
-        {
-            CurrentChildView=new EditStockViewModel();
         }
 
         private void ExecuteShowNavigationMenuCommand(object obj)
@@ -168,6 +160,21 @@ namespace AgroFamily.ViewModel
             NavigationMenuVisibility = Visibility.Collapsed;
         }
 
+        private void ExecuteShowSaleHistoryCommand(object obj)
+        {
+            CurrentChildView = new SaleHistoryViewModel();
+        }
+
+        private void ExecuteShowEditStockViewCommand(object obj)
+        {
+            CurrentChildView = new EditStockViewModel();
+        }
+
+        private void ExecuteShowProfitabilityViewCommand(object obj)
+        {
+            CurrentChildView = new ProductProfitabilityViewModel();
+        }
+
         private void ExecuteShowCashRegisterViewCommand(object obj)
         {
             CurrentChildView = new CashRegisterViewModel();
@@ -183,7 +190,10 @@ namespace AgroFamily.ViewModel
         }
         private void ExecuteShowInventoryViewCommand(object obj)
         {
-            CurrentChildView = new InventoryViewModel();
+            try
+            {
+                InventoryViewModel child=(InventoryViewModel)CurrentChildView;
+            }catch(Exception ex) { CurrentChildView = new InventoryViewModel(); }
         }
 
         private void ExecuteShowAddExpensiveViewCommand(object obj)
@@ -194,8 +204,13 @@ namespace AgroFamily.ViewModel
 
         private void ExecuteShowBusinessStatusViewCommand(object obj)
         {
-            CurrentChildView = new BusinessStatusViewModel();
+            try
+            {
+                BusinessStatusViewModel child = (BusinessStatusViewModel)CurrentChildView;
+            }
+            catch (Exception ex) { CurrentChildView = new BusinessStatusViewModel(); }
         }
+            
         private void LoadCurrentUserData()
         {
             var user = userRepository.GetById(Thread.CurrentPrincipal.Identity.Name);//Pasar un UserName por el principal

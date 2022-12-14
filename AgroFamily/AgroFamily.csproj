@@ -29,6 +29,7 @@
     <None Remove="Assets\avatar.png" />
     <None Remove="Assets\candado.png" />
     <None Remove="Assets\peso.png" />
+    <None Remove="Assets\quebrachos.png" />
     <None Remove="Assets\user_reg.png" />
   </ItemGroup>
 
@@ -47,6 +48,7 @@
   <ItemGroup>
     <Resource Include="Assets\avatar.png" />
     <Resource Include="Assets\candado.png" />
+    <Resource Include="Assets\quebrachos.png" />
     <Resource Include="Assets\user_reg.png" />
   </ItemGroup>
 
