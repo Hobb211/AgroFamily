@@ -127,15 +127,14 @@
                                        Text="Estado del negocio" 
                                        Style="{StaticResource titleStyle3}" 
                                        FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
-                                       VerticalAlignment="Center"  
-                                       Margin="22,0,22,0"/>
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock  
                                         Grid.Row="1"
                                         Text="{Binding AmountDiff}" 
                                         Style="{StaticResource titleStyle3}" 
                                         FontSize="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
-                                        VerticalAlignment="Center" Height="50" Margin="22,0,22,0"/>
+                                        VerticalAlignment="Center" Height="50"/>
 
 
                         </Grid>
@@ -154,15 +153,14 @@
                                        Text="Estado del negocio %" 
                                        Style="{StaticResource titleStyle3}" 
                                        FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
-                                       VerticalAlignment="Center"  
-                                       Margin="22,0,22,0"/>
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock  
                                         Grid.Row="1"
                                         Text="{Binding AmountDiffPorcent}" 
                                         Style="{StaticResource titleStyle3}" 
                                         FontSize="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
-                                        VerticalAlignment="Center" Height="50" Margin="22,0,22,0"/>
+                                        VerticalAlignment="Center" Height="50"/>
 
 
                         </Grid>
@@ -199,8 +197,7 @@
                                        Text="Ingresos" 
                                        Style="{StaticResource titleStyle3}" 
                                        FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
-                                       VerticalAlignment="Center"  
-                                       Margin="22,0,22,0"/>
+                                       VerticalAlignment="Center"/>
 
 
                             <TextBlock Grid.Row="1"
@@ -208,7 +205,7 @@
                                        Style="{StaticResource titleStyle3}" 
                                        VerticalAlignment="Center"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                                       Height="30" Margin="22,0,22,0"/>
+                                       Height="30" />
 
                         </Grid>
 
@@ -227,15 +224,14 @@
                                        Text="Egresos" 
                                        Style="{StaticResource titleStyle3}" 
                                        FontSize="{Binding TitleSize,UpdateSourceTrigger=PropertyChanged}"
-                                       VerticalAlignment="Center"  
-                                       Margin="22,0,22,0"/>
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="1"
                                        Text="{Binding AmountExp}" 
                                        Style="{StaticResource titleStyle3}" 
                                        VerticalAlignment="Center"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}" 
-                                       Height="30" Margin="22,0,22,0"/>
+                                       Height="30"/>
 
                         </Grid>
 

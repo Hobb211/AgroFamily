@@ -2,6 +2,7 @@
 using AgroFamily.Repositories;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.Json.Serialization.Metadata;
 using System.Windows;
 using System.Windows.Input;
@@ -73,6 +74,7 @@ namespace AgroFamily.ViewModel
         //Commands
         public ICommand AddProductCommand { get; }
         public ICommand RemoveProductCommand { get; }
+        public ICommand RemoveProductCommand_DG { get; }
         public ICommand PayCommand { get; }
 
 
@@ -96,6 +98,7 @@ namespace AgroFamily.ViewModel
             //Initialize Command
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
+            RemoveProductCommand_DG = new ViewModelCommand(ExecuteRemoveArticle2Command, CanExecuteRemoveArticle2Command);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
 
             //Define los tamaños variables descontando o aumentando el valor dependiendo del estado maximizado o minimizado
@@ -227,6 +230,24 @@ namespace AgroFamily.ViewModel
             IProductRepository productRepository = new ProductRepository();
             Products = productRepository.GetProductCoincidences2(Name);
 
+        }
+
+
+        private void ExecuteRemoveArticle2Command(object obj)
+        {
+            try
+            {
+                SaleProducts.Remove(CurrentSaleProduct);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha podido eliminar, " + e.Message);
+            }
+        }
+
+        private bool CanExecuteRemoveArticle2Command(object obj)
+        {
+            return true;
         }
     }
 

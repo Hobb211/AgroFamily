@@ -134,10 +134,8 @@ namespace AgroFamily.ViewModel
                 string PorcentFinal = String.Format("{0:N}", AmountDiffPorcent_int);
                 AmountDiffPorcent = PorcentFinal + "%";
 
-                MessageBox.Show(AmountSales_long.ToString() + " " + AmountExp_long.ToString() + " " + AmountDiff_int.ToString()+" "+ AmountDiffPorcent_int.ToString());
+                //MessageBox.Show(AmountSales_long.ToString() + " " + AmountExp_long.ToString() + " " + AmountDiff_int.ToString()+" "+ AmountDiffPorcent_int.ToString());
 
-                //MessageBox.Show(diaInicio.ToString()+ mesInicio.ToString()+anoInicio.ToString()+ diaFin.ToString()+ mesFin.ToString()+anoFin.ToString());
-                //MessageBox.Show(amountexp);
 
             }
             catch (Exception e)
