@@ -45,5 +45,11 @@ namespace AgroFamily.View
             CashRegisterViewModel viewModel = (CashRegisterViewModel)this.DataContext;
             viewModel.ExecuteGetCoincidencesCash();
         }
+
+        private void productsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemAmmount.Clear();
+            ItemAmmount.Focus();
+        }
     }
 }
