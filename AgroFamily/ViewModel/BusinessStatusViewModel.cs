@@ -73,17 +73,17 @@ namespace AgroFamily.ViewModel
             ButtonChangeSizeW = 20;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
-                TextSize = 15;
+                TextSize = 5;
                 TitleSize = 15;
                 ButtonHeight1 = 20;
-                ButtonWidth1 = 5;
+                ButtonWidth1 = 20;
             }
             else
             {
-                TextSize = 45;
+                TextSize = 35;
                 TitleSize = 45;
                 ButtonHeight1 = 80;
-                ButtonWidth1 = 65;
+                ButtonWidth1 = 80;
             }
 
 
@@ -133,8 +133,6 @@ namespace AgroFamily.ViewModel
 
                 string PorcentFinal = String.Format("{0:N}", AmountDiffPorcent_int);
                 AmountDiffPorcent = PorcentFinal + "%";
-
-                MessageBox.Show(AmountSales_long.ToString() + " " + AmountExp_long.ToString() + " " + AmountDiff_int.ToString()+" "+ AmountDiffPorcent_int.ToString());
 
                 //MessageBox.Show(diaInicio.ToString()+ mesInicio.ToString()+anoInicio.ToString()+ diaFin.ToString()+ mesFin.ToString()+anoFin.ToString());
                 //MessageBox.Show(amountexp);
