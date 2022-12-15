@@ -16,7 +16,7 @@ namespace AgroFamily.Model
         public ObservableCollection<ExpensiveModel> GetByAll();
         long GetAmountInAMonth(int month, int year);
 
-        long GetAmountInARangeDate(string diaInicio, string mesInicio, string anoInicio, string diaFin, string mesFin, string anoFin);
+        long GetAmountInARangeDate(DateTime inicio, DateTime fin);
 
 
     }

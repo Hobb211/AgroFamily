@@ -38,6 +38,7 @@ namespace AgroFamily.ViewModel
         private double _titleSize;
         private double _textSize;
         private double _textSizeChange;
+
         //ButtonSize
         private double _buttonWidth1;
         private double _buttonWidth2;

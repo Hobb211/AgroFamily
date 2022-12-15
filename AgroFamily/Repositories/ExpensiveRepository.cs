@@ -61,15 +61,13 @@ namespace AgroFamily.Repositories
             return Amount;
         }
 
-        public long GetAmountInARangeDate(string diaInicio, string mesInicio, string anoInicio, string diaFin, string mesFin, string anoFin) //A
+        public long GetAmountInARangeDate(DateTime inicio, DateTime fin) //A
         {
             long Amount = 0;
             IEnumerable<ExpensiveModel> list;
             using (SQLiteConnection connection = GetConnection())
             {
-                //list = connection.Query<SaleModel>("\tselect t1.Id, t1.id_vendedor, strftime('%m', t1.date) as mes, strftime('%Y', t1.date) as ano, t1.total\r\n\tfrom(\r\n\t\tselect Id, id_vendedor, datetime(datetime/10000000 - 62135596800, 'unixepoch') as date, total\r\n\t\tfrom SaleModel ) as t1\r\n\twhere mes =\"11\" and ano = \"\"\r\n");
-                list = connection.Query<ExpensiveModel>("select t1.Id, strftime('%d', t1.date) as dia, strftime('%m', t1.date) as mes, strftime('%Y', t1.date) as ano, t1.Amount from(select Id, datetime(datetime/10000000 - 62135596800, 'unixepoch') as date, Amount from ExpensiveModel ) as t1 where ano BETWEEN \""+anoInicio+"\" and \""+anoFin+"\" and mes BETWEEN \""+mesInicio+"\" and \""+mesFin+"\" and dia BETWEEN \""+diaInicio+"\" and \""+diaFin+"\"");
-                //list = connection.Query<SaleModel>("select t1.Id, t1.id_vendedor, strftime('%d', t1.date) as dia, strftime('%m', t1.date) as mes, strftime('%Y', t1.date) as ano, t1.total from(select Id, id_vendedor, datetime(SaleDate/10000000 - 62135596800, 'unixepoch') as date, total from SaleModel ) as t1 where ano BETWEEN \"2021\" and \"2022\" and mes BETWEEN \"11\" and \"12\" and dia BETWEEN \"01\" and \"02\"");
+                list = connection.Query<ExpensiveModel>("select * from ExpensiveModel where DateTime between "+inicio.Ticks+" and "+fin.Ticks);
             }
             ObservableCollection<ExpensiveModel> expensiveModels = new ObservableCollection<ExpensiveModel>(list);
             for (int i = 0; i < expensiveModels.Count; i++)

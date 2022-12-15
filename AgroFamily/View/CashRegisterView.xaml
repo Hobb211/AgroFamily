@@ -160,10 +160,10 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
-                    <TextBlock Text="Ventas del dia= $"
+                    <TextBlock Text="Ventas del dia= "
                                Style="{StaticResource textStyle1}"
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Text="{Binding TotalPriceDay,UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBlock Text="{Binding TotalPriceDay1,UpdateSourceTrigger=PropertyChanged}" 
                                Style="{StaticResource textStyle1}"
                                FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
@@ -224,7 +224,7 @@
                                 <StackPanel Orientation="Horizontal" 
                                             HorizontalAlignment="Center">
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}},
-                                              Path=DataContext.RemoveProductCommand_DG}"
+                                              Path=DataContext.RemoveProductCommand}"
                                             CommandParameter="{Binding}"
                                             Style="{StaticResource gridRemoveButton}">
 
@@ -240,7 +240,6 @@
             </DataGrid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid>
@@ -262,38 +261,35 @@
                              KeyDown="ItemAmmount_KeyDown"
                              Text="{Binding ManualAmmount, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="{Binding TextSize, UpdateSourceTrigger=PropertyChanged}"
-                             Width="100"
+                             Width="{Binding ButtonWidth1}"
                              />
                 </Grid>
-                <Button Grid.Column="1" 
-                        Style="{StaticResource button}"
-                        Content="Eliminar"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"
-                        Height="{Binding ButtonHeight1,UpdateSourceTrigger=PropertyChanged}"
-                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"
-                        Command="{Binding RemoveProductCommand}"/>
+                
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.7*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1" 
+                <Border Background="{StaticResource Color9}"
+                        Grid.Column="1"
+                        Margin="10"
+                        CornerRadius="10">
+                    <StackPanel
                             Orientation="Horizontal" 
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="10">
-                    <TextBlock Text="Total=$" 
+                        <TextBlock Text="Total=" 
                                Style="{StaticResource textStyle1}"
-                               Foreground="{StaticResource textColor2}"
+                               Foreground="{StaticResource textColor1}"
                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Text="{Binding TotalPrice,UpdateSourceTrigger=PropertyChanged}"
+                        <TextBlock Text="{Binding TotalPrice1,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource textStyle1}"
-                               Foreground="{StaticResource textColor2}"
+                               Foreground="{StaticResource textColor1}"
                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                    </StackPanel>
+                </Border>
                 <Button Style="{StaticResource button}" 
                         Content="Comprar"
                         Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}"

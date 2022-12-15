@@ -106,21 +106,10 @@ namespace AgroFamily.ViewModel
         {
             ISaleRepository salesRepository = new SaleRepository();
             IExpensiveModel expensiveRepository = new ExpensiveRepository(); ;
-            string fmt = "00";
-
-
-            string diaInicio = (StartingDate.Day).ToString(fmt);
-            string mesInicio = (StartingDate.Month).ToString(fmt);
-            string anoInicio = (StartingDate.Year).ToString(fmt);
-            string diaFin = (EndingDate.Day).ToString(fmt);
-            string mesFin = (EndingDate.Month).ToString(fmt);
-            string anoFin = (EndingDate.Year).ToString(fmt);
-
-
             try
             {
-                double AmountSales_long = salesRepository.GetAmountInARangeDate(diaInicio, mesInicio, anoInicio, diaFin, mesFin, anoFin);
-                double AmountExp_long = expensiveRepository.GetAmountInARangeDate(diaInicio, mesInicio, anoInicio, diaFin, mesFin, anoFin);
+                double AmountSales_long = salesRepository.GetAmountInARangeDate(StartingDate,EndingDate.AddDays(1));
+                double AmountExp_long = expensiveRepository.GetAmountInARangeDate(StartingDate,EndingDate.AddDays(1));
 
                 double AmountDiff_int = (AmountSales_long - AmountExp_long);
 

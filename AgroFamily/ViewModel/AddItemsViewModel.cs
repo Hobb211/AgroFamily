@@ -63,7 +63,7 @@ namespace AgroFamily.ViewModel
             IProductRepository productRepository = new ProductRepository();
             ISuppliesRepository suppliesRepository = new SuppliesRepository();
             Articles = suppliesRepository.GetByAllArticles();
-            ObservableCollection<ArticleModel> articlesObservable = new ObservableCollection<ArticleModel>() { new SuppliesModel() { Name = "ho" } };
+            ObservableCollection<ArticleModel> articlesObservable = new ObservableCollection<ArticleModel>();
             Articles = new ObservableCollection<ArticleModel>(suppliesRepository.GetByAllArticles().Concat(productRepository.GetByAllArticles()));
 
             TextSizeChange = 10;

@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
         MinHeight="550"
         MinWidth="800"
         >
@@ -56,323 +56,321 @@
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
     </Window.Visibility>
 
-    <Border CornerRadius="10" BorderThickness="2">
-        <Grid>
-            <Grid.RowDefinitions>
-                <!--Control bar-->
-                <RowDefinition Height="0.05*"/>
-                <!--Navigation menu-->
-                <RowDefinition Height="0.11*"/>
-                <!--Content Section-->
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            
+    <Grid>
+        <Grid.RowDefinitions>
             <!--Control bar-->
-            <Border CornerRadius="10,10,0,0"
+            <RowDefinition Height="0.05*"/>
+            <!--Navigation menu-->
+            <RowDefinition Height="0.11*"/>
+            <!--Content Section-->
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--Control bar-->
+        <Border CornerRadius="5,5,0,0"
                     Grid.Row="0">
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
-                </Border.Background>
-                <StackPanel x:Name="pnlControlBar"
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
+            </Border.Background>
+            <StackPanel x:Name="pnlControlBar"
                             Orientation="Horizontal"
                             FlowDirection="RightToLeft"
                             Background="Transparent"
                             Margin="0,0,5,0"
                             MouseDown="Window_MouseDown">
-                    <Button x:Name="btnClose" 
+                <Button x:Name="btnClose" 
                             Style="{StaticResource controlButton}"
                             Tag="{StaticResource Color1}"
                             Click="btnClose_Click">
-                        <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
-                    </Button>
-                    <Button x:Name="btnMaximize" 
+                    <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                </Button>
+                <Button x:Name="btnMaximize" 
                             Style="{StaticResource controlButton}"
                             Tag="{StaticResource Color6}"
                             Click="btnMaximize_Click"
                             Command="{Binding MaxMinFontCommand}">
-                        <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
-                    </Button>
-                    <Button x:Name="btnMinimize" 
+                    <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                </Button>
+                <Button x:Name="btnMinimize" 
                             Style="{StaticResource controlButton}"
                             Tag="{StaticResource Color6}"
                             Click="btnMinimize_Click">
-                        <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
-                    </Button>
-                </StackPanel>
-            </Border>
-            <!--Navigation menu background-->
-            <Border Grid.Row="1">
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
-                </Border.Background>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.45*"/>
-                        <ColumnDefinition Width="0.35*"/>
-                        <ColumnDefinition Width="0.1*"/>
-                        <ColumnDefinition Width="0.2*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal"
+                    <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                </Button>
+            </StackPanel>
+        </Border>
+        <!--Navigation menu background-->
+        <Border Grid.Row="1" Margin="0,-1,0,0">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource primaryBackColor3}"/>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.45*"/>
+                    <ColumnDefinition Width="0.35*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal"
                                 Margin="10,0,0,0">
-                        <!--Navigation menu-->
-                        <StackPanel Orientation="Horizontal"
+                    <!--Navigation menu-->
+                    <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding NavigationMenuVisibility,UpdateSourceTrigger=PropertyChanged}">
-                            <!--CashRegister Button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                        <!--CashRegister Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowCashRegisterViewCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="CartShopping" 
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CartShopping" 
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Caja" 
+                                <TextBlock Text="Caja" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Inventory Button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Inventory Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowInventoryMenuCommand}"
                                      Visibility="{Binding AdminMenuVisibility}"
                                          Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="BoxesStacked" 
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesStacked" 
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Inventario" 
+                                <TextBlock Text="Inventario" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Business State Button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Business State Button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowBusinessMenuCommand}"
                                      Visibility="{Binding AdminMenuVisibility}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="ChartLine" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="ChartLine" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Estado" 
+                                <TextBlock Text="Estado" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Users Buttons-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Users Buttons-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowAddUserViewCommand}"
                                      Visibility="{Binding AdminMenuVisibility}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="User" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="User" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Usuarios" 
+                                <TextBlock Text="Usuarios" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                        </StackPanel>
-                        <!--Inventory menu-->
-                        <StackPanel Orientation="Horizontal"
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    <!--Inventory menu-->
+                    <StackPanel Orientation="Horizontal"
                                 Visibility="{Binding InventoryMenuVisibility}">
-                            <!--Navigation menu button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                        <!--Navigation menu button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowNavigationMenuCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="CircleArrowLeft" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleArrowLeft" Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Atras" 
+                                <TextBlock Text="Atras" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--AddItems button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--AddItems button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowAddItemsViewCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="BoxesPacking"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesPacking"
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Añadir" 
+                                <TextBlock Text="Añadir" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Edit Stock Menu-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Edit Stock Menu-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowEditStockViewCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="Box"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="Box"
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Stock" 
+                                <TextBlock Text="Stock" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Inventory button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Inventory button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowInventoryViewCommand}"
                                      Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="BoxesStacked"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="BoxesStacked"
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Inventario" 
+                                <TextBlock Text="Inventario" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                        </StackPanel>
-                        <!--Business menu-->
-                        <StackPanel Orientation="Horizontal"
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    <!--Business menu-->
+                    <StackPanel Orientation="Horizontal"
                                 Visibility="{Binding BusinessMenuVisibility}">
-                            <!--Navigation menu button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                        <!--Navigation menu button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowNavigationMenuCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="CircleArrowLeft" 
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleArrowLeft" 
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Atras" 
+                                <TextBlock Text="Atras" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Expensives button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Expensives button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowAddExpensiveViewCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="CircleDollarToSlot"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="CircleDollarToSlot"
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Gastos" 
+                                <TextBlock Text="Gastos" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Sales History button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Sales History button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowSaleHistoryCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="FileInvoiceDollar" 
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="FileInvoiceDollar" 
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Ventas" 
+                                <TextBlock Text="Ventas" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Business button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Business button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                      Tag="{StaticResource NavigationColor}"
                                      Command="{Binding ShowBusinessStatusViewCommand}"
                                          Width="{Binding ButtonWidth1,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="ChartLine"
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="ChartLine"
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Estado" 
+                                <TextBlock Text="Estado" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                            <!--Profitability button-->
-                            <RadioButton Style="{DynamicResource NavigationButton}"
+                            </StackPanel>
+                        </RadioButton>
+                        <!--Profitability button-->
+                        <RadioButton Style="{DynamicResource NavigationButton}"
                                          Tag="{StaticResource NavigationColor}"
                                          Command="{Binding ShowProductProfitabilityViewCommand}"
                                          Width="{Binding ButtonWidth2,UpdateSourceTrigger=PropertyChanged}">
-                                <StackPanel Orientation="Vertical">
-                                    <fa:IconImage Icon="MoneyBillTrendUp" 
+                            <StackPanel Orientation="Vertical">
+                                <fa:IconImage Icon="MoneyBillTrendUp" 
                                                   Width="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Height="{Binding ButtonHeight2,UpdateSourceTrigger=PropertyChanged}"
                                                   Style="{StaticResource navigationButtonIcon}"/>
-                                    <TextBlock Text="Rentabilidad" 
+                                <TextBlock Text="Rentabilidad" 
                                                FontSize="{Binding TextBoxHeight,UpdateSourceTrigger=PropertyChanged}"
                                                Style="{StaticResource navigationButtonText}"/>
-                                </StackPanel>
-                            </RadioButton>
-                        </StackPanel>
+                            </StackPanel>
+                        </RadioButton>
                     </StackPanel>
-                    <Grid Grid.Column="1">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/quebrachos.png" Stretch="Uniform"/>
-                            <TextBlock Text="Bienvenidos a Quebrachos"
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="BIENVENIDOS A "
                                        VerticalAlignment="Center"
                                        Foreground="{StaticResource Color6}"
                                        FontSize="{Binding TextSize}"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid Grid.Column="2">
-                        <Image Margin="0,0,5,0" Source="/Assets/agro.png" Stretch="Uniform"/>
-                    </Grid>
-                    <Grid Grid.Column="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.5*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0"
+                        <Image Source="/Assets/quebrachos.png" Stretch="Uniform"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Image Margin="0,0,5,0" Source="/Assets/agro.png" Stretch="Uniform"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0"
                                     VerticalAlignment="Center">
-                            <TextBlock Text="{Binding UserAccount.Name}"
+                        <TextBlock Text="{Binding UserAccount.Name}"
                                        Style="{StaticResource textStyle1}"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock Text="{Binding UserAccount.LastName}"
+                        <TextBlock Text="{Binding UserAccount.LastName}"
                                        Style="{StaticResource textStyle1}"
                                        FontSize="{Binding TextSize,UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <Button Grid.Column="1"
+                    </StackPanel>
+                    <Button Grid.Column="1"
                                 Style="{StaticResource controlButton1}"
                                 Tag="{StaticResource NavigationButton}"
                                 Command="{Binding LogOutCommand}">
-                            <fa:IconImage Icon="RightFromBracket" 
+                        <fa:IconImage Icon="RightFromBracket" 
                                           Style="{StaticResource controlButtonIcon}"
                                           Foreground="{StaticResource NavigationColor}"
                                           Width="22"
                                           Height="22"
                                           Margin="0"/>
-                        </Button>
-                        
-                    </Grid>
-                </Grid>
-            </Border>
-            <!--Content Section-->
-            <Border CornerRadius="0,0,10,10"
-                    Grid.Row="2">
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primaryBackColor1}"/>
-                </Border.Background>
-                <ContentControl Content="{Binding CurrentChildView}"
-                                Margin="10"/>
-            </Border>
+                    </Button>
 
-        </Grid>
-    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+        <!--Content Section-->
+        <Border CornerRadius="0,0,5,5"
+                    Grid.Row="2">
+            <Border.Background>
+                <SolidColorBrush Color="{StaticResource primaryBackColor1}"/>
+            </Border.Background>
+            <ContentControl Content="{Binding CurrentChildView}"
+                                Margin="10"/>
+        </Border>
+
+    </Grid>
 
 </Window>

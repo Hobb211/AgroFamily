@@ -149,15 +149,23 @@ namespace AgroFamily.ViewModel
         private void ExecuteExportCsvCommand(object obj)
         {
             MessageBox.Show("Iniciando conversión");
-            using (var textWriter = File.CreateText(@"C:\Users\Christian\Desktop\testing.csv"))
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            using (var textWriter = File.CreateText(System.IO.Path.Combine(folderPath, "Historial.csv")))
             {
                 //string columns_line = "ID,Nombre,Apellido,Rol,Clave";
                 //textWriter.WriteLine(columns_line);
+                textWriter.WriteLine("Codigo;Tipo;Nombre;Fecha;Monto");
                 foreach (var line in ToCsv(HistoricSales))
                 {
-                    textWriter.WriteLine(line);
+                    string text = "";
+                    foreach(var item in line.Split(","))
+                    {
+                        text+= item.ToString()+";";
+                    }
+                    textWriter.WriteLine(text);
                 }
             }
+            MessageBox.Show("Se ha creado el csv en el escritorio");
         }
         public static IEnumerable<string> ToCsv<SaleModel>(ObservableCollection<SaleModel> list)
         {

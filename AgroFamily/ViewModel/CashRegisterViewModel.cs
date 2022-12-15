@@ -30,7 +30,9 @@ namespace AgroFamily.ViewModel
         private string _currentQuantityProduct1;
         private Visibility _overflowQuantityVisibility;
         private long _totalPrice;
+        private string _totalPrice1;
         private long _totalPriceDay;
+        private string _totalPriceDay1;
         private string _manualAmmount="";
 
         //Propierties
@@ -64,6 +66,7 @@ namespace AgroFamily.ViewModel
                     {
                         OverflowQuantityVisibility = Visibility.Collapsed;
                         CanAddProduct = true;
+                        if (value == 0) { CanAddProduct= false; }
                     }
                 }
             }
@@ -72,29 +75,25 @@ namespace AgroFamily.ViewModel
         public Visibility OverflowQuantityVisibility { get => _overflowQuantityVisibility; set { _overflowQuantityVisibility = value; OnPropertyChanged(nameof(OverflowQuantityVisibility)); } }
         public long TotalPrice { get => _totalPrice; set { _totalPrice = value; OnPropertyChanged(nameof(TotalPrice)); } }
         public long TotalPriceDay { get => _totalPriceDay; set { _totalPriceDay = value; OnPropertyChanged(nameof(TotalPriceDay)); } }
-        public string ManualAmmount 
-        { get => _manualAmmount; 
-            set { 
+        public string ManualAmmount
+        {
+            get => _manualAmmount;
+            set
+            {
                 _manualAmmount = value;
-                if (value != "")
-                {
-                    CanAddProduct = true;
-                }
-                else
-                {
-                    CanAddProduct = false;
-                }
-                    OnPropertyChanged(nameof(ManualAmmount));
-                } 
+                OnPropertyChanged(nameof(ManualAmmount));
             }
+        }
 
 
         //Commands
         public ICommand AddProductCommand { get; }
         public ICommand RemoveProductCommand { get; }
-        public ICommand RemoveProductCommand_DG { get; }
         public ICommand PayCommand { get; }
         public bool CanAddProduct { get => _canAddProduct; set => _canAddProduct = value; }
+        public string TotalPrice1 { get => _totalPrice1; set { _totalPrice1 = value; OnPropertyChanged(nameof(TotalPrice1)); } }
+
+        public string TotalPriceDay1 { get => _totalPriceDay1; set { _totalPriceDay1 = value; OnPropertyChanged(nameof(TotalPriceDay1)); } }
 
         public CashRegisterViewModel()
         {
@@ -104,11 +103,13 @@ namespace AgroFamily.ViewModel
             UserRepository = new UserRepository();
             LoadCurrentUserData();
             TotalPriceDay = 0;
+            TotalPrice1 = "$0";
             ObservableCollection<SaleModel> saleModels = SaleRepository.GetByDay(DateOnly.FromDateTime(DateTime.Now));
             for (int i = 0; i < saleModels.Count; i++)
             {
                 TotalPriceDay += saleModels[i].total;
             }
+            TotalPriceDay1 = String.Format("{0:C}", TotalPriceDay);
             Products = ProductRepository.GetByAll();
             OverflowQuantityVisibility = Visibility.Collapsed;
             SaleProducts = new ObservableCollection<SaleProductModel>();
@@ -116,33 +117,32 @@ namespace AgroFamily.ViewModel
             //Initialize Command
             AddProductCommand = new ViewModelCommand(ExecuteAddProductCommand, CanExecuteAddProductCommand);
             RemoveProductCommand = new ViewModelCommand(ExecuteRemoveProductCommand, CanExecuteRemoveProductCommand);
-            RemoveProductCommand_DG = new ViewModelCommand(ExecuteRemoveArticle2Command, CanExecuteRemoveArticle2Command);
             PayCommand = new ViewModelCommand(ExecutePayCommand, CanExecutePayCommand);
 
             //Define los tamaños variables descontando o aumentando el valor dependiendo del estado maximizado o minimizado
             TextSizeChange = 10;
             ButtonChangeSizeH = 20;
             ButtonChangeSizeW = 20;
-            TextBoxChangeSize = 10;
+            TextBoxChangeSize = 15;
             if ((bool)Application.Current.Properties["IsViewMinimize"])
             {
                 TextSize = 3;
                 TitleSize = 10;
                 ButtonHeight1 = 20;
-                ButtonWidth1 = 140;
+                ButtonWidth1 = 100;
                 ButtonHeight2 = 10;
                 ButtonWidth2 = 80;
-                TextBoxHeight = 10;
+                TextBoxHeight = 1;
             }
             else
             {
                 TextSize = 33;
                 TitleSize = 40;
                 ButtonHeight1 = 80;
-                ButtonWidth1 = 200;
+                ButtonWidth1 = 160;
                 ButtonHeight2 = 70;
                 ButtonWidth2 = 140;
-                TextBoxHeight = 40;
+                TextBoxHeight = 46;
             } 
         }
 
@@ -163,6 +163,7 @@ namespace AgroFamily.ViewModel
         private void ExecuteRemoveProductCommand(object obj)
         {
             TotalPrice -= CurrentSaleProduct.Amount;
+            TotalPrice1 = String.Format("{0:C}", TotalPrice);
             SaleProducts.Remove(CurrentSaleProduct);
         }
 
@@ -199,7 +200,9 @@ namespace AgroFamily.ViewModel
                 ProductRepository.Edit(product);
             }
             TotalPriceDay += TotalPrice;
+            TotalPriceDay1 = String.Format("{0:C}", TotalPriceDay);
             TotalPrice = 0;
+            TotalPrice1 = "$0";
             SaleProducts.Clear();
             Products = ProductRepository.GetByAll();
         }
@@ -243,25 +246,16 @@ namespace AgroFamily.ViewModel
                     ammount = long.Parse(ManualAmmount);
                 }
                 catch { }
-                SaleProducts.Add(new SaleProductModel()
-                {
-                    ProductId = CurrentProduct.Id,
-                    Count = 0,
-                    Name = CurrentProduct.Name,
-                    Amount = ammount
-                }) ;
             }
-            else
+            SaleProducts.Add(new SaleProductModel()
             {
-                SaleProducts.Add(new SaleProductModel()
-                {
-                    ProductId = CurrentProduct.Id,
-                    Count = CurrentQuantityProduct,
-                    Name = CurrentProduct.Name,
-                    Amount = ammount
-                });
-            }
+                ProductId = CurrentProduct.Id,
+                Count = CurrentQuantityProduct,
+                Name = CurrentProduct.Name,
+                Amount = ammount
+            });
             TotalPrice += ammount;
+            TotalPrice1 = String.Format("{0:C}", TotalPrice);
             CurrentQuantityProduct = 0;
             CurrentQuantityProduct1 = "";
             ManualAmmount = "";
@@ -272,17 +266,6 @@ namespace AgroFamily.ViewModel
             IProductRepository productRepository = new ProductRepository();
             Products = productRepository.GetProductCoincidences2(Name);
 
-        }
-        private void ExecuteRemoveArticle2Command(object obj)
-        {
-            try
-            {
-                SaleProducts.Remove(CurrentSaleProduct);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("No se ha podido eliminar, " + e.Message);
-            }
         }
 
         private bool CanExecuteRemoveArticle2Command(object obj)
