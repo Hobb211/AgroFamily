@@ -368,7 +368,7 @@
                 <TextBlock Grid.Column="1"
                            Grid.Row="0"
                            Text="{Binding CurrentSaleSellerName}"
-                           Margin="10"
+                           Margin="-2"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            TextAlignment="Justify"
